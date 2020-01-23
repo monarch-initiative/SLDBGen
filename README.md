@@ -8,6 +8,6 @@ The goal is to build scripts that is capable of parsing,
 - Datasets for Synthetic Lethality
 
 
-The recommended interchange format: networkx JSON serialization or TSV/CSV
+The recommended interchange format: networkx JSON serialization, cytoscape JSON or TSV/CSV
 
 
