@@ -111,7 +111,7 @@ def parse_luo2009_supplemental_file_S3(path, symbol2entrezID):
             if geneB_sym in symbol2entrezID:
                 geneB_id = "NCBIGene:{}".format(symbol2entrezID.get(geneB_sym))
             else:
-                geneB_id = geneB_sym
+                geneB_id = "n/a"
             stddev = float(fields[5])
             sli = SyntheticLethalInteraction(gene_A_symbol=kras_symbol,
                                              gene_A_id=kras_id,
@@ -132,6 +132,77 @@ def parse_luo2009_supplemental_file_S3(path, symbol2entrezID):
                 # first entry for geneB
                 sli_dict[geneB_sym] = sli
     return sli_dict.values()
+
+
+
+def parse_bommi_reddi_2008(path, symbol2entrezID):
+    """
+     Bommi-Reddy A, et al  Kinase requirements in human cells: III. Altered kinase
+    requirements in VHL-/- cancer cells detected in a pilot synthetic lethal screen.
+    Proc Natl Acad Sci U S A. 2008 Oct 28;105(43):16484-9. PubMed PMID: 18948595.
+    The paper describes the use of two cell types: 786-O (Table S4) and RCC4 (Table S5).
+    Each of these cells has a loss of function mutation in the tumor suppressor gene VHL.
+    The defects in the other gene were induced with a lentiviral vector that produced a shRNA. The
+    final results are in Tables S4 and S5.
+    The authors require a differential viability above 35% for the 786-O cells or a differential
+    viability above 20% for the RCC4 cells. We have copied that values from the supplemental tables
+    (which were PDF files) into a TSV file called data/bommi-reddy-2008.tsv. For the output file,
+    we demand that at least one shRNA was above threshold, and just report the best outcome per gene.
+    The authors showed experimentally that two genes, IRR and HER4, actually are not SL, so we remove these
+    by hand
+    :return:
+    """
+    # because of the experiment, geneA is always KRAS. GeneB is in Table S3
+    vhl_symbol = 'VHL'
+    vhl_id = 'NCBIGene:7428'
+    vhl_perturbation = 'lof_mutation'
+    gene2_perturbation = 'shRNA'
+    pmid = 'PMID:18948595'
+    assays = ['competitive hybridization', 'multicolor competition assay']
+    assay_string = ";".join(assays)
+    effect_type = 'differential_viability'
+    if not os.path.exists(path):
+        raise ValueError("Must path a valid path for Bommi-Reddy A, et al 2008")
+    sli_dict = defaultdict(SyntheticLethalInteraction)
+    with open(path) as f:
+        next(f)  # skip header
+        for line in f:
+            fields = line.rstrip('\n').split('\t')
+            print(len(fields), line)
+            if len(fields) < 4:
+                raise ValueError("Only got %d fields but was expecting 4" % len(fields))
+            geneB = fields[0]
+            if geneB is "IRR" or geneB is "HER4":
+                continue
+            if geneB in symbol2entrezID:
+                geneB_id = "NCBIGene:{}".format(symbol2entrezID.get(geneB))
+            else:
+                geneB_id = "n/a"
+            effect = float(fields[1])
+            cell = fields[2]
+            table = fields[3]
+            assay_string = "differential viability assay {}({})".format(cell, table)
+            sli = SyntheticLethalInteraction(gene_A_symbol=vhl_symbol,
+                                             gene_A_id=vhl_id,
+                                             gene_B_symbol=geneB,
+                                             gene_B_id=geneB_id,
+                                             gene_A_pert=vhl_perturbation,
+                                             gene_B_pert=gene2_perturbation,
+                                             effect_type=effect_type,
+                                             effect_size=effect,
+                                             assay=assay_string,
+                                             pmid=pmid)
+            if geneB in sli_dict:
+                # get the entry with the strongest effect size
+                sli_b = sli_dict.get(geneB)
+                if abs(effect) > abs(sli.effect_size):
+                    sli_dict[geneB] = sli
+            else:
+                # first entry for geneB
+                sli_dict[geneB] = sli
+    return sli_dict.values()
+
+
 
 
 def get_entrez_gene_map():
@@ -158,8 +229,10 @@ def get_entrez_gene_map():
 symbol2entrezID = get_entrez_gene_map()
 
 sli_list = parse_luo2009_supplemental_file_S3('data/luo2009.tsv', symbol2entrezID)
+sli_list2 = parse_bommi_reddi_2008('data/bommi-reddy-2008.tsv', symbol2entrezID)
 
 for sli in sli_list:
     print(sli.get_tsv_line())
-
+for sli in sli_list2:
+    print(sli.get_tsv_line())
 
