@@ -1,27 +1,27 @@
 import os.path
+import wget
+import gzip
 from collections import defaultdict
 
 
-
-
-
 class SyntheticLethalInteraction:
-    '''
+    """
     Instances of this class represent a single synthetic lethality (SL) interaction
     together with data about the experiment that was used to show the SL. A series
     of ingest scripts will transform the data of each of the ca. 30 published
     experiments to this common datastructure
-    '''
+    """
+
     def __init__(self, gene_A_symbol=None,
-                        gene_A_id=None,
-                        gene_B_symbol = None,
-                        gene_B_id=None,
-                        gene_A_pert=None,
-                        gene_B_pert=None,
-                        effect_type=None,
-                        effect_size=None,
-                        assay=None,
-                        pmid=None):
+                 gene_A_id=None,
+                 gene_B_symbol=None,
+                 gene_B_id=None,
+                 gene_A_pert=None,
+                 gene_B_pert=None,
+                 effect_type=None,
+                 effect_size=None,
+                 assay=None,
+                 pmid=None):
         if gene_A_symbol is None:
             raise ValueError("Need to pass gene A")
         if gene_A_id is None:
@@ -50,33 +50,25 @@ class SyntheticLethalInteraction:
             self.effect_type = ""
             self.effect_size = ""
         else:
-            # todo, parse to a numeric type?
             self.effect_type = effect_type
             self.effect_size = effect_size
 
     def get_tsv_line(self):
         lst = [self.gene_A_symbol,
-                    str(self.gene_A_id),
-                    self.gene_B_symbol,
-                    str(self.gene_B_id),
-                    self.gene_A_pert,
-                    self.gene_B_pert,
-                    self.effect_type,
-                    str(self.effect_size),
-                    self.assay,
-                    self.pmid]
+               str(self.gene_A_id),
+               self.gene_B_symbol,
+               str(self.gene_B_id),
+               self.gene_A_pert,
+               self.gene_B_pert,
+               self.effect_type,
+               str(self.effect_size),
+               self.assay,
+               self.pmid]
         return "\t".join(lst)
 
 
-
-
-
-
-
-
-
-def parse_luo2009_supplemental_file_S3(path):
-    '''
+def parse_luo2009_supplemental_file_S3(path, symbol2entrezID):
+    """
     Luo J, et al A genome-wide RNAi screen identifies multiple synthetic lethal
     interactions with the Ras oncogene. Cell. 2009 May 29;137(5):835-48.
     PubMed PMID: 19490893
@@ -89,7 +81,7 @@ def parse_luo2009_supplemental_file_S3(path):
     compared to WT cells, thus indicating SL. They screened 68 of these candidates
     in a second line and could confirm 50 of them (73.5%), indicating that the
     majority of the candidates were likely to be true positives.
-    '''
+    """
     # because of the experiment, geneA is always KRAS. GeneB is in Table S3
     kras_symbol = 'KRAS'
     kras_id = 'NCBIGene:3845'
@@ -103,7 +95,7 @@ def parse_luo2009_supplemental_file_S3(path):
         raise ValueError("Must path a valid path for Luo et al 2009")
     sli_dict = defaultdict(SyntheticLethalInteraction)
     with open(path) as f:
-        next(f) # skip header
+        next(f)  # skip header
         for line in f:
             fields = line.rstrip('\n').split('\t')
             if len(fields) < 8:
@@ -116,18 +108,21 @@ def parse_luo2009_supplemental_file_S3(path):
 
             geneB_sym = fields[0]
             geneB_refSeq = fields[1]
-            geneB_id = 424242 # GET THIS FROM SOMEWHERE ELSE
+            if geneB_sym in symbol2entrezID:
+                geneB_id = "NCBIGene:{}".format(symbol2entrezID.get(geneB_sym))
+            else:
+                geneB_id = 'n/a'
             stddev = float(fields[5])
             sli = SyntheticLethalInteraction(gene_A_symbol=kras_symbol,
-                                gene_A_id=kras_id,
-                                gene_B_symbol = geneB_sym,
-                                gene_B_id=geneB_id,
-                                gene_A_pert=kras_perturbation,
-                                gene_B_pert=gene2_perturbation,
-                                effect_type=effect_type,
-                                effect_size=stddev,
-                                assay=assay_string,
-                                pmid=pmid)
+                                             gene_A_id=kras_id,
+                                             gene_B_symbol=geneB_sym,
+                                             gene_B_id=geneB_id,
+                                             gene_A_pert=kras_perturbation,
+                                             gene_B_pert=gene2_perturbation,
+                                             effect_type=effect_type,
+                                             effect_size=stddev,
+                                             assay=assay_string,
+                                             pmid=pmid)
             if geneB_sym in sli_dict:
                 # get the entry with the strongest effect size
                 sli_b = sli_dict.get(geneB_sym)
@@ -139,10 +134,32 @@ def parse_luo2009_supplemental_file_S3(path):
     return sli_dict.values()
 
 
+def get_entrez_gene_map():
+    """
+    Download the file  ftp://ftp.ncbi.nih.gov/gene/DATA/GENE_INFO/Mammalia/Homo_sapiens.gene_info.gz
+    """
+    urldir = 'ftp://ftp.ncbi.nih.gov/gene/DATA/GENE_INFO/Mammalia/'
+    local_filename = 'Homo_sapiens.gene_info.gz'
+    symbol2entrezID = defaultdict(str)
+    if not os.path.exists(local_filename):
+        url = os.path.join(urldir, local_filename)
+        local_filename = wget.download(url)
+    with gzip.open(local_filename, 'rt') as f:
+        for line in f:
+            if not line.startswith("9606"):
+                continue # non human homo sapiens
+            fields = line.split('\t')
+            entrez = fields[1]
+            symbol = fields[2]
+            symbol2entrezID[symbol] = entrez
+    return symbol2entrezID
 
 
+symbol2entrezID = get_entrez_gene_map()
 
-sli_list = parse_luo2009_supplemental_file_S3('data/luo2009.tsv')
+sli_list = parse_luo2009_supplemental_file_S3('data/luo2009.tsv', symbol2entrezID)
 
 for sli in sli_list:
     print(sli.get_tsv_line())
+
+
