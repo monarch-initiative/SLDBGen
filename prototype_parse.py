@@ -111,7 +111,7 @@ def parse_luo2009_supplemental_file_S3(path, symbol2entrezID):
             if geneB_sym in symbol2entrezID:
                 geneB_id = "NCBIGene:{}".format(symbol2entrezID.get(geneB_sym))
             else:
-                geneB_id = 'n/a'
+                geneB_id = geneB_sym
             stddev = float(fields[5])
             sli = SyntheticLethalInteraction(gene_A_symbol=kras_symbol,
                                              gene_A_id=kras_id,
