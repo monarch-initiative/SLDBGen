@@ -1,4 +1,7 @@
+import logging
 import os.path
+import sys
+
 import wget
 import gzip
 from collections import defaultdict
@@ -103,7 +106,7 @@ def parse_luo2009_supplemental_file_S3(path, symbol2entrezID):
         for line in f:
             fields = line.rstrip('\n').split('\t')
             if len(fields) < 8:
-                print("Only got %d fields but was expecting 8" % len(fields))
+                logging.error("Only got %d fields but was expecting 8" % len(fields))
                 i = 0
                 for f in fields:
                     print("%d) %s" % (i, f))
