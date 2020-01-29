@@ -3,6 +3,8 @@ import wget
 import gzip
 from collections import defaultdict
 
+from utils.entrez_lookup import EntrezLookup
+
 
 class SyntheticLethalInteraction:
     """
@@ -91,9 +93,11 @@ def parse_luo2009_supplemental_file_S3(path, symbol2entrezID):
     assays = ['competitive hybridization', 'multicolor competition assay']
     assay_string = ";".join(assays)
     effect_type = 'stddev'
+
     if not os.path.exists(path):
         raise ValueError("Must path a valid path for Luo et al 2009")
     sli_dict = defaultdict(SyntheticLethalInteraction)
+
     with open(path) as f:
         next(f)  # skip header
         for line in f:
@@ -111,7 +115,7 @@ def parse_luo2009_supplemental_file_S3(path, symbol2entrezID):
             if geneB_sym in symbol2entrezID:
                 geneB_id = "NCBIGene:{}".format(symbol2entrezID.get(geneB_sym))
             else:
-                geneB_id = geneB_sym
+                geneB_id = 'n/a'
             stddev = float(fields[5])
             sli = SyntheticLethalInteraction(gene_A_symbol=kras_symbol,
                                              gene_A_id=kras_id,
@@ -134,29 +138,7 @@ def parse_luo2009_supplemental_file_S3(path, symbol2entrezID):
     return sli_dict.values()
 
 
-def get_entrez_gene_map():
-    """
-    Download the file  ftp://ftp.ncbi.nih.gov/gene/DATA/GENE_INFO/Mammalia/Homo_sapiens.gene_info.gz
-    """
-    urldir = 'ftp://ftp.ncbi.nih.gov/gene/DATA/GENE_INFO/Mammalia/'
-    local_filename = 'Homo_sapiens.gene_info.gz'
-    symbol2entrezID = defaultdict(str)
-    if not os.path.exists(local_filename):
-        url = os.path.join(urldir, local_filename)
-        local_filename = wget.download(url)
-    with gzip.open(local_filename, 'rt') as f:
-        for line in f:
-            if not line.startswith("9606"):
-                continue # non human homo sapiens
-            fields = line.split('\t')
-            entrez = fields[1]
-            symbol = fields[2]
-            symbol2entrezID[symbol] = entrez
-    return symbol2entrezID
-
-
-symbol2entrezID = get_entrez_gene_map()
-
+symbol2entrezID = EntrezLookup().reverse_lookup
 sli_list = parse_luo2009_supplemental_file_S3('data/luo2009.tsv', symbol2entrezID)
 
 for sli in sli_list:
