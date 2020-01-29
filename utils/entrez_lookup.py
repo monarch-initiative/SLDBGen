@@ -1,3 +1,4 @@
+import logging
 import os
 import json
 import gzip
@@ -7,11 +8,20 @@ import wget
 
 
 class EntrezLookup(object):
+    """
+    Entrez Lookup service
+
+    Uses NCBI Entrez to build
+    - NCBI Gene ID to symbol lookup
+    - symbol to NCBI Gene ID lookup
+    - NCBI Gene ID to dbxref lookup
+
+    """
     LOOKUP_FILE = os.path.join(os.path.dirname(__file__), '..', 'lookup', 'Homo_sapiens.gene_info.gz')
 
     def __init__(self, filename=LOOKUP_FILE):
         if not os.path.exists(filename):
-            print("File {} does not exist.".format(filename))
+            logging.warning("File {} does not exist.".format(filename))
             filename = self.download_file()
 
         self.filename = filename
@@ -31,27 +41,38 @@ class EntrezLookup(object):
                     self.dbxrefs[gene_id] = dbxrefs.split('|')
 
     def download_file(self):
+        """
+        Download the lookup file from NCBI FTP and save to its intended location.
+        """
         urldir = 'ftp://ftp.ncbi.nih.gov/gene/DATA/GENE_INFO/Mammalia/'
         filename = 'Homo_sapiens.gene_info.gz'
-        if not os.path.exists(self.LOOKUP_FILE):
-            url = os.path.join(urldir, filename)
-            print("Downloading file from {}".format(url))
-            local_filename = wget.download(url, out=self.LOOKUP_FILE)
+        url = os.path.join(urldir, filename)
+        logging.info("Downloading file from {}".format(url))
+        local_filename = wget.download(url, out=self.LOOKUP_FILE)
         return local_filename
 
     def map_symbol_to_identifier(self, symbol):
+        """
+        Map  a given symbol to NCBI Gene ID.
+        """
         retval = None
         if symbol in self.reverse_lookup:
             retval = self.reverse_lookup[symbol]
         return retval
 
     def map_identifier_to_symbol(self, identifier):
+        """
+        Map a given NCBI Gene ID to symbol.
+        """
         retval = None
         if identifier in self.lookup:
             retval = self.lookup[identifier]
         return retval
 
     def map_symbol_to_specific_identifier(self, symbol, prefix):
+        """
+        Map a given symbol to an dbxref identifier that has the given prefix.
+        """
         identifier = self.map_symbol_to_identifier(symbol)
         dbxrefs = self.dbxrefs[identifier]
         filtered = list(filter(lambda x: (prefix in x), dbxrefs))
