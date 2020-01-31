@@ -21,7 +21,8 @@ class SyntheticLethalInteraction:
                  effect_type=None,
                  effect_size=None,
                  assay=None,
-                 pmid=None):
+                 pmid=None,
+                 SL=None):
         if gene_A_symbol is None:
             raise ValueError("Need to pass gene A")
         if gene_A_id is None:
@@ -38,6 +39,8 @@ class SyntheticLethalInteraction:
             raise ValueError("Need to pass assay")
         if pmid is None:
             raise ValueError("Need to pass pmid")
+        if SL is None:
+            raise ValueError("Need to pass True or False for SL")
         self.gene_A_symbol = gene_A_symbol
         self.gene_A_id = gene_A_id
         self.gene_B_symbol = gene_B_symbol
@@ -52,8 +55,13 @@ class SyntheticLethalInteraction:
         else:
             self.effect_type = effect_type
             self.effect_size = effect_size
+        self.SL = SL # True: synthetic lethal, False: negative control
 
     def get_tsv_line(self):
+        if self.SL:
+            sl = 'T'
+        else:
+            sl = 'F'
         lst = [self.gene_A_symbol,
                str(self.gene_A_id),
                self.gene_B_symbol,
@@ -63,7 +71,8 @@ class SyntheticLethalInteraction:
                self.effect_type,
                str(self.effect_size),
                self.assay,
-               self.pmid]
+               self.pmid,
+               sl]
         return "\t".join(lst)
 
 
@@ -113,6 +122,7 @@ def parse_luo2009_supplemental_file_S3(path, symbol2entrezID):
             else:
                 geneB_id = "n/a"
             stddev = float(fields[5])
+            SL = True # All data in this set is True # TODO CHECK
             sli = SyntheticLethalInteraction(gene_A_symbol=kras_symbol,
                                              gene_A_id=kras_id,
                                              gene_B_symbol=geneB_sym,
@@ -122,7 +132,8 @@ def parse_luo2009_supplemental_file_S3(path, symbol2entrezID):
                                              effect_type=effect_type,
                                              effect_size=stddev,
                                              assay=assay_string,
-                                             pmid=pmid)
+                                             pmid=pmid,
+                                             SL=SL)
             if geneB_sym in sli_dict:
                 # get the entry with the strongest effect size
                 sli_b = sli_dict.get(geneB_sym)
@@ -182,6 +193,7 @@ def parse_bommi_reddi_2008(path, symbol2entrezID):
             cell = fields[2]
             table = fields[3]
             assay_string = "differential viability assay {}({})".format(cell, table)
+            SL = True  # All data in this set is True # TODO CHECK
             sli = SyntheticLethalInteraction(gene_A_symbol=vhl_symbol,
                                              gene_A_id=vhl_id,
                                              gene_B_symbol=geneB,
@@ -191,17 +203,75 @@ def parse_bommi_reddi_2008(path, symbol2entrezID):
                                              effect_type=effect_type,
                                              effect_size=effect,
                                              assay=assay_string,
-                                             pmid=pmid)
+                                             pmid=pmid,
+                                             SL=SL)
             if geneB in sli_dict:
                 # get the entry with the strongest effect size
                 sli_b = sli_dict.get(geneB)
-                if abs(effect) > abs(sli.effect_size):
+                if abs(effect) > abs(sli_b.effect_size):
                     sli_dict[geneB] = sli
             else:
                 # first entry for geneB
                 sli_dict[geneB] = sli
     return sli_dict.values()
 
+def parse_turner_2008(path, symbol2entrezID):
+    """
+    Parse data from  Turner NC, et al., A synthetic lethal siRNA screen identifying genes mediating
+    sensitivity to a PARP inhibitor. EMBO J. 2008 May 7;27(9):1368-77. PubMed PMID: 18388863
+    PARP1 was inhibited by the PARP inhibitor KU0058948, and a short interfering RNA library targeting
+    779 human protein kinase and kinase assocaited genes was applied.
+    :param path:
+    :return:
+    """
+    parp1_symbol = 'PARP1'
+    parp1_id = 'NCBIGene:142'
+    parp1_perturbation = 'drug'
+    gene2_perturbation = 'siRNA'
+    pmid = 'PMID:18388863'
+    assays = ['competitive hybridization', 'multicolor competition assay']
+    assay_string = ";".join(assays)
+    effect_type = 'stddev'
+    if not os.path.exists(path):
+        raise ValueError("Must path a valid path for Turner et al 2008")
+    sli_dict = defaultdict(SyntheticLethalInteraction)
+    with open(path) as f:
+        next(f) # skip header
+        for line in f:
+            if len(line) < 3:
+                raise ValueError("Bad line for Turner et al")
+            fields = line.rstrip('\n').split('\t')
+            geneB = fields[0]
+            if geneB in symbol2entrezID:
+                geneB_id = "NCBIGene:{}".format(symbol2entrezID.get(geneB))
+            else:
+                geneB_id = "n/a"
+            zscore = float(fields[1])
+            percent_inhib = fields[2]
+            if zscore <= -3.0:
+                SL = True
+            else:
+                SL = False
+            sli = SyntheticLethalInteraction(gene_A_symbol=parp1_symbol,
+                                             gene_A_id=parp1_id,
+                                             gene_B_symbol=geneB,
+                                             gene_B_id=geneB_id,
+                                             gene_A_pert=parp1_perturbation,
+                                             gene_B_pert=gene2_perturbation,
+                                             effect_type=effect_type,
+                                             effect_size=zscore,
+                                             assay=assay_string,
+                                             pmid=pmid,
+                                             SL=SL)
+            if geneB in sli_dict:
+                # get the entry with the strongest effect size
+                sli_b = sli_dict.get(geneB)
+                if abs(zscore) > abs(sli_b.effect_size):
+                    sli_dict[geneB] = sli
+            else:
+                # first entry for geneB
+                sli_dict[geneB] = sli
+        return sli_dict.values()
 
 
 
@@ -228,11 +298,15 @@ def get_entrez_gene_map():
 
 symbol2entrezID = get_entrez_gene_map()
 
-sli_list = parse_luo2009_supplemental_file_S3('data/luo2009.tsv', symbol2entrezID)
-sli_list2 = parse_bommi_reddi_2008('data/bommi-reddy-2008.tsv', symbol2entrezID)
+luo_list = parse_luo2009_supplemental_file_S3('data/luo2009.tsv', symbol2entrezID)
+bommi_list = parse_bommi_reddi_2008('data/bommi-reddy-2008.tsv', symbol2entrezID)
+turner_list = parse_turner_2008('data/turner-PARP1-2008.tsv', symbol2entrezID)
 
-for sli in sli_list:
-    print(sli.get_tsv_line())
-for sli in sli_list2:
-    print(sli.get_tsv_line())
+
+sli_lists = [luo_list, bommi_list, turner_list]
+
+for sli_list in sli_lists:
+    for sli in sli_list:
+        print(sli.get_tsv_line())
+
 
