@@ -141,6 +141,34 @@ def parse_luo2009_supplemental_file_S3(path, symbol2entrezID):
     return sli_dict.values()
 
 
+def parse_costanzo_boone_2016_data() -> defaultdict:
+    """
+    Costanzo et al. A global genetic interaction network maps a wiring diagram of
+    cellular function. Science. 23 Sep 2016: Vol. 353. Issue 6306.
+    DOI: 10.1126/science.aaf1420
+
+    This paper describes the results of massive S. cerevisiae SGA experiment.
+    The method parses data describing the effect of knocking out all pairwise
+    combinations of non-essential genes (SGA_NxN.txt).
+
+    `Description of Supplemental Data is here
+    <http://boonelab.ccbr.utoronto.ca/supplement/costanzo2016/>`_
+
+    `This method parses a data file extracted from this zip file:
+    <http://boonelab.ccbr.utoronto.ca/supplement/costanzo2016/data_files/
+    Data%20File%20S1_Raw%20genetic%20interaction%20datasets:%20Pair-wise%20
+    interaction%20format.zip>`_
+
+    :param data_file: which data file to parse (ConstanzoDatFiles.NxN, for SL data)
+    :return: defaultdict with SL interactions
+    """
+    data_file = 'SGA_NxN.txt'
+    zip_file = 'http://boonelab.ccbr.utoronto.ca/supplement/costanzo2016/data_files/' \
+               'Data%20File%20S1_Raw%20genetic%20interaction%20datasets:' \
+               '%20Pair-wise%20interaction%20format.zip'
+    return defaultdict()
+
+
 symbol2entrezID = EntrezLookup().reverse_lookup
 sli_list = parse_luo2009_supplemental_file_S3('data/luo2009.tsv', symbol2entrezID)
 
