@@ -154,12 +154,11 @@ def parse_costanzo_boone_2016_data() -> defaultdict:
     `Description of Supplemental Data is here
     <http://boonelab.ccbr.utoronto.ca/supplement/costanzo2016/>`_
 
-    `This method parses a data file extracted from this zip file:
+    `This method parses a data file (SGA_NxN.txt) extracted from this zip file:
     <http://boonelab.ccbr.utoronto.ca/supplement/costanzo2016/data_files/
     Data%20File%20S1_Raw%20genetic%20interaction%20datasets:%20Pair-wise%20
     interaction%20format.zip>`_
 
-    :param data_file: which data file to parse (ConstanzoDatFiles.NxN, for SL data)
     :return: defaultdict with SL interactions
     """
     data_file = 'SGA_NxN.txt'
