@@ -1,10 +1,10 @@
 import logging
 import os.path
-import sys
-
-import wget
-import gzip
 from collections import defaultdict
+
+import io
+import requests
+import zipfile
 
 from utils.entrez_lookup import EntrezLookup
 
@@ -141,7 +141,7 @@ def parse_luo2009_supplemental_file_S3(path, symbol2entrezID):
     return sli_dict.values()
 
 
-def parse_costanzo_boone_2016_data() -> defaultdict:
+def parse_costanzo_boone_2016_NxN_data() -> defaultdict:
     """
     Costanzo et al. A global genetic interaction network maps a wiring diagram of
     cellular function. Science. 23 Sep 2016: Vol. 353. Issue 6306.
@@ -162,9 +162,19 @@ def parse_costanzo_boone_2016_data() -> defaultdict:
     :return: defaultdict with SL interactions
     """
     data_file = 'SGA_NxN.txt'
-    zip_file = 'http://boonelab.ccbr.utoronto.ca/supplement/costanzo2016/data_files/' \
-               'Data%20File%20S1_Raw%20genetic%20interaction%20datasets:' \
-               '%20Pair-wise%20interaction%20format.zip'
+    local_data_file = 'data/SGA_NxN.txt.gz'
+    zip_file_url = 'http://boonelab.ccbr.utoronto.ca/supplement/costanzo2016/' \
+                   'data_files/' \
+                   'Data%20File%20S1_Raw%20genetic%20interaction%20datasets:' \
+                   '%20Pair-wise%20interaction%20format.zip'
+
+    # retrieve Data File S1 and extract and zip SGA_NxN.txt, if necessary
+    if not os.path.exists(local_data_file):
+        r = requests.get(zip_file_url)
+        z = zipfile.ZipFile(io.BytesIO(r.content))
+        z.extractall()
+        exit(10)
+
     return defaultdict()
 
 
@@ -174,4 +184,7 @@ sli_list = parse_luo2009_supplemental_file_S3('data/luo2009.tsv', symbol2entrezI
 for sli in sli_list:
     print(sli.get_tsv_line())
 
+boone_sli_list = parse_costanzo_boone_2016_NxN_data()
+for sli in boone_sli_list:
+    print(sli.get_tsv_line())
 
