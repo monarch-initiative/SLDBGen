@@ -1,9 +1,9 @@
+import csv
 import gzip
 import logging
 import os.path
 from collections import defaultdict
 
-import io
 import requests
 import zipfile
 import tempfile
@@ -173,16 +173,36 @@ def parse_costanzo_boone_2016_NxN_data(force_download=False) -> defaultdict:
                    'data_files/' \
                    'Data%20File%20S1_Raw%20genetic%20interaction%20datasets:' \
                    '%20Pair-wise%20interaction%20format.zip'
+    pmid = 'PMID:27708008'
+    perturbation = "SGA"
 
     # retrieve Data File S1 and extract and zip SGA_NxN.txt, if necessary
     if not os.path.exists(local_data_file) or force_download:
         with tempfile.TemporaryFile() as temp:
+            logging.info("Downloading zip file")
             get_file(temp, zip_file_url)  # download
+            logging.info("Extracting interaction data into " + local_data_file)
             with zipfile.ZipFile(temp) as in_zip:
                 with in_zip.open(interaction_data_file) as interaction_data,\
                         gzip.open(local_data_file, 'wb') as out_zip:
                     for line in interaction_data.readlines():
                         out_zip.write(line)
+
+    with gzip.open(local_data_file, 'rt') as interaction_data:
+        reader = csv.reader(interaction_data, delimiter='\t')
+        header = next(reader)
+        for row in reader:
+            sli = SyntheticLethalInteraction(gene_A_symbol=row[1],
+                                             gene_A_id="",
+                                             gene_B_symbol=row[3],
+                                             gene_B_id="",
+                                             gene_A_pert=perturbation,
+                                             gene_B_pert=perturbation,
+                                             effect_type=row[9],
+                                             effect_size=row[10],
+                                             assay=row[4],
+                                             pmid=pmid)
+
     return defaultdict()
 
 
