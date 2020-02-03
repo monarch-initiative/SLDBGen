@@ -1,3 +1,4 @@
+import gzip
 import logging
 import os.path
 from collections import defaultdict
@@ -5,8 +6,10 @@ from collections import defaultdict
 import io
 import requests
 import zipfile
+import tempfile
 
 from utils.entrez_lookup import EntrezLookup
+from clint.textui import progress
 
 
 class SyntheticLethalInteraction:
@@ -141,7 +144,7 @@ def parse_luo2009_supplemental_file_S3(path, symbol2entrezID):
     return sli_dict.values()
 
 
-def parse_costanzo_boone_2016_NxN_data() -> defaultdict:
+def parse_costanzo_boone_2016_NxN_data(force_download=False) -> defaultdict:
     """
     Costanzo et al. A global genetic interaction network maps a wiring diagram of
     cellular function. Science. 23 Sep 2016: Vol. 353. Issue 6306.
@@ -159,23 +162,45 @@ def parse_costanzo_boone_2016_NxN_data() -> defaultdict:
     Data%20File%20S1_Raw%20genetic%20interaction%20datasets:%20Pair-wise%20
     interaction%20format.zip>`_
 
+    :param force_download: force dl of zip file and rewriting interaction data [false]
     :return: defaultdict with SL interactions
     """
-    data_file = 'SGA_NxN.txt'
-    local_data_file = 'data/SGA_NxN.txt.gz'
+    interaction_data_file = "Data File S1. Raw genetic interaction datasets: " \
+                            "Pair-wise interaction format/" \
+                            "SGA_NxN.txt"
+    local_data_file = 'data/SGA_NxN.txt.gz'  # zip it up after download, it's big
     zip_file_url = 'http://boonelab.ccbr.utoronto.ca/supplement/costanzo2016/' \
                    'data_files/' \
                    'Data%20File%20S1_Raw%20genetic%20interaction%20datasets:' \
                    '%20Pair-wise%20interaction%20format.zip'
 
     # retrieve Data File S1 and extract and zip SGA_NxN.txt, if necessary
-    if not os.path.exists(local_data_file):
-        r = requests.get(zip_file_url)
-        z = zipfile.ZipFile(io.BytesIO(r.content))
-        z.extractall()
-        exit(10)
-
+    if not os.path.exists(local_data_file) or force_download:
+        with tempfile.TemporaryFile() as temp:
+            get_file(temp, zip_file_url)  # download
+            with zipfile.ZipFile(temp) as in_zip:
+                with in_zip.open(interaction_data_file) as interaction_data,\
+                        gzip.open(local_data_file, 'wb') as out_zip:
+                    for line in interaction_data.readlines():
+                        out_zip.write(line)
     return defaultdict()
+
+
+def get_file(file_handle, url):
+    """
+    Retrieve remote file given fh and url
+
+    :param file_handle: file handle to download file
+    :param url: remote url
+    """
+    with requests.get(url, stream=True) as r:
+        total_length = int(r.headers.get('content-length'))
+        logging.info("Downloading file from " + url)
+        for chunk in progress.bar(r.iter_content(chunk_size=1024),
+                                  expected_size=(total_length / 1024) + 1):
+            if chunk:
+                file_handle.write(chunk)
+                file_handle.flush()
 
 
 symbol2entrezID = EntrezLookup().reverse_lookup
