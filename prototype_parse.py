@@ -145,7 +145,9 @@ def parse_luo2009_supplemental_file_S3(path, symbol2entrezID):
 
 
 def parse_costanzo_boone_2016_NxN_data(symbol2id,
-                                       force_download=False) -> defaultdict:
+                                       force_download=False,
+                                       pvalue_cutoff=0.05
+                                       ) -> defaultdict:
     """
     Costanzo et al. A global genetic interaction network maps a wiring diagram of
     cellular function. Science. 23 Sep 2016: Vol. 353. Issue 6306.
@@ -155,16 +157,23 @@ def parse_costanzo_boone_2016_NxN_data(symbol2id,
     The method parses data describing the effect of knocking out all pairwise
     combinations of non-essential genes (SGA_NxN.txt).
 
-    `Description of Supplemental Data is here
-    <http://boonelab.ccbr.utoronto.ca/supplement/costanzo2016/>`_
-
     `This method parses a data file (SGA_NxN.txt) extracted from this zip file:
     <http://boonelab.ccbr.utoronto.ca/supplement/costanzo2016/data_files/
     Data%20File%20S1_Raw%20genetic%20interaction%20datasets:%20Pair-wise%20
     interaction%20format.zip>`_
 
+    This method saves SLIs with pvalue < pvalue_cutoff. Downstream user can filter
+    further using epsilon score. See methods for details:
+        "The interaction data ... should be filtered prior to use. We suggest three
+        different thresholds [lenient (P < 0.05), intermediate (P < 0.05 and e < 0.08),
+        and stringent confidence (P <0.05 and e > 0.16 or e < -0.12)]"
+
+    `Detailed description of Supplemental Data is here:
+    <http://boonelab.ccbr.utoronto.ca/supplement/costanzo2016/>`_
+
     :param symbol2id: dict produced by `EntrezLookup` to look up IDs from symbols
     :param force_download: force dl of zip file and rewriting interaction data [false]
+    :param pvalue_cutoff: only SLIs with pvalues less than this will be output [0.05]
     :return: defaultdict with SL interactions
     """
     interaction_data_file = "Data File S1. Raw genetic interaction datasets: " \
@@ -176,6 +185,10 @@ def parse_costanzo_boone_2016_NxN_data(symbol2id,
                    'Data%20File%20S1_Raw%20genetic%20interaction%20datasets:' \
                    '%20Pair-wise%20interaction%20format.zip'
     pmid = 'PMID:27708008'
+
+    # epsilon is an interaction score, see PMID:27708008, supporting material p4
+    # "General description of the SGA genetic interaction score"
+    effect_type = "epsilon"
     perturbation = "SGA"
 
     sli_dict = defaultdict(SyntheticLethalInteraction)
@@ -196,6 +209,13 @@ def parse_costanzo_boone_2016_NxN_data(symbol2id,
         reader = csv.reader(interaction_data, delimiter='\t')
         header = next(reader)
         for row in reader:
+            try:
+                pvalue = float(row[6])
+            except ValueError:
+                logging.WARNING("can't convert {} to float".format(row[6]))
+            if pvalue > pvalue_cutoff:
+                continue
+
             gene_A_id = "n/a"
             if row[1].upper() in symbol2entrezID:
                 gene_A_id = "NCBIGene:{}".format(symbol2entrezID.get(row[1].upper()))
@@ -210,8 +230,8 @@ def parse_costanzo_boone_2016_NxN_data(symbol2id,
                                              gene_B_id=gene_B_id,
                                              gene_A_pert=perturbation,
                                              gene_B_pert=perturbation,
-                                             effect_type=row[9],
-                                             effect_size=row[10],
+                                             effect_type=effect_type,
+                                             effect_size=row[5],
                                              assay=row[4],
                                              pmid=pmid)
 
