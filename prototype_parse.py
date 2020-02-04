@@ -144,7 +144,7 @@ def parse_luo2009_supplemental_file_S3(path, symbol2entrezID):
     return sli_dict.values()
 
 
-def parse_costanzo_boone_2016_NxN_data(symbol2entrezID,
+def parse_costanzo_boone_2016_NxN_data(symbol2id,
                                        force_download=False)-> defaultdict:
     """
     Costanzo et al. A global genetic interaction network maps a wiring diagram of
@@ -163,6 +163,7 @@ def parse_costanzo_boone_2016_NxN_data(symbol2entrezID,
     Data%20File%20S1_Raw%20genetic%20interaction%20datasets:%20Pair-wise%20
     interaction%20format.zip>`_
 
+    :param symbol2id: dict produced by `EntrezLookup` to look up IDs from symbols
     :param force_download: force dl of zip file and rewriting interaction data [false]
     :return: defaultdict with SL interactions
     """
@@ -235,7 +236,7 @@ scSymbol2entrezID = EntrezLookup(filename=
                                  species_id=["4932", "559292"]
                                  ).reverse_lookup
 
-boone_sli_list = parse_costanzo_boone_2016_NxN_data(symbol2entrezID=scSymbol2entrezID)
+boone_sli_list = parse_costanzo_boone_2016_NxN_data(symbol2id=scSymbol2entrezID)
 for sli in boone_sli_list:
     print(sli.get_tsv_line())
 
