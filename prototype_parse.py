@@ -145,7 +145,7 @@ def parse_luo2009_supplemental_file_S3(path, symbol2entrezID):
 
 
 def parse_costanzo_boone_2016_NxN_data(symbol2id,
-                                       force_download=False)-> defaultdict:
+                                       force_download=False) -> defaultdict:
     """
     Costanzo et al. A global genetic interaction network maps a wiring diagram of
     cellular function. Science. 23 Sep 2016: Vol. 353. Issue 6306.
