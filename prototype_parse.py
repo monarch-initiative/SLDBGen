@@ -144,7 +144,8 @@ def parse_luo2009_supplemental_file_S3(path, symbol2entrezID):
     return sli_dict.values()
 
 
-def parse_costanzo_boone_2016_NxN_data(force_download=False) -> defaultdict:
+def parse_costanzo_boone_2016_NxN_data(symbol2entrezID,
+                                       force_download=False)-> defaultdict:
     """
     Costanzo et al. A global genetic interaction network maps a wiring diagram of
     cellular function. Science. 23 Sep 2016: Vol. 353. Issue 6306.
@@ -229,7 +230,12 @@ sli_list = parse_luo2009_supplemental_file_S3('data/luo2009.tsv', symbol2entrezI
 for sli in sli_list:
     print(sli.get_tsv_line())
 
-boone_sli_list = parse_costanzo_boone_2016_NxN_data()
+scSymbol2entrezID = EntrezLookup(filename=
+                                 "lookup/Saccharomyces_cerevisiae.gene_info.gz",
+                                 species_id=["4932", "559292"]
+                                 ).reverse_lookup
+
+boone_sli_list = parse_costanzo_boone_2016_NxN_data(symbol2entrezID=scSymbol2entrezID)
 for sli in boone_sli_list:
     print(sli.get_tsv_line())
 
