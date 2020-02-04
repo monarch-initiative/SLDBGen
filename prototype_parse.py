@@ -147,7 +147,7 @@ def parse_luo2009_supplemental_file_S3(path, symbol2entrezID):
 def parse_costanzo_boone_2016_NxN_data(symbol2id,
                                        force_download=False,
                                        pvalue_cutoff=0.05
-                                       ) -> defaultdict:
+                                       ) -> list:
     """
     Costanzo et al. A global genetic interaction network maps a wiring diagram of
     cellular function. Science. 23 Sep 2016: Vol. 353. Issue 6306.
@@ -191,7 +191,7 @@ def parse_costanzo_boone_2016_NxN_data(symbol2id,
     effect_type = "epsilon"
     perturbation = "SGA"
 
-    sli_dict = defaultdict(SyntheticLethalInteraction)
+    sli_list = list()
 
     # retrieve Data File S1 and extract and zip SGA_NxN.txt, if necessary
     if not os.path.exists(local_data_file) or force_download:
@@ -234,8 +234,8 @@ def parse_costanzo_boone_2016_NxN_data(symbol2id,
                                              effect_size=row[5],
                                              assay=row[4],
                                              pmid=pmid)
-
-    return defaultdict()
+            sli_list.append(sli)
+    return sli_list
 
 
 def get_file(file_handle, url):
