@@ -217,12 +217,12 @@ def parse_costanzo_boone_2016_NxN_data(symbol2id,
                 continue
 
             gene_A_id = "n/a"
-            if row[1].upper() in symbol2entrezID:
-                gene_A_id = "NCBIGene:{}".format(symbol2entrezID.get(row[1].upper()))
+            if row[1].upper() in symbol2id:
+                gene_A_id = "NCBIGene:{}".format(symbol2id.get(row[1].upper()))
 
             gene_B_id = "n/a"
-            if row[3].upper() in symbol2entrezID:
-                gene_B_id = "NCBIGene:{}".format(symbol2entrezID.get(row[3].upper()))
+            if row[3].upper() in symbol2id:
+                gene_B_id = "NCBIGene:{}".format(symbol2id.get(row[3].upper()))
 
             sli = SyntheticLethalInteraction(gene_A_symbol=row[1],
                                              gene_A_id=gene_A_id,
