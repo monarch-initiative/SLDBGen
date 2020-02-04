@@ -178,6 +178,8 @@ def parse_costanzo_boone_2016_NxN_data(symbol2id,
     pmid = 'PMID:27708008'
     perturbation = "SGA"
 
+    sli_dict = defaultdict(SyntheticLethalInteraction)
+
     # retrieve Data File S1 and extract and zip SGA_NxN.txt, if necessary
     if not os.path.exists(local_data_file) or force_download:
         with tempfile.TemporaryFile() as temp:
@@ -194,10 +196,18 @@ def parse_costanzo_boone_2016_NxN_data(symbol2id,
         reader = csv.reader(interaction_data, delimiter='\t')
         header = next(reader)
         for row in reader:
+            gene_A_id = "n/a"
+            if row[1].upper() in symbol2entrezID:
+                gene_A_id = "NCBIGene:{}".format(symbol2entrezID.get(row[1].upper()))
+
+            gene_B_id = "n/a"
+            if row[3].upper() in symbol2entrezID:
+                gene_B_id = "NCBIGene:{}".format(symbol2entrezID.get(row[3].upper()))
+
             sli = SyntheticLethalInteraction(gene_A_symbol=row[1],
-                                             gene_A_id="",
+                                             gene_A_id=gene_A_id,
                                              gene_B_symbol=row[3],
-                                             gene_B_id="",
+                                             gene_B_id=gene_B_id,
                                              gene_A_pert=perturbation,
                                              gene_B_pert=perturbation,
                                              effect_type=row[9],
