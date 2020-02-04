@@ -133,7 +133,7 @@ def parse_luo2009_supplemental_file_S3(path, symbol2entrezID):
             if geneB_sym in sli_dict:
                 # get the entry with the strongest effect size
                 sli_b = sli_dict.get(geneB_sym)
-                if abs(stddev) > abs(sli.effect_size):
+                if abs(stddev) > abs(sli_b.effect_size):
                     sli_dict[geneB_sym] = sli
             else:
                 # first entry for geneB
