@@ -303,8 +303,9 @@ def parse_costanzo_boone_2016_NxN_data(symbol2id,
     Data%20File%20S1_Raw%20genetic%20interaction%20datasets:%20Pair-wise%20
     interaction%20format.zip>`_
 
-    This method saves SLIs with pvalue < pvalue_cutoff. Downstream user can filter
-    further using epsilon score. See methods for details:
+    This method sets the SL = True for SL pairs where pvalue < pvalue_cutoff. Other
+    SL pairs are still ingested, SL = False. Downstream user can filter further using
+    epsilon score. See methods for details:
         "The interaction data ... should be filtered prior to use. We suggest three
         different thresholds [lenient (P < 0.05), intermediate (P < 0.05 and e < 0.08),
         and stringent confidence (P <0.05 and e > 0.16 or e < -0.12)]"
@@ -315,7 +316,7 @@ def parse_costanzo_boone_2016_NxN_data(symbol2id,
     :param symbol2id: dict produced by `EntrezLookup` to look up IDs from symbols
     :param force_download: force dl of zip file and rewriting interaction data [false]
     :param pvalue_cutoff: only SLIs with pvalues less than this will be output [0.05]
-    :return: defaultdict with SL interactions
+    :return: list with SL interactions
     """
     interaction_data_file = "Data File S1. Raw genetic interaction datasets: " \
                             "Pair-wise interaction format/" \
@@ -350,12 +351,13 @@ def parse_costanzo_boone_2016_NxN_data(symbol2id,
         reader = csv.reader(interaction_data, delimiter='\t')
         header = next(reader)
         for row in reader:
+            is_sl = False
             try:
                 pvalue = float(row[6])
+                if pvalue < pvalue_cutoff:
+                    is_sl = True
             except ValueError:
                 logging.WARNING("can't convert {} to float".format(row[6]))
-            if pvalue > pvalue_cutoff:
-                continue
 
             gene_A_id = "n/a"
             if row[1].upper() in symbol2id:
@@ -375,7 +377,7 @@ def parse_costanzo_boone_2016_NxN_data(symbol2id,
                                              effect_size=row[5],
                                              assay=row[4],
                                              pmid=pmid,
-                                             SL=True)
+                                             SL=is_sl)
             sli_list.append(sli)
     return sli_list
 
