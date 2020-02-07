@@ -1,5 +1,3 @@
-
-
 import logging
 import os.path
 from _collections import defaultdict
@@ -7,8 +5,44 @@ from idg2sl import SyntheticLethalInteraction
 
 
 
+class GenePair:
+    """
+    We need a class to act as a key in dictionaries with the key being made of gene A and gene B
+    because in some of our datasets, both gene A and gene B can vary
+    """
+    def __init__(self, geneA, geneB):
+        self.gene_A = geneA
+        self.gene_B = geneB
+
+    def __hash__(self):
+        return hash((self.gene_A, self.gene_B))
+
+    def __eq__(self, other):
+        return (self.gene_A, self.gene_B) == (other.gene_A, other.gene_B)
+
+    def __ne__(self, other):
+        # Not strictly necessary, but to avoid having both x==y and x!=y
+        # True at the same time
+        return not (self == other)
 
 
+
+def mark_maximum_entries(sli_dict):
+    """
+    The parsing functions add all SLIs for gene A & B to a list
+    Here, we get a dictionary of lists (the list can have one or more entry)
+    The keys are GenePair objects.
+    We need to mark one entry in each list as being the Max=True
+    """
+    sli_list = []
+    for k, vlist in sli_dict.items():
+        vlist.sort(key=lambda x: abs(x.effect_size), reverse=True)
+        sli = vlist[0]
+        sli.set_maximum()
+        sli_list.append(sli)
+        for s in vlist[1:]:
+            sli_list.append(s)
+    return sli_list
 
 
 def parse_luo2009_supplemental_file_S3(path, symbol2entrezID):
@@ -35,11 +69,15 @@ def parse_luo2009_supplemental_file_S3(path, symbol2entrezID):
     assays = ['competitive hybridization', 'multicolor competition assay']
     assay_string = ";".join(assays)
     effect_type = 'stddev'
+    cell_line = "DLD-1"
+    cellosaurus = "CVCL_0248"
+    cancer = "Colorectal Carcinoma"
+    ncit = "NCIT:C2955"
 
     if not os.path.exists(path):
         raise ValueError("Must path a valid path for Luo et al 2009")
-    sli_dict = defaultdict(SyntheticLethalInteraction)
-
+    # The following keeps track of the current largest effect size SLI for any given gene A/gene B pair
+    sli_dict = defaultdict(list)
     with open(path) as f:
         next(f)  # skip header
         for line in f:
@@ -47,11 +85,9 @@ def parse_luo2009_supplemental_file_S3(path, symbol2entrezID):
             if len(fields) < 8:
                 logging.error("Only got %d fields but was expecting 8" % len(fields))
                 i = 0
-                for f in fields:
-                    print("%d) %s" % (i, f))
-
+                for fd in fields:
+                    print("%d) %s" % (i, fd))
                 raise ValueError("Malformed line, must have 8 tab-separated fields")
-
             geneB_sym = fields[0]
             geneB_refSeq = fields[1]
             if geneB_sym in symbol2entrezID:
@@ -60,7 +96,7 @@ def parse_luo2009_supplemental_file_S3(path, symbol2entrezID):
                 geneB_id = 'n/a'
 
             stddev = float(fields[5])
-            SL = True # All data in this set is True # TODO CHECK
+            SL = True  # All data in this set is True # TODO CHECK
             sli = SyntheticLethalInteraction(gene_A_symbol=kras_symbol,
                                              gene_A_id=kras_id,
                                              gene_B_symbol=geneB_sym,
@@ -69,20 +105,17 @@ def parse_luo2009_supplemental_file_S3(path, symbol2entrezID):
                                              gene_B_pert=gene2_perturbation,
                                              effect_type=effect_type,
                                              effect_size=stddev,
+                                             cell_line=cell_line,
+                                             cellosaurus_id=cellosaurus,
+                                             cancer_type=cancer,
+                                             ncit_id=ncit,
                                              assay=assay_string,
                                              pmid=pmid,
                                              SL=SL)
-            if geneB_sym in sli_dict:
-                # get the entry with the strongest effect size
-                sli_b = sli_dict.get(geneB_sym)
-                if abs(stddev) > abs(sli_b.effect_size):
-                    sli_dict[geneB_sym] = sli
-            else:
-                # first entry for geneB
-                sli_dict[geneB_sym] = sli
-    return sli_dict.values()
-
-
+            gene_pair = GenePair(kras_symbol, geneB_sym)
+            sli_dict[gene_pair].append(sli)
+    sli_list = mark_maximum_entries(sli_dict)
+    return sli_list
 
 
 def parse_bommi_reddi_2008(path, symbol2entrezID):
@@ -111,50 +144,61 @@ def parse_bommi_reddi_2008(path, symbol2entrezID):
     assays = ['competitive hybridization', 'multicolor competition assay']
     assay_string = ";".join(assays)
     effect_type = 'differential_viability'
+    cell_786O = "786-0"
+    cellosaurus_786O = "CVCL_1051"
+    cell_RCC4 = "RCC4"
+    cellosaurus_RCC4 = "CVCL_0498"
+    cancer = "Clear Cell Renal Cell Carcinoma"
+    ncit = "NCIT:C4033"
     if not os.path.exists(path):
         raise ValueError("Must path a valid path for Bommi-Reddy A, et al 2008")
-    sli_dict = defaultdict(SyntheticLethalInteraction)
+    # The following keeps track of the current largest effect size SLI for any given gene A/gene B pair
+    sli_dict = defaultdict(list)
     with open(path) as f:
         next(f)  # skip header
         for line in f:
             fields = line.rstrip('\n').split('\t')
-            print(len(fields), line)
             if len(fields) < 4:
                 raise ValueError("Only got %d fields but was expecting 4" % len(fields))
-            geneB = fields[0]
-            if geneB is "IRR" or geneB is "HER4":
+            geneB_sym = fields[0]
+            if geneB_sym is "IRR" or geneB_sym is "HER4":
                 continue
-            if geneB in symbol2entrezID:
-                geneB_id = "NCBIGene:{}".format(symbol2entrezID.get(geneB))
+            if geneB_sym in symbol2entrezID:
+                geneB_id = "NCBIGene:{}".format(symbol2entrezID.get(geneB_sym))
             else:
                 geneB_id = "n/a"
             effect = float(fields[1])
             cell = fields[2]
+            if cell == 'RCC4':
+                cell_line = cell_RCC4
+                cellosaurus = cellosaurus_RCC4
+            elif cell == '786-0':
+                cell_line = cell_786O
+                cellosaurus = cellosaurus_786O
+            else:
+                raise ValueError("Did not recognize cell type '%s'" % cell)
             table = fields[3]
             assay_string = "differential viability assay {}({})".format(cell, table)
             SL = True  # All data in this set is True # TODO CHECK
             sli = SyntheticLethalInteraction(gene_A_symbol=vhl_symbol,
                                              gene_A_id=vhl_id,
-                                             gene_B_symbol=geneB,
+                                             gene_B_symbol=geneB_sym,
                                              gene_B_id=geneB_id,
                                              gene_A_pert=vhl_perturbation,
                                              gene_B_pert=gene2_perturbation,
                                              effect_type=effect_type,
                                              effect_size=effect,
+                                             cell_line=cell_line,
+                                             cellosaurus_id=cellosaurus,
+                                             cancer_type=cancer,
+                                             ncit_id=ncit,
                                              assay=assay_string,
                                              pmid=pmid,
                                              SL=SL)
-            if geneB in sli_dict:
-                # get the entry with the strongest effect size
-                sli_b = sli_dict.get(geneB)
-                if abs(effect) > abs(sli_b.effect_size):
-                    sli_dict[geneB] = sli
-            else:
-                # first entry for geneB
-                sli_dict[geneB] = sli
-    return sli_dict.values()
-
-
+            gene_pair = GenePair(vhl_symbol, geneB_sym)
+            sli_dict[gene_pair].append(sli)
+    sli_list = mark_maximum_entries(sli_dict)
+    return sli_list
 
 
 def parse_turner_2008(path, symbol2entrezID):
@@ -174,18 +218,22 @@ def parse_turner_2008(path, symbol2entrezID):
     assays = ['competitive hybridization', 'multicolor competition assay']
     assay_string = ";".join(assays)
     effect_type = 'stddev'
+    cell_line = 'CAL-51'
+    cellosaurus = 'CVCL_1110'
+    cancer = "Breast Carcinoma"
+    ncit = "NCIT:C4872"
     if not os.path.exists(path):
         raise ValueError("Must path a valid path for Turner et al 2008")
-    sli_dict = defaultdict(SyntheticLethalInteraction)
+    sli_dict = defaultdict(list)
     with open(path) as f:
-        next(f) # skip header
+        next(f)  # skip header
         for line in f:
             if len(line) < 3:
                 raise ValueError("Bad line for Turner et al")
             fields = line.rstrip('\n').split('\t')
-            geneB = fields[0]
-            if geneB in symbol2entrezID:
-                geneB_id = "NCBIGene:{}".format(symbol2entrezID.get(geneB))
+            geneB_sym = fields[0]
+            if geneB_sym in symbol2entrezID:
+                geneB_id = "NCBIGene:{}".format(symbol2entrezID.get(geneB_sym))
             else:
                 geneB_id = "n/a"
             zscore = float(fields[1])
@@ -196,21 +244,20 @@ def parse_turner_2008(path, symbol2entrezID):
                 SL = False
             sli = SyntheticLethalInteraction(gene_A_symbol=parp1_symbol,
                                              gene_A_id=parp1_id,
-                                             gene_B_symbol=geneB,
+                                             gene_B_symbol=geneB_sym,
                                              gene_B_id=geneB_id,
                                              gene_A_pert=parp1_perturbation,
                                              gene_B_pert=gene2_perturbation,
                                              effect_type=effect_type,
                                              effect_size=zscore,
+                                             cell_line=cell_line,
+                                             cellosaurus_id=cellosaurus,
+                                             cancer_type=cancer,
+                                             ncit_id=ncit,
                                              assay=assay_string,
                                              pmid=pmid,
                                              SL=SL)
-            if geneB in sli_dict:
-                # get the entry with the strongest effect size
-                sli_b = sli_dict.get(geneB)
-                if abs(zscore) > abs(sli_b.effect_size):
-                    sli_dict[geneB] = sli
-            else:
-                # first entry for geneB
-                sli_dict[geneB] = sli
-        return sli_dict.values()
+            gene_pair = GenePair(parp1_symbol, geneB_sym)
+            sli_dict[gene_pair].append(sli)
+        sli_list = mark_maximum_entries(sli_dict)
+        return sli_list
