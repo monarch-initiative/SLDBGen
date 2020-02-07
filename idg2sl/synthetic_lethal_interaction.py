@@ -15,6 +15,7 @@ class SyntheticLethalInteraction:
                  gene_B_pert=None,
                  effect_type=None,
                  effect_size=None,
+                 species_id="9606",
                  cell_line="",
                  cellosaurus_id="",
                  cancer_type="",
@@ -52,6 +53,7 @@ class SyntheticLethalInteraction:
         self.assay = assay
         self.pmid = pmid
         # The cell line data is not obligatory. If it is not passed, set it to the empty string
+        self.species_id = species_id
         self.cell_line = cell_line
         self.cellosaurus_id = cellosaurus_id
         self.cancer_type = cancer_type
@@ -88,6 +90,9 @@ class SyntheticLethalInteraction:
 
     def get_pmid(self):
         return self.pmid
+
+    def get_species_id(self):
+        return self.species_id
 
     def get_cell_line(self):
         return self.cell_line
@@ -126,6 +131,7 @@ class SyntheticLethalInteraction:
                self.gene_B_pert,
                self.effect_type,
                str(self.effect_size),
+               self.species_id,
                self.assay,
                self.cell_line,
                self.cellosaurus_id,
