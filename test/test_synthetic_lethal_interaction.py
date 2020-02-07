@@ -24,11 +24,15 @@ class TestSyntheticLethalInteraction(unittest.TestCase):
         self.no_getter = []
         self.sli = SyntheticLethalInteraction(**self.parameters)
 
-    def test_getters(self):
+    def test_attributes_and_getters(self):
         for param, value in self.parameters.items():
             if param in self.no_getter:
                 continue
             with self.subTest():
+                self.assertEqual(getattr(self.sli, param), value,
+                                 msg="Attribute {} has wrong value ({} != {})"
+                                 .format(param, getattr(self.sli, param), value))
+
                 getter_name = "get_" + param
                 self.assertTrue(hasattr(self.sli, getter_name),
                                 msg="No getter method for {}!".format(param))
