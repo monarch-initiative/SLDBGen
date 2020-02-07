@@ -79,10 +79,10 @@ class SyntheticLethalInteraction:
     def get_gene_B_id(self):
         return self.gene_B_id
 
-    def get_gene_A_perturbation(self):
+    def get_gene_A_pert(self):
         return self.gene_A_pert
 
-    def get_gene_B_perturbation(self):
+    def get_gene_B_pert(self):
         return self.gene_B_pert
 
     def get_assay(self):
@@ -117,6 +117,9 @@ class SyntheticLethalInteraction:
 
     def is_maximum(self):
         return self.maximum_value
+
+    def get_SL(self):
+        return self.SL
 
     def get_tsv_line(self):
         if self.SL:
