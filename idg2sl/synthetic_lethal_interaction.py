@@ -15,9 +15,16 @@ class SyntheticLethalInteraction:
                  gene_B_pert=None,
                  effect_type=None,
                  effect_size=None,
+                 cell_line="",
+                 cellosaurus_id="",
+                 cancer_type="",
+                 ncit_id="",
                  assay=None,
                  pmid=None,
                  SL=None):
+        """
+
+        """
         if gene_A_symbol is None:
             raise ValueError("Need to pass gene A")
         if gene_A_id is None:
@@ -44,6 +51,11 @@ class SyntheticLethalInteraction:
         self.gene_B_pert = gene_B_pert
         self.assay = assay
         self.pmid = pmid
+        # The cell line data is not obligatory. If it is not passed, set it to the empty string
+        self.cell_line = cell_line
+        self.cellosaurus_id = cellosaurus_id
+        self.cancer_type = cancer_type
+        self.ncit_id = ncit_id
         if effect_type is None or effect_size is None:
             self.effect_type = ""
             self.effect_size = ""
@@ -51,6 +63,52 @@ class SyntheticLethalInteraction:
             self.effect_type = effect_type
             self.effect_size = effect_size
         self.SL = SL # True: synthetic lethal, False: negative control
+        self.is_maximum = False
+
+    def get_gene_A_symbol(self):
+        return self.gene_A_symbol
+
+    def get_gene_A_id(self):
+        return self.gene_A_id
+
+    def get_gene_B_symbol(self):
+        return self.gene_B_symbol
+
+    def get_gene_B_id(self):
+        return self.gene_B_id
+
+    def get_gene_A_perturbation(self):
+        return self.gene_A_pert
+
+    def get_gene_B_perturbation(self):
+        return self.gene_B_pert
+
+    def get_assay(self):
+        return self.assay
+
+    def get_pmid(self):
+        return self.pmid
+
+    def get_cell_line(self):
+        return self.cell_line
+
+    def get_cellosaurus_id(self):
+        return self.cellosaurus_id
+
+    def get_cancer_type(self):
+        return self.cancer_type
+
+    def get_ncit_id(self):
+        return self.ncit_id
+
+    def get_effect_type(self):
+        return self.effect_type
+
+    def get_effect_size(self):
+        return self.effect_size
+
+    def set_maximum(self):
+        self.is_maximum = True
 
     def get_tsv_line(self):
         if self.SL:
@@ -66,6 +124,10 @@ class SyntheticLethalInteraction:
                self.effect_type,
                str(self.effect_size),
                self.assay,
+               self.cell_line,
+               self.cellosaurus_id,
+               self.cancer_type,
+               self.ncit_id,
                self.pmid,
                sl]
         return "\t".join(lst)

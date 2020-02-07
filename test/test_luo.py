@@ -24,6 +24,7 @@ class TestLuo(TestCase):
             __file__), 'data', 'Homo_sapiens.gene_info.gz')
         parser = EntrezParser(self.entrez_file)
         self.luo_list = idg2sl.parse_luo2009_supplemental_file_S3(self.inputfile, parser.get_mapping())
+        self.first_entry = self.luo_list[0]
 
     def test_entrez(self):
         """
@@ -32,3 +33,13 @@ class TestLuo(TestCase):
         """
         self.assertEqual(7, len(self.luo_list))
 
+    def test_get_symbol(self):
+        self.assertEqual("KRAS", self.first_entry.get_gene_A_symbol())
+        self.assertEqual("ANAPC1", self.first_entry.get_gene_B_symbol())
+
+    def test_get_perturbation(self):
+        self.assertEqual("oncogenic_mutation", self.first_entry.get_gene_A_perturbation())
+        self.assertEqual("shRNA", self.first_entry.get_gene_B_perturbation())
+
+    def test_get_cellosaus(self):
+        self.assertEqual("DLD-1", self.first_entry.get_cell_line())
