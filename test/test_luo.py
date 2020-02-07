@@ -41,8 +41,8 @@ class TestLuo(TestCase):
         self.assertEqual("ANAPC1", self.first_entry.get_gene_B_symbol())
 
     def test_get_perturbation(self):
-        self.assertEqual("oncogenic_mutation", self.first_entry.get_gene_A_perturbation())
-        self.assertEqual("shRNA", self.first_entry.get_gene_B_perturbation())
+        self.assertEqual("oncogenic_mutation", self.first_entry.get_gene_A_pert())
+        self.assertEqual("shRNA", self.first_entry.get_gene_B_pert())
 
     def test_get_cellosaus(self):
         self.assertEqual("DLD-1", self.first_entry.get_cell_line())
