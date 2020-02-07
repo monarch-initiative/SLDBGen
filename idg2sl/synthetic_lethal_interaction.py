@@ -63,7 +63,7 @@ class SyntheticLethalInteraction:
             self.effect_type = effect_type
             self.effect_size = effect_size
         self.SL = SL # True: synthetic lethal, False: negative control
-        self.is_maximum = False
+        self.maximum_value = False
 
     def get_gene_A_symbol(self):
         return self.gene_A_symbol
@@ -108,7 +108,10 @@ class SyntheticLethalInteraction:
         return self.effect_size
 
     def set_maximum(self):
-        self.is_maximum = True
+        self.maximum_value = True
+
+    def is_maximum(self):
+        return self.maximum_value
 
     def get_tsv_line(self):
         if self.SL:

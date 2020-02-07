@@ -1,6 +1,5 @@
 from unittest import TestCase
 import os.path
-from idg2sl import SyntheticLethalInteraction
 from idg2sl import EntrezParser
 import idg2sl
 
@@ -26,12 +25,16 @@ class TestLuo(TestCase):
         self.luo_list = idg2sl.parse_luo2009_supplemental_file_S3(self.inputfile, parser.get_mapping())
         self.first_entry = self.luo_list[0]
 
-    def test_entrez(self):
+    def test_count_entries(self):
         """
         There are 7 unique genes in Luo small.
+        There are 10 genes altogether.
+        Thus, 7 of the entries should be marked as max
         :return:
         """
-        self.assertEqual(7, len(self.luo_list))
+        self.assertEqual(10, len(self.luo_list))
+        num_max = sum([1 for item in self.luo_list if item.is_maximum()])
+        self.assertEqual(7, num_max)
 
     def test_get_symbol(self):
         self.assertEqual("KRAS", self.first_entry.get_gene_A_symbol())
@@ -43,3 +46,14 @@ class TestLuo(TestCase):
 
     def test_get_cellosaus(self):
         self.assertEqual("DLD-1", self.first_entry.get_cell_line())
+        self.assertEqual("CVCL_0248", self.first_entry.get_cellosaurus_id())
+
+    def test_get_cancer_type(self):
+        self.assertEqual("Colorectal Carcinoma", self.first_entry.get_cancer_type())
+        self.assertEqual("NCIT:C2955", self.first_entry.get_ncit_id())
+
+    def test_get_assay(self):
+        self.assertEqual("competitive hybridization;multicolor competition assay", self.first_entry.get_assay())
+
+    def test_get_pmid(self):
+        self.assertEqual('PMID:19490893', self.first_entry.get_pmid())
