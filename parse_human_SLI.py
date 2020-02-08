@@ -34,15 +34,29 @@ yeastSymbol2entrezID = EntrezLookup(filename=
                                     species_id=["4932", "559292"]
                                     ).reverse_lookup
 
-luo_list = idg2sl.parse_luo2009_supplemental_file_S3('data/luo2009.tsv', humanSymbol2entrezID)
-bommi_list = idg2sl.parse_bommi_reddi_2008('data/bommi-reddy-2008.tsv', humanSymbol2entrezID)
+
+# Do the yeast somewhere else
+# boone_sli_list = idg2sl.parse_costanzo_boone_2016_NxN_data(symbol2id=yeastSymbol2entrezID)
+
+luo2008 = idg2sl.parse_luo2009_supplemental_file_S3('data/luo2009.tsv', humanSymbol2entrezID)
+bommi2008 = idg2sl.parse_bommi_reddi_2008('data/bommi-reddy-2008.tsv', humanSymbol2entrezID)
 turner_list = idg2sl.parse_turner_2008('data/turner-PARP1-2008.tsv', humanSymbol2entrezID)
-boone_sli_list = idg2sl.parse_costanzo_boone_2016_NxN_data(symbol2id=yeastSymbol2entrezID)
 
-sli_lists = [luo_list, bommi_list, turner_list, boone_sli_list]
+steckel2012 = idg2sl.parse_steckel_2012('data/steckel-2012-KRAS.tsv', humanSymbol2entrezID)
+lord2008 = idg2sl.parse_lord_2008('data/lord-PARP1-2008.tsv', humanSymbol2entrezID)
+toyoshima2008 = idg2sl.parse_toyoshima_2008('data/toyoshima-MYC-2008.tsv', humanSymbol2entrezID)
 
+sli_lists = [luo2008, bommi2008, turner_list, steckel2012, lord2008, toyoshima2008]
+
+n = 0
+n_SL = 0
 for sli_list in sli_lists:
     for sli in sli_list:
         print(sli.get_tsv_line())
+        n += 1
+        if sli.get_SL():
+            n_SL += 1
+
+print("We got %d interactions including %d synthetic lethal interactions" % (n, n_SL))
 
 
