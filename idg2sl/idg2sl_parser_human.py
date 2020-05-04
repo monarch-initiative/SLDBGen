@@ -444,6 +444,7 @@ def parse_lord_2008(path, symbol2entrezID):
                 sli_list.append(sli)
     return sli_list
 
+
 def parse_toyoshima_2008(path, symbol2entrezID):
     """
     Parsing data from
@@ -504,7 +505,6 @@ def parse_toyoshima_2008(path, symbol2entrezID):
                                              SL=True)
             sl_list.append(sli)
     return sl_list
-
 
 
 def parse_Shen2015(path, symbol2entrezID):
@@ -569,7 +569,9 @@ def parse_Shen2015(path, symbol2entrezID):
 
 
 def parse_pathak_2015(path, symbol2entrezID):
-    gen1_symbol = 'SRC' # whole SRC Family
+    # SRC Gene is proto-oncogene blocked by Dasatinib
+
+    gen1_symbol = 'SRC'
     gen1_id = 'NCBIGene:6714'
     gen1_perturbation = 'pharmaceutical (Dasatinib)'
     gene2_perturbation = 'siRNA'
@@ -630,7 +632,6 @@ def parse_pathak_2015(path, symbol2entrezID):
     return sli_list
 
 
-
 def parse_srivas_2016(path, symbol2entrezID):
     # using the human SL interactions (supplemental file 4 page 2)
     gen1_perturbation = 'pharmaceutical'
@@ -687,6 +688,76 @@ def parse_srivas_2016(path, symbol2entrezID):
                                                  pmid=pmid,
                                                  SL=True)
                 sli_list.append(sli)
+    return sli_list
+
+
+# Wang2017 supplementary files
+# https://www.cell.com/cell/fulltext/S0092-8674(17)30061-2?_returnURL=https%3A%2F%2Flinkinghub.elsevier.com%2Fretrieve%2Fpii%2FS0092867417300612%3Fshowall%3Dtrue#secsectitle0275
+
+
+
+def parse_han_2017(path, symbol2entrezID):
+    # using supplemental file 4
+    gen1_perturbation = "sgRNA"
+    gene2_perturbation = "sgRNA"
+    pmid = "28319085"
+    assay = ""
+    effect_type = "t-Test"      # very unsure
+    cell_line = "K562 chronic myeloid leukemia cells"
+    cellosaurus = "CVCL_0004"
+    cancer = "Chronic Myelogenous Leukemia"
+    ncit = "C3174"
+
+    sli_list = []
+    if not os.path.exists(path):
+        raise ValueError("Must enter a valid path for Han et al 2017")
+    # The following keeps track of the current largest effect size SLI for any given gene A/gene B pair
+    sli_dict = defaultdict(list)
+    with open(path) as f:
+        next(f)  # skip header
+        for line in f:
+            fields = line.rstrip('\n').split('\t')
+            if len(fields) < 4:
+                logging.error("Only got %d fields but was expecting at least 4 tab-separated fields" % len(fields))
+
+            # seperate genes
+            genes = fields[0].split("__")
+            geneA_sym = genes[0]
+            geneB_sym = genes[1]
+
+            if geneA_sym in symbol2entrezID:
+                geneA_id = "NCBIGene:{}".format(symbol2entrezID.get(geneA_sym))
+            else:
+                geneA_id = 'n/a'
+
+            if geneB_sym in symbol2entrezID:
+                geneB_id = "NCBIGene:{}".format(symbol2entrezID.get(geneB_sym))
+            else:
+                geneB_id = 'n/a'
+
+            effect = float(fields[6].replace(",", "."))
+
+            if abs(effect) < 3:         # unsure about cutoff and effekt_type
+                SL = False
+            else:
+                SL = True
+
+            sli = SyntheticLethalInteraction(gene_A_symbol=geneA_sym,
+                                             gene_A_id=geneA_id,
+                                             gene_B_symbol=geneB_sym,
+                                             gene_B_id=geneB_id,
+                                             gene_A_pert=gen1_perturbation,
+                                             gene_B_pert=gene2_perturbation,
+                                             effect_type=effect_type,
+                                             effect_size=effect,
+                                             cell_line=cell_line,
+                                             cellosaurus_id=cellosaurus,
+                                             cancer_type=cancer,
+                                             ncit_id=ncit,
+                                             assay=assay,
+                                             pmid=pmid,
+                                             SL=SL)
+            sli_list.append(sli)
     return sli_list
 
 
