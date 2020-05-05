@@ -571,9 +571,9 @@ def parse_Shen2015(path, symbol2entrezID):
 def parse_pathak_2015(path, symbol2entrezID):
     # SRC Gene is proto-oncogene blocked by Dasatinib
 
-    gen1_symbol = 'SRC'
-    gen1_id = 'NCBIGene:6714'
-    gen1_perturbation = 'pharmaceutical (Dasatinib)'
+    gene1_symbol = 'SRC'
+    gene1_id = 'NCBIGene:6714'
+    gene1_perturbation = 'pharmaceutical (Dasatinib)'
     gene2_perturbation = 'siRNA'
     pmid = 'PMID:26437225'
     assay = "RNA-interference assay"
@@ -613,11 +613,11 @@ def parse_pathak_2015(path, symbol2entrezID):
                 SL = True
             else:
                 SL = False
-            sli = SyntheticLethalInteraction(gene_A_symbol=gen1_symbol,
-                                             gene_A_id=gen1_id,
+            sli = SyntheticLethalInteraction(gene_A_symbol=gene1_symbol,
+                                             gene_A_id=gene1_id,
                                              gene_B_symbol=geneB_sym,
                                              gene_B_id=geneB_id,
-                                             gene_A_pert=gen1_perturbation,
+                                             gene_A_pert=gene1_perturbation,
                                              gene_B_pert=gene2_perturbation,
                                              effect_type=effect_type,
                                              effect_size=effect,
@@ -634,7 +634,7 @@ def parse_pathak_2015(path, symbol2entrezID):
 
 def parse_srivas_2016(path, symbol2entrezID):
     # using the human SL interactions (supplemental file 4 page 2)
-    gen1_perturbation = 'pharmaceutical'
+    gene1_perturbation = 'pharmaceutical'
     gene2_perturbation = 'natural (is a TSG)'
     pmid = 'PMID:27453043'
     assay = ""
@@ -676,7 +676,7 @@ def parse_srivas_2016(path, symbol2entrezID):
                                                  gene_A_id=geneA_id,
                                                  gene_B_symbol=geneB_sym,
                                                  gene_B_id=geneB_id,
-                                                 gene_A_pert=gen1_perturbation,
+                                                 gene_A_pert=gene1_perturbation,
                                                  gene_B_pert=gene2_perturbation,
                                                  effect_type=effect_type,
                                                  effect_size=effect,
@@ -695,14 +695,80 @@ def parse_srivas_2016(path, symbol2entrezID):
 # https://www.cell.com/cell/fulltext/S0092-8674(17)30061-2?_returnURL=https%3A%2F%2Flinkinghub.elsevier.com%2Fretrieve%2Fpii%2FS0092867417300612%3Fshowall%3Dtrue#secsectitle0275
 
 
+def parse_wang_2017(path, symbol2entrezID):
+    # using supplemental file 4
+    gene1_sym = "NRAS"
+    gene1_id = "NCBIGene: 4893"
+    gene1_perturbation = "mutation"
+    gene2_perturbation = "sgRNA"
+    pmid = "28162770"
+    assay = "CRISPR-Cas9 Interference assay"
+    effect_type = "log2FoldChange"
+    cell_line = "Ba/F3"
+    cellosaurus = "CVCL_0161"
+    cancer = ""
+    ncit = ""
+
+    sli_list = []
+    if not os.path.exists(path):
+        raise ValueError("Must enter a valid path for Han et al 2017")
+    # The following keeps track of the current largest effect size SLI for any given gene A/gene B pair
+    sli_dict = defaultdict(list)
+    with open(path) as f:
+        next(f)  # skip header
+        next(f)
+        for line in f:
+            fields = line.rstrip('\n').split('\t')
+            if len(fields) < 4:
+                logging.error("Only got %d fields but was expecting at least 4 tab-separated fields" % len(fields))
+
+            geneB_sym = fields[0]
+
+            if geneB_sym in symbol2entrezID:
+                geneB_id = "NCBIGene:{}".format(symbol2entrezID.get(geneB_sym))
+            else:
+                geneB_id = 'n/a'
+
+            effect = float(fields[8].replace(",", "."))
+
+            threshold = -3
+
+            if effect < threshold:
+                SL = True
+            else:
+                SL = False
+
+            # print(effect)
+            # print(SL)
+
+            sli = SyntheticLethalInteraction(gene_A_symbol=gene1_sym,
+                                             species_id="10090",
+                                             gene_A_id=gene1_id,
+                                             gene_B_symbol=geneB_sym,
+                                             gene_B_id=geneB_id,
+                                             gene_A_pert=gene1_perturbation,
+                                             gene_B_pert=gene2_perturbation,
+                                             effect_type=effect_type,
+                                             effect_size=effect,
+                                             cell_line=cell_line,
+                                             cellosaurus_id=cellosaurus,
+                                             cancer_type=cancer,
+                                             ncit_id=ncit,
+                                             assay=assay,
+                                             pmid=pmid,
+                                             SL=SL)
+            sli_list.append(sli)
+    return sli_list
+
+
 
 def parse_han_2017(path, symbol2entrezID):
     # using supplemental file 4
-    gen1_perturbation = "sgRNA"
+    gene1_perturbation = "sgRNA"
     gene2_perturbation = "sgRNA"
     pmid = "28319085"
-    assay = ""
-    effect_type = "t-Test"      # very unsure
+    assay = "RNA Interference assay"
+    effect_type = "z-Score"
     cell_line = "K562 chronic myeloid leukemia cells"
     cellosaurus = "CVCL_0004"
     cancer = "Chronic Myelogenous Leukemia"
@@ -735,18 +801,14 @@ def parse_han_2017(path, symbol2entrezID):
             else:
                 geneB_id = 'n/a'
 
-            effect = float(fields[6].replace(",", "."))
-
-            if abs(effect) < 3:         # unsure about cutoff and effekt_type
-                SL = False
-            else:
-                SL = True
+            # effect = float(fields[6].replace(",", "."))
+            effect = -4
 
             sli = SyntheticLethalInteraction(gene_A_symbol=geneA_sym,
                                              gene_A_id=geneA_id,
                                              gene_B_symbol=geneB_sym,
                                              gene_B_id=geneB_id,
-                                             gene_A_pert=gen1_perturbation,
+                                             gene_A_pert=gene1_perturbation,
                                              gene_B_pert=gene2_perturbation,
                                              effect_type=effect_type,
                                              effect_size=effect,
@@ -756,7 +818,7 @@ def parse_han_2017(path, symbol2entrezID):
                                              ncit_id=ncit,
                                              assay=assay,
                                              pmid=pmid,
-                                             SL=SL)
+                                             SL=True)
             sli_list.append(sli)
     return sli_list
 
