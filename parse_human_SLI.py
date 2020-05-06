@@ -48,16 +48,18 @@ yeastSymbol2entrezID = EntrezLookup(filename="lookup/Saccharomyces_cerevisiae.ge
 # shen2015 = idg2sl.parse_Shen2015('data/Shen_2015.tsv', humanSymbol2entrezID)
 # srivas2016 = idg2sl.parse_srivas_2016('data/Srivas_2016.tsv', humanSymbol2entrezID)
 # han2017 = idg2sl.parse_han_2017('data/Han2017_supplemental_table_1.tsv', humanSymbol2entrezID)
+# wang2017 = idg2sl.parse_wang_2017('data/Wang2017_table5.tsv', humanSymbol2entrezID)
 
-wang2017 = idg2sl.parse_wang_2017('data/Wang2017_table5.tsv', humanSymbol2entrezID)
+pathak2015 = idg2sl.parse_pathak_2015("data/pathak2015.txt", humanSymbol2entrezID)
 
-# sli_lists = [luo2008, bommi2008, turner_list, steckel2012, lord2008, toyoshima2008, shen2015, srivas2016, han2017]
-sli_lists = [wang2017]
+# sli_lists = [luo2008, bommi2008, turner_list, steckel2012, lord2008, toyoshima2008, shen2015, srivas2016, han2017, wang2017]
+sli_lists = [pathak2015]
 
 n = 0
 n_SL = 0
 for sli_list in sli_lists:
     for sli in sli_list:
+        # if n < 10:
         print(sli.get_tsv_line())
         n += 1
         if sli.get_SL():

@@ -570,6 +570,7 @@ def parse_Shen2015(path, symbol2entrezID):
 
 def parse_pathak_2015(path, symbol2entrezID):
     # SRC Gene is proto-oncogene blocked by Dasatinib
+    # trying to maximise dasatinib sensitivity by SL interaction
 
     gene1_symbol = 'SRC'
     gene1_id = 'NCBIGene:6714'
@@ -577,11 +578,11 @@ def parse_pathak_2015(path, symbol2entrezID):
     gene2_perturbation = 'siRNA'
     pmid = 'PMID:26437225'
     assay = "RNA-interference assay"
-    effect_type = "sensitization index"
+    effect_type = "p-Value"
     cell_line = "ovary cancer cell line"
     cellosaurus = "CVCL_9724"
     cancer = "Recurrent Ovarian Carcinoma"
-    ncit = "NCIT:C7833"			# NCI Thesaurus, Ontology
+    ncit = "NCIT:C7833"
 
 ### done until here
 
@@ -591,28 +592,37 @@ def parse_pathak_2015(path, symbol2entrezID):
     # The following keeps track of the current largest effect size SLI for any given gene A/gene B pair
     sli_dict = defaultdict(list)
     with open(path) as f:
-        next(f)  # skip header
         for line in f:
-            fields = line.rstrip('\n').split('\t')
-            fields[0] = fields[0].replace(",", ".")
-            if len(fields) < 3:
-                logging.error("Only got %d fields but was expecting at least 3" % len(fields))
+            fields = line.rstrip('\n').split(' ')
+            if len(fields) < 10:
+                logging.error("Only got %d fields but was expecting at least 10" % len(fields))
                 i = 0
                 for fd in fields:
                     print("%d) %s" % (i, fd))
                     #raise ValueError("Malformed line, must have at least 3 tab-separated fields")
-            geneB_sym = fields[1]
+            geneB_sym = fields[2]
             if geneB_sym in symbol2entrezID:
                 geneB_id = "NCBIGene:{}".format(symbol2entrezID.get(geneB_sym))
+                if geneB_id != "NCBIGene:{}".format(fields[1]):
+                    print(geneB_id)
+                    print(fields[1])
+                    raise ValueError("NCBIGene IDs for {} do not correspond!".format(geneB_sym))
             else:
                 geneB_id = 'n/a'
 
-            effect = float(fields[0])
-            sl_genes = ["FZR1", "RAD17", "RFC1", "BLM", "CDC73", "CDC6", "WEE1"]
-            if geneB_sym in sl_genes:
-                SL = True
+            if fields[10] != "ND":
+                effect = float(fields[10])
+                if effect < 0.05:
+                    SL = True
+                else:
+                    SL = False
             else:
+                effect = "n/a"
                 SL = False
+
+
+
+
             sli = SyntheticLethalInteraction(gene_A_symbol=gene1_symbol,
                                              gene_A_id=gene1_id,
                                              gene_B_symbol=geneB_sym,
@@ -704,23 +714,23 @@ def parse_wang_2017(path, symbol2entrezID):
     pmid = "28162770"
     assay = "CRISPR-Cas9 Interference assay"
     effect_type = "log2FoldChange"
-    cell_line = "Ba/F3"
+    cell_line = "Ba/F3"                             # 2.
     cellosaurus = "CVCL_0161"
     cancer = ""
     ncit = ""
 
     sli_list = []
     if not os.path.exists(path):
-        raise ValueError("Must enter a valid path for Han et al 2017")
+        raise ValueError("Must enter a valid path for Wang et al 2017")
     # The following keeps track of the current largest effect size SLI for any given gene A/gene B pair
     sli_dict = defaultdict(list)
     with open(path) as f:
         next(f)  # skip header
-        next(f)
+        next(f)  # skip first row as well
         for line in f:
             fields = line.rstrip('\n').split('\t')
-            if len(fields) < 4:
-                logging.error("Only got %d fields but was expecting at least 4 tab-separated fields" % len(fields))
+            if len(fields) < 7:
+                logging.error("Only got %d fields but was expecting at least 7 tab-separated fields" % len(fields))
 
             geneB_sym = fields[0]
 
@@ -731,7 +741,7 @@ def parse_wang_2017(path, symbol2entrezID):
 
             effect = float(fields[8].replace(",", "."))
 
-            threshold = -3
+            threshold = -3                                  # 4.
 
             if effect < threshold:
                 SL = True
@@ -768,7 +778,7 @@ def parse_han_2017(path, symbol2entrezID):
     gene2_perturbation = "sgRNA"
     pmid = "28319085"
     assay = "RNA Interference assay"
-    effect_type = "z-Score"
+    effect_type = "z-Score"         # phentype z-Score
     cell_line = "K562 chronic myeloid leukemia cells"
     cellosaurus = "CVCL_0004"
     cancer = "Chronic Myelogenous Leukemia"
@@ -801,8 +811,7 @@ def parse_han_2017(path, symbol2entrezID):
             else:
                 geneB_id = 'n/a'
 
-            # effect = float(fields[6].replace(",", "."))
-            effect = -4
+            effect = -4                             # 3.
 
             sli = SyntheticLethalInteraction(gene_A_symbol=geneA_sym,
                                              gene_A_id=geneA_id,
