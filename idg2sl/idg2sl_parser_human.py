@@ -564,7 +564,9 @@ def parse_Shen2015(path, symbol2entrezID):
                                              assay=assay,
                                              pmid=pmid,
                                              SL=SL)
-            sli_list.append(sli)
+            gene_pair = GenePair(azd7762_symbol, geneB_sym)
+            sli_dict[gene_pair].append(sli)
+    sli_list = mark_maximum_entries(sli_dict)
     return sli_list
 
 
@@ -578,7 +580,7 @@ def parse_pathak_2015(path, symbol2entrezID):
     gene2_perturbation = 'siRNA'
     pmid = 'PMID:26437225'
     assay = "RNA-interference assay"
-    effect_type = "p-Value"
+    effect_type = "p-Value"                 # 5.
     cell_line = "ovary cancer cell line"
     cellosaurus = "CVCL_9724"
     cancer = "Recurrent Ovarian Carcinoma"
@@ -600,28 +602,24 @@ def parse_pathak_2015(path, symbol2entrezID):
                 for fd in fields:
                     print("%d) %s" % (i, fd))
                     #raise ValueError("Malformed line, must have at least 3 tab-separated fields")
+
             geneB_sym = fields[2]
             if geneB_sym in symbol2entrezID:
                 geneB_id = "NCBIGene:{}".format(symbol2entrezID.get(geneB_sym))
-                if geneB_id != "NCBIGene:{}".format(fields[1]):
-                    print(geneB_id)
-                    print(fields[1])
-                    raise ValueError("NCBIGene IDs for {} do not correspond!".format(geneB_sym))
             else:
                 geneB_id = 'n/a'
 
-            if fields[10] != "ND":
+            if fields[10] == "ND" :
+                print("string")
+                effect = 1                          # 6. 1 because effect is p-Value
+                SL = False
+            else:
                 effect = float(fields[10])
+                print("NO_string")
                 if effect < 0.05:
                     SL = True
                 else:
                     SL = False
-            else:
-                effect = "n/a"
-                SL = False
-
-
-
 
             sli = SyntheticLethalInteraction(gene_A_symbol=gene1_symbol,
                                              gene_A_id=gene1_id,
@@ -638,7 +636,9 @@ def parse_pathak_2015(path, symbol2entrezID):
                                              assay=assay,
                                              pmid=pmid,
                                              SL=SL)
-            sli_list.append(sli)
+            gene_pair = GenePair(gene1_symbol, geneB_sym)
+            sli_dict[gene_pair].append(sli)
+    sli_list = mark_maximum_entries(sli_dict)
     return sli_list
 
 
@@ -697,12 +697,10 @@ def parse_srivas_2016(path, symbol2entrezID):
                                                  assay=assay,
                                                  pmid=pmid,
                                                  SL=True)
-                sli_list.append(sli)
+                gene_pair = GenePair(i, geneB_sym)
+                sli_dict[gene_pair].append(sli)
+    sli_list = mark_maximum_entries(sli_dict)
     return sli_list
-
-
-# Wang2017 supplementary files
-# https://www.cell.com/cell/fulltext/S0092-8674(17)30061-2?_returnURL=https%3A%2F%2Flinkinghub.elsevier.com%2Fretrieve%2Fpii%2FS0092867417300612%3Fshowall%3Dtrue#secsectitle0275
 
 
 def parse_wang_2017(path, symbol2entrezID):
@@ -767,7 +765,9 @@ def parse_wang_2017(path, symbol2entrezID):
                                              assay=assay,
                                              pmid=pmid,
                                              SL=SL)
-            sli_list.append(sli)
+            gene_pair = GenePair(gene1_sym, geneB_sym)
+            sli_dict[gene_pair].append(sli)
+    sli_list = mark_maximum_entries(sli_dict)
     return sli_list
 
 
@@ -828,7 +828,9 @@ def parse_han_2017(path, symbol2entrezID):
                                              assay=assay,
                                              pmid=pmid,
                                              SL=True)
-            sli_list.append(sli)
+            gene_pair = GenePair(geneA_sym, geneB_sym)
+            sli_dict[gene_pair].append(sli)
+    sli_list = mark_maximum_entries(sli_dict)
     return sli_list
 
 
