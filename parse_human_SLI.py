@@ -37,26 +37,25 @@ yeastSymbol2entrezID = EntrezLookup(filename="lookup/Saccharomyces_cerevisiae.ge
 # Do the yeast somewhere else
 # boone_sli_list = idg2sl.parse_costanzo_boone_2016_NxN_data(symbol2id=yeastSymbol2entrezID)
 
-# luo2008 = idg2sl.parse_luo2009_supplemental_file_S3('data/luo2009.tsv', humanSymbol2entrezID)
-# bommi2008 = idg2sl.parse_bommi_reddi_2008('data/bommi-reddy-2008.tsv', humanSymbol2entrezID)
-# turner_list = idg2sl.parse_turner_2008('data/turner-PARP1-2008.tsv', humanSymbol2entrezID)
+luo2008 = idg2sl.parse_luo2009_supplemental_file_S3('data/luo2009.tsv', humanSymbol2entrezID)
+bommi2008 = idg2sl.parse_bommi_reddi_2008('data/bommi-reddy-2008.tsv', humanSymbol2entrezID)
+turner_list = idg2sl.parse_turner_2008('data/turner-PARP1-2008.tsv', humanSymbol2entrezID)
 
-# steckel2012 = idg2sl.parse_steckel_2012('data/steckel-2012-KRAS.tsv', humanSymbol2entrezID)
-# lord2008 = idg2sl.parse_lord_2008('data/lord-PARP1-2008.tsv', humanSymbol2entrezID)
-# toyoshima2008 = idg2sl.parse_toyoshima_2008('data/toyoshima-MYC-2008.tsv', humanSymbol2entrezID)
+steckel2012 = idg2sl.parse_steckel_2012('data/steckel-2012-KRAS.tsv', humanSymbol2entrezID)
+lord2008 = idg2sl.parse_lord_2008('data/lord-PARP1-2008.tsv', humanSymbol2entrezID)
+toyoshima2008 = idg2sl.parse_toyoshima_2008('data/toyoshima-MYC-2008.tsv', humanSymbol2entrezID)
 
-# shen2015 = idg2sl.parse_Shen2015('data/Shen_2015.tsv', humanSymbol2entrezID)
-
-# pathak2015 = idg2sl.parse_pathak_2015(humanSymbol2entrezID)       # 2 SL Interactions, hardcoded
-# srivas2016 = idg2sl.parse_srivas_2016('data/Srivas_2016.tsv', humanSymbol2entrezID)
-# han2017 = idg2sl.parse_han_2017('data/Han2017_supplemental_table_1.tsv', humanSymbol2entrezID)
+shen2015 = idg2sl.parse_Shen2015('data/Shen_2015.tsv', humanSymbol2entrezID)
+pathak2015 = idg2sl.parse_pathak_2015(humanSymbol2entrezID)       # 2 SL Interactions, hardcoded
+srivas2016 = idg2sl.parse_srivas_2016('data/Srivas_2016.tsv', humanSymbol2entrezID)
+han2017 = idg2sl.parse_han_2017('data/Han2017_supplemental_table_1.tsv', humanSymbol2entrezID)
 wang2017 = idg2sl.parse_wang_2017('data/Wang2017_table5.tsv', humanSymbol2entrezID)
 shen2017 = idg2sl.parse_shen_2017('data/shen2017.tsv', humanSymbol2entrezID)
 
 
 
-# sli_lists = [luo2008, bommi2008, turner_list, steckel2012, lord2008, toyoshima2008, shen2015, srivas2016, han2017, wang2017]
-sli_lists = [shen2017]
+sli_lists = [luo2008, bommi2008, turner_list, steckel2012, lord2008, toyoshima2008, shen2015, srivas2016, han2017, wang2017, shen2017]
+# sli_lists = [wang2017]
 
 n = 0
 n_SL = 0

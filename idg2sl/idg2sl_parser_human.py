@@ -623,6 +623,7 @@ def parse_pathak_2015(symbol2entrezID):
                                      SL=True)
     gene_pair = GenePair(gene1_symbol, "PRKCE")
     sli_dict[gene_pair].append(sli)
+    sli_list = mark_maximum_entries(sli_dict)
     return sli_list
 
 
@@ -696,7 +697,7 @@ def parse_wang_2017(path, symbol2entrezID):
     pmid = "28162770"
     assay = "CRISPR-Cas9 Interference assay"
     effect_type = "log2FoldChange"
-    cell_line = "Ba/F3"                             # 1.
+    cell_line = "Ba/F3"                             # ?
     cellosaurus = "CVCL_0161"
     cancer = ""
     ncit = ""
@@ -723,7 +724,7 @@ def parse_wang_2017(path, symbol2entrezID):
 
             effect = float(fields[8].replace(",", "."))
 
-            threshold = -3                                  # take cutoff?
+            threshold = -3                                  # which cutoff?
 
             if effect < threshold:
                 SL = True
@@ -761,7 +762,7 @@ def parse_han_2017(path, symbol2entrezID):
     gene2_perturbation = "sgRNA"
     pmid = "28319085"
     assay = "RNA Interference assay"
-    effect_type = "z-Score"         # phentype z-Score
+    effect_type = "z-Score"
     cell_line = "K562 chronic myeloid leukemia cells"
     cellosaurus = "CVCL_0004"
     cancer = "Chronic Myelogenous Leukemia"
@@ -794,7 +795,7 @@ def parse_han_2017(path, symbol2entrezID):
             else:
                 geneB_id = 'n/a'
 
-            effect = -4                             # 3.
+            effect = -4                             # ?
 
             sli = SyntheticLethalInteraction(gene_A_symbol=geneA_sym,
                                              gene_A_id=geneA_id,
