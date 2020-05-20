@@ -51,11 +51,12 @@ yeastSymbol2entrezID = EntrezLookup(filename="lookup/Saccharomyces_cerevisiae.ge
 # srivas2016 = idg2sl.parse_srivas_2016('data/Srivas_2016.tsv', humanSymbol2entrezID)
 # han2017 = idg2sl.parse_han_2017('data/Han2017_supplemental_table_1.tsv', humanSymbol2entrezID)
 wang2017 = idg2sl.parse_wang_2017('data/Wang2017_table5.tsv', humanSymbol2entrezID)
+shen2017 = idg2sl.parse_shen_2017('data/shen2017.tsv', humanSymbol2entrezID)
 
 
 
 # sli_lists = [luo2008, bommi2008, turner_list, steckel2012, lord2008, toyoshima2008, shen2015, srivas2016, han2017, wang2017]
-sli_lists = [wang2017]
+sli_lists = [shen2017]
 
 n = 0
 n_SL = 0
