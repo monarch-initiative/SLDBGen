@@ -55,7 +55,7 @@ shen2017 = idg2sl.parse_shen_2017('data/shen2017.tsv', humanSymbol2entrezID)
 
 
 # sli_lists = [luo2008, bommi2008, turner_list, steckel2012, lord2008, toyoshima2008, shen2015, srivas2016, han2017, wang2017, shen2017]
-sli_lists = [han2017]
+sli_lists = [srivas2016]
 
 n = 0
 n_SL = 0

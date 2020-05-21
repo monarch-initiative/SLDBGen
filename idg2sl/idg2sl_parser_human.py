@@ -696,7 +696,7 @@ def parse_wang_2017(path, symbol2entrezID):
     gene1_id = "NCBIGene: 4893"
     gene1_perturbation = "mutation"
     gene2_perturbation = "sgRNA"
-    pmid = "28162770"
+    pmid = "PMID:28162770"
     assay = "CRISPR-Cas9 Interference assay"
     effect_type = "log2FoldChange"
     cell_line = "Ba/F3"                             # ?

@@ -28,12 +28,12 @@ class TestWang(TestCase):
         """
         There are 22 SL genes in wang2017 small.
         There are 30 genes altogether.
-        Thus, 22 of the entries should be marked as max
+        Thus, 30 of the entries should be marked as max
         :return:
         """
         self.assertEqual(30, len(self.wang2017_list))
         num_max = sum([1 for item in self.wang2017_list if item.is_maximum()])
-        self.assertEqual(22, num_max)
+        self.assertEqual(30, num_max)
 
     def test_get_symbol(self):
         self.assertEqual("NRAS", self.first_entry.get_gene_A_symbol())
