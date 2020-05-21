@@ -506,10 +506,11 @@ def parse_toyoshima_2008(path, symbol2entrezID):
 
 
 def parse_Shen2015(path, symbol2entrezID):
-    # GeneA is always CHEK1, GeneB is in data/Shen_2015.txt
-    azd7762_symbol = 'CHEK1'
-    azd7762_id = 'NCBIGene:1111'
-    azd7762_perturbation = 'pharmaceutical (AZD7762)'
+    # GeneA is always CHEK1 (pharmaceutically inhibited by AZD7762)
+    # GeneB is in data/Shen_2015.txt
+    geneA_symbol = 'CHEK1'
+    geneA_id = 'NCBIGene:1111'
+    geneA_perturbation = 'pharmaceutical'
     gene2_perturbation = 'siRNA'
     pmid = 'PMID:26437225'
     assay = "RNA-interference assay"
@@ -534,7 +535,7 @@ def parse_Shen2015(path, symbol2entrezID):
                 i = 0
                 for fd in fields:
                     print("%d) %s" % (i, fd))
-                    #raise ValueError("Malformed line, must have at least 3 tab-separated fields")
+                    raise ValueError("Malformed line, must have at least 3 tab-separated fields")
             geneB_sym = fields[1]
             if geneB_sym in symbol2entrezID:
                 geneB_id = "NCBIGene:{}".format(symbol2entrezID.get(geneB_sym))
@@ -547,11 +548,11 @@ def parse_Shen2015(path, symbol2entrezID):
                 SL = True
             else:
                 SL = False
-            sli = SyntheticLethalInteraction(gene_A_symbol=azd7762_symbol,
-                                             gene_A_id=azd7762_id,
+            sli = SyntheticLethalInteraction(gene_A_symbol=geneA_symbol,
+                                             gene_A_id=geneA_id,
                                              gene_B_symbol=geneB_sym,
                                              gene_B_id=geneB_id,
-                                             gene_A_pert=azd7762_perturbation,
+                                             gene_A_pert=geneA_perturbation,
                                              gene_B_pert=gene2_perturbation,
                                              effect_type=effect_type,
                                              effect_size=effect,
@@ -562,20 +563,20 @@ def parse_Shen2015(path, symbol2entrezID):
                                              assay=assay,
                                              pmid=pmid,
                                              SL=SL)
-            gene_pair = GenePair(azd7762_symbol, geneB_sym)
+            gene_pair = GenePair(geneA_symbol, geneB_sym)
             sli_dict[gene_pair].append(sli)
     sli_list = mark_maximum_entries(sli_dict)
     return sli_list
 
 
 def parse_pathak_2015(symbol2entrezID):
-    # 2 SL Interactions, hardcoded
+    # just 2 SL Interactions, hardcoded
     # SRC Gene is proto-oncogene blocked by Dasatinib
-    # trying to maximise dasatinib sensitivity by SL interaction
+    # trying to maximise the Dasatinib sensitivity by SL interaction
 
     gene1_symbol = 'SRC'
     gene1_id = 'NCBIGene:6714'
-    gene1_perturbation = 'pharmaceutical (Dasatinib)'
+    gene1_perturbation = 'pharmaceutical'
     gene2_perturbation = 'cohort study'
     pmid = 'PMID:26437225'
     assay = "pharmaceutical inhibition study"
@@ -629,10 +630,11 @@ def parse_pathak_2015(symbol2entrezID):
 
 def parse_srivas_2016(path, symbol2entrezID):
     # using the human SL interactions (supplemental file 4 page 2)
+    # https://www.cell.com/molecular-cell/fulltext/S1097-2765(16)30280-5?innerTabgraphical_S1097276516302805=#secsectitle0105
     gene1_perturbation = 'pharmaceutical'
     gene2_perturbation = 'natural (is a TSG)'
     pmid = 'PMID:27453043'
-    assay = "multi-species approach"                # not sure
+    assay = "pharmaceutical + siRNA"
     effect_type = "z-Score"
     cell_line = "HeLa-Cells"
     cellosaurus = "CVCL_0030"
@@ -645,7 +647,6 @@ def parse_srivas_2016(path, symbol2entrezID):
     # The following keeps track of the current largest effect size SLI for any given gene A/gene B pair
     sli_dict = defaultdict(list)
     with open(path) as f:
-        # next(f)  # skip header
         for line in f:
             fields = line.rstrip('\n').split('\t')
             if len(fields) < 4:
@@ -690,6 +691,7 @@ def parse_srivas_2016(path, symbol2entrezID):
 
 def parse_wang_2017(path, symbol2entrezID):
     # using supplemental file 4
+    # https://www.cell.com/cell/fulltext/S0092-8674(17)30061-2?_returnURL=https%3A%2F%2Flinkinghub.elsevier.com%2Fretrieve%2Fpii%2FS0092867417300612%3Fshowall%3Dtrue#secsectitle0275
     gene1_sym = "NRAS"
     gene1_id = "NCBIGene: 4893"
     gene1_perturbation = "mutation"
@@ -731,8 +733,6 @@ def parse_wang_2017(path, symbol2entrezID):
             else:
                 SL = False
 
-            # print(effect)
-            # print(SL)
 
             sli = SyntheticLethalInteraction(gene_A_symbol=gene1_sym,
                                              species_id="10090",
@@ -757,7 +757,7 @@ def parse_wang_2017(path, symbol2entrezID):
 
 
 def parse_han_2017(path, symbol2entrezID):
-    # using supplemental file 4
+    # using supplemental file 14
     gene1_perturbation = "sgRNA"
     gene2_perturbation = "sgRNA"
     pmid = "28319085"
