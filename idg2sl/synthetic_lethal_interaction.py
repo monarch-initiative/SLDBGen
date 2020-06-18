@@ -143,3 +143,10 @@ class SyntheticLethalInteraction:
                self.pmid,
                sl]
         return "\t".join(lst)
+
+    def __repr__(self):
+        """
+        Returns:
+            a string to be used by 'print'
+        """
+        return self.get_tsv_line()
