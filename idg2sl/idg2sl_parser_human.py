@@ -507,7 +507,7 @@ def parse_toyoshima_2008(path, symbol2entrezID):
 
 def parse_Shen2015(path, symbol2entrezID):
     # GeneA is always CHEK1 (pharmaceutically inhibited by AZD7762)
-    # GeneB is in data/Shen_2015.txt
+    # GeneB is in data/Shen_2015.tsv
     geneA_symbol = 'CHEK1'
     geneA_id = 'NCBIGene:1111'
     geneA_perturbation = 'pharmaceutical'

@@ -1,7 +1,9 @@
 import gzip
-import os.path
+import os
 import wget
-
+import matplotlib.pyplot as plt
+import networkx as nx
+import pandas as pd
 from collections import defaultdict
 from utils.entrez_lookup import EntrezLookup
 import idg2sl
@@ -54,15 +56,16 @@ shen2017 = idg2sl.parse_shen_2017('data/shen2017.tsv', humanSymbol2entrezID)
 
 
 
-# sli_lists = [luo2008, bommi2008, turner_list, steckel2012, lord2008, toyoshima2008, shen2015, srivas2016, han2017, wang2017, shen2017]
-sli_lists = [srivas2016]
+sli_lists = [luo2008, bommi2008, turner_list, steckel2012, lord2008, toyoshima2008, shen2015, srivas2016, han2017, wang2017, shen2017]
+#sli_lists = [pathak2015]
 
 n = 0
 n_SL = 0
 for sli_list in sli_lists:
     for sli in sli_list:
         # if n < 10:
-        print(sli.get_tsv_line())
+        #print(sli.get_tsv_line())
+
         n += 1
         if sli.get_SL():
             n_SL += 1
@@ -70,3 +73,24 @@ for sli_list in sli_lists:
 print("We got %d interactions including %d synthetic lethal interactions" % (n, n_SL))
 
 
+def save_SL_data(path, sli_lists):
+    with open(path, 'w') as out_f:
+        out_f.write("Gen1,Gen2,weight\n")
+        for sli_list in sli_lists:
+            for sli in sli_list:
+                if sli.get_SL():
+                    out_f.write(sli.get_gene_A_symbol() + "," + sli.get_gene_B_symbol() + ",")
+                    out_f.write(str(sli.get_effect_size()))
+                    out_f.write("\n")
+
+filename = "SL_graph.csv"
+
+save_SL_data(filename, sli_lists)
+
+df = pd.read_csv(filename)
+print(df.head())
+#Graphtype = nx.Graph()
+G = nx.from_pandas_edgelist(df, "Gen1", "Gen2", "weight")
+#labels=nx.draw_networkx_labels(G, pos=nx.spectral_layout(G))
+nx.draw(G, with_labels = True)
+plt.show()
