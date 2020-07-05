@@ -33,6 +33,7 @@ def parse_STRING(stringdata, outfile):
                     ensemblA = protID2ensembl.get(protA)
                     found += 1
                 else:
+                    ensemblA = "n/a"
                     nfound += 1
                 if protB in protID2ensembl:
                     ensemblB = protID2ensembl.get(protB)
@@ -41,8 +42,9 @@ def parse_STRING(stringdata, outfile):
                     ensemblB = protID2ensembl.get(protB)
                     found += 1
                 else:
+                    ensemblB = "n/a"
                     nfound += 1
-                out_f.write(ensemblA + "\t" + ensemblB + "\t" + fields[2])
+                out_f.write("STRING_data\t" + ensemblA + "\t" + ensemblB + "\t" + fields[2])
     print("Found %d proteins, didn't find %d proteins" % (found, nfound))
     print(nfound/(found + nfound))
 
