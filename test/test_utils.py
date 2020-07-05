@@ -1,5 +1,5 @@
 import unittest
-from utils.entrez_lookup import EntrezLookup
+from utils.lookup import EntrezLookup
 from collections import defaultdict
 
 
