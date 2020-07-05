@@ -1,4 +1,3 @@
-												Expression (RPKM) , HeLa		Expression (RPKM), A549		Expression (RPKM), 293T	
 Interaction	geneA	geneB	HeLa_Z	A549_Z	293T_Z	Hit_Cell_Line	Interaction_type	Conserved?	Validation?	PriorSL_report?	PMID / ref	geneA	geneB	geneA	geneB	geneA	geneB
 BRCA1_WEE1	BRCA1	WEE1	-0,421	-1,102	-5,860	293T	Synthetic Lethal	private		yes	25964244	16,82	19,74	9,10	5,25	14,80	23,87
 BRCA2_CDK9	BRCA2	CDK9	-0,581	1,231	-5,130	293T	Synthetic Lethal	private				0,67	11,61	0,47	6,89	1,68	21,06
@@ -24,7 +23,7 @@ PARP1_RRM2	PARP1	RRM2	-0,314	-0,340	-3,718	293T	Synthetic Lethal	private				37,2
 BRCA1_VEGFA	BRCA1	VEGFA	-1,473	-0,605	-3,701	293T	Synthetic Lethal	private				16,82	21,09	9,10	9,04	14,80	15,84
 ARID1A_TOP1	ARID1A	TOP1	-0,926	-0,773	-3,701	293T	Synthetic Lethal	private				3,90	3,78	10,18	4,04	15,83	89,12
 MTOR_PDGFRA	MTOR	PDGFRA	0,613	-1,293	-3,614	293T	Synthetic Lethal	private		yes	17290308	13,27	0,00	8,65	0,11	20,97	0,36
-BRD4_PTEN	BRD4	PTEN	0,413	-0,013	-3,593	293T	Synthetic Lethal	private		yes	"Baltz, Nicholas J et al ""JQ1, a Potential Therapeutic Molecule for Myeloid Leukemia with PTEN Deficiency."" Blood 128.22 (2016): 5899.Web. 09 Dec. 2016."	1,44	14,48	1,36	4,67	22,00	8,09
+BRD4_PTEN	BRD4	PTEN	0,413	-0,013	-3,593	293T	Synthetic Lethal	private		yes	"Baltz,?Nicholas J?et al?""JQ1, a Potential Therapeutic Molecule for Myeloid Leukemia with PTEN Deficiency.""?Blood?128.22?(2016):?5899.Web. 09 Dec. 2016."	1,44	14,48	1,36	4,67	22,00	8,09
 PDGFRA_TOP1	PDGFRA	TOP1	-0,990	-1,491	-3,564	293T	Synthetic Lethal	private				0,00	3,78	0,11	4,04	0,36	89,12
 BRD4_FGFR3	BRD4	FGFR3	-0,063	-2,363	-3,552	293T	Synthetic Lethal	private				1,44	1,19	1,36	0,63	22,00	33,36
 ROR1_TOP1	ROR1	TOP1	-2,059	-1,061	-3,550	293T	Synthetic Lethal	private				0,13	3,78	3,79	4,04	1,99	89,12

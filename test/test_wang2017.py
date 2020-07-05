@@ -36,8 +36,9 @@ class TestWang(TestCase):
         self.assertEqual(30, num_max)
 
     def test_get_symbol(self):
+        # Note that the Wanf2017 parse upper cases all gene symbols
         self.assertEqual("NRAS", self.first_entry.get_gene_A_symbol())
-        self.assertEqual("Shoc2", self.first_entry.get_gene_B_symbol())
+        self.assertEqual("SHOC2", self.first_entry.get_gene_B_symbol())
 
     def test_get_perturbation(self):
         self.assertEqual("mutation", self.first_entry.get_gene_A_pert())
