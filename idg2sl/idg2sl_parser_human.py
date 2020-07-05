@@ -507,7 +507,7 @@ def parse_toyoshima_2008(path, symbol2entrezID):
 
 def parse_Shen2015(path, symbol2entrezID):
     # GeneA is always CHEK1 (pharmaceutically inhibited by AZD7762)
-    # GeneB is in data/Shen_2015.txt
+    # GeneB is in data/Shen_2015.tsv
     geneA_symbol = 'CHEK1'
     geneA_id = 'NCBIGene:1111'
     geneA_perturbation = 'pharmaceutical'
@@ -717,7 +717,7 @@ def parse_wang_2017(path, symbol2entrezID):
             if len(fields) < 7:
                 logging.error("Only got %d fields but was expecting at least 7 tab-separated fields" % len(fields))
 
-            geneB_sym = fields[0]
+            geneB_sym = fields[0].upper()
 
             if geneB_sym in symbol2entrezID:
                 geneB_id = "NCBIGene:{}".format(symbol2entrezID.get(geneB_sym))
@@ -725,6 +725,8 @@ def parse_wang_2017(path, symbol2entrezID):
                 geneB_id = 'n/a'
 
             effect = float(fields[8].replace(",", "."))
+            #if effect < -2.5:
+            #    break
 
             threshold = -3                                  # which cutoff?
 
