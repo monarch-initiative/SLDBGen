@@ -24,3 +24,11 @@ and before each use of the scripts,
 ```bash
 source py3/bin/activate
 ```
+
+## Testing
+Activate the virtual environment as above, and then install the nose package
+```bash
+source py3/bin/activate
+pip install nose
+nosetests
+```
