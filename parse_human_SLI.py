@@ -5,6 +5,7 @@ from collections import defaultdict
 from utils.lookup import Lookup
 from utils.ensembl_lookup import EnsemblLookup
 import idg2sl
+from idg2sl import *
 
 
 # from utils.ensembl_lookup import ncbi2ensembl
@@ -32,22 +33,18 @@ def get_entrez_gene_map():
 
 
 symbol2ncbi = Lookup().symbol2ncbi
-# print(symbol2ncbi["MLL3"])
 symbol2ensembl = Lookup().symbol2ensembl
 ncbi2ensembl = Lookup().ncbi2ensembl
-# print(ncbi2ensembl["4893"])
 
-# yeastSymbol2entrezID = Lookup(filename="lookup/Saccharomyces_cerevisiae.gene_info.gz",
-#                              species_id=["4932", "559292"]
-#                              ).symbol2ncbi
-
-
-# Do the yeast somewhere else
-# boone_sli_list = idg2sl.parse_costanzo_boone_2016_NxN_data(symbol2id=yeastSymbol2entrezID)
 
 luo2008 = idg2sl.parse_luo2009_supplemental_file_S3('data/luo2009.tsv', symbol2ncbi)
 bommi2008 = idg2sl.parse_bommi_reddi_2008('data/bommi-reddy-2008.tsv', symbol2ncbi)
-turner_list = idg2sl.parse_turner_2008('data/turner-PARP1-2008.tsv', symbol2ncbi)
+
+
+# Turner 2008
+turner2008 = Turner2008Parser(symbol2ncbi, 'data/turner-PARP1-2008.tsv')
+turner_list = turner2008.parse()
+
 
 steckel2012 = idg2sl.parse_steckel_2012('data/steckel-2012-KRAS.tsv', symbol2ncbi)
 lord2008 = idg2sl.parse_lord_2008('data/lord-PARP1-2008.tsv', symbol2ncbi)
