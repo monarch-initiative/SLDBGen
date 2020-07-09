@@ -57,8 +57,11 @@ han2017 = idg2sl.parse_han_2017('data/Han2017_supplemental_table_1.tsv', symbol2
 wang2017 = idg2sl.parse_wang_2017('data/Wang2017_table5.tsv', symbol2ncbi)
 shen2017 = idg2sl.parse_shen_2017('data/shen2017.tsv', symbol2ncbi)
 
+manual = ManualEntry()
+manual_list = manual.get_entries()
+
 sli_lists = [luo2008, bommi2008, turner_list, steckel2012, lord2008, toyoshima2008, shen2015, srivas2016, han2017,
-             wang2017, shen2017]
+             wang2017, shen2017, manual_list]
 # sli_lists = [shen2015]
 
 
