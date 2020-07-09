@@ -3,30 +3,12 @@ import os.path
 from _collections import defaultdict
 from idg2sl import SyntheticLethalInteraction
 
+from.gene_pair import GenePair
+
 
 ## Some constants
 activating_mutation = 'activating_mutation'
 
-
-class GenePair:
-    """
-    We need a class to act as a key in dictionaries with the key being made of gene A and gene B
-    because in some of our datasets, both gene A and gene B can vary
-    """
-    def __init__(self, geneA, geneB):
-        self.gene_A = geneA
-        self.gene_B = geneB
-
-    def __hash__(self):
-        return hash((self.gene_A, self.gene_B))
-
-    def __eq__(self, other):
-        return (self.gene_A, self.gene_B) == (other.gene_A, other.gene_B)
-
-    def __ne__(self, other):
-        # Not strictly necessary, but to avoid having both x==y and x!=y
-        # True at the same time
-        return not (self == other)
 
 
 
