@@ -1,14 +1,11 @@
 import gzip
-import os
+import os.path
 import wget
+import pandas as pd
+
 from collections import defaultdict
 from utils.lookup import Lookup
-from utils.ensembl_lookup import EnsemblLookup
 import idg2sl
-from idg2sl import *
-
-
-# from utils.ensembl_lookup import ncbi2ensembl
 
 
 def get_entrez_gene_map():
@@ -33,18 +30,22 @@ def get_entrez_gene_map():
 
 
 symbol2ncbi = Lookup().symbol2ncbi
+# print(symbol2ncbi["MLL3"])
 symbol2ensembl = Lookup().symbol2ensembl
 ncbi2ensembl = Lookup().ncbi2ensembl
+# print(ncbi2ensembl["4893"])
 
+# yeastSymbol2entrezID = Lookup(filename="lookup/Saccharomyces_cerevisiae.gene_info.gz",
+#                              species_id=["4932", "559292"]
+#                              ).symbol2ncbi
+
+
+# Do the yeast somewhere else
+# boone_sli_list = idg2sl.parse_costanzo_boone_2016_NxN_data(symbol2id=yeastSymbol2entrezID)
 
 luo2008 = idg2sl.parse_luo2009_supplemental_file_S3('data/luo2009.tsv', symbol2ncbi)
 bommi2008 = idg2sl.parse_bommi_reddi_2008('data/bommi-reddy-2008.tsv', symbol2ncbi)
-
-
-# Turner 2008
-turner2008 = Turner2008Parser(symbol2ncbi, 'data/turner-PARP1-2008.tsv')
-turner_list = turner2008.parse()
-
+turner_list = idg2sl.parse_turner_2008('data/turner-PARP1-2008.tsv', symbol2ncbi)
 
 steckel2012 = idg2sl.parse_steckel_2012('data/steckel-2012-KRAS.tsv', symbol2ncbi)
 lord2008 = idg2sl.parse_lord_2008('data/lord-PARP1-2008.tsv', symbol2ncbi)
@@ -57,26 +58,49 @@ han2017 = idg2sl.parse_han_2017('data/Han2017_supplemental_table_1.tsv', symbol2
 wang2017 = idg2sl.parse_wang_2017('data/Wang2017_table5.tsv', symbol2ncbi)
 shen2017 = idg2sl.parse_shen_2017('data/shen2017.tsv', symbol2ncbi)
 
-manual = ManualEntry()
-manual_list = manual.get_entries()
+#sli_lists = [luo2008, bommi2008, turner_list, steckel2012, lord2008, toyoshima2008, shen2015, srivas2016, han2017,
+#             wang2017, shen2017]
+sli_lists = [luo2008]
 
-sli_lists = [luo2008, bommi2008, turner_list, steckel2012, lord2008, toyoshima2008, shen2015, srivas2016, han2017,
-             wang2017, shen2017, manual_list]
-# sli_lists = [shen2015]
-
-
+df = pd.DataFrame(columns=["Gene1ID", "Gene2ID", "SL"])
+row_list = []
+print(df)
 n = 0
 n_SL = 0
 for sli_list in sli_lists:
     for sli in sli_list:
         # if n < 10:
-        # print(sli.get_tsv_line())
+        print(sli.get_tsv_line())
+        if not sli.get_gene_A_id().startswith("NCBI"):
+            geneA_id = ncbi2ensembl.get(sli.get_gene_A_id().split(":")[1])
+        elif sli.get_gene_A_symbol() in symbol2ensembl:
+            geneA_id = symbol2ensembl.get(sli.get_gene_A_symbol())
+        else:
+            geneA_id = "n/a"
+
+        if geneA_id is not "n/a":
+            if sli.get_gene_B_id().startswith("NCBI") and sli.get_gene_B_id().split(":")[1] in ncbi2ensembl:
+                geneB_id = ncbi2ensembl.get(sli.get_gene_B_id().split(":")[1])
+                row_list.append({"Gene1ID": geneA_id, "Gene2ID": geneB_id, "SL": sli.get_SL()})
+            elif sli.get_gene_B_symbol() in symbol2ensembl:
+                geneB_id = symbol2ensembl.get(sli.get_gene_B_symbol())
+                row_list.append({"Gene1ID": geneA_id, "Gene2ID": geneB_id, "SL": sli.get_SL()})
+            else:
+                geneB_id = "n/a"
+
         n += 1
         if sli.get_SL():
             n_SL += 1
+df = pd.DataFrame(row_list)
+
+#dups = df["Gene2ID"].duplicated(keep=False)
+#print(dups)
+
 
 print("We got %d interactions including %d synthetic lethal interactions" % (n, n_SL))
 
+#print(df)
+#print(df[dups])
 
 def save_SL_data(path, sli_lists):
     with open(path, 'w') as out_f:
@@ -143,7 +167,7 @@ ensembl_file = "SL_graph_ensembl.tsv"
 
 # save_SL_data(file, sli_lists)
 # save_SL_data_ncbi(ncbi_file, sli_lists)
-save_SL_data_ensembl(ensembl_file, sli_lists)
+#save_SL_data_ensembl(ensembl_file, sli_lists)
 
 # df = pd.read_csv(filename)
 # print(df.head())

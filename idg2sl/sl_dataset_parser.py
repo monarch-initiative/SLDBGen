@@ -19,7 +19,6 @@ class SL_DatasetParser:
                 self.rows.append(row)
 
 
-
     def _mark_maximum_entries(self, sli_dict):
         """
         The parsing functions add all SLIs for gene A & B to a list
