@@ -99,7 +99,7 @@ df = pd.DataFrame(row_list)
 
 print("We got %d interactions including %d synthetic lethal interactions" % (n, n_SL))
 
-#print(df)
+print(df)
 #print(df[dups])
 
 def save_SL_data(path, sli_lists):
