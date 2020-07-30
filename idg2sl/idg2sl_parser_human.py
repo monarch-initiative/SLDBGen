@@ -3,13 +3,10 @@ import os.path
 from _collections import defaultdict
 from idg2sl import SyntheticLethalInteraction
 
-from.gene_pair import GenePair
-
+from .gene_pair import GenePair
 
 ## Some constants
 activating_mutation = 'activating_mutation'
-
-
 
 
 def mark_maximum_entries(sli_dict):
@@ -146,7 +143,7 @@ def parse_bommi_reddi_2008(path, symbol2entrezID):
             if len(fields) < 4:
                 raise ValueError("Only got %d fields but was expecting 4" % len(fields))
             geneB_sym = fields[0]
-            if geneB_sym is "IRR" or geneB_sym is "HER4":
+            if geneB_sym == "IRR" or geneB_sym == "HER4":
                 continue
             if geneB_sym in symbol2entrezID:
                 geneB_id = "NCBIGene:{}".format(symbol2entrezID.get(geneB_sym))
@@ -186,68 +183,6 @@ def parse_bommi_reddi_2008(path, symbol2entrezID):
     return sli_list
 
 
-def parse_turner_2008(path, symbol2entrezID):
-    """
-    Parse data from  Turner NC, et al., A synthetic lethal siRNA screen identifying genes mediating
-    sensitivity to a PARP inhibitor. EMBO J. 2008 May 7;27(9):1368-77. PubMed PMID: 18388863
-    PARP1 was inhibited by the PARP inhibitor KU0058948, and a short interfering RNA library targeting
-    779 human protein kinase and kinase assocaited genes was applied.
-    :param path:
-    :return:
-    """
-    parp1_symbol = 'PARP1'
-    parp1_id = 'NCBIGene:142'
-    parp1_perturbation = 'drug'
-    gene2_perturbation = 'siRNA'
-    pmid = 'PMID:18388863'
-    assays = ['competitive hybridization', 'multicolor competition assay']
-    assay_string = ";".join(assays)
-    effect_type = 'stddev'
-    cell_line = 'CAL-51'
-    cellosaurus = 'CVCL_1110'
-    cancer = "Breast Carcinoma"
-    ncit = "NCIT:C4872"
-    if not os.path.exists(path):
-        raise ValueError("Must path a valid path for Turner et al 2008")
-    sli_dict = defaultdict(list)
-    with open(path) as f:
-        next(f)  # skip header
-        for line in f:
-            if len(line) < 3:
-                raise ValueError("Bad line for Turner et al")
-            fields = line.rstrip('\n').split('\t')
-            geneB_sym = fields[0]
-            if geneB_sym in symbol2entrezID:
-                geneB_id = "NCBIGene:{}".format(symbol2entrezID.get(geneB_sym))
-            else:
-                geneB_id = "n/a"
-            zscore = float(fields[1])
-            percent_inhib = fields[2]
-            if zscore <= -3.0:
-                SL = True
-            else:
-                SL = False
-            sli = SyntheticLethalInteraction(gene_A_symbol=parp1_symbol,
-                                             gene_A_id=parp1_id,
-                                             gene_B_symbol=geneB_sym,
-                                             gene_B_id=geneB_id,
-                                             gene_A_pert=parp1_perturbation,
-                                             gene_B_pert=gene2_perturbation,
-                                             effect_type=effect_type,
-                                             effect_size=zscore,
-                                             cell_line=cell_line,
-                                             cellosaurus_id=cellosaurus,
-                                             cancer_type=cancer,
-                                             ncit_id=ncit,
-                                             assay=assay_string,
-                                             pmid=pmid,
-                                             SL=SL)
-            gene_pair = GenePair(parp1_symbol, geneB_sym)
-            sli_dict[gene_pair].append(sli)
-        sli_list = mark_maximum_entries(sli_dict)
-        return sli_list
-
-
 def parse_steckel_2012(path, symbol2entrezID):
     """
     Steckel M, et al. Determination of synthetic lethal interactions in KRAS oncogene-dependent cancer cells reveals novel
@@ -285,7 +220,7 @@ def parse_steckel_2012(path, symbol2entrezID):
     sli_dict = defaultdict(list)
     # GeneID	Locus.ID	Accession	HCT-116 Z-score	HKE-3 Z-score	D Z-score
     with open(path) as f:
-        next(f) # skip header
+        next(f)  # skip header
         for line in f:
             F = line.rstrip('\n').split('\t')
             if len(F) != 6:
@@ -301,7 +236,7 @@ def parse_steckel_2012(path, symbol2entrezID):
             else:
                 geneB_id = "n/a"
             if geneB_sym == "KRAS":
-                continue # This was an internal control!
+                continue  # This was an internal control!
             if delta_zscore >= 3.3 and HKE3_zscore < 2:
                 SL = True
             else:
@@ -375,7 +310,7 @@ def parse_lord_2008(path, symbol2entrezID):
             if geneBsym == 'BRCA1':
                 continue
             elif geneBsym == 'GFP-22' or geneBsym == 'SCRAM':
-                continue # a control siRNA
+                continue  # a control siRNA
             # ignore the third field
             parpdict[geneBsym].append(parp_sens)
     sli_list = []
@@ -385,7 +320,8 @@ def parse_lord_2008(path, symbol2entrezID):
         else:
             geneB_id = "n/a"
         if len(parp_sens_list) != 2:
-            raise ValueError("Length of list not equal to 2 for %s (len was %d)" % (geneBsym, len(parp_sens_list))) # should never happen
+            raise ValueError("Length of list not equal to 2 for %s (len was %d)" % (
+            geneBsym, len(parp_sens_list)))  # should never happen
         if parp_sens_list[0] <= -0.1 and parp_sens_list[1] <= -0.1:
             sli = SyntheticLethalInteraction(gene_A_symbol=parp1_symbol,
                                              gene_A_id=parp1_id,
@@ -394,7 +330,7 @@ def parse_lord_2008(path, symbol2entrezID):
                                              gene_A_pert=parp1_perturbation,
                                              gene_B_pert=gene2_perturbation,
                                              effect_type=effect_type,
-                                             effect_size=min(parp_sens_list[0] ,parp_sens_list[1]),
+                                             effect_size=min(parp_sens_list[0], parp_sens_list[1]),
                                              cell_line=cell_line,
                                              cellosaurus_id=cellosaurus,
                                              cancer_type=cancer,
@@ -404,7 +340,7 @@ def parse_lord_2008(path, symbol2entrezID):
                                              SL=True)
             sli_list.append(sli)
         else:
-            effectsize = min(parp_sens_list[0] ,parp_sens_list[1])
+            effectsize = min(parp_sens_list[0], parp_sens_list[1])
             if effectsize > -0.05:
                 sli = SyntheticLethalInteraction(gene_A_symbol=parp1_symbol,
                                                  gene_A_id=parp1_id,
@@ -452,7 +388,7 @@ def parse_toyoshima_2008(path, symbol2entrezID):
         raise ValueError("Must path a valid path for Turner et al 2008")
     sl_list = []
     with open(path) as f:
-        next(f) # skip header
+        next(f)  # skip header
         for line in f:
             fields = line.rstrip('\n').split('\t')
             if len(fields) != 6:
@@ -500,7 +436,7 @@ def parse_Shen2015(path, symbol2entrezID):
     cell_line = "HeLa-Cells"
     cellosaurus = "CVCL_0030"
     cancer = ""
-    ncit = ""			# NCI Thesaurus, Ontology
+    ncit = ""  # NCI Thesaurus, Ontology
 
     sli_list = []
     if not os.path.exists(path):
@@ -568,18 +504,17 @@ def parse_pathak_2015(symbol2entrezID):
     cancer = "Recurrent Ovarian Carcinoma"
     ncit = "NCIT:C7833"
 
-
     sli_list = []
     sli_dict = defaultdict(list)
 
     sli = SyntheticLethalInteraction(gene_A_symbol=gene1_symbol,
                                      gene_A_id=gene1_id,
-                                     gene_B_symbol = "CSNK2A1",
-                                     gene_B_id = "NCBIGene:{}".format(symbol2entrezID.get("CSNK2A1")),
+                                     gene_B_symbol="CSNK2A1",
+                                     gene_B_id="NCBIGene:{}".format(symbol2entrezID.get("CSNK2A1")),
                                      gene_A_pert=gene1_perturbation,
                                      gene_B_pert=gene2_perturbation,
                                      effect_type=effect_type,
-                                     effect_size = -0.82,
+                                     effect_size=-0.82,
                                      cell_line=cell_line,
                                      cellosaurus_id=cellosaurus,
                                      cancer_type=cancer,
@@ -596,7 +531,7 @@ def parse_pathak_2015(symbol2entrezID):
                                      gene_A_pert=gene1_perturbation,
                                      gene_B_pert=gene2_perturbation,
                                      effect_type=effect_type,
-                                     effect_size= -0.96,
+                                     effect_size=-0.96,
                                      cell_line=cell_line,
                                      cellosaurus_id=cellosaurus,
                                      cancer_type=cancer,
@@ -681,7 +616,7 @@ def parse_wang_2017(path, symbol2entrezID):
     pmid = "PMID:28162770"
     assay = "CRISPR-Cas9 Interference assay"
     effect_type = "log2FoldChange"
-    cell_line = "Ba/F3"                             # ?
+    cell_line = "Ba/F3"  # ?
     cellosaurus = "CVCL_0161"
     cancer = ""
     ncit = ""
@@ -707,16 +642,15 @@ def parse_wang_2017(path, symbol2entrezID):
                 geneB_id = 'n/a'
 
             effect = float(fields[8].replace(",", "."))
-            #if effect < -2.5:
+            # if effect < -2.5:
             #    break
 
-            threshold = -3                                  # which cutoff?
+            threshold = -3  # which cutoff?
 
             if effect < threshold:
                 SL = True
             else:
                 SL = False
-
 
             sli = SyntheticLethalInteraction(gene_A_symbol=gene1_sym,
                                              species_id="10090",
@@ -779,7 +713,7 @@ def parse_han_2017(path, symbol2entrezID):
             else:
                 geneB_id = 'n/a'
 
-            effect = -4                             # ?
+            effect = -4  # ?
 
             sli = SyntheticLethalInteraction(gene_A_symbol=geneA_sym,
                                              gene_A_id=geneA_id,
@@ -849,7 +783,7 @@ def parse_shen_2017(path, symbol2entrezID):
             for i in cell_line:
                 if i == "293T":
                     cellosaurus = "CVCL_0161"
-                    #effect = float("-2.5")
+                    # effect = float("-2.5")
                     effect = float(fields[5].replace(",", "."))
                 if i == "HeLa":
                     cellosaurus = "CVCL_0030"

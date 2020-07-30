@@ -2,6 +2,8 @@ import gzip
 import os
 import wget
 from collections import defaultdict
+
+from idg2sl.parsers.blomen_2015_parser import Blomen2015Parser
 from utils.lookup import Lookup
 from utils.ensembl_lookup import EnsemblLookup
 import idg2sl
@@ -19,6 +21,7 @@ def get_entrez_gene_map():
     local_filename = 'Homo_sapiens.gene_info.gz'
     symbol2entrezID = defaultdict(str)
     if not os.path.exists(local_filename):
+        print("[INFO] Will download ", local_filename)
         url = os.path.join(urldir, local_filename)
         local_filename = wget.download(url)
     with gzip.open(local_filename, 'rt') as f:
@@ -40,6 +43,14 @@ ncbi2ensembl = Lookup().ncbi2ensembl
 luo2008 = idg2sl.parse_luo2009_supplemental_file_S3('data/luo2009.tsv', symbol2ncbi)
 bommi2008 = idg2sl.parse_bommi_reddi_2008('data/bommi-reddy-2008.tsv', symbol2ncbi)
 
+
+# Blomen 2015
+blomen2015 = Blomen2015Parser(symbol2ncbi, 'data/blomen2015_S7.tsv')
+blomen_list = blomen2015.parse()
+print("blomen n=", len(blomen_list))
+for x in blomen_list:
+    print(x)
+exit(1)
 
 # Turner 2008
 turner2008 = Turner2008Parser(symbol2ncbi, 'data/turner-PARP1-2008.tsv')

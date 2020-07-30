@@ -18,8 +18,6 @@ class SL_DatasetParser:
             for row in csvreader:
                 self.rows.append(row)
 
-
-
     def _mark_maximum_entries(self, sli_dict):
         """
         The parsing functions add all SLIs for gene A & B to a list
@@ -36,7 +34,6 @@ class SL_DatasetParser:
             for s in vlist[1:]:
                 sli_list.append(s)
         return sli_list
-
 
     def parse(self):
         """
