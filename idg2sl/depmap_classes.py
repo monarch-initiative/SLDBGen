@@ -23,3 +23,26 @@ class Gene:
 
     def get_number_effective_cells(self):
         return len(self.effective_cells)
+
+
+class SyntheticLethalInteraction:
+    """
+    Instances of this class represent a single synthetic lethality (SL) interaction
+    """
+
+    def __init__(self,
+                 gene_A_id="",
+                 gene_B_id="",
+                 SL=None):
+        self.gene_A_id = gene_A_id
+        self.gene_B_id = gene_B_id
+        self.SL = SL
+
+    def get_gene_A_id(self):
+        return self.gene_A_id
+
+    def get_gene_B_id(self):
+        return self.gene_B_id
+
+    def get_SL(self):
+        return self.SL

@@ -6,11 +6,11 @@ import os
 import numpy as np
 from collections import defaultdict
 import concurrent.futures
-from pandas import Series, DataFrame
-from idg2sl.depmap_classes import Gene
+from idg2sl.depmap_classes import Gene, SyntheticLethalInteraction
 import multiprocessing as mp
+import time
 
-
+start = time.process_time()
 
 gene_effect_threshold = -0.5  # threshold from which genes are considered effective
 cell_proportion_threshold = 0.2  # proportion of cells, geneA is considered effective in -> geneB as well!!!
@@ -92,68 +92,20 @@ def intersection(lst1, lst2):
 
 
 def f(id, effective_cells, genes):
-    row_list = []
+    gene_list = []
     for gene_B in genes:
         if id == gene_B.get_id():
             continue
         cells_covered = len(set(effective_cells + gene_B.get_effective_cells()))
         intersect = len(intersection(effective_cells, gene_B.get_effective_cells()))
         if intersect / cells_covered > intersect_threshold:
-            dict = {"gene_A": id, "gene_B": gene_B.get_id(), "SL": 1}
-            row_list.append(dict)
+            sli = SyntheticLethalInteraction(gene_A_id=id, gene_B_id=gene_B.get_id(), SL=1)
+            #sls.append(sli)
+            #dict = {"gene_A": id, "gene_B": gene_B.get_id(), "SL": 1}
+            gene_list.append(sli)
     # queue.put(row_list)
     # sls.extend(row_list)
-    return row_list
-
-
-def start_procs():
-    results = []
-    procs = []
-    # queue = multiprocessing.Queue()
-
-    # instantiating process with arguments
-    with mp.Pool(4) as p:
-        for gene in genes:
-            results.append(p.apply(f, args=(gene.get_id(), gene.get_effective_cells())))
-        p.close()
-        p.join()
-
-    for result in results:
-        sls.append(result.get())
-
-    print("all proc started")
-    # while not queue.empty():
-    #     results.append(queue.get())
-
-
-
-def normal():
-    i = 0
-    for gene in genes:
-        i += 1
-        if i % 100 == 0:
-            print(f"{i} genes done!")
-        result = f(gene.get_id(), gene.get_effective_cells())
-        sls.append(result)
-
-
-def log_result(result):
-    # This is called whenever f(i) returns a result.
-    # result_list is modified only by the main process, not the pool workers.
-    sls.append(result)
-
-def apply_async_with_callback():
-    with mp.Pool() as p:
-        i = 0
-        for gene in genes:
-            if i%100 == 0:
-                print(i)
-            i += 1
-            sls.append(p.apply_async(f, (gene.get_id(), gene.get_effective_cells())).get())
-    p.close()
-    p.join()
-    print(sls)
-
+    return gene_list
 
 
 
@@ -164,26 +116,31 @@ if __name__ == '__main__':
     # apply_async_with_callback()
 
     results = []
-    p =  mp.Pool()
+    p = mp.Pool()
     i = 0
     for gene in genes:
-        if i%100 == 0:
+        if i % 100 == 0:
             print(i)
         i += 1
-        results.append(p.apply_async(f, (gene.get_id(), gene.get_effective_cells(), genes)))
+        # results.append(p.apply_async(f, (gene.get_id(), gene.get_effective_cells(), genes)))
+        results.append(p.starmap_async(f, [(gene.get_id(), gene.get_effective_cells(), genes)]))
     p.close()
-    print("Processes done")
+    print("Pool closing done")
     p.join()
-    print("join done")
-
-    sls = [res.get() for res in results]
+    print("Pool joining done")
+    for res in results:
+        for list in res.get():
+            for sli in list:
+                dict = {"gene_A": sli.get_gene_A_id(), "gene_B": sli.get_gene_B_id(), "SL": sli.get_SL()}
+                sls.append(dict)
     print("sls erstellt")
 
-    print(sls[1])
+
 
     sl_pairs = pd.DataFrame(sls)
     print(sl_pairs.head())
     sl_pairs.to_csv('output.csv')
+    print(f"\nCalculation took {time.process_time() - start} seconds!")
 
 
 
