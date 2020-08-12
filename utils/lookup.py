@@ -64,7 +64,7 @@ class Lookup(object):
                         self.symbol2ensembl[symbol] = ensembl
                         for syn in ncbi_synonyms:
                             self.symbol2ensembl[syn] = ensembl
-
+        '''
         ### lookup.txt
         with open(os.path.join(os.path.dirname(__file__), '..', 'lookup', 'lookup.txt'), 'rt') as f:
             next(f)  # skip header
@@ -110,7 +110,7 @@ class Lookup(object):
                         self.ncbi2ensembl[ncbi] = ensembl
                     if ensembl not in self.ensembl2ncbi.keys():
                         self.ensembl2ncbi[ensembl] = ncbi
-
+        '''
     def download_file(self,
                       urldir='ftp://ftp.ncbi.nih.gov/gene/DATA/GENE_INFO/Mammalia/',
                       filename='Homo_sapiens.gene_info.gz'):
