@@ -23,7 +23,7 @@ def arg_parser():
                         help='Below which score should a gene be considered effective in a cell line? (default -0.5)')
     parser.add_argument('--prop', metavar="cell_proportion_threshold", type=float, default=0.2,
                         help='Below which proportion of effective cell lines is a gene considered? (default 0.2)')
-    parser.add_argument('--intersect', metavar="intersect_threshold", type=float, default=0,
+    parser.add_argument('--intersect', metavar="intersect_threshold", type=float, default=0.25,
                         help='How many percent of cell lines should be covered by both gene A and gene B? (default 0)')
     args = parser.parse_args()
     return args
@@ -65,8 +65,6 @@ def get_data(gene_effect_threshold, cell_proportion_threshold):
 
     i = 0
     while i in range(ensembl_df.shape[1]):
-        if i % 1000 == 0:
-            print(f"Data at {i} genes!")
         col = ensembl_df.iloc[:, i]  # corresponds to a column (which shows one gene)
         effective_cells = col.index[col < gene_effect_threshold].tolist()
         proportion = len(effective_cells) / ensembl_df.shape[0]
@@ -77,10 +75,7 @@ def get_data(gene_effect_threshold, cell_proportion_threshold):
             continue
         gene = Gene(gene_id=col.name, effective_cells=effective_cells)
         genes.append(gene)
-
-    # ensembl_df.to_csv(os.path.join(os.path.dirname(__file__), 'data', 'ensembl_df.csv'), index=False)
-    print("Calculation done!")
-    # return genes
+    print(f"Reduction finished, {len(genes)} genes are left!\n")
 
 
 def intersection(lst1, lst2):
@@ -105,24 +100,22 @@ def f(i, genes, intersect_threshold):
 def get_SLI(intersect_threshold):
     results = []
     sls = []
-    p = mp.Pool()
+
+    p = mp.Pool(processes=int(len(genes)/500))
     for i in range(len(genes)):
         results.append(p.starmap_async(f, [(i, genes, intersect_threshold)]))
 
-    #results.append(f(gene.get_id(), gene.get_effective_cells(), genes, intersect_threshold))
-    #genes.remove(gene)
     p.close()
-    print("Pools are closed!")
+    print("Calculating SL Interactions...")
     p.join()
-    print("Pool joining done")
-    print(type(results))
-    print(results[0])
+    print("Finished Calculations:")
+
     for res in results:
         for list in res.get():
             for sli in list:
                 dict = {"gene_A": sli.get_gene_A_id(), "gene_B": sli.get_gene_B_id(), "SL": sli.get_SL()}
                 sls.append(dict)
-    print("sls erstellt")
+
     return sls
 
 
@@ -139,12 +132,11 @@ if __name__ == '__main__':
           f"minimum intersect between the set of effective cells from two genes: {args.intersect}\n")
 
     get_data(gene_effect_threshold, cell_proportion_threshold)
-    print("starting the big boys now!")
 
     sls = get_SLI(intersect_threshold)
 
     sl_pairs = pd.DataFrame(sls)
-    print(sl_pairs.head())
+    #print(sl_pairs.head())
+    print(f"Found {len(sls)} SL Interactions in {time.process_time() - start} seconds!\n")
     #sl_pairs.to_csv(f'output_{args.effect}_{args.prop}_{args.intersect}.csv', index=False)
 
-    print(f"\nCalculation took {time.process_time() - start} seconds!\n")
