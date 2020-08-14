@@ -12,6 +12,7 @@ class SlConstants(Enum):
     SH_RNA = 6
     COMPETITIVE_HYBRIDIZATION = 7
     MULTICOLOR_COMPETITION_ASSAY = 8
+    RNA_INTERFERENCE_ASSAY = 9
 
 
 
@@ -32,5 +33,7 @@ class SlConstants(Enum):
             return 'competitive hybridization'
         elif self.value == 8:
             return 'multicolor competition assay'
+        elif self.value == 9:
+            return "RNA-interference assay"
         else:
             return "TODO (SlConstants in sl_dataset_parser"

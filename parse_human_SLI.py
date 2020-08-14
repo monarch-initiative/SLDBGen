@@ -37,6 +37,15 @@ symbol2ensembl = Lookup().symbol2ensembl
 ncbi2ensembl = Lookup().ncbi2ensembl
 
 
+lord2008 = Lord2008Parser()
+lord2008_list = lord2008.parse()
+print("[INFO] Lord et al 2008  n= %d SL interactions" % len(lord2008_list))
+exit(0)
+
+
+steckel2012 = Steckel2012Parser()
+steckel2012_list = steckel2012.parse()
+print("[INFO] Steckel et al 2012  n= %d SL interactions" % len(steckel2012_list))
 
 bommi2008 = Bommi2008Parser()
 bommi2008_list = bommi2008.parse()
@@ -71,8 +80,8 @@ exit(1)
 
 
 
-steckel2012 = idg2sl.parse_steckel_2012('data/steckel-2012-KRAS.tsv', symbol2ncbi)
-lord2008 = idg2sl.parse_lord_2008('data/lord-PARP1-2008.tsv', symbol2ncbi)
+
+
 toyoshima2008 = idg2sl.parse_toyoshima_2008('data/toyoshima-MYC-2008.tsv', symbol2ncbi)
 
 shen2015 = idg2sl.parse_Shen2015('data/Shen_2015.tsv', symbol2ncbi)
@@ -85,7 +94,7 @@ shen2017 = idg2sl.parse_shen_2017('data/shen2017.tsv', symbol2ncbi)
 manual = ManualEntry()
 manual_list = manual.get_entries()
 
-sli_lists = [luo2009_list, bommi2008_list, turner_list, steckel2012, lord2008, toyoshima2008, shen2015, srivas2016, han2017,
+sli_lists = [luo2009_list, bommi2008_list, turner_list, steckel2012_list, lord2008, toyoshima2008, shen2015, srivas2016, han2017,
              wang2017, shen2017, manual_list]
 
 
