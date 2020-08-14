@@ -36,29 +36,33 @@ symbol2ncbi = Lookup().symbol2ncbi
 symbol2ensembl = Lookup().symbol2ensembl
 ncbi2ensembl = Lookup().ncbi2ensembl
 
-# Blomen 2015
-blomen2015 = Blomen2015Parser(symbol2ncbi, 'data/blomen2015_S7.tsv')
-blomen_list = blomen2015.parse()
-print("blomen n=", len(blomen_list))
-for x in blomen_list:
-    print(x)
-exit(1)
+# Turner 2008
+turner2008 = Turner2008Parser()
+turner_list = turner2008.parse()
+print("[INFO] Turner et al 2008  n= %d SL interactions" % len(turner_list))
+exit(0)
 
+# Blomen 2015
+blomen2015 = Blomen2015Parser()
+blomen_list = blomen2015.parse()
+print("[INFO] Blomen et al 2015  n= %d SL interactions" % len(blomen_list))
 
 
 # Luo et al 2009
 luo2009parser = Luo2009Parser()
-luo2008 = luo2009parser.parse()
-
+luo2009_list = luo2009parser.parse()
+print("[INFO] Luo et al 2009  n= %d SL interactions" % len(luo2009_list))
 exit(1)
-#idg2sl.parse_luo2009_supplemental_file_S3('data/luo2009.tsv', symbol2ncbi)
+
+
+
+
+
+
+
 bommi2008 = idg2sl.parse_bommi_reddi_2008('data/bommi-reddy-2008.tsv', symbol2ncbi)
 
 
-
-# Turner 2008
-turner2008 = Turner2008Parser(symbol2ncbi, 'data/turner-PARP1-2008.tsv')
-turner_list = turner2008.parse()
 
 
 steckel2012 = idg2sl.parse_steckel_2012('data/steckel-2012-KRAS.tsv', symbol2ncbi)
@@ -75,9 +79,9 @@ shen2017 = idg2sl.parse_shen_2017('data/shen2017.tsv', symbol2ncbi)
 manual = ManualEntry()
 manual_list = manual.get_entries()
 
-sli_lists = [luo2008, bommi2008, turner_list, steckel2012, lord2008, toyoshima2008, shen2015, srivas2016, han2017,
+sli_lists = [luo2009_list, bommi2008, turner_list, steckel2012, lord2008, toyoshima2008, shen2015, srivas2016, han2017,
              wang2017, shen2017, manual_list]
-# sli_lists = [shen2015]
+
 
 
 n = 0

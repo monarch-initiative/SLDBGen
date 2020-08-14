@@ -52,7 +52,7 @@ class Luo2009Parser(SL_DatasetParser):
             for row in csvreader:
                 if len(row) < 8:
                     raise ValueError("Bad line in Luo2009 with less than 8 fields")
-                geneB_sym = self.get_current_symbol(row['Symbol'])  # fields[0]
+                geneB_sym = self.get_current_symbol(row['Symbol'])
                 if geneB_sym == 'CXORF40A':
                     geneB_sym = 'EOLA1'
                 if geneB_sym in self.entrez_dict:
