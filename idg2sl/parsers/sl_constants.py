@@ -7,13 +7,17 @@ class SlConstants(Enum):
     ACTIVATING_MUTATION = 1 #'activating_mutation'
     KNOCKOUT = 2
     SI_RNA = 3
-    DRUG = 4
+    PHARMACEUTICAL = 4
     LOF_MUTATION = 5
     SH_RNA = 6
     COMPETITIVE_HYBRIDIZATION = 7
     MULTICOLOR_COMPETITION_ASSAY = 8
     RNA_INTERFERENCE_ASSAY = 9
     OVEREXPRESSION = 10
+    COHORT_STUDY = 11
+    PHARAMACEUTICAL_INHIBITION_ASSAY = 12
+    GROWTH_INHIBITION_ASSAY = 13
+
 
 
 
@@ -25,7 +29,7 @@ class SlConstants(Enum):
         elif self.value == 3:
             return 'siRNA'
         elif self.value == 4:
-            return 'drug'
+            return 'pharmaceutical'
         elif self.value == 5:
             return 'lof_mutation'
         elif self.value == 6:
@@ -38,5 +42,11 @@ class SlConstants(Enum):
             return "RNA-interference assay"
         elif self.value == 10:
             return "overexpression"
+        elif self.value == 11:
+            return "cohort study"
+        elif self.value == 12:
+            return "pharmaceutical inhibition assay"
+        elif self.value == 13:
+            return "growth inhibition assay"
         else:
             return "TODO (SlConstants in sl_dataset_parser"

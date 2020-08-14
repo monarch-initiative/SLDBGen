@@ -36,6 +36,11 @@ symbol2ncbi = Lookup().symbol2ncbi
 symbol2ensembl = Lookup().symbol2ensembl
 ncbi2ensembl = Lookup().ncbi2ensembl
 
+manual = ManualEntry()
+manual_list = manual.get_entries()
+print("We got %d manually entered entries." % len(manual_list))
+exit(1)
+
 
 shen2015 = Shen2015Parser()
 shen2015_list = shen2015.parse()

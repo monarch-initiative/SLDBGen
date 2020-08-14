@@ -31,63 +31,6 @@ def mark_maximum_entries(sli_dict):
 
 
 
-def parse_pathak_2015(symbol2entrezID):
-    # just 2 SL Interactions, hardcoded
-    # SRC Gene is proto-oncogene blocked by Dasatinib
-    # trying to maximise the Dasatinib sensitivity by SL interaction
-
-    gene1_symbol = 'SRC'
-    gene1_id = 'NCBIGene:6714'
-    gene1_perturbation = 'pharmaceutical'
-    gene2_perturbation = 'cohort study'
-    pmid = 'PMID:26437225'
-    assay = "pharmaceutical inhibition study"
-    effect_type = "correlation"
-    cell_line = "n/a"
-    cellosaurus = "n/a"
-    cancer = "Recurrent Ovarian Carcinoma"
-    ncit = "NCIT:C7833"
-
-    sli_list = []
-    sli_dict = defaultdict(list)
-
-    sli = SyntheticLethalInteraction(gene_A_symbol=gene1_symbol,
-                                     gene_A_id=gene1_id,
-                                     gene_B_symbol="CSNK2A1",
-                                     gene_B_id="NCBIGene:{}".format(symbol2entrezID.get("CSNK2A1")),
-                                     gene_A_pert=gene1_perturbation,
-                                     gene_B_pert=gene2_perturbation,
-                                     effect_type=effect_type,
-                                     effect_size=-0.82,
-                                     cell_line=cell_line,
-                                     cellosaurus_id=cellosaurus,
-                                     cancer_type=cancer,
-                                     ncit_id=ncit,
-                                     assay=assay,
-                                     pmid=pmid,
-                                     SL=True)
-    gene_pair = GenePair(gene1_symbol, "CSNK2A1")
-    sli_dict[gene_pair].append(sli)
-    sli = SyntheticLethalInteraction(gene_A_symbol=gene1_symbol,
-                                     gene_A_id=gene1_id,
-                                     gene_B_symbol="PRKCE",
-                                     gene_B_id="NCBIGene:{}".format(symbol2entrezID.get("PRKCE")),
-                                     gene_A_pert=gene1_perturbation,
-                                     gene_B_pert=gene2_perturbation,
-                                     effect_type=effect_type,
-                                     effect_size=-0.96,
-                                     cell_line=cell_line,
-                                     cellosaurus_id=cellosaurus,
-                                     cancer_type=cancer,
-                                     ncit_id=ncit,
-                                     assay=assay,
-                                     pmid=pmid,
-                                     SL=True)
-    gene_pair = GenePair(gene1_symbol, "PRKCE")
-    sli_dict[gene_pair].append(sli)
-    sli_list = mark_maximum_entries(sli_dict)
-    return sli_list
-
 
 def parse_srivas_2016(path, symbol2entrezID):
     # using the human SL interactions (supplemental file 4 page 2)

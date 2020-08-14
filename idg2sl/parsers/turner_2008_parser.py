@@ -25,7 +25,7 @@ class Turner2008Parser(SL_DatasetParser):
     def parse(self):
         parp1_symbol = 'PARP1'
         parp1_id = 'NCBIGene:142'
-        parp1_perturbation = SlConstants.DRUG
+        parp1_perturbation = SlConstants.PHARMACEUTICAL
         gene2_perturbation = SlConstants.SI_RNA
         assays = ['competitive hybridization', 'multicolor competition assay']
         assay_string = ";".join(assays)
