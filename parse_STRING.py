@@ -1,9 +1,7 @@
 import gzip
 import os
-import wget
 from collections import defaultdict
-# from utils.lookup import Lookup
-import idg2sl
+
 
 
 
@@ -73,7 +71,7 @@ def parse_STRING(stringdata, cutoff, outfile, protID2ensembl):
 if __name__ == "__main__":
     stringdata = os.path.join(os.path.dirname(__file__), 'data', 'STRING_9606.protein.links.v11.0.txt.gz')
     outfile = "STRING_graph_ensembl.txt"
-    cutoff = 700
+    cutoff = 700 #threshold on the protein-protein interaction scores
 
     lookup = load_lookup()      # maps ~93.2% of the IDs
     backup = load_backup()      # maps ~97.9% of the IDs
