@@ -29,68 +29,6 @@ def mark_maximum_entries(sli_dict):
 
 
 
-def parse_Shen2015(path, symbol2entrezID):
-    # GeneA is always CHEK1 (pharmaceutically inhibited by AZD7762)
-    # GeneB is in data/Shen_2015.tsv
-    geneA_symbol = 'CHEK1'
-    geneA_id = 'NCBIGene:1111'
-    geneA_perturbation = 'pharmaceutical'
-    gene2_perturbation = 'siRNA'
-    pmid = 'PMID:26437225'
-    assay = "RNA-interference assay"
-    effect_type = "z-Score"
-    cell_line = "HeLa-Cells"
-    cellosaurus = "CVCL_0030"
-    cancer = ""
-    ncit = ""  # NCI Thesaurus, Ontology
-
-    sli_list = []
-    if not os.path.exists(path):
-        raise ValueError("Must path a valid path for Shen et al 2015")
-    # The following keeps track of the current largest effect size SLI for any given gene A/gene B pair
-    sli_dict = defaultdict(list)
-    with open(path) as f:
-        next(f)  # skip header
-        for line in f:
-            fields = line.rstrip('\n').split('\t')
-            fields[0] = fields[0].replace(",", ".")
-            if len(fields) < 3:
-                logging.error("Only got %d fields but was expecting at least 3" % len(fields))
-                i = 0
-                for fd in fields:
-                    print("%d) %s" % (i, fd))
-                    raise ValueError("Malformed line, must have at least 3 tab-separated fields")
-            geneB_sym = fields[1]
-            if geneB_sym in symbol2entrezID:
-                geneB_id = "NCBIGene:{}".format(symbol2entrezID.get(geneB_sym))
-            else:
-                geneB_id = 'n/a'
-
-            effect = float(fields[0])
-            sl_genes = ["FZR1", "RAD17", "RFC1", "BLM", "CDC73", "CDC6", "WEE1"]
-            if geneB_sym in sl_genes:
-                SL = True
-            else:
-                SL = False
-            sli = SyntheticLethalInteraction(gene_A_symbol=geneA_symbol,
-                                             gene_A_id=geneA_id,
-                                             gene_B_symbol=geneB_sym,
-                                             gene_B_id=geneB_id,
-                                             gene_A_pert=geneA_perturbation,
-                                             gene_B_pert=gene2_perturbation,
-                                             effect_type=effect_type,
-                                             effect_size=effect,
-                                             cell_line=cell_line,
-                                             cellosaurus_id=cellosaurus,
-                                             cancer_type=cancer,
-                                             ncit_id=ncit,
-                                             assay=assay,
-                                             pmid=pmid,
-                                             SL=SL)
-            gene_pair = GenePair(geneA_symbol, geneB_sym)
-            sli_dict[gene_pair].append(sli)
-    sli_list = mark_maximum_entries(sli_dict)
-    return sli_list
 
 
 def parse_pathak_2015(symbol2entrezID):
