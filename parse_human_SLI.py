@@ -5,7 +5,6 @@ from collections import defaultdict
 
 from idg2sl.parsers.blomen_2015_parser import Blomen2015Parser
 from utils.lookup import Lookup
-from utils.ensembl_lookup import EnsemblLookup
 import idg2sl
 from idg2sl import *
 
@@ -37,11 +36,6 @@ symbol2ncbi = Lookup().symbol2ncbi
 symbol2ensembl = Lookup().symbol2ensembl
 ncbi2ensembl = Lookup().ncbi2ensembl
 
-
-luo2008 = idg2sl.parse_luo2009_supplemental_file_S3('data/luo2009.tsv', symbol2ncbi)
-bommi2008 = idg2sl.parse_bommi_reddi_2008('data/bommi-reddy-2008.tsv', symbol2ncbi)
-
-
 # Blomen 2015
 blomen2015 = Blomen2015Parser(symbol2ncbi, 'data/blomen2015_S7.tsv')
 blomen_list = blomen2015.parse()
@@ -49,6 +43,18 @@ print("blomen n=", len(blomen_list))
 for x in blomen_list:
     print(x)
 exit(1)
+
+
+
+# Luo et al 2009
+luo2009parser = Luo2009Parser()
+luo2008 = luo2009parser.parse()
+
+exit(1)
+#idg2sl.parse_luo2009_supplemental_file_S3('data/luo2009.tsv', symbol2ncbi)
+bommi2008 = idg2sl.parse_bommi_reddi_2008('data/bommi-reddy-2008.tsv', symbol2ncbi)
+
+
 
 # Turner 2008
 turner2008 = Turner2008Parser(symbol2ncbi, 'data/turner-PARP1-2008.tsv')

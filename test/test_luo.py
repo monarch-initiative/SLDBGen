@@ -1,6 +1,6 @@
 from unittest import TestCase
 import os.path
-from idg2sl import EntrezParser
+from idg2sl import Luo2009Parser
 import idg2sl
 
 
@@ -17,12 +17,9 @@ class TestLuo(TestCase):
 
     """
     def setUp(self) -> None:
-        self.inputfile = os.path.join(os.path.dirname(
-            __file__), 'data', 'luo_small.tsv')
-        self.entrez_file = os.path.join(os.path.dirname(
-            __file__), 'data', 'Homo_sapiens.gene_info.gz')
-        parser = EntrezParser(self.entrez_file)
-        self.luo_list = idg2sl.parse_luo2009_supplemental_file_S3(self.inputfile, parser.get_mapping())
+        self.inputfile = os.path.join(os.path.dirname(__file__), 'data', 'luo_small.tsv')
+        parser = Luo2009Parser(fname=self.inputfile)
+        self.luo_list = parser.parse()
         self.first_entry = self.luo_list[0]
 
     def test_count_entries(self):

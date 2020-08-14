@@ -7,3 +7,5 @@ idg2sl/parsers/__pycache__/
 p3/
 test/__pycache__/
 utils/__pycache__/
+/test/protein-coding_gene.txt
+/protein-coding_gene.txt
