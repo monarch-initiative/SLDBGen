@@ -37,6 +37,11 @@ symbol2ensembl = Lookup().symbol2ensembl
 ncbi2ensembl = Lookup().ncbi2ensembl
 
 
+toyoshima2008 = Toyoshima2008Parser()
+toyoshima2008_list = toyoshima2008.parse()
+print("[INFO] Toyoshima et al 2008  n= %d SL interactions" % len(toyoshima2008_list))
+exit(0)
+
 lord2008 = Lord2008Parser()
 lord2008_list = lord2008.parse()
 print("[INFO] Lord et al 2008  n= %d SL interactions" % len(lord2008_list))
@@ -55,7 +60,6 @@ exit(0)
 turner2008 = Turner2008Parser()
 turner_list = turner2008.parse()
 print("[INFO] Turner et al 2008  n= %d SL interactions" % len(turner_list))
-exit(0)
 
 # Blomen 2015
 blomen2015 = Blomen2015Parser()
@@ -67,22 +71,10 @@ print("[INFO] Blomen et al 2015  n= %d SL interactions" % len(blomen_list))
 luo2009parser = Luo2009Parser()
 luo2009_list = luo2009parser.parse()
 print("[INFO] Luo et al 2009  n= %d SL interactions" % len(luo2009_list))
-exit(1)
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-toyoshima2008 = idg2sl.parse_toyoshima_2008('data/toyoshima-MYC-2008.tsv', symbol2ncbi)
 
 shen2015 = idg2sl.parse_Shen2015('data/Shen_2015.tsv', symbol2ncbi)
 pathak2015 = idg2sl.parse_pathak_2015(symbol2ncbi)  # 2 SL Interactions, hardcoded
@@ -94,7 +86,8 @@ shen2017 = idg2sl.parse_shen_2017('data/shen2017.tsv', symbol2ncbi)
 manual = ManualEntry()
 manual_list = manual.get_entries()
 
-sli_lists = [luo2009_list, bommi2008_list, turner_list, steckel2012_list, lord2008, toyoshima2008, shen2015, srivas2016, han2017,
+sli_lists = [luo2009_list, bommi2008_list, turner_list, steckel2012_list, lord2008_list,
+             toyoshima2008_list, shen2015, srivas2016, han2017,
              wang2017, shen2017, manual_list]
 
 

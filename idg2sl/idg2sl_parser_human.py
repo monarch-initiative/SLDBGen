@@ -29,69 +29,6 @@ def mark_maximum_entries(sli_dict):
 
 
 
-
-def parse_toyoshima_2008(path, symbol2entrezID):
-    """
-    Parsing data from
-    Toyoshima M, et al. Functional genomics identifies therapeutic targets for MYC-driven cancer.
-    Proc Natl Acad Sci U S A. 2012 Jun 12;109(24):9545-50. PMID: 22623531
-    The results of the screen revealed 148 hits, defined according to a Z score of ≥2 (23), including 140 genes and
-    eight microRNAs (Fig. 1B). Here, we focus on the 140 gene hits, which we designate MYC-synthetic lethal (MYC-SL)
-    genes. To eliminate siRNAs that exhibited substantial growth inhibition properties in normal cells, siRNAs
-    with >50% reduced viability in HFF-pBabe were eliminated from further consideration regardless of differential
-    toxicity. This process left 102 MYC-SL gene hits for follow-up
-    NOTE: I see only 101 genes in the Supplemental table.
-    """
-    mycsymbol = 'MYC'
-    myc_id = 'NCBIGene:4609'
-    myc_perturbation = 'overexpression'
-    gene2_perturbation = 'siRNA'
-    pmid = 'PMID:22623531'
-    assay_string = "RNA-interference assay"
-    effect_type = 'stddev'
-    cell_line = 'HFF-Myc'
-    cellosaurus = 'CVCL_Y511'
-    cancer = "n/a"
-    ncit = "n/a"
-    if not os.path.exists(path):
-        raise ValueError("Must path a valid path for Turner et al 2008")
-    sl_list = []
-    with open(path) as f:
-        next(f)  # skip header
-        for line in f:
-            fields = line.rstrip('\n').split('\t')
-            if len(fields) != 6:
-                raise ValueError("Bad line with %d fields: %s" % (len(fields), line))
-            # Gene Symbol	Accession number	Z score (>than)	%Viability HFF-pB	%Viability HFF-MYC	Ratio pBabe/Myc
-            geneBsym = fields[0]
-            if geneBsym in symbol2entrezID:
-                geneB_id = "NCBIGene:{}".format(symbol2entrezID.get(geneBsym))
-            else:
-                geneB_id = "n/a"
-            accession = fields[1]
-            zscore = float(fields[2])
-            viability_HFF = float(fields[3])
-            viability_HFF_MYC = float(fields[4])
-            ratio_pBabe_Myc = float(fields[5])
-            sli = SyntheticLethalInteraction(gene_A_symbol=mycsymbol,
-                                             gene_A_id=myc_id,
-                                             gene_B_symbol=geneBsym,
-                                             gene_B_id=geneB_id,
-                                             gene_A_pert=myc_perturbation,
-                                             gene_B_pert=gene2_perturbation,
-                                             effect_type=effect_type,
-                                             effect_size=zscore,
-                                             cell_line=cell_line,
-                                             cellosaurus_id=cellosaurus,
-                                             cancer_type=cancer,
-                                             ncit_id=ncit,
-                                             assay=assay_string,
-                                             pmid=pmid,
-                                             SL=True)
-            sl_list.append(sli)
-    return sl_list
-
-
 def parse_Shen2015(path, symbol2entrezID):
     # GeneA is always CHEK1 (pharmaceutically inhibited by AZD7762)
     # GeneB is in data/Shen_2015.tsv
