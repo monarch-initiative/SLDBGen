@@ -36,6 +36,12 @@ symbol2ncbi = Lookup().symbol2ncbi
 symbol2ensembl = Lookup().symbol2ensembl
 ncbi2ensembl = Lookup().ncbi2ensembl
 
+
+
+bommi2008 = Bommi2008Parser()
+bommi2008_list = bommi2008.parse()
+print("[INFO] Bommi et al 2008  n= %d SL interactions" % len(bommi2008_list))
+exit(0)
 # Turner 2008
 turner2008 = Turner2008Parser()
 turner_list = turner2008.parse()
@@ -60,7 +66,7 @@ exit(1)
 
 
 
-bommi2008 = idg2sl.parse_bommi_reddi_2008('data/bommi-reddy-2008.tsv', symbol2ncbi)
+
 
 
 
@@ -79,7 +85,7 @@ shen2017 = idg2sl.parse_shen_2017('data/shen2017.tsv', symbol2ncbi)
 manual = ManualEntry()
 manual_list = manual.get_entries()
 
-sli_lists = [luo2009_list, bommi2008, turner_list, steckel2012, lord2008, toyoshima2008, shen2015, srivas2016, han2017,
+sli_lists = [luo2009_list, bommi2008_list, turner_list, steckel2012, lord2008, toyoshima2008, shen2015, srivas2016, han2017,
              wang2017, shen2017, manual_list]
 
 

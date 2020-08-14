@@ -15,8 +15,16 @@ class HgncParser:
                 symbol = row['symbol']
                 entrez_id = row['entrez_id']
                 ensembl_gene_id = row['ensembl_gene_id']
-                prev_symbols = row['prev_symbol'].split('|')
+                prevsymstr = row['prev_symbol'].replace('"', "")
+                prev_symbols = prevsymstr.split('|')
                 for ps in prev_symbols:
+                    if ps in self.synonym2symbol:
+                        self.synonym2symbol[ps] = "MULTIPLE"
+                    else:
+                        self.synonym2symbol[ps] = symbol
+                alias_symbol_str = row['alias_symbol'].replace('"', "")
+                alias_symbols = alias_symbol_str.split('|')
+                for ps in alias_symbols:
                     if ps in self.synonym2symbol:
                         self.synonym2symbol[ps] = "MULTIPLE"
                     else:
