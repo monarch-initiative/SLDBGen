@@ -10,8 +10,6 @@ import idg2sl
 from idg2sl import *
 
 
-# from utils.ensembl_lookup import ncbi2ensembl
-
 
 def get_entrez_gene_map():
     """

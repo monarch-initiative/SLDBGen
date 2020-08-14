@@ -6,7 +6,7 @@ import tempfile
 import zipfile
 
 import requests
-from clint.textui import progress
+#from clint.textui import progress
 from idg2sl import SyntheticLethalInteraction
 
 
