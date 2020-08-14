@@ -21,9 +21,9 @@ def arg_parser():
                                                  'and blablabla')
     parser.add_argument('--effect', metavar="gene_effect_threshold", type=float, default=-0.5,
                         help='Below which score should a gene be considered effective in a cell line? (default -0.5)')
-    parser.add_argument('--prop', metavar="cell_proportion_threshold", type=float, default=0.2,
+    parser.add_argument('--prop', metavar="cell_proportion_threshold", type=float, default=0.1,
                         help='Below which proportion of effective cell lines is a gene considered? (default 0.2)')
-    parser.add_argument('--intersect', metavar="intersect_threshold", type=float, default=0.25,
+    parser.add_argument('--intersect', metavar="intersect_threshold", type=float, default=0.5,
                         help='How many percent of cell lines should be covered by both gene A and gene B? (default 0)')
     args = parser.parse_args()
     return args
@@ -41,11 +41,11 @@ def get_data(gene_effect_threshold, cell_proportion_threshold):
     if not os.path.exists(filename):
         filename = wget.download(url)
 
-    df = pd.read_csv(filename)  # , index_col=0)
+    df = pd.read_csv(filename)
     df = df.drop(df.columns[[0]], axis=1)
 
+    # find Ensembl ID for the symbols
     symbol_lookup = defaultdict(str)
-
     with gzip.open(os.path.join(os.path.dirname(__file__), 'lookup', 'Homo_sapiens.gene_info.gz'), 'rt') as f:
         for line in f:
             fields = line.split('\t')
@@ -54,6 +54,7 @@ def get_data(gene_effect_threshold, cell_proportion_threshold):
                 ensembl = fields[5].split(":")[-1]
                 symbol_lookup[symbol] = ensembl
 
+    # change column names (genes names)
     new_columns = []
     for i in list(df.columns):
         symbol = i.split(" ")[0]
@@ -63,6 +64,8 @@ def get_data(gene_effect_threshold, cell_proportion_threshold):
     ensembl_df = df.copy()
     ensembl_df.columns = new_columns
 
+    # build a list with gene instances
+    # do not consider genes that don't have Ensembl ID or genes where percentage of effective is too low or too high
     i = 0
     while i in range(ensembl_df.shape[1]):
         col = ensembl_df.iloc[:, i]  # corresponds to a column (which shows one gene)
@@ -71,7 +74,7 @@ def get_data(gene_effect_threshold, cell_proportion_threshold):
         i += 1
         if not col.name.startswith("ENS"):
             continue
-        if not (0 < proportion < cell_proportion_threshold):
+        if not ((1/ensembl_df.shape[0]) < proportion < cell_proportion_threshold):
             continue
         gene = Gene(gene_id=col.name, effective_cells=effective_cells)
         genes.append(gene)
@@ -89,7 +92,7 @@ def f(i, genes, intersect_threshold):
     while j in range(len(genes)):
         gene_B = genes[j]
         cells_covered = len(set(gene_A.get_effective_cells() + gene_B.get_effective_cells()))
-        intersect = len(intersection(gene_A.get_effective_cells(), gene_B.get_effective_cells()))
+        intersect = len(set(gene_A.get_effective_cells()).intersection(set(gene_B.get_effective_cells())))
         if intersect / cells_covered > intersect_threshold:
             sli = SyntheticLethalInteraction(gene_A_id=gene_A.get_id(), gene_B_id=gene_B.get_id(), SL=1)
             gene_list.append(sli)
@@ -101,7 +104,7 @@ def get_SLI(intersect_threshold):
     results = []
     sls = []
 
-    p = mp.Pool(processes=int(len(genes)/500))
+    p = mp.Pool()
     for i in range(len(genes)):
         results.append(p.starmap_async(f, [(i, genes, intersect_threshold)]))
 
@@ -113,7 +116,7 @@ def get_SLI(intersect_threshold):
     for res in results:
         for list in res.get():
             for sli in list:
-                dict = {"gene_A": sli.get_gene_A_id(), "gene_B": sli.get_gene_B_id(), "SL": sli.get_SL()}
+                dict = {"source":"depmap", "gene_A": sli.get_gene_A_id(), "gene_B": sli.get_gene_B_id(), "SL": sli.get_SL()}
                 sls.append(dict)
 
     return sls
@@ -127,16 +130,16 @@ if __name__ == '__main__':
     cell_proportion_threshold = args.prop  # proportion of cells, geneA is considered effective in -> geneB as well!!!
     intersect_threshold = args.intersect  # proportion of cell lines covered by geneA and geneB
 
-    print(f"\ngenes considered effective in cell line below: {args.effect}\n"
-          f"necessary proportion of effective cells lines to be considered: {args.prop}\n"
-          f"minimum intersect between the set of effective cells from two genes: {args.intersect}\n")
+    print(f"\ngenes considered effective in cell line when CERES Score below: {args.effect}\n"
+          f"max percentage of effective cells lines per gene: {args.prop}\n"
+          f"minimum intersect between the effective cells of two genes: {args.intersect}\n")
 
     get_data(gene_effect_threshold, cell_proportion_threshold)
 
     sls = get_SLI(intersect_threshold)
 
     sl_pairs = pd.DataFrame(sls)
-    #print(sl_pairs.head())
+    print(sl_pairs.head())
     print(f"Found {len(sls)} SL Interactions in {time.process_time() - start} seconds!\n")
-    #sl_pairs.to_csv(f'output_{args.effect}_{args.prop}_{args.intersect}.csv', index=False)
+    sl_pairs.to_csv(f'depmap_result_{args.effect}_{args.prop}_{args.intersect}.csv', index=False)
 
