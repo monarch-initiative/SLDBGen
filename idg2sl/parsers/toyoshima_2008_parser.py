@@ -25,9 +25,9 @@ class Toyoshima2008Parser(SL_DatasetParser):
     def parse(self):
         mycsymbol = 'MYC'
         myc_id = 'NCBIGene:4609'
-        myc_perturbation = SlConstants.OVEREXPRESSION
-        gene2_perturbation = SlConstants.SI_RNA
-        assay_string = SlConstants.RNA_INTERFERENCE_ASSAY
+        myc_perturbation = SlConstants.OVEREXPRESSION.to_string()
+        gene2_perturbation = SlConstants.SI_RNA.to_string()
+        assay_string = SlConstants.RNA_INTERFERENCE_ASSAY.to_string()
         effect_type = 'stddev'
         cell_line = 'HFF-Myc'
         cellosaurus = 'CVCL_Y511'
@@ -57,8 +57,8 @@ class Toyoshima2008Parser(SL_DatasetParser):
                                                  gene_A_id=myc_id,
                                                  gene_B_symbol=geneBsym,
                                                  gene_B_id=geneB_id,
-                                                 gene_A_pert=myc_perturbation.to_string(),
-                                                 gene_B_pert=gene2_perturbation.to_string(),
+                                                 gene_A_pert=myc_perturbation,
+                                                 gene_B_pert=gene2_perturbation,
                                                  effect_type=effect_type,
                                                  effect_size=zscore,
                                                  cell_line=cell_line,

@@ -144,6 +144,57 @@ class SyntheticLethalInteraction:
                sl]
         return "\t".join(lst)
 
+    @staticmethod
+    def get_tsv_with_ensembl_header():
+        lst = ['geneA',
+               'geneA.ncbi-id',
+               'geneA.ensembl-id',
+               'geneB',
+               'geneB.ncbi-id',
+               'geneB.ensembl-id',
+               'geneA.perturbation',
+               'geneB.perturbation',
+               'effect.type',
+               'effect.size',
+               'assay',
+               'cell.line',
+               'cellosaurus.id',
+               'cancer',
+               'ncit.id',
+               'pmid',
+               'SL']
+        return "\t".join(lst)
+
+    def get_tsv_line_with_ensembl(self, symbol2ensembl):
+        ensemblA = symbol2ensembl.get(self.gene_A_symbol, "n/a")
+        ensemblB = symbol2ensembl.get(self.gene_B_symbol, "n/a")
+        if self.gene_A_pert is None:
+            print("NONE gene_A_pert")
+            return ""
+        if self.SL:
+            sl = 'T'
+        else:
+            sl = 'F'
+        lst = [self.gene_A_symbol,
+               str(self.gene_A_id),
+               ensemblA,
+               self.gene_B_symbol,
+               str(self.gene_B_id),
+               ensemblB,
+               self.gene_A_pert,
+               self.gene_B_pert,
+               self.effect_type,
+               str(self.effect_size),
+               self.assay,
+               self.cell_line,
+               self.cellosaurus_id,
+               self.cancer_type,
+               self.ncit_id,
+               self.pmid,
+               sl]
+        return "\t".join(lst)
+
+
     def __repr__(self):
         """
         Returns:

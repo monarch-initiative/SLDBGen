@@ -1,6 +1,5 @@
 import csv
 from collections import defaultdict
-from .hgnc_entry import HgncEntry
 
 class HgncParser:
     def __init__(self, fname):
@@ -30,7 +29,7 @@ class HgncParser:
                     else:
                         self.synonym2symbol[ps] = symbol
                 self.symbol2entrez[symbol] = entrez_id
-                self.symbol2ensembl = ensembl_gene_id
+                self.symbol2ensembl[symbol] = ensembl_gene_id
 
     def get_entrez_dictionary(self):
         return self.symbol2entrez
@@ -38,5 +37,5 @@ class HgncParser:
     def get_ensembl_dictionary(self):
         return self.symbol2ensembl
 
-    def get_symbol_dictionary(self):
+    def get_synonym_dictionary(self):
         return self.synonym2symbol

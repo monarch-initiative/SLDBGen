@@ -36,10 +36,10 @@ class Lord2008Parser(SL_DatasetParser):
         """
         parp1_symbol = 'PARP1'
         parp1_id = 'NCBIGene:142'
-        parp1_perturbation = SlConstants.PHARMACEUTICAL
-        gene2_perturbation = SlConstants.SI_RNA
+        parp1_perturbation = SlConstants.PHARMACEUTICAL.to_string()
+        gene2_perturbation = SlConstants.SI_RNA.to_string()
 
-        assay_string = SlConstants.RNA_INTERFERENCE_ASSAY
+        assay_string = SlConstants.RNA_INTERFERENCE_ASSAY.to_string()
         effect_type = 'stddev'
         cell_line = 'CAL-51'
         cellosaurus = 'CVCL_1110'

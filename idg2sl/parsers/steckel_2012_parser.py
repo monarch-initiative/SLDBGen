@@ -45,6 +45,11 @@ class Steckel2012Parser(SL_DatasetParser):
         cancer = "Colorectal Carcinoma"
         ncit = "NCIT:C2955"
         sli_dict = defaultdict(list)
+        # Immunoglobulin or multiple mapping old symbols
+        # COAS3, CES4, POM121L1, MYCL2 are aliases for a pseudogene
+        unclear_gene_symbols = {'MAD', 'IGHG4', 'DKFZp434C1418', 'COAS3', 'HNT', 'CES4', 'SAS', 'HLA-DRB3',
+                                'LOC90557', 'POM121L1', 'MLL2', '37499', 'MYCL2', 'CAMKIINALPHA',
+                                'TGIF', 'PCDHA2', 'PCDHA9'}
         # GeneID	Locus.ID	Accession	HCT-116.Z-score	HKE-3.Z-score	D.Z-score
         with open(self.fname) as csvfile:
             csvreader = csv.DictReader(csvfile, delimiter='\t')
@@ -60,6 +65,12 @@ class Steckel2012Parser(SL_DatasetParser):
                 delta_zscore = float(row['D.Z-score'])
                 if geneB_sym in self.entrez_dict:
                     geneB_id = "NCBIGene:{}".format(self.entrez_dict.get(geneB_sym))
+                elif geneB_sym == 'C9ORF96':
+                    geneB_sym = 'STKLD1'
+                elif geneB_sym in unclear_gene_symbols:
+                    continue
+                elif delta_zscore < 2:
+                    continue # one of the many negative samples, we can skip it if it cannot be mapped
                 else:
                     raise ValueError("Could not find id for gene %s in Steckel 2012" % geneB_sym)
                 if geneB_sym == "KRAS":

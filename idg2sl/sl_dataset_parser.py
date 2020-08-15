@@ -21,7 +21,7 @@ class SL_DatasetParser:
             parser = HgncParser(hgnc_fname)
             self.entrez_dict = parser.get_entrez_dictionary()
             self.ensembl_dist = parser.get_ensembl_dictionary()
-            self.synonym_dict = parser.get_symbol_dictionary()
+            self.synonym_dict = parser.get_synonym_dictionary()
         else:
             self.entrez_dict = entrez
             self.ensembl_dist = ensembl

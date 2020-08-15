@@ -13,17 +13,16 @@ class Shen2015Parser(SL_DatasetParser):
     """
 
     def __init__(self, fname='data/Shen_2015.tsv'):
-        pmid = 'PMID:18832051'
+        pmid = 'PMID:26437225'
         super().__init__(fname=fname, pmid=pmid)
 
     def parse(self):
         geneA_symbol = 'CHEK1'
         geneA_id = 'NCBIGene:1111'
-        geneA_perturbation = 'pharmaceutical'
-        gene2_perturbation = 'siRNA'
-        pmid = 'PMID:26437225'
-        assay = "RNA-interference assay"
-        effect_type = "z-Score"
+        geneA_perturbation = SlConstants.PHARMACEUTICAL.to_string()
+        gene2_perturbation = SlConstants.SI_RNA.to_string()
+        assay = SlConstants.RNA_INTERFERENCE_ASSAY.to_string()
+        effect_type = SlConstants.ZSCORE.to_string()
         cell_line = "HeLa-Cells"
         cellosaurus = "CVCL_0030"
         cancer = ""
@@ -62,7 +61,7 @@ class Shen2015Parser(SL_DatasetParser):
                                                  cancer_type=cancer,
                                                  ncit_id=ncit,
                                                  assay=assay,
-                                                 pmid=pmid,
+                                                 pmid=self.pmid,
                                                  SL=SL)
                 gene_pair = GenePair(geneA_symbol, geneB_sym)
                 sli_dict[gene_pair].append(sli)
