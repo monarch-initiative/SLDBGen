@@ -40,7 +40,7 @@ class Lord2008Parser(SL_DatasetParser):
         gene2_perturbation = SlConstants.SI_RNA.to_string()
 
         assay_string = SlConstants.RNA_INTERFERENCE_ASSAY.to_string()
-        effect_type = 'stddev'
+        effect_type = SlConstants.ZSCORE.to_string()
         cell_line = 'CAL-51'
         cellosaurus = 'CVCL_1110'
         cancer = "Breast Carcinoma"

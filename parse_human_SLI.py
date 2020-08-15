@@ -12,6 +12,11 @@ entrez_dict = hgnc.get_entrez_dictionary()
 ensembl_dict = hgnc.get_ensembl_dictionary()
 synonym_dict = hgnc.get_synonym_dictionary()
 
+kessler2012 = Kessler2012Parser()
+kessler2012_list = kessler2012.parse()
+print("[INFO] KEssler et al 2012  n= %d SL interactions" % len(kessler2012_list))
+
+
 
 manual = ManualEntry()
 manual_list = manual.get_entries()
@@ -85,7 +90,7 @@ schick2019_list = schick2019.parse()
 print("[INFO] Schick et al 2019  n= %d SL interactions" % len(schick2019_list))
 
 sli_lists = [luo2009_list, bommi2008_list, turner_list, steckel2012_list, lord2008_list,
-             toyoshima2008_list, shen2015_list, srivas2016_list, han2017_list,
+             toyoshima2008_list, shen2015_list, srivas2016_list, han2017_list, kessler2012_list,
              wang2017_list, shen2017_list, manual_list]
 all_sli_list = []
 for l in sli_lists:

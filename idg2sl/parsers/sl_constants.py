@@ -1,10 +1,8 @@
 from enum import Enum
 
 
-
-
 class SlConstants(Enum):
-    ACTIVATING_MUTATION = 1 #'activating_mutation'
+    ACTIVATING_MUTATION = 1  # 'activating_mutation'
     KNOCKOUT = 2
     SI_RNA = 3
     PHARMACEUTICAL = 4
@@ -22,9 +20,8 @@ class SlConstants(Enum):
     CRISPR_CAS9 = 16
     ZSCORE = 17
     CISPLATIN_CYTOTOXICITY_ASSAY = 18
-
-
-
+    LOG2_DECREASE_IN_ABUNDANCE = 19
+    N_A = 20
 
     def to_string(self):
         if self.value == 1:
@@ -63,5 +60,9 @@ class SlConstants(Enum):
             return "Z-score"
         elif self.value == 18:
             return "cisplatin toxicity assay"
+        elif self.value == 19:
+            return "log2 decrease in abundance"
+        elif self.value == 20:
+            return "n/a"
         else:
-            return "TODO (SlConstants in sl_dataset_parser"
+            return "TODO (SlConstants in sl_dataset_parser)"
