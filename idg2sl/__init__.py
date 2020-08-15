@@ -11,6 +11,7 @@ from .parsers.lord_2008_parser import Lord2008Parser
 from .parsers.toyoshima_2008_parser import Toyoshima2008Parser
 from .parsers.shen_2015_parser import Shen2015Parser
 from .parsers.srivas_2016_parser import Srivas2016Parser
+from .parsers.wang_2017_parser import Wang2017Parser
 from .hgnc_parser import HgncParser
 from idg2sl.sl_dataset_parser import SL_DatasetParser
 
@@ -27,5 +28,6 @@ __all__ = ["SyntheticLethalInteraction",
             "Steckel2012Parser",
             "Toyoshima2008Parser",
             "Turner2008Parser",
+            "Wang2017Parser",
             "HgncParser",
             "ManualEntry"]

@@ -17,6 +17,8 @@ class SlConstants(Enum):
     COHORT_STUDY = 11
     PHARAMACEUTICAL_INHIBITION_ASSAY = 12
     GROWTH_INHIBITION_ASSAY = 13
+    CRISPR_CAS9_INTERFERENCE_ASSAY = 14
+    SG_RNA = 15
 
 
 
@@ -48,5 +50,9 @@ class SlConstants(Enum):
             return "pharmaceutical inhibition assay"
         elif self.value == 13:
             return "growth inhibition assay"
+        elif self.value == 14:
+            return "CRISPR-Cas9 Interference assay"
+        elif self.value == 15:
+            return "sgRNA"
         else:
             return "TODO (SlConstants in sl_dataset_parser"

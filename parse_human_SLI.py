@@ -40,6 +40,11 @@ manual = ManualEntry()
 manual_list = manual.get_entries()
 print("We got %d manually entered entries." % len(manual_list))
 
+wang2017 = Wang2017Parser()
+wang2017_list = wang2017.parse()
+print("[INFO] Wang et al 2017  n= %d SL interactions" % len(wang2017_list))
+exit(0)
+
 
 srivas2016 = Srivas2016Parser()
 srivas2016_list = srivas2016.parse()
@@ -90,7 +95,7 @@ print("[INFO] Luo et al 2009  n= %d SL interactions" % len(luo2009_list))
 
 
 han2017 = idg2sl.parse_han_2017('data/Han2017_supplemental_table_1.tsv', symbol2ncbi)
-wang2017 = idg2sl.parse_wang_2017('data/Wang2017_table5.tsv', symbol2ncbi)
+
 shen2017 = idg2sl.parse_shen_2017('data/shen2017.tsv', symbol2ncbi)
 
 manual = ManualEntry()
