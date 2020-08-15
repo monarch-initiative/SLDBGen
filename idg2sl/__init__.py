@@ -8,6 +8,7 @@ from .parsers.han_2017_parser import Han2017Parser
 from .parsers.lord_2008_parser import Lord2008Parser
 from .parsers.luo_2009 import Luo2009Parser
 from .parsers.mohni_2014_parser import Mohni2014Parser
+from .parsers.schick_2019_parser import Schick2019Parser
 from .parsers.shen_2015_parser import Shen2015Parser
 from .parsers.shen_2017_parser import Shen2017Parser
 from .parsers.srivas_2016_parser import Srivas2016Parser
@@ -28,6 +29,7 @@ __all__ = ["SyntheticLethalInteraction",
             "Lord2008Parser",
             "Luo2009Parser",
             "Mohni2014Parser",
+            "Schick2019Parser",
             "Shen2015Parser",
             "Shen2017Parser",
             "Srivas2016Parser",
