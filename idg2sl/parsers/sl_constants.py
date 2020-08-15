@@ -21,6 +21,7 @@ class SlConstants(Enum):
     SG_RNA = 15
     CRISPR_CAS9 = 16
     ZSCORE = 17
+    CISPLATIN_CYTOTOXICITY_ASSAY = 18
 
 
 
@@ -60,5 +61,7 @@ class SlConstants(Enum):
             return "CRISPR CAS9"
         elif self.value == 17:
             return "Z-score"
+        elif self.value == 18:
+            return "cisplatin toxicity assay"
         else:
             return "TODO (SlConstants in sl_dataset_parser"

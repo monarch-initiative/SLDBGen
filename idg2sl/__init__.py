@@ -1,6 +1,6 @@
 from .synthetic_lethal_interaction import SyntheticLethalInteraction
 from idg2sl.parsers.shen_2017_parser import *
-from .manual_entry import ManualEntry
+from idg2sl.parsers.manual_entry import ManualEntry
 from .parsers.sl_constants import SlConstants
 from .parsers.entrez_parser import EntrezParser
 from .parsers.bommi_2008_parser import Bommi2008Parser
