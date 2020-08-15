@@ -1,1 +1,12 @@
 data/SGA_NxN.txt.gz
+/Homo_sapiens.gene_info.gz
+.ipynb_checkpoints/
+.vscode/
+idg2sl/__pycache__/
+idg2sl/parsers/__pycache__/
+p3/
+test/__pycache__/
+utils/__pycache__/
+/test/protein-coding_gene.txt
+/protein-coding_gene.txt
+.idea/

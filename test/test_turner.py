@@ -1,7 +1,8 @@
 from unittest import TestCase
 import os.path
-from idg2sl import EntrezParser
+from idg2sl.parsers.entrez_parser import EntrezParser
 import idg2sl
+from idg2sl import Turner2008Parser
 
 class TestTurner(TestCase):
     """
@@ -15,8 +16,11 @@ class TestTurner(TestCase):
             __file__), 'data', 'turner_small.tsv')
         self.entrez_file = os.path.join(os.path.dirname(
             __file__), 'data', 'Homo_sapiens.gene_info.gz')
-        parser = EntrezParser(self.entrez_file)
-        self.turner_list = idg2sl.parse_turner_2008(self.inputfile, parser.get_mapping())
+        entrezparser = EntrezParser(self.entrez_file)
+       
+        #self.turner_list = idg2sl.parse_turner_2008(self.inputfile, parser.get_mapping())
+        parser = Turner2008Parser(entrezparser.get_mapping(), fname=self.inputfile)
+        self.turner_list = parser.parse()
         self.first_entry = self.turner_list[0]
 
     def test_count_entries(self):
