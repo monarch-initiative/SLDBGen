@@ -1,4 +1,4 @@
-Interaction	geneA	geneB	HeLa_Z	A549_Z	293T_Z	Hit_Cell_Line	Interaction_type	Conserved?	Validation?	PriorSL_report?	PMID / ref	geneA	geneB	geneA	geneB	geneA	geneB
+Interaction	geneA	geneB	HeLa_Z	A549_Z	293T_Z	Hit_Cell_Line	Interaction_type	Conserved?	Validation?	PriorSL_report?	PMID / ref	gene.A	gene.B	gene.A	gene.B	gene.A	gene.B
 BRCA1_WEE1	BRCA1	WEE1	-0,421	-1,102	-5,860	293T	Synthetic Lethal	private		yes	25964244	16,82	19,74	9,10	5,25	14,80	23,87
 BRCA2_CDK9	BRCA2	CDK9	-0,581	1,231	-5,130	293T	Synthetic Lethal	private				0,67	11,61	0,47	6,89	1,68	21,06
 FNTA_TOP1	FNTA	TOP1	-1,701	-2,046	-4,889	293T	Synthetic Lethal	private				12,98	3,78	10,54	4,04	35,22	89,12

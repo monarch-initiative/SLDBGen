@@ -1,4 +1,4 @@
-"Drug-target Pairs (pZ < -4)"	"GI Synergy ranked by GIT score"	"GI Synergy ranked by GIM score"	GI Synergy ranked by RankSum			
+Drug-target.Pairs	GI Synergy ranked by GIT score	GI Synergy ranked by GIM score	GI Synergy ranked by RankSum
 AKT1__AKT2	1	2	1			
 PIM1__PIM2	2	1	2			
 ALAD__GPI	4	4	3			

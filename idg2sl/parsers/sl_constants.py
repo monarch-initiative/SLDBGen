@@ -19,6 +19,8 @@ class SlConstants(Enum):
     GROWTH_INHIBITION_ASSAY = 13
     CRISPR_CAS9_INTERFERENCE_ASSAY = 14
     SG_RNA = 15
+    CRISPR_CAS9 = 16
+    ZSCORE = 17
 
 
 
@@ -54,5 +56,9 @@ class SlConstants(Enum):
             return "CRISPR-Cas9 Interference assay"
         elif self.value == 15:
             return "sgRNA"
+        elif self.value == 16:
+            return "CRISPR CAS9"
+        elif self.value == 17:
+            return "Z-score"
         else:
             return "TODO (SlConstants in sl_dataset_parser"

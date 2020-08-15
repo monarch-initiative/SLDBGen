@@ -40,6 +40,18 @@ manual = ManualEntry()
 manual_list = manual.get_entries()
 print("We got %d manually entered entries." % len(manual_list))
 
+
+shen2017 = Shen2017Parser()
+shen2017_list = shen2017.parse()
+print("[INFO] Shen et al 2017  n= %d SL interactions" % len(shen2017_list))
+exit(0)
+
+
+han2017 = Han2017Parser()
+han2017_list = han2017.parse()
+print("[INFO] Han et al 2017  n= %d SL interactions" % len(han2017_list))
+exit(0)
+
 wang2017 = Wang2017Parser()
 wang2017_list = wang2017.parse()
 print("[INFO] Wang et al 2017  n= %d SL interactions" % len(wang2017_list))
@@ -94,16 +106,15 @@ print("[INFO] Luo et al 2009  n= %d SL interactions" % len(luo2009_list))
 
 
 
-han2017 = idg2sl.parse_han_2017('data/Han2017_supplemental_table_1.tsv', symbol2ncbi)
 
-shen2017 = idg2sl.parse_shen_2017('data/shen2017.tsv', symbol2ncbi)
+
 
 manual = ManualEntry()
 manual_list = manual.get_entries()
 
 sli_lists = [luo2009_list, bommi2008_list, turner_list, steckel2012_list, lord2008_list,
-             toyoshima2008_list, shen2015_list, srivas2016_list, han2017,
-             wang2017, shen2017, manual_list]
+             toyoshima2008_list, shen2015_list, srivas2016_list, han2017_list,
+             wang2017_list, shen2017_list, manual_list]
 
 
 
