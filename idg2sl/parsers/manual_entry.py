@@ -159,5 +159,41 @@ class ManualEntry:
                                          SL=True)
         self.entries.append(sli)
 
+
+    def _get_barbie_2009(self):
+        """
+        Paper is about one SLI
+        """
+        kras = 'KRAS'
+        kras_id = 'NCBIGene:3845'
+        tbk1 = 'TBK1'
+        tbk1_id = 'NCBIGene:29110'
+        kras_perturbation = SlConstants.ACTIVATING_MUTATION.to_string()
+        tbk1_perturbation = SlConstants.SI_RNA.to_string()
+        pmid = '19847166'
+        assay = SlConstants.GROWTH_INHIBITION_ASSAY.to_string()
+        effect_type = "n/a"
+        cell_line = "n/a"
+        cellosaurus = "n/a"
+        cancer = "Lung adenocarcinoma"
+        ncit = "NCIT:C3512"
+        sli = SyntheticLethalInteraction(gene_A_symbol=kras,
+                                         gene_A_id=kras_id,
+                                         gene_B_symbol=tbk1,
+                                         gene_B_id=tbk1_id,
+                                         gene_A_pert=kras_perturbation,
+                                         gene_B_pert=tbk1_perturbation,
+                                         effect_type=effect_type,
+                                         effect_size='n/a',
+                                         cell_line=cell_line,
+                                         cellosaurus_id=cellosaurus,
+                                         cancer_type=cancer,
+                                         ncit_id=ncit,
+                                         assay=assay,
+                                         pmid=pmid,
+                                         SL=True)
+        self.entries.append(sli)
+
+
     def get_entries(self):
         return self.entries

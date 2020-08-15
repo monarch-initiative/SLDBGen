@@ -13,8 +13,7 @@ class TestHgncParser(TestCase):
         self.inputfile = os.path.join(os.path.dirname(
             __file__), 'data', 'hgnc_small.txt')
         hgncparser = HgncParser(self.inputfile)
-        self.d = hgncparser.get_dictionary() 
+        self.d = hgncparser.get_entrez_dictionary()
        
     def test_count_entries(self):
-        #hgncparser = HgncParser(self.inputfile)
-         self.assertEqual(10,len(self.d))
+        self.assertEqual(10,len(self.d))

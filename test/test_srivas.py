@@ -1,6 +1,6 @@
 from unittest import TestCase
 import os.path
-from idg2sl import EntrezParser
+from idg2sl import Srivas2016Parser
 import idg2sl
 
 
@@ -15,9 +15,8 @@ class TestSrivas(TestCase):
     """
     def setUp(self) -> None:
         self.inputfile = os.path.join(os.path.dirname(__file__), 'data', 'srivas_small.tsv')
-        self.entrez_file = os.path.join(os.path.dirname(__file__), 'data', 'Homo_sapiens.gene_info.gz')
-        parser = EntrezParser(self.entrez_file)
-        self.srivas_list = idg2sl.parse_srivas_2016(self.inputfile, parser.get_mapping())
+        parser = Srivas2016Parser(fname=self.inputfile)
+        self.srivas_list = parser.parse()
         self.first_entry = self.srivas_list[0]
 
     def test_count_entries(self):

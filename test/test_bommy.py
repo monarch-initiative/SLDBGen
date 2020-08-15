@@ -1,6 +1,6 @@
 from unittest import TestCase
 import os.path
-from idg2sl import EntrezParser
+from idg2sl import Bommi2008Parser
 import idg2sl
 
 
@@ -17,10 +17,8 @@ class TestBommy(TestCase):
     def setUp(self) -> None:
         self.inputfile = os.path.join(os.path.dirname(
             __file__), 'data', 'bommy_small.tsv')
-        self.entrez_file = os.path.join(os.path.dirname(
-            __file__), 'data', 'Homo_sapiens.gene_info.gz')
-        parser = EntrezParser(self.entrez_file)
-        self.bommy_list = idg2sl.parse_bommi_reddi_2008(self.inputfile, parser.get_mapping())
+        parser = Bommi2008Parser(fname=self.inputfile)
+        self.bommy_list = parser.parse()
         self.first_entry = self.bommy_list[0]
 
     def test_count_entries(self):
