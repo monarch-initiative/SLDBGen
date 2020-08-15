@@ -1,10 +1,10 @@
 from unittest import TestCase
 import os.path
-from idg2sl import EntrezParser
+from idg2sl import Steckel2012Parser
 import idg2sl
 
 
-class TestLuo(TestCase):
+class TestSteckel2012(TestCase):
     """
     This tests the function that parses the
     Steckel M, et al. Determination of synthetic lethal interactions in KRAS oncogene-dependent cancer cells reveals novel
@@ -16,10 +16,8 @@ class TestLuo(TestCase):
     def setUp(self) -> None:
         self.inputfile = os.path.join(os.path.dirname(
             __file__), 'data', 'steckel-2012-small.tsv')
-        self.entrez_file = os.path.join(os.path.dirname(
-            __file__), 'data', 'Homo_sapiens.gene_info.gz')
-        parser = EntrezParser(self.entrez_file)
-        self.steckel_list = idg2sl.parse_steckel_2012(self.inputfile, parser.get_mapping())
+        parser = Steckel2012Parser(fname=self.inputfile)
+        self.steckel_list = parser.parse()
         self.first_entry = self.steckel_list[0]
 
     def test_count_entries(self):

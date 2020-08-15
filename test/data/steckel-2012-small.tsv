@@ -1,4 +1,4 @@
-GeneID	Locus.ID	Accession	HCT-116 Z-score	HKE-3 Z-score	D Z-score
+GeneID	Locus.ID	Accession	HCT-116.Z-score	HKE-3.Z-score	D.Z-score
 POLR2A	5430	NM_000937	9.78	2.5	7.28
 ARSA	410	NM_000487	6.01	-0.14	6.15
 CREBZF	58487	NM_021212	7.7	1.85	5.85

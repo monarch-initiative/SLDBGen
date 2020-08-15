@@ -80,8 +80,9 @@ luo2009parser = Luo2009Parser()
 luo2009_list = luo2009parser.parse()
 print("[INFO] Luo et al 2009  n= %d SL interactions" % len(luo2009_list))
 
-manual = ManualEntry()
-manual_list = manual.get_entries()
+schick2019 = Schick2019Parser()
+schick2019_list = schick2019.parse()
+print("[INFO] Schick et al 2019  n= %d SL interactions" % len(schick2019_list))
 
 sli_lists = [luo2009_list, bommi2008_list, turner_list, steckel2012_list, lord2008_list,
              toyoshima2008_list, shen2015_list, srivas2016_list, han2017_list,

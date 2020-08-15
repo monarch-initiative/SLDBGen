@@ -14,12 +14,7 @@ class TestTurner(TestCase):
     def setUp(self) -> None:
         self.inputfile = os.path.join(os.path.dirname(
             __file__), 'data', 'turner_small.tsv')
-        self.entrez_file = os.path.join(os.path.dirname(
-            __file__), 'data', 'Homo_sapiens.gene_info.gz')
-        entrezparser = EntrezParser(self.entrez_file)
-       
-        #self.turner_list = idg2sl.parse_turner_2008(self.inputfile, parser.get_mapping())
-        parser = Turner2008Parser(entrezparser.get_mapping(), fname=self.inputfile)
+        parser = Turner2008Parser(fname=self.inputfile)
         self.turner_list = parser.parse()
         self.first_entry = self.turner_list[0]
 
@@ -28,8 +23,11 @@ class TestTurner(TestCase):
         There are 10 unique genes in turner_small.
         There are 10 genes altogether.
         Thus, 10 of the entries should be marked as max
+        However, we skip one of the genes (IMPK)
+        CDC2 is not an up to date gene symbol and since it is not synthetic lethal,
+        the parser skips it. Therefore, we expect 8
         :return:
         """
-        self.assertEqual(10, len(self.turner_list))
+        self.assertEqual(8, len(self.turner_list))
         num_max = sum([1 for item in self.turner_list if item.is_maximum()])
-        self.assertEqual(10, num_max)
+        self.assertEqual(8, num_max)
