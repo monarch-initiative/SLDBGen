@@ -1,51 +1,21 @@
-import gzip
-import os
-import wget
-from collections import defaultdict
-
 from idg2sl.parsers.blomen_2015_parser import Blomen2015Parser
-from utils.lookup import Lookup
-import idg2sl
 from idg2sl import *
-
-
-
-def get_entrez_gene_map():
-    """
-    Download the file  ftp://ftp.ncbi.nih.gov/gene/DATA/GENE_INFO/Mammalia/Homo_sapiens.gene_info.gz
-    """
-    urldir = 'ftp://ftp.ncbi.nih.gov/gene/DATA/GENE_INFO/Mammalia/'
-    local_filename = 'Homo_sapiens.gene_info.gz'
-    symbol2entrezID = defaultdict(str)
-    if not os.path.exists(local_filename):
-        print("[INFO] Will download ", local_filename)
-        url = os.path.join(urldir, local_filename)
-        local_filename = wget.download(url)
-    with gzip.open(local_filename, 'rt') as f:
-        for line in f:
-            if not line.startswith("9606"):
-                continue  # non human homo sapiens
-            fields = line.split('\t')
-            entrez = fields[1]
-            symbol = fields[2]
-            symbol2entrezID[symbol] = entrez
-    return symbol2entrezID
-
-
-symbol2ncbi = Lookup().symbol2ncbi
-symbol2ensembl = Lookup().symbol2ensembl
-ncbi2ensembl = Lookup().ncbi2ensembl
 
 manual = ManualEntry()
 manual_list = manual.get_entries()
 print("We got %d manually entered entries." % len(manual_list))
 
+mohni2014 = Mohni2014Parser()
+mohni2014_list = mohni2014.parse()
+for x in mohni2014_list:
+    print(x)
+print("[INFO] Shen et al 2017  n= %d SL interactions" % len(mohni2014_list))
+exit(0)
 
 shen2017 = Shen2017Parser()
 shen2017_list = shen2017.parse()
 print("[INFO] Shen et al 2017  n= %d SL interactions" % len(shen2017_list))
 exit(0)
-
 
 han2017 = Han2017Parser()
 han2017_list = han2017.parse()
@@ -56,7 +26,6 @@ wang2017 = Wang2017Parser()
 wang2017_list = wang2017.parse()
 print("[INFO] Wang et al 2017  n= %d SL interactions" % len(wang2017_list))
 exit(0)
-
 
 srivas2016 = Srivas2016Parser()
 srivas2016_list = srivas2016.parse()
@@ -78,7 +47,6 @@ lord2008_list = lord2008.parse()
 print("[INFO] Lord et al 2008  n= %d SL interactions" % len(lord2008_list))
 exit(0)
 
-
 steckel2012 = Steckel2012Parser()
 steckel2012_list = steckel2012.parse()
 print("[INFO] Steckel et al 2012  n= %d SL interactions" % len(steckel2012_list))
@@ -97,17 +65,10 @@ blomen2015 = Blomen2015Parser()
 blomen_list = blomen2015.parse()
 print("[INFO] Blomen et al 2015  n= %d SL interactions" % len(blomen_list))
 
-
 # Luo et al 2009
 luo2009parser = Luo2009Parser()
 luo2009_list = luo2009parser.parse()
 print("[INFO] Luo et al 2009  n= %d SL interactions" % len(luo2009_list))
-
-
-
-
-
-
 
 manual = ManualEntry()
 manual_list = manual.get_entries()
@@ -115,8 +76,6 @@ manual_list = manual.get_entries()
 sli_lists = [luo2009_list, bommi2008_list, turner_list, steckel2012_list, lord2008_list,
              toyoshima2008_list, shen2015_list, srivas2016_list, han2017_list,
              wang2017_list, shen2017_list, manual_list]
-
-
 
 n = 0
 n_SL = 0

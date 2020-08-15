@@ -88,5 +88,5 @@ class Luo2009Parser(SL_DatasetParser):
                                                  SL=SL)
                 gene_pair = GenePair(kras_symbol, geneB_sym)
                 sli_dict[gene_pair].append(sli)
-            sli_list = self._mark_maximum_entries(sli_dict)
+        sli_list = self._mark_maximum_entries(sli_dict)
         return sli_list
