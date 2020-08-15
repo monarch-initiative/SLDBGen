@@ -12,6 +12,11 @@ entrez_dict = hgnc.get_entrez_dictionary()
 ensembl_dict = hgnc.get_ensembl_dictionary()
 synonym_dict = hgnc.get_synonym_dictionary()
 
+
+vizeacoumar2013 = Vizeacoumar2013Parser()
+vizeacoumar2013_list = vizeacoumar2013.parse()
+print("[INFO] Vizeacoumar et al 2013  n= %d SL interactions" % len(vizeacoumar2013_list))
+
 brough2018 = Brough2018Parser()
 brough2018_list = brough2018.parse()
 print("[INFO] Brough et al 2018  n= %d SL interactions" % len(brough2018_list))

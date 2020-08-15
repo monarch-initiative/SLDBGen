@@ -1,0 +1,231 @@
+Gene.ID	human gene	Refseq	Reason for Selection	Rank in primary screen	Expression	Expression fold change	95% Confidence Interval (P<0.05)	80% Confidence Interval (P<0.2)	68% Confidence Interval (P<0.32)	
+6129	RPL7	NM_000971	GARP	11	Expressed	0.875543036596302	1	1	1	Ribosome biogenesis & translation
+220001	VWCE	NM_152718	GARP	32	Expression below threshold	#N/A	1	1	1	Cell adhesion and communication
+6829	SUPT5H	NM_003169	GARP	38	Expressed	0.981712166440279	1	1	1	Transcription & Chromatin-related
+83855	KLF16	NM_031918	GARP	72	Expressed	0.914658436901003	1	1	1	Transcription & Chromatin-related
+51079	NDUFA13	NM_015965	GARP	89	Expressed	0.664684676589763	1	1	1	Mitochondrial organization
+2005	ELK4	NM_001973	GARP	123	Expressed	0.92205710003224	1	1	1	Transcription & Chromatin-related
+7415	VCP	NM_007126	Yeast ortholog	139	Expressed	1.15383345535244	1	1	1	Intracellular Protein Traffic
+6387	CXCL12	NM_000609	GARP	180	Expression below threshold	#N/A	1	1	1	Signal transduction
+22858	ICK	NM_014920	GARP	212	Expressed	1.10848788297149	1	1	1	Developmental process
+89870	TRIM15	NM_033229	GARP	279	Expressed	0.757614842414343	1	1	1	Unknown
+388585	HES5	XM_371215	GARP	380	Expressed	0.959340254681137	1	1	1	Transcription & Chromatin-related
+5707	PSMD1	NM_002807	GARP	426	Expressed	1.18183202634535	1	1	1	Cell cycle and Mitosis
+81603	TRIM8	NM_030912	GARP	479	Expressed	0.666469149319059	1	1	1	Protein modification
+84570	COL25A1	NM_032518	GARP	617	Expression below threshold	#N/A	1	1	1	Cell adhesion and communication
+5455	POU3F3	NM_006236	GARP	1	Expressed	0.921447260531133	0	1	1	Transcription & Chromatin-related
+6860	SYT4	NM_020783	GARP	2	Expression below threshold	#N/A	0	1	1	Ion regulation
+23020	SNRNP200	NM_014014	GARP	3	Expressed	0.90297941222787	0	1	1	RNA processing
+10267	RAMP1	NM_005855	GARP	39	Expressed	0.621057607514081	0	1	1	Signal transduction
+6167	RPL37	NM_000997	GARP	40	Expressed	1.390868956611	0	1	1	Ribosome biogenesis & translation
+58495	OVOL2	NM_021220	GARP	50	Expression below threshold	#N/A	0	1	1	Signal transduction
+6208	RPS14	NM_005617	GARP	51	Expressed	0.795723989964903	0	1	1	Ribosome biogenesis & translation
+9716	AQR	NM_014691	GARP	62	Expressed	1.35662313410732	0	1	1	Ribosome biogenesis & translation
+9045	RPL14	NM_003973	GARP	69	Expressed	1.14863744600943	0	1	1	Ribosome biogenesis & translation
+8725	C19orf2	NM_003796	GARP	116	Expressed	0.807114355245227	0	1	1	Transcription & Chromatin-related
+3630	INS	NM_000207	GARP	161	Expression below threshold	#N/A	0	1	1	Apoptosis
+79913	ACTR5	NM_024855	GARP	167	Expressed	0.93631410722344	0	1	1	Transcription & Chromatin-related
+79587	CARS2	NM_024537	GARP	173	Expressed	1.42120483312759	0	1	1	RNA processing
+148066	ZNRF4	NM_181710	GARP	184	Expression below threshold	#N/A	0	1	1	Ion regulation
+6239	RREB1	NM_002955	GARP	193	Expressed	0.657450189257888	0	1	1	Transcription & Chromatin-related
+6223	RPS19	NM_001022	GARP	219	Expressed	0.949579042682412	0	1	1	Ribosome biogenesis & translation
+6147	RPL23A	NM_000984	GARP	299	Expressed	1.17366444861265	0	1	1	Ribosome biogenesis & translation
+6233	RPS27A	NM_002954	GARP	318	Expressed	0.785528214448202	0	1	1	Ribosome biogenesis & translation
+221	ALDH3B1	NM_000694	GARP	407	Expressed	0.764446000424573	0	1	1	Metabolism
+1052	CEBPD	NM_005195	GARP	411	Expressed	0.66893479737353	0	1	1	Transcription & Chromatin-related
+1460	CSNK2B	NM_001320	GARP	463	Expressed	1.36958138666811	0	1	1	Signal transduction
+8329	HIST1H2AI	NM_003509	Yeast ortholog	698	Expressed	1.33451544260247	0	1	1	Transcription & Chromatin-related
+126961	HIST2H3C	NM_021059	Yeast ortholog	703	Expression below threshold	#N/A	0	1	1	Transcription & Chromatin-related
+5887	RAD23B	NM_002874	GARP	715	Expressed	1.01929383384057	0	1	1	DDR pathways & NA metabolism
+11219	TREX2	NM_080700	GARP	717	Expressed	0.890423763042113	0	1	1	DDR pathways & NA metabolism
+231	AKR1B1	NM_001628	Yeast ortholog	747	Expressed	1.35600735153124	0	1	1	Metabolism
+5888	RAD51	NM_002875	GARP	826	Expressed	1.33277893154784	0	1	1	DDR pathways & NA metabolism
+9643	MORF4L2	NM_012286	SHARP	6401	Expressed	1.13589658965605	0	1	1	DDR pathways & NA metabolism
+331	XIAP	NM_001167	SHARP	14215	Expressed	0.91935534610095	0	1	1	Enzymatic or Catalytic activity
+6141	RPL18	NM_000979	GARP	5	Expressed	1.00604511312726	0	0	1	Ribosome biogenesis & translation
+3119	HLA-DQB1	NM_002123	GARP	20	Expression below threshold	#N/A	0	0	1	Immune System process
+158358	KIAA2026	XM_088551	GARP	22	Expressed	1.06444027245416	0	0	1	Unknown
+245812	CNPY4	NM_152755	GARP	24	Expression below threshold	#N/A	0	0	1	Cell adhesion and communication
+6168	RPL37A	NM_000998	GARP	25	Expressed	1.10778929319062	0	0	1	Ribosome biogenesis & translation
+4583	MUC2	NM_002457	GARP	35	Expression below threshold	#N/A	0	0	1	Cell adhesion and communication
+55761	TTC17	NM_018259	GARP	36	Expressed	1.02616377328488	0	0	1	Enzymatic or Catalytic activity
+27043	PELP1	NM_014389	GARP	44	Expressed	0.941302609809721	0	0	1	Transcription & Chromatin-related
+7477	WNT7B	NM_058238	GARP	48	Expressed	0.817997024260268	0	0	1	Signal transduction
+55454	CSGALNACT2	NM_018590	GARP	53	Expressed	1.0514654897398	0	0	1	Intracellular Protein Traffic
+9329	GTF3C4	NM_012204	GARP	60	Expressed	1.1411745673969	0	0	1	Transcription & Chromatin-related
+5652	PRSS8	NM_002773	GARP	61	Expressed	0.69105119569077	0	0	1	Enzymatic or Catalytic activity
+7701	ZNF142	XM_376172	GARP	76	Expressed	0.929764340524189	0	0	1	Transcription & Chromatin-related
+83733	SLC25A18	NM_031481	GARP	91	Expression below threshold	#N/A	0	0	1	Mitochondrial organization
+1841	DTYMK	NM_012145	Yeast ortholog	92	Expressed	1.2451862059717	0	0	1	Enzymatic or Catalytic activity
+9088	PKMYT1	NM_004203	Yeast ortholog	99	Expressed	1.21667808263688	0	0	1	Cell cycle and Mitosis
+8651	SOCS1	NM_003745	GARP	164	Expressed	1.17702299012613	0	0	1	Signal transduction
+55234	SMU1	NM_018225	GARP	171	Expressed	0.991221922147434	0	0	1	Unknown
+10730	YME1L1	NM_014263	Yeast ortholog	236	Expressed	0.872507840022334	0	0	1	Mitochondrial organization
+4172	MCM3	NM_002388	Yeast ortholog	282	Expressed	1.23009095942236	0	0	1	DDR pathways & NA metabolism
+2647	BLOC1S1	NM_001487	GARP	290	Expressed	1.18969025031455	0	0	1	Transport
+4796	TONSL	NM_013432	GARP	371	Expressed	1.12056551504365	0	0	1	Miscellaneous
+9416	DDX23	NM_004818	GARP	375	Expressed	1.12103863544286	0	0	1	RNA processing
+6431	SFRS6	NM_006275	Yeast ortholog	466	Expressed	1.0621481430631	0	0	1	Ribosome biogenesis & translation
+6595	SMARCA2	NM_003070	GARP	487	Expressed	1.04617231688614	0	0	1	Transcription & Chromatin-related
+4188	MDFI	NM_005586	GARP	509	Expressed	0.799954860694075	0	0	1	Signal transduction
+56953	NT5M	NM_020201	GARP	521	Expressed	0.874467395860335	0	0	1	DDR pathways & NA metabolism
+4117	MAK	NM_005906	GARP	543	Expression below threshold	#N/A	0	0	1	Developmental process
+54821	ERCC6L	XM_372231	GARP	678	Expressed	1.97245994015895	0	0	1	Cell cycle and Mitosis
+6240	RRM1	NM_001033	GARP	1285	Expressed	1.45084158247409	0	0	1	DDR pathways & NA metabolism
+150465	TTL	NM_153712	GARP	1291	Expressed	0.963783829062926	0	0	1	Cytoskeleton
+56154	TEX15	NM_031271	SHARP	15489	Expression below threshold	#N/A	0	0	1	Unknown
+8774	NAPG	NM_003826	GARP	4	Expressed	1.15237318867926	0	0	0	Intracellular Protein Traffic
+5690	PSMB2	NM_002794	GARP	6	Expressed	1.19188909532136	0	0	0	Cell cycle and Mitosis
+22818	COPZ1	NM_016057	GARP	7	Expressed	1.08376352657556	0	0	0	Intracellular Protein Traffic
+4902	NRTN	#N/A	GARP	8	no si	0.91175366567964	0	0	0	Cell adhesion and communication
+6011	GRK1	NM_002929	GARP	9	Expression below threshold	#N/A	0	0	0	Protein modification
+6810	STX4	NM_004604	GARP	10	Expressed	0.758976699049452	0	0	0	Intracellular Protein Traffic
+375260	WASH2P	NM_198943	GARP	12	no si	0.800926078332083	0	0	0	Cytoskeleton
+8666	EIF3G	NM_003755	GARP	13	Expressed	0.655948747725316	0	0	0	Ribosome biogenesis & translation
+10858	CYP46A1	NM_006668	GARP	14	Expressed	1.03438194612601	0	0	0	Metabolism
+7314	UBB	NM_018955	GARP	15	Expressed	0.922413159314548	0	0	0	Protein modification
+4636	MYL5	NM_002477	GARP	16	Expression below threshold	#N/A	0	0	0	Ion regulation
+6878	TAF6	NM_005641	GARP	17	Expressed	1.15379266747665	0	0	0	Transcription & Chromatin-related
+1893	ECM1	NM_004425	GARP	18	Expressed	1.25056105966314	0	0	0	Cell adhesion and communication
+8175	SF3A2	NM_007165	GARP	19	Expressed	1.18277856217117	0	0	0	RNA processing
+11073	TOPBP1	NM_007027	Yeast ortholog	21	Expressed	1.14194407610588	0	0	0	DDR pathways & NA metabolism
+558	AXL	NM_001699	GARP	23	Expressed	0.610103114252818	0	0	0	Signal Transduction
+56521	DNAJC12	NM_021800	GARP	26	Expressed	1.7544714848083	0	0	0	Immune System process
+6143	RPL19	NM_000981	Yeast ortholog	27	Expressed	0.873421530384443	0	0	0	Ribosome biogenesis & translation
+55585	UBE2Q1	NM_017582	GARP	28	Expressed	1.1769393684546	0	0	0	Protein modification
+9409	PEX16	NM_004813	GARP	29	Expressed	1.09877157973862	0	0	0	Intracellular Protein Traffic
+10633	RASL10A	NM_006477	GARP	30	Expressed	1.00267148557295	0	0	0	DDR pathways & NA metabolism
+7291	TWIST1	NM_000474	GARP	31	Expressed	0.673119240267575	0	0	0	Developmental process
+341098	341098	XM_291857	GARP	33	no si	#N/A	0	0	0	Unknown
+51362	CDC40	NM_015891	GARP	34	Expressed	1.0376195017634	0	0	0	RNA processing
+5524	PPP2R4	NM_178001	GARP	37	Expressed	0.833563782236481	0	0	0	Cell cycle and Mitosis
+5984	RFC4	NM_002916	GARP	41	Expressed	0.989985980503119	0	0	0	DDR pathways & NA metabolism
+22938	SNW1	NM_012245	Yeast ortholog	42	Expressed	1.05198563166238	0	0	0	RNA processing
+1316	KLF6	NM_001300	GARP	43	Expressed	0.720242181707159	0	0	0	Transcription & Chromatin-related
+2587	GALR1	NM_001480	GARP	45	Expression below threshold	#N/A	0	0	0	Signal transduction
+391	RHOG	NM_001665	GARP	46	Expressed	1.67147525842772	0	0	0	Signal transduction
+116988	AGAP3	NM_031946	GARP	47	Expressed	0.86528212206884	0	0	0	Signal transduction
+388611	CD164L2	XM_371239	GARP	49	Expressed	1.44944792304645	0	0	0	Cell adhesion and communication
+10055	SAE1	NM_005500	GARP	52	Expressed	0.919260082376282	0	0	0	Protein modification
+10268	RAMP3	NM_005856	GARP	54	Expressed	0.950971493269763	0	0	0	Signal transduction
+8775	NAPA	NM_003827	GARP	55	Expressed	1.1348711441973	0	0	0	Intracellular Protein Traffic
+10713	USP39	NM_006590	GARP	56	Expressed	1.02944731664883	0	0	0	Unknown
+376765	376765	XM_352378	GARP	57	no si	#N/A	0	0	0	Unknown
+5893	RAD52	NM_002879	Yeast ortholog	58	Expressed	0.820316185845799	0	0	0	DDR pathways & NA metabolism
+2962	GTF2F1	NM_002096	GARP	59	Expressed	0.951628246503066	0	0	0	Transcription & Chromatin-related
+57596	BEGAIN	NM_020836	GARP	63	Expression below threshold	#N/A	0	0	0	Intracellular Protein Traffic
+6442	SGCA	NM_000023	GARP	64	Expression below threshold	#N/A	0	0	0	Cytoskeleton
+6726	SRP9	NM_003133	GARP	65	no si	1.30321941318865	0	0	0	Miscellaneous
+55197	RPRD1A	NM_018170	GARP	66	Expressed	0.902413152494805	0	0	0	Unknown
+348	APOE	NM_000041	GARP	67	Expressed	0.852000982952365	0	0	0	Metabolism
+5441	POLR2L	NM_021128	GARP	68	Expressed	1.30032747687696	0	0	0	Transcription & Chromatin-related
+51027	BOLA1	NM_016074	GARP	70	Expressed	0.952688183559818	0	0	0	Miscellaneous
+5464	PPA1	NM_021129	GARP	71	Expressed	1.15673228127929	0	0	0	Enzymatic or Catalytic activity
+3753	KCNE1	NM_000219	GARP	73	Expression below threshold	#N/A	0	0	0	Ion regulation
+8065	CUL5	NM_003478	GARP	74	Expressed	0.842147006796105	0	0	0	Protein modification
+84502	JPH4	NM_032452	GARP	75	Expressed	0.89887162947317	0	0	0	Cell adhesion and communication
+1622	DBI	NM_020548	GARP	77	Expressed	1.76270982546216	0	0	0	Cell adhesion and communication
+4070	TACSTD2	NM_002353	GARP	78	Expressed	1.37714550663186	0	0	0	Signal transduction
+2852	GPER	NM_001505	GARP	79	Expressed	1.07687440550354	0	0	0	Signal transduction
+5861	RAB1A	NM_004161	GARP	80	Expressed	0.952360704705143	0	0	0	Intracellular Protein Traffic
+5094	PCBP2	NM_005016	GARP	81	Expressed	0.886584472066952	0	0	0	RNA processing
+5704	PSMC4	NM_006503	GARP	82	Expressed	1.19559602035407	0	0	0	Cell cycle and Mitosis
+51741	WWOX	NM_016373	GARP	83	Expressed	1.1466912549704	0	0	0	Apoptosis
+6205	RPS11	NM_001015	GARP	84	Expressed	1.01153413109101	0	0	0	Ribosome biogenesis & translation
+4058	LTK	NM_002344	GARP	85	Expression below threshold	#N/A	0	0	0	Signal transduction
+22921	MSRB2	NM_012228	GARP	86	Expressed	1.35470478862413	0	0	0	Protein modification
+2492	FSHR	NM_000145	GARP	87	Expression below threshold	#N/A	0	0	0	Signal transduction
+348654	GEN1	NM_182625	GARP	88	Expressed	1.31547697772906	0	0	0	DDR pathways & NA metabolism
+116085	SLC22A12	NM_144585	GARP	90	Expression below threshold	#N/A	0	0	0	Ion regulation
+387927	387927	XM_370726	GARP	93	no si	#N/A	0	0	0	Unknown
+8459	TPST2	NM_003595	GARP	94	Expressed	1.54989072294412	0	0	0	Intracellular Protein Traffic
+6440	SFTPC	NM_003018	GARP	95	Expression below threshold	#N/A	0	0	0	Cell adhesion and communication
+150291	C22orf27	NM_153044	GARP	96	no si	#N/A	0	0	0	Unknown
+894	CCND2	NM_001759	GARP	97	Expression below threshold	#N/A	0	0	0	Miscellaneous
+9107	MTMR6	NM_004685	GARP	98	Expressed	1.11411449286212	0	0	0	Enzymatic or Catalytic activity
+2815	GP9	NM_000174	GARP	100	Expressed	0.880062872497996	0	0	0	Cell adhesion and communication
+5090	PBX3	NM_006195	GARP	108	Expressed	1.1881808979221	0	0	0	Transcription & Chromatin-related
+54913	RPP25	NM_017793	GARP	112	Expressed	0.948388451249002	0	0	0	RNA processing
+5093	PCBP1	NM_006196	GARP	114	Expressed	1.00676362703892	0	0	0	RNA processing
+8836	GGH	NM_003878	HIGH EXPRESSION	119	Expressed	2.00999094209612	0	0	0	Metabolism
+5411	PNN	NM_002687	GARP	122	Expressed	1.17294917388078	0	0	0	RNA processing
+51495	PTPLAD1	NM_016395	GARP	124	Expressed	1.19822596376605	0	0	0	Signal transduction
+3225	HOXC9	NM_006897	GARP	130	Expressed	1.12449987441932	0	0	0	Transcription & Chromatin-related
+7205	TRIP6	NM_003302	GARP	132	Expressed	0.807399444868916	0	0	0	Cell adhesion and communication
+10395	DLC1	NM_006094	GARP	133	no si	#N/A	0	0	0	Cytoskeleton
+3364	HUS1	NM_004507	GARP	147	Expressed	1.17657802798801	0	0	0	DDR pathways & NA metabolism
+1906	EDN1	NM_001955	GARP	148	Expression below threshold	#N/A	0	0	0	Signal transduction
+1643	DDB2	NM_000107	GARP	151	Expressed	0.912636336019341	0	0	0	DDR pathways & NA metabolism
+55890	GPRC5C	NM_022036	GARP	153	Expressed	0.814917264238444	0	0	0	Mitochondrial organization
+1938	EEF2	NM_001961	GARP	157	Expressed	0.91426544574291	0	0	0	Ribosome biogenesis & translation
+3642	INSM1	NM_002196	GARP	158	Expressed	0.844674849493222	0	0	0	Developmental process
+91039	DPP9	NM_139159	GARP	160	Expressed	0.856239027264415	0	0	0	Miscellaneous
+374291	NDUFS7	NM_024407	Yeast ortholog	163	Expressed	0.863278521751268	0	0	0	Metabolism
+10215	OLIG2	NM_005806	GARP	169	Expression below threshold	#N/A	0	0	0	Developmental process
+23764	MAFF	NM_012323	GARP	170	Expressed	0.905908345918247	0	0	0	Transcription & Chromatin-related
+381	ARF5	NM_001662	GARP	172	Expressed	0.875158662394876	0	0	0	Intracellular Protein Traffic
+6839	SUV39H1	NM_003173	Yeast ortholog	179	Expressed	1.28347126812	0	0	0	Transcription & Chromatin-related
+285349	ZNF660	NM_173658	Yeast ortholog	182	Expression below threshold	#N/A	0	0	0	Transcription & Chromatin-related
+55311	ZNF444	NM_018337	GARP	185	Expressed	0.856589263679225	0	0	0	Transcription & Chromatin-related
+51066	C3orf32	NM_015931	GARP	186	Expression below threshold	#N/A	0	0	0	Unknown
+6788	STK3	NM_006281	GARP	196	Expressed	0.964354507565565	0	0	0	Signal transduction
+7710	ZNF154	NM_003444	Yeast ortholog	197	Expression below threshold	#N/A	0	0	0	Transcription & Chromatin-related
+23127	GLT25D2	NM_015101	GARP	201	Expression below threshold	#N/A	0	0	0	Intracellular Protein Traffic
+285877	POM121L12	NM_182595	Yeast ortholog	202	Expression below threshold	#N/A	0	0	0	Unknown
+55502	HES6	NM_018645	GARP	205	Expressed	0.901335738088058	0	0	0	Transcription & Chromatin-related
+124602	KIF19	NM_153209	GARP	218	Expression below threshold	#N/A	0	0	0	Cytoskeleton
+4990	SIX6	NM_007374	GARP	221	Expressed	0.927928789267918	0	0	0	Transcription & Chromatin-related
+9700	ESPL1	NM_012291	Yeast ortholog	223	Expressed	1.07163826385513	0	0	0	Cell cycle and Mitosis
+3735	KARS	NM_005548	Yeast ortholog	234	Expressed	1.05302522774671	0	0	0	RNA processing
+10690	FUT9	NM_006581	GARP	245	Expression below threshold	#N/A	0	0	0	Intracellular Protein Traffic
+3855	KRT7	NM_005556	GARP	250	Expressed	0.218401322886979	0	0	0	DDR pathways & NA metabolism
+94233	OPN4	NM_033282	GARP	269	Expression below threshold	#N/A	0	0	0	Signal transduction
+5709	PSMD3	NM_002809	GARP	272	Expressed	1.14422438846316	0	0	0	Cell cycle and Mitosis
+7137	TNNI3	NM_000363	GARP	278	Expressed	0.835891734342402	0	0	0	Cytoskeleton
+58511	DNASE2B	NM_021233	GARP	286	Expression below threshold	#N/A	0	0	0	DDR pathways & NA metabolism
+79894	ZNF672	NM_024836	Yeast ortholog	288	Expressed	1.00571079543644	0	0	0	Transcription & Chromatin-related
+140469	MYO3B	NM_138995	GARP	307	Expression below threshold	#N/A	0	0	0	Cytoskeleton
+4155	MBP	NM_001025098	GARP	308	Expressed	0.700819343107227	0	0	0	Miscellaneous
+3714	JAG2	NM_002226	GARP	309	Expressed	1.09289893875098	0	0	0	Signal transduction
+253714	MMS22L	NM_198468	GARP	311	Expressed	1.14999453084255	0	0	0	DDR pathways & NA metabolism
+64407	RGS18	NM_130782	GARP	327	Expression below threshold	#N/A	0	0	0	Signal transduction
+8337	HIST2H2AA3	NM_003516	Yeast ortholog	328	Expressed	1.38935954977036	0	0	0	Cell cycle and Mitosis
+7491	PLA2G7	#N/A	HIGH EXPRESSION	337	Expressed	2.76906515472397	0	0	0	#N/A
+65243	ZNF643	NM_023070	Yeast ortholog	347	Expression below threshold	#N/A	0	0	0	Transcription & Chromatin-related
+84969	TOX2	NM_032883	GARP	349	Expressed	0.745595728518962	0	0	0	Transcription & Chromatin-related
+151449	GDF7	NM_182828	GARP	361	Expressed	0.807934924379067	0	0	0	Signal transduction
+4851	NOTCH1	NM_017617	GARP	364	Expressed	0.984207898776727	0	0	0	Signal transduction
+27339	PRPF19	NM_014502	GARP	365	Expressed	0.926116119620743	0	0	0	RNA processing
+26959	HBP1	NM_012257	GARP	377	Expressed	0.846859475827941	0	0	0	Transcription & Chromatin-related
+293	SLC25A6	NM_001636	GARP	382	Expressed	1.07486092256867	0	0	0	Transport
+10314	LANCL1	NM_006055	GARP	384	Expressed	1.19643332466001	0	0	0	Unknown
+23762	OSBP2	NM_030758	GARP	389	Expressed	1.29867415905023	0	0	0	Metabolism
+8756	ADAM7	NM_003817	GARP	391	Expression below threshold	#N/A	0	0	0	Enzymatic or Catalytic activity
+27022	FOXD3	NM_012183	GARP	397	Expression below threshold	#N/A	0	0	0	Developmental process
+284827	KRTAP13-4	NM_181600	GARP	402	no si	#N/A	0	0	0	Developmental process
+23466	CBX6	NM_014292	HIGH EXPRESSION	448	Expressed	2.0161961480843	0	0	0	Transcription & Chromatin-related
+9550	ATP6V1G1	NM_004888	Yeast ortholog	450	Expressed	1.01653860124464	0	0	0	Metabolism
+6655	SOS2	NM_006939	GARP	484	Expressed	0.701734890207741	0	0	0	Signal transduction
+55038	CDCA4	NM_145701	Yeast ortholog	495	Expressed	1.20743455946673	0	0	0	Cell cycle and Mitosis
+57018	CCNL1	NM_020307	GARP	531	Expressed	0.840692145892874	0	0	0	DDR pathways & NA metabolism
+23246	BOP1	NM_015201	GARP	546	Expressed	0.989889916325493	0	0	0	RNA processing
+9488	PIGB	NM_004855	GARP	549	Expressed	0.954101065198765	0	0	0	Enzymatic or Catalytic activity
+90199	WFDC8	NM_130896	GARP	567	Expression below threshold	#N/A	0	0	0	Cell adhesion and communication
+29985	SLC39A3	NM_144564	Yeast ortholog	581	Expressed	0.952402293559844	0	0	0	Transport
+55576	STAB2	NM_017564	GARP	590	Expression below threshold	#N/A	0	0	0	Signal transduction
+5932	RBBP8	NM_002894	Yeast ortholog	594	Expressed	0.530375669587413	0	0	0	DDR pathways & NA metabolism
+668	FOXL2	NM_023067	GARP	604	Expression below threshold	#N/A	0	0	0	DDR pathways & NA metabolism
+3104	ZBTB48	NM_005341	GARP	619	Expressed	1.00404365649127	0	0	0	Transcription & Chromatin-related
+114026	ZIM3	NM_052882	Yeast ortholog	628	Expression below threshold	#N/A	0	0	0	Transcription & Chromatin-related
+90353	CTU1	NM_145232	Yeast ortholog	636	Expressed	0.825420400204461	0	0	0	RNA processing
+51270	TFDP3	NM_016521	Yeast ortholog	660	Expression below threshold	#N/A	0	0	0	Transcription & Chromatin-related
+399	RHOH	NM_004310	GARP	684	Expression below threshold	#N/A	0	0	0	Signal transduction
+5579	PRKCB	NM_002738	GARP	716	Expression below threshold	#N/A	0	0	0	Signal transduction
+1642	DDB1	NM_001923	SHARP	2248	Expressed	1.04703524015734	0	0	0	DDR pathways & NA metabolism
+6117	RPA1	NM_002945	SHARP	2987	Expressed	1.0793610260347	0	0	0	DDR pathways & NA metabolism
+64210	MMS19	NM_022362	SHARP	4721	Expressed	1.19231588054692	0	0	0	Transcription & Chromatin-related
+2189	FANCG	NM_004629	SHARP	9321	Expressed	1.13258513506348	0	0	0	DDR pathways & NA metabolism
+7486	WRN	NM_000553	SHARP	10485	Expressed	0.911377715417931	0	0	0	DDR pathways & NA metabolism
+6749	SSRP1	NM_003146	SHARP	13378	Expressed	0.996239832275939	0	0	0	DDR pathways & NA metabolism
+6188	RPS3	NM_001005	SHARP	15044	Expressed	1.05246700113898	0	0	0	Ribosome biogenesis & translation
+6421	SFPQ	NM_005066	SHARP	15222	Expressed	1.17374580365251	0	0	0	RNA processing
