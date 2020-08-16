@@ -115,7 +115,7 @@ show_stats("Wang et al 2017", wang2017_list)
 sli_lists = [bommi2008_list, brough2018_list, han2017_list, kessler2012_list, krastev2011_list, lord2008_list,
              luo2009_list,
              mohni2014_list, shen2015_list, shen2017_list, schick2019_list, srivas2016_list, steckel2012_list,
-             toyoshima2008_list, turner2008_list, wang2017_list, manual_list]
+             sun2019_list,   toyoshima2008_list, turner2008_list, wang2017_list, manual_list]
 all_sli_list = []
 for l in sli_lists:
     all_sli_list.extend(l)
