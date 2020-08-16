@@ -15,7 +15,7 @@ class Kessler2012Parser(SL_DatasetParser):
     """
 
     def __init__(self, fname='data/kessler2012SupplTable1.tsv'):
-        pmid = 'PMID:22157079'
+        pmid = '22157079'
         super().__init__(fname=fname, pmid=pmid)
 
     def parse(self):

@@ -22,7 +22,7 @@ class Blomen2015Parser(SL_DatasetParser):
     """
 
     def __init__(self, fname='data/blomen2015_S7.tsv'):
-        pmid = 'PMID:26472760'
+        pmid = '26472760'
         super().__init__(fname=fname, pmid=pmid)
 
     def parse(self):

@@ -50,4 +50,4 @@ class TestSrivas(TestCase):
         self.assertEqual("pharmaceutical + siRNA", self.first_entry.get_assay())
 
     def test_get_pmid(self):
-        self.assertEqual('PMID:27453043', self.first_entry.get_pmid())
+        self.assertEqual('27453043', self.first_entry.get_pmid())

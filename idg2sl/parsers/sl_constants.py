@@ -9,6 +9,7 @@ class SlConstants:
     COMPETITIVE_HYBRIDIZATION = 'competitive hybridization'
     CRISPR_CAS9 = "CRISPR CAS9"
     CRISPR_CAS9_INTERFERENCE_ASSAY = "CRISPR-Cas9 Interference assay"
+    CYTOTOXICITY_ASSAY = "cytotoxicity assay"
     GROWTH_INHIBITION_ASSAY = "growth inhibition assay"
     KNOCKOUT = 'knockout'
     LOF_MUTATION = 'lof_mutation'
@@ -44,6 +45,8 @@ class SlConstants:
     K562_CELLOSAURUS = "CVCL_0004"
     KBM7_CELL = 'KBM - 7'
     KBM7_CELLOSAURUS = 'CVCL_A426'
+    MCF7_CELL = 'MCF-7'
+    MCF7_CELLOSAURUS = 'CVCL_0031'
     OVCAR3_CELL = "OVCAR-3"
     OVCAR3_CELLOSAURUS = "CVCL_0465"
     UMRC6_CELL = 'UM-RC-6'
@@ -81,6 +84,7 @@ class SlConstants:
 
     # Some common gene ids
     ARID1A_GENE_ID = 'NCBIGene:8289'
+    BCL2_GENE_ID = 'NCBIGene:596'
     CREBBP_GENE_ID = 'NCBIGene:1387'
     CKS1B_GENE_ID = 'NCBIGene:1163'
     DDR1_GENE_ID = 'NCBIGene:780'
@@ -89,6 +93,7 @@ class SlConstants:
     KRAS_GENE_ID = 'NCBIGene:3845'
     MYC_GENE_ID = 'NCBIGene:4609'
     PBRM1_GENE_ID = 'NCBIGene:55193'
+    PDK1_GENE_ID = 'NCBIGene:5163'
     PLK1_GENE_ID = 'NCBIGene:5347'
     PTEN_GENE_ID = 'NCBIGene:5728'
     SLC7A11_GENE_ID = 'NCBIGene:23657'

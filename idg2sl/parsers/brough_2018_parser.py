@@ -27,7 +27,7 @@ class Brough2018Parser(SL_DatasetParser):
     """
 
     def __init__(self, fname=None):
-        pmid = 'PMID:29915391'
+        pmid = '29915391'
         super().__init__(fname=fname, pmid=pmid)
         self.sli_dict = defaultdict(list)
         # old symbols that are assigned to multiple genes

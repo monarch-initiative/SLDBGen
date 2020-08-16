@@ -24,7 +24,9 @@ class ManualEntry:
         self._add_szymanska_2020
         self._add_hu_2020()
         self._add_hu_2020a()
-        self._add_villalba_2019
+        self._add_villalba_2019()
+        self._add_paul_2020()
+        self._add_chatterjee2019()
 
     def create_sli(self, geneA, geneAid, geneB, geneBid, geneApert, geneBpert, effecttype, effectsize, cell,
                    cellosaurus,
@@ -46,11 +48,25 @@ class ManualEntry:
                                          SL=True)
         return sli
 
+
+    def _add_chatterjee2019(self):
+        pten = 'PTEN'
+        pdk1 = 'PDK1' # Note the authors use the wrong symbol ('PDHK1') for pyruvate dehydrogenase kinase 1
+        pmid = '31461649'
+        sli = self.create_sli(geneA=pten, geneAid=SlConstants.PTEN_GENE_ID,geneB=pdk1, geneBid=SlConstants.PDK1_GENE_ID,
+                              geneApert=SlConstants.LOF_MUTATION, geneBpert=SlConstants.SH_RNA,
+                              effecttype=SlConstants.N_A, effectsize=SlConstants.N_A,
+                              cell=SlConstants.N_A, cellosaurus=SlConstants.N_A,
+                              cancer=SlConstants.N_A, ncit=SlConstants.N_A,
+                              assay=SlConstants.GROWTH_INHIBITION_ASSAY,pmid=pmid)
+        self.entries.append(sli)
+
+
     def _add_reid_2016(self):
         """
          PLK1 NCBI Gene id 5347 and CKS1B NCBI Gene id 1163 
          """
-        pmid = 'PMID:27558135'
+        pmid = '27558135'
         cell_line = 'multiple.breast.cancer.cell.lines'
         sli = self.create_sli(geneA='PLK1', geneAid=SlConstants.PLK1_GENE_ID,
                               geneB="CKS1B", geneBid=SlConstants.CKS1B_GENE_ID,
@@ -71,7 +87,7 @@ class ManualEntry:
         src = 'SRC'
         csnk2a1 = "CSNK2A1"
         CSNK2A1_GENE_ID = "NCBIGene:1457"
-        pmid = 'PMID:26437225'
+        pmid = '26437225'
         effect_type = "correlation"
         sli = self.create_sli(geneA=src, geneAid=SlConstants.SRC_GENE_ID,
                               geneB=csnk2a1,  geneBid=CSNK2A1_GENE_ID,
@@ -306,6 +322,24 @@ class ManualEntry:
                               cancer=SlConstants.MINIMALLY_INVASIVE_LUNG_ADENOCARCINOMA,
                               ncit=SlConstants.MINIMALLY_INVASIVE_LUNG_ADENOCARCINOMA_NCIT,
                               assay=SlConstants.CELL_VIABILITY_ASSAY,pmid=pmid)
+        self.entries.append(sli)
+
+
+    def _add_paul_2020(self):
+        """
+        G - Quadruplex - Binding  Small Molecule Induces  Synthetic  Lethality in Breast
+        Cancer Cells by Inhibiting c - MYC and BCL2 Expression
+        """
+        myc = "MYC"
+        bcl2 = "BCL2"
+
+        pmid = "31621996"
+        sli = self.create_sli(geneA=myc, geneAid=SlConstants.MYC_GENE_ID, geneB=bcl2, geneBid=SlConstants.BCL2_GENE_ID,
+                              geneApert=SlConstants.SI_RNA, geneBpert=SlConstants.SI_RNA,
+                              effecttype=SlConstants.N_A, effectsize=SlConstants.N_A,
+                              cell=SlConstants.MCF7_CELL, cellosaurus=SlConstants.MCF7_CELLOSAURUS,
+                              cancer=SlConstants.N_A, ncit=SlConstants.N_A,
+                              assay=SlConstants.CYTOTOXICITY_ASSAY, pmid=pmid)
         self.entries.append(sli)
 
 

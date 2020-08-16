@@ -53,4 +53,4 @@ class TestLuo(TestCase):
         self.assertEqual("competitive hybridization;multicolor competition assay", self.first_entry.get_assay())
 
     def test_get_pmid(self):
-        self.assertEqual('PMID:19490893', self.first_entry.get_pmid())
+        self.assertEqual('19490893', self.first_entry.get_pmid())

@@ -7,7 +7,7 @@ import csv
 
 class Lord2008Parser(SL_DatasetParser):
     def __init__(self, fname='data/lord-PARP1-2008.tsv'):
-        pmid = 'PMID:18832051'
+        pmid = '18832051'
         super().__init__(fname=fname, pmid=pmid)
 
     def parse(self):

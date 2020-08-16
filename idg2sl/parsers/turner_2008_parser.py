@@ -19,7 +19,7 @@ class Turner2008Parser(SL_DatasetParser):
     """
 
     def __init__(self, fname='data/turner-PARP1-2008.tsv'):
-        pmid = 'PMID:18388863'
+        pmid = '18388863'
         super().__init__(fname=fname, pmid=pmid)
 
     def parse(self):
