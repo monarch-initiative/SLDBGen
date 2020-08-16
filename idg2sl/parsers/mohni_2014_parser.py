@@ -16,7 +16,7 @@ class Mohni2014Parser(SL_DatasetParser):
     """
 
     def __init__(self, fname='data/mohniS1excerpt.tsv', entrez=None, ensembl=None, synonym=None):
-        pmid = 'PMID: 24662920'
+        pmid = '24662920'
         super().__init__(fname=fname, pmid=pmid, entrez=entrez, ensembl=ensembl, synonym=synonym)
 
     def parse(self):

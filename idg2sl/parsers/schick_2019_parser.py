@@ -10,7 +10,7 @@ class Schick2019Parser(SL_DatasetParser):
         SMARCA4-ARID2, SMARCA4-ACTB and SMARCC1-SMARCC2.
         Multiple techniques and cell lines were used
         """
-        pmid = "PMID:31427792"
+        pmid = "31427792"
         super().__init__(fname=fname, pmid=pmid)
 
     def get_sli(self, geneA_sym, geneA_id, geneB_sym, geneB_id):

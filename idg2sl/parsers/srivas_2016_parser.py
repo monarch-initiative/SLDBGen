@@ -12,18 +12,13 @@ class Srivas2016Parser(SL_DatasetParser):
     # https://www.cell.com/molecular-cell/fulltext/S1097-2765(16)30280-5?innerTabgraphical_S1097276516302805=#secsectitle0105
     """
     def __init__(self, fname='data/Srivas_2016.tsv'):
-        pmid = 'PMID:27453043'
+        pmid = '27453043'
         super().__init__(fname=fname, pmid=pmid)
 
     def parse(self):
         gene1_perturbation = SlConstants.PHARMACEUTICAL
         gene2_perturbation = 'natural (is a TSG)'
         assay = "pharmaceutical + siRNA"
-        effect_type = SlConstants.ZSCORE
-        cell_line = "HeLa-Cells"
-        cellosaurus = "CVCL_0030"
-        cancer = ""
-        ncit = ""
         # The following keeps track of the current largest effect size SLI for any given gene A/gene B pair
         sli_dict = defaultdict(list)
         with open(self.fname) as csvfile:
@@ -53,12 +48,12 @@ class Srivas2016Parser(SL_DatasetParser):
                                                      gene_B_id=geneB_id,
                                                      gene_A_pert=gene1_perturbation,
                                                      gene_B_pert=gene2_perturbation,
-                                                     effect_type=effect_type,
+                                                     effect_type=SlConstants.ZSCORE,
                                                      effect_size=effect,
-                                                     cell_line=cell_line,
-                                                     cellosaurus_id=cellosaurus,
-                                                     cancer_type=cancer,
-                                                     ncit_id=ncit,
+                                                     cell_line=SlConstants.HELA_CELL,
+                                                     cellosaurus_id=SlConstants.HELA_CELLOSAURUS,
+                                                     cancer_type=SlConstants.N_A,
+                                                     ncit_id=SlConstants.N_A,
                                                      assay=assay,
                                                      pmid=self.pmid,
                                                      SL=True)

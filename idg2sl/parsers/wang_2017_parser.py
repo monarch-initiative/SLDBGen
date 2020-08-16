@@ -13,7 +13,7 @@ class Wang2017Parser(SL_DatasetParser):
         (RAF1 and SHOC2) are involved in MAPK pathway signaling. The final gene, PREX1, did not
         immediately fit in either category and is discussed later in its own section.
         """
-        pmid="PMID:28162770"
+        pmid="28162770"
         super().__init__(fname=fname, pmid=pmid)
 
 

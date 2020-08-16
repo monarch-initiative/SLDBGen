@@ -13,7 +13,7 @@ class Shen2015Parser(SL_DatasetParser):
     """
 
     def __init__(self, fname='data/Shen_2015.tsv'):
-        pmid = 'PMID:26437225'
+        pmid = '26437225'
         super().__init__(fname=fname, pmid=pmid)
 
     def parse(self):
