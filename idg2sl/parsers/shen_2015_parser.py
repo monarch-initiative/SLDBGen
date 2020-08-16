@@ -19,10 +19,10 @@ class Shen2015Parser(SL_DatasetParser):
     def parse(self):
         geneA_symbol = 'CHEK1'
         geneA_id = 'NCBIGene:1111'
-        geneA_perturbation = SlConstants.PHARMACEUTICAL.to_string()
-        gene2_perturbation = SlConstants.SI_RNA.to_string()
-        assay = SlConstants.RNA_INTERFERENCE_ASSAY.to_string()
-        effect_type = SlConstants.ZSCORE.to_string()
+        geneA_perturbation = SlConstants.PHARMACEUTICAL
+        gene2_perturbation = SlConstants.SI_RNA
+        assay = SlConstants.RNA_INTERFERENCE_ASSAY
+        effect_type = SlConstants.ZSCORE
         cell_line = "HeLa-Cells"
         cellosaurus = "CVCL_0030"
         cancer = ""

@@ -27,7 +27,7 @@ class Blomen2015Parser(SL_DatasetParser):
 
     def parse(self):
         perturbation = SlConstants.KNOCKOUT
-        cellosuarus = 'CVCL_Y019'
+        cellosuarus = SlConstants.HAP1_CELLOSAURUS
         assay = 'proportions.of.sense.and.antisense.insertions'
         sli_dict = defaultdict(list)
         # GENE	SUMMARY	PUBMED ID	INTERACTING QUERY GENE
@@ -51,11 +51,11 @@ class Blomen2015Parser(SL_DatasetParser):
                                                      gene_A_id=geneA_id,
                                                      gene_B_symbol=geneB,
                                                      gene_B_id=geneB_id,
-                                                     gene_A_pert=perturbation.to_string(),
-                                                     gene_B_pert=perturbation.to_string(),
+                                                     gene_A_pert=perturbation,
+                                                     gene_B_pert=perturbation,
                                                      effect_type='n/a',
                                                      effect_size=0,
-                                                     cell_line='HAP1',
+                                                     cell_line=SlConstants.HAP1_CELL,
                                                      cellosaurus_id=cellosuarus,
                                                      cancer_type='n/a',
                                                      ncit_id='n/a',

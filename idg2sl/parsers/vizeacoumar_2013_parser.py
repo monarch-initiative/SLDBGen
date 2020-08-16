@@ -26,13 +26,13 @@ class Vizeacoumar2013Parser(SL_DatasetParser):
         BLM, MUS81, PTEN, PTTG1
         """
         geneAid = self.entrez_dict.get(geneA)
-        geneA_perturbation = SlConstants.LOF_MUTATION.to_string()
-        gene2_perturbation = SlConstants.SI_RNA.to_string()
-        assay_string = SlConstants.MULTICOLOR_COMPETITION_ASSAY.to_string()
+        geneA_perturbation = SlConstants.LOF_MUTATION
+        gene2_perturbation = SlConstants.SI_RNA
+        assay_string = SlConstants.MULTICOLOR_COMPETITION_ASSAY
         cell_line = 'HCT 116'
         cellosaurus = 'CVCL_0291'
-        cancer = SlConstants.N_A.to_string()
-        ncit = SlConstants.N_A.to_string()
+        cancer = SlConstants.N_A
+        ncit = SlConstants.N_A
         c = 0
         with open(fname) as csvfile:
             csvreader = csv.DictReader(csvfile, delimiter='\t')
@@ -74,13 +74,13 @@ class Vizeacoumar2013Parser(SL_DatasetParser):
         geneA = 'KRAS'
         geneAid = self.get_current_symbol(geneA)
         fname = 'data/vizeacoumarSuppl4-PTEN.tsv'
-        geneA_perturbation = SlConstants.ACTIVATING_MUTATION.to_string()
-        gene2_perturbation = SlConstants.SI_RNA.to_string()
-        assay_string = SlConstants.MULTICOLOR_COMPETITION_ASSAY.to_string()
+        geneA_perturbation = SlConstants.ACTIVATING_MUTATION
+        gene2_perturbation = SlConstants.SI_RNA
+        assay_string = SlConstants.MULTICOLOR_COMPETITION_ASSAY
         cell_line = 'HCT 116'
         cellosaurus = 'CVCL_0291'
-        cancer = SlConstants.N_A.to_string()
-        ncit = SlConstants.N_A.to_string()
+        cancer = SlConstants.N_A
+        ncit = SlConstants.N_A
         c = 0
         with open(fname) as csvfile:
             csvreader = csv.DictReader(csvfile, delimiter='\t')

@@ -21,14 +21,14 @@ class Kessler2012Parser(SL_DatasetParser):
     def parse(self):
         myc = 'MYC'
         myc_id = self.entrez_dict.get(myc)
-        myc_perturbation = SlConstants.OVEREXPRESSION.to_string()
-        geneB_perturbation = SlConstants.SI_RNA.to_string()
-        assay_string = SlConstants.RNA_INTERFERENCE_ASSAY.to_string()
-        effect_type = SlConstants.LOG2_DECREASE_IN_ABUNDANCE.to_string()
+        myc_perturbation = SlConstants.OVEREXPRESSION
+        geneB_perturbation = SlConstants.SI_RNA
+        assay_string = SlConstants.RNA_INTERFERENCE_ASSAY
+        effect_type = SlConstants.LOG2_DECREASE_IN_ABUNDANCE
         cell_line = 'human mammary epithelial cells'
-        cellosaurus = SlConstants.N_A.to_string()
-        cancer = SlConstants.N_A.to_string()
-        ncit = SlConstants.N_A.to_string()
+        cellosaurus = SlConstants.N_A
+        cancer = SlConstants.N_A
+        ncit = SlConstants.N_A
         sli_dict = defaultdict(list)
         # Pseudogenes, divergent nc transcripts
         # DIP maps to two newer symbols (also GIF

@@ -27,15 +27,15 @@ class Wang2017Parser(SL_DatasetParser):
                                          gene_A_id=geneA_id,
                                          gene_B_symbol=geneB_sym,
                                          gene_B_id=geneB_id,
-                                         gene_A_pert=SlConstants.ACTIVATING_MUTATION.to_string(),
-                                         gene_B_pert=SlConstants.SG_RNA.to_string(),
+                                         gene_A_pert=SlConstants.ACTIVATING_MUTATION,
+                                         gene_B_pert=SlConstants.SG_RNA,
                                          effect_type="n/a",
                                          effect_size="n/a",
                                          cell_line="n/a",
                                          cellosaurus_id="n/a",
                                          cancer_type=cancer,
                                          ncit_id=ncit,
-                                         assay=SlConstants.CRISPR_CAS9_INTERFERENCE_ASSAY.to_string(),
+                                         assay=SlConstants.CRISPR_CAS9_INTERFERENCE_ASSAY,
                                          pmid=self.pmid,
                                          SL=True)
         return sli

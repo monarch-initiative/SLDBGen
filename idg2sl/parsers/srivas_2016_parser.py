@@ -16,10 +16,10 @@ class Srivas2016Parser(SL_DatasetParser):
         super().__init__(fname=fname, pmid=pmid)
 
     def parse(self):
-        gene1_perturbation = SlConstants.PHARMACEUTICAL.to_string()
+        gene1_perturbation = SlConstants.PHARMACEUTICAL
         gene2_perturbation = 'natural (is a TSG)'
         assay = "pharmaceutical + siRNA"
-        effect_type = SlConstants.ZSCORE.to_string()
+        effect_type = SlConstants.ZSCORE
         cell_line = "HeLa-Cells"
         cellosaurus = "CVCL_0030"
         cancer = ""

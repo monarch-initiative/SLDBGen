@@ -1,8 +1,7 @@
-from idg2sl.parsers.blomen_2015_parser import Blomen2015Parser
 from idg2sl import *
 import os
 
-
+## First download (if needed) and parse the HGNC file with symbol/NCBI Gene/Ensembl mappings
 hgnc_fname = SL_DatasetParser.get_local_hgncfile_name()
 if not os.path.exists(hgnc_fname):
     SL_DatasetParser.get_hgnc_file()
@@ -12,6 +11,12 @@ entrez_dict = hgnc.get_entrez_dictionary()
 ensembl_dict = hgnc.get_ensembl_dictionary()
 synonym_dict = hgnc.get_synonym_dictionary()
 
+
+krastev2011 = Krastev2011Parser()
+krastev2011_list = krastev2011.parse()
+for item in krastev2011_list:
+    print(item)
+exit(1)
 
 vizeacoumar2013 = Vizeacoumar2013Parser()
 vizeacoumar2013_list = vizeacoumar2013.parse()

@@ -37,9 +37,9 @@ class Bommi2008Parser(SL_DatasetParser):
         # because of the experiment, geneA is always VHL.
         vhl_symbol = 'VHL'
         vhl_id = 'NCBIGene:7428'
-        vhl_perturbation = SlConstants.LOF_MUTATION.to_string()
-        gene2_perturbation = SlConstants.SH_RNA.to_string()
-        assays = [SlConstants.COMPETITIVE_HYBRIDIZATION.to_string(), SlConstants.MULTICOLOR_COMPETITION_ASSAY.to_string()]
+        vhl_perturbation = SlConstants.LOF_MUTATION
+        gene2_perturbation = SlConstants.SH_RNA
+        assays = [SlConstants.COMPETITIVE_HYBRIDIZATION, SlConstants.MULTICOLOR_COMPETITION_ASSAY]
         assay_string = ";".join(assays)
         effect_type = 'differential_viability'
         cell_786O = "786-0"

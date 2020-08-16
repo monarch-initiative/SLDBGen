@@ -27,13 +27,13 @@ class ManualEntry:
                                          gene_B_id=1163,
                                          gene_A_pert='shRNA',
                                          gene_B_pert='increased.expression',
-                                         effect_type=SlConstants.GROWTH_INHIBITION_ASSAY.to_string(),
+                                         effect_type=SlConstants.GROWTH_INHIBITION_ASSAY,
                                          effect_size='n/a',
                                          cell_line='multiple.breast.cancer.cell.lines',
                                          cellosaurus_id='n/a',
                                          cancer_type=breastCarcinoma,
                                          ncit_id=ncitBreastCarcinoma,
-                                         assay=SlConstants.GROWTH_INHIBITION_ASSAY.to_string(),
+                                         assay=SlConstants.GROWTH_INHIBITION_ASSAY,
                                          pmid='PMID:27558135',
                                          SL=True)
         self.entries.append(sli)
@@ -46,10 +46,10 @@ class ManualEntry:
         """
         gene1_symbol = 'SRC'
         gene1_id = 'NCBIGene:6714'
-        gene1_perturbation = SlConstants.PHARMACEUTICAL.to_string()
-        gene2_perturbation = SlConstants.COHORT_STUDY.to_string()
+        gene1_perturbation = SlConstants.PHARMACEUTICAL
+        gene2_perturbation = SlConstants.COHORT_STUDY
         pmid = 'PMID:26437225'
-        assay = SlConstants.PHARAMACEUTICAL_INHIBITION_ASSAY.to_string()
+        assay = SlConstants.PHARAMACEUTICAL_INHIBITION_ASSAY
         effect_type = "correlation"
         cell_line = "n/a"
         cellosaurus = "n/a"
@@ -92,12 +92,12 @@ class ManualEntry:
     def _get_sultana_2013(self):
         atr = 'ATR'
         atr_id = 'NCBIGene:545'
-        atr_perturbation = SlConstants.PHARMACEUTICAL.to_string()
+        atr_perturbation = SlConstants.PHARMACEUTICAL
         xrcc1 = 'XRCC1'
         xrcc1_id = 'NCBIGene:7515'
-        xrcc1_perturbation = SlConstants.SI_RNA.to_string()
+        xrcc1_perturbation = SlConstants.SI_RNA
         pmid = '23451157'
-        assay = SlConstants.CISPLATIN_CYTOTOXICITY_ASSAY.to_string()
+        assay = SlConstants.CISPLATIN_CYTOTOXICITY_ASSAY
         effect_type = "n/a"
         cell_line = "OVCAR-3"
         cellosaurus = "CVCL_0465"
@@ -131,12 +131,12 @@ class ManualEntry:
         """
         smarca2 = 'SMARCA2'
         smarca2_id = 'NCBIGene:6595'
-        smarca2_perturbation = SlConstants.SI_RNA.to_string()
+        smarca2_perturbation = SlConstants.SI_RNA
         smarca4 = 'SMARCA4'
         smarca4_id = 'NCBIGene:6597'
-        smarca4_perturbation = SlConstants.LOF_MUTATION.to_string()
+        smarca4_perturbation = SlConstants.LOF_MUTATION
         pmid = '31427792'
-        assay = SlConstants.GROWTH_INHIBITION_ASSAY.to_string()
+        assay = SlConstants.GROWTH_INHIBITION_ASSAY
         effect_type = "n/a"
         cell_line = "A-549"
         cellosaurus = "CVCL_0023"
@@ -168,10 +168,10 @@ class ManualEntry:
         kras_id = 'NCBIGene:3845'
         tbk1 = 'TBK1'
         tbk1_id = 'NCBIGene:29110'
-        kras_perturbation = SlConstants.ACTIVATING_MUTATION.to_string()
-        tbk1_perturbation = SlConstants.SI_RNA.to_string()
+        kras_perturbation = SlConstants.ACTIVATING_MUTATION
+        tbk1_perturbation = SlConstants.SI_RNA
         pmid = '19847166'
-        assay = SlConstants.GROWTH_INHIBITION_ASSAY.to_string()
+        assay = SlConstants.GROWTH_INHIBITION_ASSAY
         effect_type = "n/a"
         cell_line = "n/a"
         cellosaurus = "n/a"

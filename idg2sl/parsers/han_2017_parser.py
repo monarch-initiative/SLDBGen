@@ -13,9 +13,9 @@ class Han2017Parser(SL_DatasetParser):
 
     def parse(self):
         # using supplemental file 1
-        gene1_perturbation = SlConstants.SG_RNA.to_string()
-        gene2_perturbation = SlConstants.SG_RNA.to_string()
-        assay = SlConstants.RNA_INTERFERENCE_ASSAY.to_string()
+        gene1_perturbation = SlConstants.SG_RNA
+        gene2_perturbation = SlConstants.SG_RNA
+        assay = SlConstants.RNA_INTERFERENCE_ASSAY
         effect_type = "z-Score"
         cell_line = "K562 chronic myeloid leukemia cells"
         cellosaurus = "CVCL_0004"

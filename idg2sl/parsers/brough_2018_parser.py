@@ -39,14 +39,14 @@ class Brough2018Parser(SL_DatasetParser):
         fname = 'data/brough_2012_suppl9.tsv'
         rb1 = 'RB1'
         rb1_id = self.entrez_dict.get(rb1)
-        rb1_perturbation = SlConstants.LOF_MUTATION.to_string()
-        gene2_perturbation = SlConstants.SI_RNA.to_string()
+        rb1_perturbation = SlConstants.LOF_MUTATION
+        gene2_perturbation = SlConstants.SI_RNA
         assay_string = "siMEM+penetrance"
         effect_type = "penetrance"
-        cell_line = SlConstants.N_A.to_string()
-        cellosaurus = SlConstants.N_A.to_string()
-        cancer = SlConstants.N_A.to_string()
-        ncit = SlConstants.N_A.to_string()
+        cell_line = SlConstants.N_A
+        cellosaurus = SlConstants.N_A
+        cancer = SlConstants.N_A
+        ncit = SlConstants.N_A
 
         with open(fname) as csvfile:
             csvreader = csv.DictReader(csvfile, delimiter='\t')
@@ -82,14 +82,14 @@ class Brough2018Parser(SL_DatasetParser):
     def parse_suppl10_11(self, fname):
         rb1 = 'RB1'
         rb1_id = self.entrez_dict.get(rb1)
-        rb1_perturbation = SlConstants.LOF_MUTATION.to_string()
-        gene2_perturbation = SlConstants.SI_RNA.to_string()
+        rb1_perturbation = SlConstants.LOF_MUTATION
+        gene2_perturbation = SlConstants.SI_RNA
         assay_string = "siMEM+penetrance"
         effect_type = "penetrance"
-        cell_line = SlConstants.N_A.to_string()
-        cellosaurus = SlConstants.N_A.to_string()
-        cancer = SlConstants.N_A.to_string()
-        ncit = SlConstants.N_A.to_string()
+        cell_line = SlConstants.N_A
+        cellosaurus = SlConstants.N_A
+        cancer = SlConstants.N_A
+        ncit = SlConstants.N_A
 
         with open(fname) as csvfile:
             csvreader = csv.DictReader(csvfile, delimiter='\t')
@@ -104,7 +104,7 @@ class Brough2018Parser(SL_DatasetParser):
                 elif geneBsym in self.unclear_gene_symbols:
                     continue
                 else:
-                    raise ValueError("Could not find iid for %s in Brough 2018 2008 " % geneBsym)
+                    raise ValueError("Could not find id for %s in Brough 2018 2008 " % geneBsym)
                 penetrance = int(row['Penetrance.(%)'])
                 if penetrance >= 80:
                     sli = SyntheticLethalInteraction(gene_A_symbol=rb1,

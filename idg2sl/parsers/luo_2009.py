@@ -75,7 +75,7 @@ class Luo2009Parser(SL_DatasetParser):
                                                  gene_A_id=kras_id,
                                                  gene_B_symbol=geneB_sym,
                                                  gene_B_id=geneB_id,
-                                                 gene_A_pert=kras_perturbation.to_string(),
+                                                 gene_A_pert=kras_perturbation,
                                                  gene_B_pert=gene2_perturbation,
                                                  effect_type=effect_type,
                                                  effect_size=stddev,

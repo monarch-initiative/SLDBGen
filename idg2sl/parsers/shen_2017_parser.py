@@ -18,10 +18,10 @@ class Shen2017Parser(SL_DatasetParser):
         super().__init__(fname=fname, pmid=pmid)
 
     def parse(self):
-        gene1_perturbation = SlConstants.CRISPR_CAS9.to_string()
-        gene2_perturbation = SlConstants.CRISPR_CAS9.to_string()
-        assay = SlConstants.CRISPR_CAS9_INTERFERENCE_ASSAY.to_string()
-        effect_type = SlConstants.ZSCORE.to_string()
+        gene1_perturbation = SlConstants.CRISPR_CAS9
+        gene2_perturbation = SlConstants.CRISPR_CAS9
+        assay = SlConstants.CRISPR_CAS9_INTERFERENCE_ASSAY
+        effect_type = SlConstants.ZSCORE
         cancer = ""
         ncit = ""
         sli_list = []
