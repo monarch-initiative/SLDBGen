@@ -28,6 +28,11 @@ class ManualEntry:
         self._add_paul_2020()
         self._add_chatterjee2019()
         self._add_parvin_2019()
+        self._add_park_2019()
+        self._add_burdova_2019()
+        self._add_zhang2019()
+        self._add_li2019()
+        self._get_sasaki2019()
 
     def create_sli(self, geneA, geneAid, geneB, geneBid, geneApert, geneBpert, effecttype, effectsize, cell,
                    cellosaurus,
@@ -49,33 +54,106 @@ class ManualEntry:
                                          SL=True)
         return sli
 
-    def _add_parvin_2019(self):
-        lmo2 = 'LMO2'
-        parp1 = 'PARP1'
-        pmid = '31447348'
-        sli = self.create_sli(geneA=lmo2, geneAid=SlConstants.LMO2_GENE_ID, geneB=parp1,geneBid=SlConstants.PARP1_GENE_ID,
-                              geneApert=SlConstants.OVEREXPRESSION, geneBpert=SlConstants.PHARMACEUTICAL,
+
+    def _get_sasaki2019(self):
+        parg = 'PARG'
+        dusp22 = 'DUSP22'
+        pmid = '31142510'
+        sli = self.create_sli(geneA=parg, geneAid=SlConstants.PARG_GENE_ID,
+                              geneb=dusp22, geneBid=SlConstants.DUSP22_GENE_ID,
+                              geneApert=SlConstants.SI_RNA, geneBpert=SlConstants.SH_RNA,
                               effecttype=SlConstants.N_A, effectsize=SlConstants.N_A,
-                              cell=SlConstants.DOHH2_CELL, cellosaurus=SlConstants.DOHH2_CELLOSAURUS,
+                              cell=SlConstants.A549_CELL, cellosaurus=SlConstants.A549_CELLOSAURUS,
+                              cancer=SlConstants.N_A, ncit=SlConstants.N_A,
+                              assay=SlConstants.SH_RNA,pmid=pmid)
+        self.entries.append(sli)
+
+    def _add_li2019(self):
+        """
+        Note CBP is now called CREBBP
+        p300 is now EP300
+        """
+        crebbp = 'CREBBP'
+        ep300 = 'EP300'
+        pmid = '31223286'
+        sli = self.create_sli(geneA=crebbp, geneAid=SlConstants.CREBBP_GENE_ID,geneB=ep300, geneBid=SlConstants.EP300_GENE_ID,
+                              geneApert=SlConstants.SI_RNA, geneBpert=SlConstants.SI_RNA,
+                              effecttype=SlConstants.N_A, effectsize=SlConstants.N_A,
+                              cell=SlConstants.CELL_5637, cellosaurus=SlConstants.CELL_5637_CELLOSAURUS,
+                              cancer=SlConstants.BLADDER_CARCINOMA, ncit=SlConstants.BLADDER_CARCINOMA_NCIT,
+                              assay=SlConstants.CELL_VIABILITY_ASSAY, pmid=pmid)
+        self.entries.append(sli)
+
+    def _add_zhang2019(self):
+        """
+        double inhibition of Aur-A and mTOR showed significant synergistic effects in TNBC cell lines and a xenograft model,
+        """
+        mtor = 'MTOR'
+        aurka = 'AURKA'
+        pmid = '31406104'
+        sli = self.create_sli(geneA=mtor, geneAid=SlConstants.MTOR_GENE_ID, geneB=aurka, geneBid=SlConstants.AURKA_GENE_ID,
+                              geneApert=SlConstants.PHARMACEUTICAL,
+                              geneBpert=SlConstants.PHARMACEUTICAL,
+                              effecttype=SlConstants.N_A, effectsize=SlConstants.N_A,
+                              cell='TNBC cell lines', cellosaurus=SlConstants.N_A,
+                              cancer=SlConstants.TRIPLE_NEG_BREAST_CARCINOMA, ncit=SlConstants.TRIPLE_NEG_BREAST_CARCINOMA_NCIT,
+                              assay=SlConstants.GROWTH_INHIBITION_ASSAY,pmid=pmid)
+        self.entries.append(sli)
+
+
+    def _add_burdova_2019(self):
+        ccnf = 'CCNF' # cyclin F
+        chek1 = 'CHEK1' # the authors use chk1
+        pmid = '31424118'
+        sli = self.create_sli(geneA=chek1, geneAid=SlConstants.CHEK1_GENE_ID,
+                              geneB=ccnf, geneBid=SlConstants.CCNF_GENE_ID,
+                              geneApert=SlConstants.PHARMACEUTICAL,
+                              geneBpert=SlConstants.CRISPR_CAS9,
+                              effecttype=SlConstants.N_A,
+                              effectsize=SlConstants.N_A,
+                              cell='cyclin F knock‐out cell line', cellosaurus=SlConstants.N_A,
                               cancer=SlConstants.N_A, ncit=SlConstants.N_A,
                               assay=SlConstants.CELL_VIABILITY_ASSAY,pmid=pmid)
         self.entries.append(sli)
 
+    def _add_park_2019(self):
+        myc = 'MCY'
+        aurka = 'AURKA'
+        pmid = '31429028'
+        sli = self.create_sli(geneA=myc, geneAid=SlConstants.MYC_GENE_ID, geneB=aurka,
+                              geneBid=SlConstants.AURKA_GENE_ID,
+                              geneApert=SlConstants.ACTIVATING_MUTATION, geneBpert=SlConstants.PHARMACEUTICAL,
+                              effecttype=SlConstants.N_A, effectsize=SlConstants.N_A,
+                              cell='Myc-overexpressing lymphoma cell lines', cellosaurus=SlConstants.N_A,
+                              cancer=SlConstants.N_A, ncit=SlConstants.N_A,
+                              assay=SlConstants.PATIENT_DERIVED_XENOGRAFT, pmid=pmid)
+        self.entries.append(sli)
 
-
+    def _add_parvin_2019(self):
+        lmo2 = 'LMO2'
+        parp1 = 'PARP1'
+        pmid = '31447348'
+        sli = self.create_sli(geneA=lmo2, geneAid=SlConstants.LMO2_GENE_ID, geneB=parp1,
+                              geneBid=SlConstants.PARP1_GENE_ID,
+                              geneApert=SlConstants.OVEREXPRESSION, geneBpert=SlConstants.PHARMACEUTICAL,
+                              effecttype=SlConstants.N_A, effectsize=SlConstants.N_A,
+                              cell=SlConstants.DOHH2_CELL, cellosaurus=SlConstants.DOHH2_CELLOSAURUS,
+                              cancer=SlConstants.N_A, ncit=SlConstants.N_A,
+                              assay=SlConstants.CELL_VIABILITY_ASSAY, pmid=pmid)
+        self.entries.append(sli)
 
     def _add_chatterjee2019(self):
         pten = 'PTEN'
-        pdk1 = 'PDK1' # Note the authors use the wrong symbol ('PDHK1') for pyruvate dehydrogenase kinase 1
+        pdk1 = 'PDK1'  # Note the authors use the wrong symbol ('PDHK1') for pyruvate dehydrogenase kinase 1
         pmid = '31461649'
-        sli = self.create_sli(geneA=pten, geneAid=SlConstants.PTEN_GENE_ID,geneB=pdk1, geneBid=SlConstants.PDK1_GENE_ID,
+        sli = self.create_sli(geneA=pten, geneAid=SlConstants.PTEN_GENE_ID, geneB=pdk1,
+                              geneBid=SlConstants.PDK1_GENE_ID,
                               geneApert=SlConstants.LOF_MUTATION, geneBpert=SlConstants.SH_RNA,
                               effecttype=SlConstants.N_A, effectsize=SlConstants.N_A,
                               cell=SlConstants.N_A, cellosaurus=SlConstants.N_A,
                               cancer=SlConstants.N_A, ncit=SlConstants.N_A,
-                              assay=SlConstants.GROWTH_INHIBITION_ASSAY,pmid=pmid)
+                              assay=SlConstants.GROWTH_INHIBITION_ASSAY, pmid=pmid)
         self.entries.append(sli)
-
 
     def _add_reid_2016(self):
         """
@@ -105,7 +183,7 @@ class ManualEntry:
         pmid = '26437225'
         effect_type = "correlation"
         sli = self.create_sli(geneA=src, geneAid=SlConstants.SRC_GENE_ID,
-                              geneB=csnk2a1,  geneBid=CSNK2A1_GENE_ID,
+                              geneB=csnk2a1, geneBid=CSNK2A1_GENE_ID,
                               geneApert=SlConstants.PHARMACEUTICAL, geneBpert=SlConstants.COHORT_STUDY,
                               effecttype=effect_type, effectsize='-0.82',
                               cell=SlConstants.N_A, cellosaurus=SlConstants.N_A,
@@ -323,7 +401,6 @@ class ManualEntry:
                               assay=SlConstants.GROWTH_INHIBITION_ASSAY, pmid=pmid)
         self.entries.append(sli)
 
-
     def _add_villalba_2019(self):
         tmprss4 = 'TMPRSS4'
         ddr1 = 'DDR1'
@@ -336,9 +413,8 @@ class ManualEntry:
                               cell=SlConstants.H358_CELL, cellosaurus=SlConstants.H358_CELLOSAURUS,
                               cancer=SlConstants.MINIMALLY_INVASIVE_LUNG_ADENOCARCINOMA,
                               ncit=SlConstants.MINIMALLY_INVASIVE_LUNG_ADENOCARCINOMA_NCIT,
-                              assay=SlConstants.CELL_VIABILITY_ASSAY,pmid=pmid)
+                              assay=SlConstants.CELL_VIABILITY_ASSAY, pmid=pmid)
         self.entries.append(sli)
-
 
     def _add_paul_2020(self):
         """
@@ -356,7 +432,6 @@ class ManualEntry:
                               cancer=SlConstants.N_A, ncit=SlConstants.N_A,
                               assay=SlConstants.CYTOTOXICITY_ASSAY, pmid=pmid)
         self.entries.append(sli)
-
 
     def get_entries(self):
         return self.entries

@@ -17,6 +17,7 @@ class SlConstants:
     MULTICOLOR_COMPETITION_ASSAY = 'multicolor competition assay'
     N_A = "n/a"
     OVEREXPRESSION = "overexpression"
+    PATIENT_DERIVED_XENOGRAFT = 'PDX'
     PHARMACEUTICAL = 'pharmaceutical'
     PHARAMACEUTICAL_INHIBITION_ASSAY = "pharmaceutical inhibition assay"
     RNA_INTERFERENCE_ASSAY = "RNA-interference assay"
@@ -28,6 +29,8 @@ class SlConstants:
 
 
     ## Cells
+    CELL_5637 = '5637'
+    CELL_5637_CELLOSAURUS = 'CVCL_0126'
     A498_CELL = 'A-498'
     A498_CELLOSAURUS = 'CVCL_1056'
     A549_CELL = "A-549"
@@ -56,6 +59,8 @@ class SlConstants:
     UMRC6_CELLOSAURUS = 'CVCL_2741'
 
     ## NCI T
+    BLADDER_CARCINOMA = 'Bladder Carcinoma'
+    BLADDER_CARCINOMA_NCIT = 'NCIT:C4912'
     BREAST_CARCINOMA  = "Breast Carcinoma"
     BREAST_CARCINOMA_NCIT = "NCIT:C4872"
     CHRONIC_MYELOGENOUS_LEUKEMIA = "Chronic Myelogenous Leukemia"
@@ -81,21 +86,30 @@ class SlConstants:
     RECURRENT_OVARIAN_CANCER_NCIT = "NCIT:C7833"
     RENAL_CELL_CARCINOMA = ' Renal cell carcinoma'
     RENAL_CELL_CARCINOMA_NCIT = 'NCIT:C9385'
+    TRIPLE_NEG_BREAST_CARCINOMA = 'Triple-Negative Breast Carcinoma'
+    TRIPLE_NEG_BREAST_CARCINOMA_NCIT = 'NCIT:C71732'
 
 
 
 
     # Some common gene ids
     ARID1A_GENE_ID = 'NCBIGene:8289'
+    AURKA_GENE_ID = 'NCBIGene:6790'
     BCL2_GENE_ID = 'NCBIGene:596'
+    CCNF_GENE_ID = 'NCBIGene:899'
+    CHEK1_GENE_ID = 'NCBIGene:1111'
     CREBBP_GENE_ID = 'NCBIGene:1387'
     CKS1B_GENE_ID = 'NCBIGene:1163'
     DDR1_GENE_ID = 'NCBIGene:780'
+    DUSP22_GENE_ID = 'NCBIGene:56940'
+    E2F1_GENE_ID = 'NCBIGene:1869'
     EP300_GENE_ID = 'NCBIGene:2033'
     EZH2_GENE_ID = 'NCBIGene:2146'
     KRAS_GENE_ID = 'NCBIGene:3845'
     LMO2_GENE_ID = 'NCBIGene:4005'
+    MTOR_GENE_ID = 'NCBIGene:2475'
     MYC_GENE_ID = 'NCBIGene:4609'
+    PARG_GENE_ID = 'NCBI:Gene:8505'
     PARP1_GENE_ID = 'NCBIGene:142'
     PBRM1_GENE_ID = 'NCBIGene:55193'
     PDK1_GENE_ID = 'NCBIGene:5163'
