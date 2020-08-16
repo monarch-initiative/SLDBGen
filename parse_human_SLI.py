@@ -14,9 +14,7 @@ synonym_dict = hgnc.get_synonym_dictionary()
 
 krastev2011 = Krastev2011Parser()
 krastev2011_list = krastev2011.parse()
-for item in krastev2011_list:
-    print(item)
-exit(1)
+print("[INFO] Krastev et al 2011  n= %d SL interactions" % len(krastev2011_list))
 
 vizeacoumar2013 = Vizeacoumar2013Parser()
 vizeacoumar2013_list = vizeacoumar2013.parse()
@@ -104,7 +102,8 @@ schick2019 = Schick2019Parser()
 schick2019_list = schick2019.parse()
 print("[INFO] Schick et al 2019  n= %d SL interactions" % len(schick2019_list))
 
-sli_lists = [bommi2008_list, brough2018_list, han2017_list, kessler2012_list, lord2008_list, luo2009_list,
+sli_lists = [bommi2008_list, brough2018_list, han2017_list, kessler2012_list, krastev2011_list, lord2008_list,
+             luo2009_list,
              mohni2014_list, shen2015_list, shen2017_list, schick2019_list, srivas2016_list, steckel2012_list,
              toyoshima2008_list, turner_list, wang2017_list, manual_list]
 all_sli_list = []

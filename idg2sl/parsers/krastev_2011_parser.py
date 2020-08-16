@@ -55,7 +55,7 @@ class Krastev2011Parser(SL_DatasetParser):
         mastl = 'MASTL'
         sli = self.create_sli(mastl)
         sli_list.append(sli)
-        txndc16 = 'TXNDC16'
+        txndc16 = 'TXNDC16' # current symbol for KIAA1344
         sli = self.create_sli(txndc16)
         sli_list.append(sli)
         return sli_list

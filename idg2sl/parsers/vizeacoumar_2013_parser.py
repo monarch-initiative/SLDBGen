@@ -65,7 +65,6 @@ class Vizeacoumar2013Parser(SL_DatasetParser):
                                                  pmid=self.pmid,
                                                  SL=True)
                     self.sli_list.append(sli)
-        print("%s got %d genes" % (geneA, c))
 
     def parseKRAS(self):
         """
@@ -113,7 +112,6 @@ class Vizeacoumar2013Parser(SL_DatasetParser):
                                                  pmid=self.pmid,
                                                  SL=True)
                     self.sli_list.append(sli)
-        print("%s got %d genes" % (geneA, c))
 
     def parse(self):
         blm = 'BLM'

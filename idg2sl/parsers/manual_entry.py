@@ -13,11 +13,12 @@ class ManualEntry:
 
     def __init__(self):
         self.entries = []
-        self._get_reid_2016()
-        self._get_parthak_2015()
-        self._get_sultana_2013()
+        self._add_reid_2016()
+        self._add_parthak_2015()
+        self._add_sultana_2013()
+        self._add_scholl_2009()
 
-    def _get_reid_2016(self):
+    def _add_reid_2016(self):
         """
          PLK1 NCBI Gene id 5347 and CKS1B NCBI Gene id 1163 
          """
@@ -38,7 +39,7 @@ class ManualEntry:
                                          SL=True)
         self.entries.append(sli)
 
-    def _get_parthak_2015(self):
+    def _add_parthak_2015(self):
         """
         # just 2 SL Interactions, hardcoded
         # SRC Gene is proto-oncogene blocked by Dasatinib
@@ -89,7 +90,7 @@ class ManualEntry:
         self.entries.append(sli)
 
 
-    def _get_sultana_2013(self):
+    def _add_sultana_2013(self):
         atr = 'ATR'
         atr_id = 'NCBIGene:545'
         atr_perturbation = SlConstants.PHARMACEUTICAL
@@ -185,6 +186,42 @@ class ManualEntry:
                                          gene_B_pert=tbk1_perturbation,
                                          effect_type=effect_type,
                                          effect_size='n/a',
+                                         cell_line=cell_line,
+                                         cellosaurus_id=cellosaurus,
+                                         cancer_type=cancer,
+                                         ncit_id=ncit,
+                                         assay=assay,
+                                         pmid=pmid,
+                                         SL=True)
+        self.entries.append(sli)
+
+    def _add_scholl_2009(self):
+        """
+        KRAS and  STK33
+        Scholl C, Fröhling S, Dunn IF, et al. Synthetic lethal interaction between oncogenic KRAS dependency and
+        STK33 suppression in human cancer cells. Cell. 2009;137(5):821-834.
+        """
+        kras = 'KRAS'
+        kras_id = 'NCBIGene:3845'
+        stk33 = 'STK33'
+        stk33_id = 'NCBIGene:65975'
+        kras_perturbation = SlConstants.ACTIVATING_MUTATION
+        stk33_perturbation = SlConstants.SI_RNA
+        pmid = '19490892'
+        assay = SlConstants.GROWTH_INHIBITION_ASSAY
+        effect_type = SlConstants.N_A
+        cell_line = SlConstants.HCT_116
+        cellosaurus = SlConstants.HCT_116_CELLOSAURUS
+        cancer = SlConstants.N_A
+        ncit = SlConstants.N_A
+        sli = SyntheticLethalInteraction(gene_A_symbol=kras,
+                                         gene_A_id=kras_id,
+                                         gene_B_symbol=stk33,
+                                         gene_B_id=stk33_id,
+                                         gene_A_pert=kras_perturbation,
+                                         gene_B_pert=stk33_perturbation,
+                                         effect_type=effect_type,
+                                         effect_size=SlConstants.N_A,
                                          cell_line=cell_line,
                                          cellosaurus_id=cellosaurus,
                                          cancer_type=cancer,

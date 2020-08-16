@@ -27,7 +27,10 @@ class SlConstants:
     HCT_116_CELLOSAURUS = 'CVCL_0291'
     HAP1_CELL = 'HAP1'
     HAP1_CELLOSAURUS = 'CVCL_Y019'
+    ## NCI T
     COLON_CARCINOMA = 'Colon carcinoma'
     COLON_CARCINOMA_NCIT = 'NCIT:C4910'
+    LUNG_ADENOCARCINOMA = "Lung adenocarcinoma"
+    LUNG_ADENOCARCINOMA_NCIT = "NCIT:C3512"
 
 
