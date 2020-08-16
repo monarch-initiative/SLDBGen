@@ -83,6 +83,10 @@ steckel2012 = Steckel2012Parser()
 steckel2012_list = steckel2012.parse()
 show_stats("Steckel et al 2012", steckel2012_list)
 
+sun2019 = Sun2019Parser()
+sun2019_list = sun2019.parse()
+show_stats("Sun et al 2019", sun2019_list)
+
 toyoshima2008 = Toyoshima2008Parser()
 toyoshima2008_list = toyoshima2008.parse()
 show_stats("Toyoshima et al 2008", toyoshima2008_list)

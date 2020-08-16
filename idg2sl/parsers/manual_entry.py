@@ -27,6 +27,7 @@ class ManualEntry:
         self._add_villalba_2019()
         self._add_paul_2020()
         self._add_chatterjee2019()
+        self._add_parvin_2019()
 
     def create_sli(self, geneA, geneAid, geneB, geneBid, geneApert, geneBpert, effecttype, effectsize, cell,
                    cellosaurus,
@@ -47,6 +48,20 @@ class ManualEntry:
                                          pmid=pmid,
                                          SL=True)
         return sli
+
+    def _add_parvin_2019(self):
+        lmo2 = 'LMO2'
+        parp1 = 'PARP1'
+        pmid = '31447348'
+        sli = self.create_sli(geneA=lmo2, geneAid=SlConstants.LMO2_GENE_ID, geneB=parp1,geneBid=SlConstants.PARP1_GENE_ID,
+                              geneApert=SlConstants.OVEREXPRESSION, geneBpert=SlConstants.PHARMACEUTICAL,
+                              effecttype=SlConstants.N_A, effectsize=SlConstants.N_A,
+                              cell=SlConstants.DOHH2_CELL, cellosaurus=SlConstants.DOHH2_CELLOSAURUS,
+                              cancer=SlConstants.N_A, ncit=SlConstants.N_A,
+                              assay=SlConstants.CELL_VIABILITY_ASSAY,pmid=pmid)
+        self.entries.append(sli)
+
+
 
 
     def _add_chatterjee2019(self):
