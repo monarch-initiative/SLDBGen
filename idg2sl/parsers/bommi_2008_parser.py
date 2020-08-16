@@ -30,24 +30,22 @@ class Bommi2008Parser(SL_DatasetParser):
     """
 
     def __init__(self, fname='data/bommi-reddy-2008.tsv'):
-        pmid = 'PMID:18948595'
+        pmid = '18948595'
         super().__init__(fname=fname, pmid=pmid)
 
     def parse(self):
         # because of the experiment, geneA is always VHL.
         vhl_symbol = 'VHL'
-        vhl_id = 'NCBIGene:7428'
-        vhl_perturbation = SlConstants.LOF_MUTATION.to_string()
-        gene2_perturbation = SlConstants.SH_RNA.to_string()
-        assays = [SlConstants.COMPETITIVE_HYBRIDIZATION.to_string(), SlConstants.MULTICOLOR_COMPETITION_ASSAY.to_string()]
+        vhl_id = SlConstants.VHL_GENE_ID
+        vhl_perturbation = SlConstants.LOF_MUTATION
+        gene2_perturbation = SlConstants.SH_RNA
+        assays = [SlConstants.COMPETITIVE_HYBRIDIZATION, SlConstants.MULTICOLOR_COMPETITION_ASSAY]
         assay_string = ";".join(assays)
         effect_type = 'differential_viability'
         cell_786O = "786-0"
         cellosaurus_786O = "CVCL_1051"
         cell_RCC4 = "RCC4"
         cellosaurus_RCC4 = "CVCL_0498"
-        cancer = "Clear Cell Renal Cell Carcinoma"
-        ncit = "NCIT:C4033"
         # The following keeps track of the current largest effect size SLI for any given gene A/gene B pair
         sli_dict = defaultdict(list)
         # The following list includes symbols that are not current but either could
@@ -92,8 +90,8 @@ class Bommi2008Parser(SL_DatasetParser):
                                                  effect_size=effect,
                                                  cell_line=cell_line,
                                                  cellosaurus_id=cellosaurus,
-                                                 cancer_type=cancer,
-                                                 ncit_id=ncit,
+                                                 cancer_type=SlConstants.CLEAR_CELL_RENAL_CELL_CARCINOMA,
+                                                 ncit_id=SlConstants.CLEAR_CELL_RENAL_CELL_CARCINOMA_NCIT,
                                                  assay=assay_string,
                                                  pmid=self.pmid,
                                                  SL=SL)

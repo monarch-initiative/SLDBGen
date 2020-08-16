@@ -22,12 +22,12 @@ class Blomen2015Parser(SL_DatasetParser):
     """
 
     def __init__(self, fname='data/blomen2015_S7.tsv'):
-        pmid = 'PMID:26472760'
+        pmid = '26472760'
         super().__init__(fname=fname, pmid=pmid)
 
     def parse(self):
         perturbation = SlConstants.KNOCKOUT
-        cellosuarus = 'CVCL_Y019'
+        cellosuarus = SlConstants.HAP1_CELLOSAURUS
         assay = 'proportions.of.sense.and.antisense.insertions'
         sli_dict = defaultdict(list)
         # GENE	SUMMARY	PUBMED ID	INTERACTING QUERY GENE
@@ -51,14 +51,14 @@ class Blomen2015Parser(SL_DatasetParser):
                                                      gene_A_id=geneA_id,
                                                      gene_B_symbol=geneB,
                                                      gene_B_id=geneB_id,
-                                                     gene_A_pert=perturbation.to_string(),
-                                                     gene_B_pert=perturbation.to_string(),
-                                                     effect_type='n/a',
+                                                     gene_A_pert=perturbation,
+                                                     gene_B_pert=perturbation,
+                                                     effect_type=SlConstants.N_A,
                                                      effect_size=0,
-                                                     cell_line='HAP1',
+                                                     cell_line=SlConstants.HAP1_CELL,
                                                      cellosaurus_id=cellosuarus,
-                                                     cancer_type='n/a',
-                                                     ncit_id='n/a',
+                                                     cancer_type=SlConstants.N_A,
+                                                     ncit_id=SlConstants.N_A,
                                                      assay=assay,
                                                      pmid=self.pmid,
                                                      SL=True)

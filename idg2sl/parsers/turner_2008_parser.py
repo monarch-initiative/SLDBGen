@@ -19,7 +19,7 @@ class Turner2008Parser(SL_DatasetParser):
     """
 
     def __init__(self, fname='data/turner-PARP1-2008.tsv'):
-        pmid = 'PMID:18388863'
+        pmid = '18388863'
         super().__init__(fname=fname, pmid=pmid)
 
     def parse(self):
@@ -63,8 +63,8 @@ class Turner2008Parser(SL_DatasetParser):
                                                  gene_A_id=parp1_id,
                                                  gene_B_symbol=geneB_sym,
                                                  gene_B_id=geneB_id,
-                                                 gene_A_pert=parp1_perturbation.to_string(),
-                                                 gene_B_pert=gene2_perturbation.to_string(),
+                                                 gene_A_pert=parp1_perturbation,
+                                                 gene_B_pert=gene2_perturbation,
                                                  effect_type=effect_type,
                                                  effect_size=zscore,
                                                  cell_line=cell_line,

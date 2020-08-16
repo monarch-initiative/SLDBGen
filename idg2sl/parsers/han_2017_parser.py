@@ -13,14 +13,9 @@ class Han2017Parser(SL_DatasetParser):
 
     def parse(self):
         # using supplemental file 1
-        gene1_perturbation = SlConstants.SG_RNA.to_string()
-        gene2_perturbation = SlConstants.SG_RNA.to_string()
-        assay = SlConstants.RNA_INTERFERENCE_ASSAY.to_string()
-        effect_type = "z-Score"
-        cell_line = "K562 chronic myeloid leukemia cells"
-        cellosaurus = "CVCL_0004"
-        cancer = "Chronic Myelogenous Leukemia"
-        ncit = "C3174"
+        gene1_perturbation = SlConstants.SG_RNA
+        gene2_perturbation = SlConstants.SG_RNA
+        assay = SlConstants.RNA_INTERFERENCE_ASSAY
         sli_list = []
         with open(self.fname) as csvfile:
             csvreader = csv.DictReader(csvfile, delimiter='\t')
@@ -46,12 +41,12 @@ class Han2017Parser(SL_DatasetParser):
                                                  gene_B_id=geneB_id,
                                                  gene_A_pert=gene1_perturbation,
                                                  gene_B_pert=gene2_perturbation,
-                                                 effect_type=effect_type,
+                                                 effect_type=SlConstants.ZSCORE,
                                                  effect_size=effect,
-                                                 cell_line=cell_line,
-                                                 cellosaurus_id=cellosaurus,
-                                                 cancer_type=cancer,
-                                                 ncit_id=ncit,
+                                                 cell_line=SlConstants.K562_CELL,
+                                                 cellosaurus_id=SlConstants.K562_CELLOSAURUS,
+                                                 cancer_type=SlConstants.CHRONIC_MYELOGENOUS_LEUKEMIA,
+                                                 ncit_id=SlConstants.CHRONIC_MYELOGENOUS_LEUKEMIA_NCIT,
                                                  assay=assay,
                                                  pmid=self.pmid,
                                                  SL=True)

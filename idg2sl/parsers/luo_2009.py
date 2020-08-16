@@ -15,7 +15,7 @@ class Luo2009Parser(SL_DatasetParser):
     a file 'luo2009.tsv' in the data directory. The experiment used cell lines
     with activating (oncogenic) mutations in KRAS and used a first screen with
     relative abundance of shRNAs to identify 368 genes using stringent criteria.
-    They tested 320 candidates from the frist screen and found 83 shRNAs targeting
+    They tested 320 candidates from the first screen and found 83 shRNAs targeting
     77 genes to preferentially decreased the viability of the KRAS mutant cells
     compared to WT cells, thus indicating SL. They screened 68 of these candidates
     in a second line and could confirm 50 of them (73.5%), indicating that the
@@ -28,7 +28,7 @@ class Luo2009Parser(SL_DatasetParser):
         """
         data/luo2009.tsv is our copy of Supplemental Table S3
         """
-        pmid = 'PMID:19490893'
+        pmid = '19490893'
         super().__init__(fname=fname, pmid=pmid)
 
     def parse(self):
@@ -75,7 +75,7 @@ class Luo2009Parser(SL_DatasetParser):
                                                  gene_A_id=kras_id,
                                                  gene_B_symbol=geneB_sym,
                                                  gene_B_id=geneB_id,
-                                                 gene_A_pert=kras_perturbation.to_string(),
+                                                 gene_A_pert=kras_perturbation,
                                                  gene_B_pert=gene2_perturbation,
                                                  effect_type=effect_type,
                                                  effect_size=stddev,

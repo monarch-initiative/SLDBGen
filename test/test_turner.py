@@ -1,7 +1,5 @@
 from unittest import TestCase
 import os.path
-from idg2sl.parsers.entrez_parser import EntrezParser
-import idg2sl
 from idg2sl import Turner2008Parser
 
 class TestTurner(TestCase):

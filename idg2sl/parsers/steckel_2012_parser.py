@@ -30,20 +30,20 @@ class Steckel2012Parser(SL_DatasetParser):
     """
 
     def __init__(self, fname='data/steckel-2012-KRAS.tsv'):
-        pmid = 'PMID:22613949'
+        pmid = '22613949'
         super().__init__(fname=fname, pmid=pmid)
 
     def parse(self):
         kras_symbol = 'KRAS'
-        kras_id = 'NCBIGene:3845'
+        kras_id = SlConstants.KRAS_GENE_ID
         kras_perturbation = SlConstants.ACTIVATING_MUTATION  # activating_mutation
         gene2_perturbation = SlConstants.SI_RNA  # 'siRNA'
-        assay_string = "RNA-interference assay"
+        assay_string = SlConstants.RNA_INTERFERENCE_ASSAY
         effect_type = 'stddev'
-        cell_line = 'HCT-116'
-        cellosaurus = 'CVCL_0291'
-        cancer = "Colorectal Carcinoma"
-        ncit = "NCIT:C2955"
+        cell_line = SlConstants.HCT_116
+        cellosaurus = SlConstants.HCT_116_CELLOSAURUS
+        cancer = SlConstants.COLORECTAL_CARCINOMA
+        ncit = SlConstants.COLORECTAL_CARCINOMA_NCIT
         sli_dict = defaultdict(list)
         # Immunoglobulin or multiple mapping old symbols
         # COAS3, CES4, POM121L1, MYCL2 are aliases for a pseudogene
@@ -83,8 +83,8 @@ class Steckel2012Parser(SL_DatasetParser):
                                                  gene_A_id=kras_id,
                                                  gene_B_symbol=geneB_sym,
                                                  gene_B_id=geneB_id,
-                                                 gene_A_pert=kras_perturbation.to_string(),
-                                                 gene_B_pert=gene2_perturbation.to_string(),
+                                                 gene_A_pert=kras_perturbation,
+                                                 gene_B_pert=gene2_perturbation,
                                                  effect_type=effect_type,
                                                  effect_size=HCT116_zscore,
                                                  cell_line=cell_line,

@@ -1,7 +1,7 @@
 from unittest import TestCase
 import os.path
 from idg2sl import Steckel2012Parser
-import idg2sl
+from idg2sl import SlConstants
 
 
 class TestSteckel2012(TestCase):
@@ -41,5 +41,5 @@ class TestSteckel2012(TestCase):
         self.assertEqual("siRNA", self.first_entry.get_gene_B_pert())
 
     def test_get_cellosaurus(self):
-        self.assertEqual("HCT-116", self.first_entry.get_cell_line())
-        self.assertEqual("CVCL_0291", self.first_entry.get_cellosaurus_id())
+        self.assertEqual(SlConstants.HCT_116, self.first_entry.get_cell_line())
+        self.assertEqual(SlConstants.HCT_116_CELLOSAURUS, self.first_entry.get_cellosaurus_id())

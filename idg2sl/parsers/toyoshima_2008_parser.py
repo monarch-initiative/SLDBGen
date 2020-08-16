@@ -19,20 +19,14 @@ class Toyoshima2008Parser(SL_DatasetParser):
         toxicity. This process left 102 MYC-SL gene hits for follow-up
         NOTE: I see only 101 genes in the Supplemental table.
         """
-        pmid = 'PMID:22623531'
+        pmid = '22623531'
         super().__init__(fname=fname, pmid=pmid)
 
     def parse(self):
         mycsymbol = 'MYC'
-        myc_id = 'NCBIGene:4609'
-        myc_perturbation = SlConstants.OVEREXPRESSION.to_string()
-        gene2_perturbation = SlConstants.SI_RNA.to_string()
-        assay_string = SlConstants.RNA_INTERFERENCE_ASSAY.to_string()
         effect_type = 'stddev'
         cell_line = 'HFF-Myc'
         cellosaurus = 'CVCL_Y511'
-        cancer = "n/a"
-        ncit = "n/a"
         sl_list = []
         # The following list includes symbols that are not current but either could
         # not be matched or match to multiple possible candidates
@@ -54,18 +48,18 @@ class Toyoshima2008Parser(SL_DatasetParser):
                     raise ValueError("Could not find id for symbol %s in Toyoshima 2008" % geneBsym)
                 zscore = float(row['Z.score.greaterthan'])
                 sli = SyntheticLethalInteraction(gene_A_symbol=mycsymbol,
-                                                 gene_A_id=myc_id,
+                                                 gene_A_id=SlConstants.MYC_GENE_ID,
                                                  gene_B_symbol=geneBsym,
                                                  gene_B_id=geneB_id,
-                                                 gene_A_pert=myc_perturbation,
-                                                 gene_B_pert=gene2_perturbation,
+                                                 gene_A_pert=SlConstants.OVEREXPRESSION,
+                                                 gene_B_pert=SlConstants.SI_RNA,
                                                  effect_type=effect_type,
                                                  effect_size=zscore,
                                                  cell_line=cell_line,
                                                  cellosaurus_id=cellosaurus,
-                                                 cancer_type=cancer,
-                                                 ncit_id=ncit,
-                                                 assay=assay_string,
+                                                 cancer_type=SlConstants.N_A,
+                                                 ncit_id=SlConstants.N_A,
+                                                 assay=SlConstants.RNA_INTERFERENCE_ASSAY,
                                                  pmid=self.pmid,
                                                  SL=True)
                 sl_list.append(sli)

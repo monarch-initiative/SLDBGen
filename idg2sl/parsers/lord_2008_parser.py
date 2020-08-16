@@ -2,13 +2,12 @@ from collections import defaultdict
 from idg2sl import SyntheticLethalInteraction
 from idg2sl.sl_dataset_parser import SL_DatasetParser
 from .sl_constants import SlConstants
-from idg2sl.gene_pair import GenePair
 import csv
 
 
 class Lord2008Parser(SL_DatasetParser):
     def __init__(self, fname='data/lord-PARP1-2008.tsv'):
-        pmid = 'PMID:18832051'
+        pmid = '18832051'
         super().__init__(fname=fname, pmid=pmid)
 
     def parse(self):
@@ -36,11 +35,11 @@ class Lord2008Parser(SL_DatasetParser):
         """
         parp1_symbol = 'PARP1'
         parp1_id = 'NCBIGene:142'
-        parp1_perturbation = SlConstants.PHARMACEUTICAL.to_string()
-        gene2_perturbation = SlConstants.SI_RNA.to_string()
+        parp1_perturbation = SlConstants.PHARMACEUTICAL
+        gene2_perturbation = SlConstants.SI_RNA
 
-        assay_string = SlConstants.RNA_INTERFERENCE_ASSAY.to_string()
-        effect_type = 'stddev'
+        assay_string = SlConstants.RNA_INTERFERENCE_ASSAY
+        effect_type = SlConstants.ZSCORE
         cell_line = 'CAL-51'
         cellosaurus = 'CVCL_1110'
         cancer = "Breast Carcinoma"
