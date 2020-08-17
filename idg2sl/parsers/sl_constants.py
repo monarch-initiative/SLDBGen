@@ -20,8 +20,10 @@ class SlConstants:
     PATIENT_DERIVED_XENOGRAFT = 'PDX'
     PHARMACEUTICAL = 'pharmaceutical'
     PHARAMACEUTICAL_INHIBITION_ASSAY = "pharmaceutical inhibition assay"
+    PVAL = 'p-value'
     RNA_INTERFERENCE_ASSAY = "RNA-interference assay"
     SG_RNA = "sgRNA"
+    SG_RNA_DEPLETION_ASSAY = 'sgRNA depletion assay'
     SH_RNA = 'shRNA'
     SI_RNA = 'siRNA'
     ZSCORE = "Z-score"
@@ -47,14 +49,20 @@ class SlConstants:
     HAP1_CELLOSAURUS = 'CVCL_Y019'
     HELA_CELL = "HeLa-Cells"
     HELA_CELLOSAURUS = "CVCL_0030"
+    H82_CELL = 'NCI-H82'
+    H82_CELLOSAURUS = 'CVCL_1591'
     K562_CELL = "K562 chronic myeloid leukemia cells"
     K562_CELLOSAURUS = "CVCL_0004"
     KBM7_CELL = 'KBM - 7'
     KBM7_CELLOSAURUS = 'CVCL_A426'
     MCF7_CELL = 'MCF-7'
     MCF7_CELLOSAURUS = 'CVCL_0031'
+    MDAMB468_CELL = 'MDA-MB-468'
+    MDAMB468_CELLOSAURUS = 'CVCL_0419'
     OVCAR3_CELL = "OVCAR-3"
     OVCAR3_CELLOSAURUS = "CVCL_0465"
+    T98G_CELL = 'T98G'
+    T98G_CELLOSAURUS = 'CVCL_0556'
     UMRC6_CELL = 'UM-RC-6'
     UMRC6_CELLOSAURUS = 'CVCL_2741'
 
@@ -76,6 +84,10 @@ class SlConstants:
     COLORECTAL_CARCINOMA_NCIT = "NCIT:C2955"
     GASTRIC_CARCINOMA = 'Gastric Carcinoma'
     GASTRIC_CARCINOMA_NCIT = 'NCIT:C4911'
+    GLIOBLASTOMA = 'Glioblastoma'
+    GLIOBLASTOMA_NCIT = 'NCIT:C3058'
+    JMML = 'Juvenile Myelomonocytic Leukemia'
+    JMML_NCIT = 'NCIT:C9233'
     LUNG_ADENOCARCINOMA = "Lung adenocarcinoma"
     LUNG_ADENOCARCINOMA_NCIT = "NCIT:C3512"
     MINIMALLY_INVASIVE_LUNG_ADENOCARCINOMA = 'Minimally invasive lung adenocarcinoma'
@@ -94,9 +106,12 @@ class SlConstants:
 
     # Some common gene ids
     ARID1A_GENE_ID = 'NCBIGene:8289'
+    ATM_GENE_ID = 'NCBIGene:472'
     AURKA_GENE_ID = 'NCBIGene:6790'
     BCL2_GENE_ID = 'NCBIGene:596'
+    BCL2L1_GENE_ID = 'NCBIGene:598'
     CCNF_GENE_ID = 'NCBIGene:899'
+    CDH1_GENE_ID = 'NCBIGene:999'
     CHEK1_GENE_ID = 'NCBIGene:1111'
     CREBBP_GENE_ID = 'NCBIGene:1387'
     CKS1B_GENE_ID = 'NCBIGene:1163'
@@ -105,6 +120,7 @@ class SlConstants:
     E2F1_GENE_ID = 'NCBIGene:1869'
     EP300_GENE_ID = 'NCBIGene:2033'
     EZH2_GENE_ID = 'NCBIGene:2146'
+    IDH1_GENE_ID = 'NCBIGene:3417'
     KRAS_GENE_ID = 'NCBIGene:3845'
     LMO2_GENE_ID = 'NCBIGene:4005'
     MTOR_GENE_ID = 'NCBIGene:2475'
@@ -115,9 +131,13 @@ class SlConstants:
     PDK1_GENE_ID = 'NCBIGene:5163'
     PLK1_GENE_ID = 'NCBIGene:5347'
     PTEN_GENE_ID = 'NCBIGene:5728'
+    PTPN11_GENE_ID = 'NCBIGene:5781'
+    RB1_GENE_ID = 'NCBIGene:5925'
+    ROS1_GENE_ID = 'NCBIGene:6098'
     SLC7A11_GENE_ID = 'NCBIGene:23657'
     SRC_GENE_ID = 'NCBIGene:6714'
     TBK1_GENE_ID = 'NCBIGene:29110'
+    TNK2_GENE_ID = 'NCBIGene:10188'
     TMPRSS4_GENE_ID = 'NCBIGene:56649'
     VHL_GENE_ID = 'NCBIGene:7428'
 

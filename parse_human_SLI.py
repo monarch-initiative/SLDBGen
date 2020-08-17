@@ -60,7 +60,9 @@ mohni2014 = Mohni2014Parser(entrez=entrez_dict, ensembl=ensembl_dict, synonym=sy
 mohni2014_list = mohni2014.parse()
 show_stats("Mohni et al 2014", mohni2014_list)
 
-
+oser2019 = Oser2019Parser()
+oser2019_list = oser2019.parse()
+show_stats("Oser et al 2019", oser2019_list)
 
 schick2019 = Schick2019Parser()
 schick2019_list = schick2019.parse()
