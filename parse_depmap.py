@@ -1,3 +1,7 @@
+### run script and change thresholds via console:
+### python parse_depmap.py --effect -0.5 --prop 0.1 --intersect 0.5
+### --commands are optional (defaults are above)
+
 from typing import Any, Union
 import sys
 import wget
