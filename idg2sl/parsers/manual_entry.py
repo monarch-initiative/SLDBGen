@@ -21,7 +21,7 @@ class ManualEntry:
         self._add_lelij_2020()
         self._add_liu_2020()
         self._add_huang_2020()
-        self._add_szymanska_2020
+        self._add_szymanska_2020()
         self._add_hu_2020()
         self._add_hu_2020a()
         self._add_villalba_2019()
