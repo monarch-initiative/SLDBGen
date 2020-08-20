@@ -37,6 +37,10 @@ han2017 = Han2017Parser()
 han2017_list = han2017.parse()
 show_stats("Han et al 2017", han2017_list)
 
+kang2015 = Kang2015Parser()
+kang2015_list = kang2015.parse()
+show_stats("Kang et al 2015", kang2015_list)
+
 kessler2012 = Kessler2012Parser()
 kessler2012_list = kessler2012.parse()
 show_stats("Kessler et al 2012", kessler2012_list)
@@ -117,8 +121,8 @@ show_stats("Wang et al 2017", wang2017_list)
 
 
 
-sli_lists = [bommi2008_list, brough2018_list, chakraborty2017_list, han2017_list, kessler2012_list, krastev2011_list,
-             lord2008_list, luo2009_list,
+sli_lists = [bommi2008_list, brough2018_list, chakraborty2017_list, han2017_list, kang2015_list, kessler2012_list,
+             krastev2011_list, lord2008_list, luo2009_list,
              mohni2014_list, shen2015_list, shen2017_list, schick2019_list, srivas2016_list, steckel2012_list,
              sun2019_list,   toyoshima2008_list, turner2008_list, wang2017_list, manual_list]
 all_sli_list = []

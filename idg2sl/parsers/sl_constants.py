@@ -32,6 +32,8 @@ class SlConstants:
     ## Cells
     CELL_5637 = '5637'
     CELL_5637_CELLOSAURUS = 'CVCL_0126'
+    A375_CELL = 'A375'
+    A375_CELLOSAURUS = 'CVCL_0132'
     A498_CELL = 'A-498'
     A498_CELLOSAURUS = 'CVCL_1056'
     A549_CELL = "A-549"
@@ -95,6 +97,8 @@ class SlConstants:
     JMML_NCIT = 'NCIT:C9233'
     LUNG_ADENOCARCINOMA = "Lung adenocarcinoma"
     LUNG_ADENOCARCINOMA_NCIT = "NCIT:C3512"
+    MELANOMA = 'Melanoma'
+    MELANOMA_NCIT = 'NCIT:C3224'
     MINIMALLY_INVASIVE_LUNG_ADENOCARCINOMA = 'Minimally invasive lung adenocarcinoma'
     MINIMALLY_INVASIVE_LUNG_ADENOCARCINOMA_NCIT = 'NCIT:C2923'
     OVARIAN_SEROUS_ADENOCARCINOMA = "Ovarian serous adenocarcinoma"
@@ -118,6 +122,7 @@ class SlConstants:
     AURKA_GENE_ID = 'NCBIGene:6790'
     BCL2_GENE_ID = 'NCBIGene:596'
     BCL2L1_GENE_ID = 'NCBIGene:598'
+    BRAF_GENE_ID = 'NCBIGene:673'
     CCNF_GENE_ID = 'NCBIGene:899'
     CDH1_GENE_ID = 'NCBIGene:999'
     CDK1_GENE_ID = 'NCBIGene:983'
