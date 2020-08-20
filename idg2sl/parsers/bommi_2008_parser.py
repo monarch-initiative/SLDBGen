@@ -40,7 +40,6 @@ class Bommi2008Parser(SL_DatasetParser):
         vhl_perturbation = SlConstants.LOF_MUTATION
         gene2_perturbation = SlConstants.SH_RNA
         assays = [SlConstants.COMPETITIVE_HYBRIDIZATION, SlConstants.MULTICOLOR_COMPETITION_ASSAY]
-        assay_string = ";".join(assays)
         effect_type = 'differential_viability'
         cell_786O = "786-0"
         cellosaurus_786O = "CVCL_1051"

@@ -26,7 +26,7 @@ class Srivas2016Parser(SL_DatasetParser):
             for row in csvreader:
                 if len(row) < 4:
                     raise ValueError(
-                        "Only got %d fields but was expecting at least 4 tab-separated fields" % len(fields))
+                        "Only got %d fields but was expecting at least 4 tab-separated fields" % len(row))
                 # seperate col containing multiple genes
                 geneA_sym = row['geneAlist'].split(",")
                 geneB_sym = row['geneB']

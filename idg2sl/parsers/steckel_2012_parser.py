@@ -55,7 +55,7 @@ class Steckel2012Parser(SL_DatasetParser):
             csvreader = csv.DictReader(csvfile, delimiter='\t')
             for row in csvreader:
                 if len(row) != 6:
-                    raise ValueError("Line has %d fields (should have 6): %s" % (len(F), line))
+                    raise ValueError("Line has %d fields (should have 6): %s" % (len(row), row))
                 geneB_sym = row['GeneID']  # F[0]
                 geneB_sym = self.get_current_symbol(geneB_sym)
                 locusID = row['Locus.ID']  # F[1]

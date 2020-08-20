@@ -29,6 +29,9 @@ brough2018 = Brough2018Parser()
 brough2018_list = brough2018.parse()
 show_stats("Brough et al 2018", brough2018_list)
 
+chakraborty2017 = Chakraborty2017Parser()
+chakraborty2017_list = chakraborty2017.parse()
+show_stats("chakraborty et al 2017", chakraborty2017_list)
 
 han2017 = Han2017Parser()
 han2017_list = han2017.parse()
@@ -114,8 +117,8 @@ show_stats("Wang et al 2017", wang2017_list)
 
 
 
-sli_lists = [bommi2008_list, brough2018_list, han2017_list, kessler2012_list, krastev2011_list, lord2008_list,
-             luo2009_list,
+sli_lists = [bommi2008_list, brough2018_list, chakraborty2017_list, han2017_list, kessler2012_list, krastev2011_list,
+             lord2008_list, luo2009_list,
              mohni2014_list, shen2015_list, shen2017_list, schick2019_list, srivas2016_list, steckel2012_list,
              sun2019_list,   toyoshima2008_list, turner2008_list, wang2017_list, manual_list]
 all_sli_list = []

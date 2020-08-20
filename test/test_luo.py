@@ -1,7 +1,6 @@
 from unittest import TestCase
 import os.path
 from idg2sl import Luo2009Parser
-import idg2sl
 
 
 class TestLuo(TestCase):
