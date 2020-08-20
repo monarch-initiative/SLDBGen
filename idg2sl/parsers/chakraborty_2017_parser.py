@@ -76,10 +76,14 @@ class Chakraborty2017Parser(SL_DatasetParser):
                  "IDO2": 0.9347, "GLOD4": 0.9464, "EGLN3": 0.9474, "SETD5": 0.9573, "IGBP1": 0.9579, "PHF8": 0.9743, "EHMT2": 0.9855,
                  "PRMT7": 0.9924}
         sli_list = []
+        # MLL2 was a symbol for two different genes, I cannot disambiguate
+        unclear_gene_symbols = {'MLL2'}
         for geneB, pval in pvals.items():
             if pval < 0.1:
                 if geneB in self.entrez_dict:
                     geneBid = self.entrez_dict.get(geneB)
+                elif geneB in unclear_gene_symbols:
+                    continue
                 else:
                     raise ValueError("Could not find gene id for %s in Chakraborty 2017" % geneB)
                 sli = self.get_sli(geneB_sym=geneB, geneB_id=geneBid, pval=pval, slstatus=True)
@@ -88,7 +92,7 @@ class Chakraborty2017Parser(SL_DatasetParser):
                 if geneB in self.entrez_dict:
                     geneBid = self.entrez_dict.get(geneB)
                 else:
-                    raise ValueError("Could not find gene id for %s in Chakraborty 2017" % geneB)
+                    continue # don't worry, we are looking for negative genes
                 sli = self.get_sli(geneB_sym=geneB, geneB_id=geneBid, pval=pval, slstatus=False)
                 sli_list.append(sli)
         return sli_list

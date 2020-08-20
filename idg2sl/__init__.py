@@ -1,5 +1,4 @@
 from .synthetic_lethal_interaction import SyntheticLethalInteraction
-from idg2sl.parsers.shen_2017_parser import *
 from idg2sl.parsers.manual_entry import ManualEntry
 from .parsers.sl_constants import SlConstants
 from .parsers.blomen_2015_parser import Blomen2015Parser
