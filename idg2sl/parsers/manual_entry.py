@@ -42,6 +42,7 @@ class ManualEntry(SL_DatasetParser):
         self._add_ding_2019()
         self._add_costa_carbral_2016()
         self._add_sanjiv_2016()
+        self._add_wang_2004()
 
     def create_sli(self, geneA, geneB, geneApert, geneBpert, cell, cellosaurus, cancer, ncit,
                    assay, pmid, effecttype=SlConstants.N_A, effectsize=SlConstants.N_A):
@@ -63,6 +64,17 @@ class ManualEntry(SL_DatasetParser):
                                          pmid=pmid,
                                          SL=True)
         return sli
+
+    def _add_wang_2004(self):
+        pmid = '15144957'
+        myc = 'MYC'
+        TNFRSF10B = 'TNFRSF10B' # current symbol for DR5
+        sli = self.create_sli(geneA=myc, geneB=TNFRSF10B,
+                              geneApert=SlConstants.ACTIVATING_MUTATION, geneBpert=SlConstants.AGONIST,
+                              cell=SlConstants.IMR90_CELL, cellosaurus=SlConstants.IMR90_CELLOSAURUS,
+                              cancer=SlConstants.N_A, ncit=SlConstants.N_A,
+                              assay=SlConstants.CELL_VIABILITY_ASSAY, pmid=pmid)
+        self.entries.append(sli)
 
     def _add_sanjiv_2016(self):
         """
