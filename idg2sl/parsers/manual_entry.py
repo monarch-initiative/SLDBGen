@@ -1,14 +1,15 @@
 from idg2sl.parsers.sl_constants import SlConstants
 from idg2sl import SyntheticLethalInteraction
+from idg2sl.sl_dataset_parser import SL_DatasetParser
 
-
-class ManualEntry:
+class ManualEntry(SL_DatasetParser):
     """
     In a number of papers, only one or a handful of synthetic lethal interactions are described.
     These are very valuable. It is easiest to enter this information by hand.
     """
 
-    def __init__(self):
+    def __init__(self, entrez, ensembl, synonym):
+        super().__init__(fname=None, pmid=None, entrez=entrez, ensembl=ensembl, synonym=synonym)
         self.entries = []
         self._add_reid_2016()
         self._add_parthak_2015()
@@ -21,7 +22,7 @@ class ManualEntry:
         self._add_lelij_2020()
         self._add_liu_2020()
         self._add_huang_2020()
-        self._add_szymanska_2020
+        self._add_szymanska_2020()
         self._add_hu_2020()
         self._add_hu_2020a()
         self._add_villalba_2019()
@@ -41,9 +42,17 @@ class ManualEntry:
         self._add_ding_2019()
         self._add_costa_carbral_2016()
         self._add_sanjiv_2016()
+        self._add_wang_2015()
 
-    def create_sli(self, geneA, geneAid, geneB, geneBid, geneApert, geneBpert, cell, cellosaurus, cancer, ncit,
-                   assay, pmid, effecttype=SlConstants.N_A, effectsize=SlConstants.N_A):
+    def create_sli(self, geneA, geneB, geneApert, geneBpert, effecttype, effectsize, cell,
+                   cellosaurus, cancer, ncit, assay, pmid):
+        geneAid = self.get_ncbi_gene_curie(geneA)
+        if geneAid is None or not geneAid.startswith('NCBIGene'):
+            print(geneA, geneAid)
+            raise ValueError("Could not find gene id for %s (geneA) in manual_entry.py" % geneA)
+        geneBid = self.get_ncbi_gene_curie(geneB)
+        if geneBid is None or not geneBid.startswith('NCBIGene'):
+            raise ValueError("Could not find gene id for %s (geneB) in manual_entry.py" % geneA)
         sli = SyntheticLethalInteraction(gene_A_symbol=geneA,
                                          gene_A_id=geneAid,
                                          gene_B_symbol=geneB,
@@ -167,6 +176,16 @@ class ManualEntry:
         sli = self.create_sli(geneA=pten, geneAid=SlConstants.PTEN_GENE_ID, geneB=atm, geneBid=SlConstants.ATM_GENE_ID,
                               geneApert=SlConstants.LOF_MUTATION, geneBpert=SlConstants.PHARMACEUTICAL,
                               cell=SlConstants.MDAMB468_CELL, cellosaurus=SlConstants.MDAMB468_CELLOSAURUS,
+
+    def _add_wang_2015(self):
+        pmid = '15144957'
+        myc = 'MYC'
+        TNFRSF10B = 'TNFRSF10B' # current symbol for DR5
+        sli = self.create_sli(geneA=myc, geneB=TNFRSF10B,
+                              geneApert=SlConstants.ACTIVATING_MUTATION, geneBpert=SlConstants.AGONIST,
+                              effecttype=SlConstants.N_A, effectsize=SlConstants.N_A,
+                              cell=SlConstants.IMR90_CELL, cellosaurus=SlConstants.IMR90_CELLOSAURUS,
+
                               cancer=SlConstants.N_A, ncit=SlConstants.N_A,
                               assay=SlConstants.CELL_VIABILITY_ASSAY, pmid=pmid)
         self.entries.append(sli)
@@ -186,12 +205,13 @@ class ManualEntry:
                               assay=SlConstants.GROWTH_INHIBITION_ASSAY, pmid=pmid)
         self.entries.append(sli)
 
+
     def _add_sasaki2019(self):
         parg = 'PARG'
         dusp22 = 'DUSP22'
         pmid = '31142510'
-        sli = self.create_sli(geneA=parg, geneAid=SlConstants.PARG_GENE_ID,
-                              geneB=dusp22, geneBid=SlConstants.DUSP22_GENE_ID,
+
+        sli = self.create_sli(geneA=parg,  geneB=dusp22,
                               geneApert=SlConstants.SI_RNA, geneBpert=SlConstants.SH_RNA,
                               effecttype=SlConstants.N_A, effectsize=SlConstants.N_A,
                               cell=SlConstants.A549_CELL, cellosaurus=SlConstants.A549_CELLOSAURUS,
@@ -207,8 +227,7 @@ class ManualEntry:
         crebbp = 'CREBBP'
         ep300 = 'EP300'
         pmid = '31223286'
-        sli = self.create_sli(geneA=crebbp, geneAid=SlConstants.CREBBP_GENE_ID, geneB=ep300,
-                              geneBid=SlConstants.EP300_GENE_ID,
+        sli = self.create_sli(geneA=crebbp, geneB=ep300,
                               geneApert=SlConstants.SI_RNA, geneBpert=SlConstants.SI_RNA,
                               effecttype=SlConstants.N_A, effectsize=SlConstants.N_A,
                               cell=SlConstants.CELL_5637, cellosaurus=SlConstants.CELL_5637_CELLOSAURUS,
@@ -223,8 +242,7 @@ class ManualEntry:
         mtor = 'MTOR'
         aurka = 'AURKA'
         pmid = '31406104'
-        sli = self.create_sli(geneA=mtor, geneAid=SlConstants.MTOR_GENE_ID, geneB=aurka,
-                              geneBid=SlConstants.AURKA_GENE_ID,
+        sli = self.create_sli(geneA=mtor, geneB=aurka,
                               geneApert=SlConstants.PHARMACEUTICAL,
                               geneBpert=SlConstants.PHARMACEUTICAL,
                               effecttype=SlConstants.N_A, effectsize=SlConstants.N_A,
@@ -238,8 +256,7 @@ class ManualEntry:
         ccnf = 'CCNF'  # cyclin F
         chek1 = 'CHEK1'  # the authors use chk1
         pmid = '31424118'
-        sli = self.create_sli(geneA=chek1, geneAid=SlConstants.CHEK1_GENE_ID,
-                              geneB=ccnf, geneBid=SlConstants.CCNF_GENE_ID,
+        sli = self.create_sli(geneA=chek1, geneB=ccnf,
                               geneApert=SlConstants.PHARMACEUTICAL,
                               geneBpert=SlConstants.CRISPR_CAS9,
                               effecttype=SlConstants.N_A,
@@ -250,11 +267,10 @@ class ManualEntry:
         self.entries.append(sli)
 
     def _add_park_2019(self):
-        myc = 'MCY'
+        myc = 'MYC'
         aurka = 'AURKA'
         pmid = '31429028'
-        sli = self.create_sli(geneA=myc, geneAid=SlConstants.MYC_GENE_ID, geneB=aurka,
-                              geneBid=SlConstants.AURKA_GENE_ID,
+        sli = self.create_sli(geneA=myc, geneB=aurka,
                               geneApert=SlConstants.ACTIVATING_MUTATION, geneBpert=SlConstants.PHARMACEUTICAL,
                               effecttype=SlConstants.N_A, effectsize=SlConstants.N_A,
                               cell='Myc-overexpressing lymphoma cell lines', cellosaurus=SlConstants.N_A,
@@ -266,8 +282,7 @@ class ManualEntry:
         lmo2 = 'LMO2'
         parp1 = 'PARP1'
         pmid = '31447348'
-        sli = self.create_sli(geneA=lmo2, geneAid=SlConstants.LMO2_GENE_ID, geneB=parp1,
-                              geneBid=SlConstants.PARP1_GENE_ID,
+        sli = self.create_sli(geneA=lmo2, geneB=parp1,
                               geneApert=SlConstants.OVEREXPRESSION, geneBpert=SlConstants.PHARMACEUTICAL,
                               effecttype=SlConstants.N_A, effectsize=SlConstants.N_A,
                               cell=SlConstants.DOHH2_CELL, cellosaurus=SlConstants.DOHH2_CELLOSAURUS,
@@ -279,8 +294,7 @@ class ManualEntry:
         pten = 'PTEN'
         pdk1 = 'PDK1'  # Note the authors use the wrong symbol ('PDHK1') for pyruvate dehydrogenase kinase 1
         pmid = '31461649'
-        sli = self.create_sli(geneA=pten, geneAid=SlConstants.PTEN_GENE_ID, geneB=pdk1,
-                              geneBid=SlConstants.PDK1_GENE_ID,
+        sli = self.create_sli(geneA=pten, geneB=pdk1,
                               geneApert=SlConstants.LOF_MUTATION, geneBpert=SlConstants.SH_RNA,
                               effecttype=SlConstants.N_A, effectsize=SlConstants.N_A,
                               cell=SlConstants.N_A, cellosaurus=SlConstants.N_A,
@@ -294,8 +308,7 @@ class ManualEntry:
          """
         pmid = '27558135'
         cell_line = 'multiple.breast.cancer.cell.lines'
-        sli = self.create_sli(geneA='PLK1', geneAid=SlConstants.PLK1_GENE_ID,
-                              geneB="CKS1B", geneBid=SlConstants.CKS1B_GENE_ID,
+        sli = self.create_sli(geneA='PLK1', geneB="CKS1B",
                               geneApert=SlConstants.SH_RNA, geneBpert=SlConstants.OVEREXPRESSION,
                               effecttype=SlConstants.N_A, effectsize=SlConstants.N_A,
                               cell=cell_line, cellosaurus=SlConstants.N_A,
@@ -315,8 +328,7 @@ class ManualEntry:
         CSNK2A1_GENE_ID = "NCBIGene:1457"
         pmid = '26437225'
         effect_type = "correlation"
-        sli = self.create_sli(geneA=src, geneAid=SlConstants.SRC_GENE_ID,
-                              geneB=csnk2a1, geneBid=CSNK2A1_GENE_ID,
+        sli = self.create_sli(geneA=src,  geneB=csnk2a1,
                               geneApert=SlConstants.PHARMACEUTICAL, geneBpert=SlConstants.COHORT_STUDY,
                               effecttype=effect_type, effectsize='-0.82',
                               cell=SlConstants.N_A, cellosaurus=SlConstants.N_A,
@@ -326,8 +338,7 @@ class ManualEntry:
         self.entries.append(sli)
         prkce = "PRKCE"
         PRKCE_GENE_ID = "NCBIGene:5581"
-        sli = self.create_sli(geneA=src, geneAid=SlConstants.SRC_GENE_ID,
-                              geneB=prkce, geneBid=PRKCE_GENE_ID,
+        sli = self.create_sli(geneA=src, geneB=prkce,
                               geneApert=SlConstants.PHARMACEUTICAL, geneBpert=SlConstants.COHORT_STUDY,
                               effecttype=effect_type, effectsize='-0.96',
                               cell=SlConstants.N_A, cellosaurus=SlConstants.N_A,
@@ -338,11 +349,9 @@ class ManualEntry:
 
     def _add_sultana_2013(self):
         atr = 'ATR'
-        atr_id = 'NCBIGene:545'
         xrcc1 = 'XRCC1'
-        xrcc1_id = 'NCBIGene:7515'
         pmid = '23451157'
-        sli = self.create_sli(geneA=atr, geneAid=atr_id, geneB=xrcc1, geneBid=xrcc1_id,
+        sli = self.create_sli(geneA=atr, geneB=xrcc1,
                               geneApert=SlConstants.PHARMACEUTICAL, geneBpert=SlConstants.SI_RNA,
                               effecttype=SlConstants.N_A, effectsize=SlConstants.N_A,
                               cell=SlConstants.OVCAR3_CELL, cellosaurus=SlConstants.OVCAR3_CELLOSAURUS,
@@ -366,7 +375,7 @@ class ManualEntry:
         smarca4 = 'SMARCA4'
         smarca4_perturbation = SlConstants.LOF_MUTATION
         pmid = '31427792'
-        sli = self.create_sli(geneA=smarca2, geneAid=smarca2_id, geneB=smarca4, geneBid=SlConstants.SMARCA4_GENE_ID,
+        sli = self.create_sli(geneA=smarca2, geneB=smarca4,
                               geneApert=smarca2_perturbation, geneBpert=smarca4_perturbation,
                               effecttype=SlConstants.N_A, effectsize=SlConstants.N_A,
                               cell=SlConstants.A549_CELL, cellosaurus=SlConstants.A549_CELLOSAURUS,
@@ -382,7 +391,7 @@ class ManualEntry:
         tbk1 = 'TBK1'
         tbk1_id = 'NCBIGene:29110'
         pmid = '19847166'
-        sli = self.create_sli(geneA=kras, geneAid=SlConstants.KRAS_GENE_ID, geneB=tbk1, geneBid=tbk1_id,
+        sli = self.create_sli(geneA=kras, geneB=tbk1,
                               geneApert=SlConstants.ACTIVATING_MUTATION, geneBpert=SlConstants.SI_RNA,
                               effecttype=SlConstants.N_A, effectsize=SlConstants.N_A,
                               cell=SlConstants.N_A, cellosaurus=SlConstants.N_A,
@@ -402,7 +411,7 @@ class ManualEntry:
         stk33 = 'STK33'
         stk33_id = 'NCBIGene:65975'
         pmid = '19490892'
-        sli = self.create_sli(geneA=kras, geneAid=SlConstants.KRAS_GENE_ID, geneB=stk33, geneBid=stk33_id,
+        sli = self.create_sli(geneA=kras, geneB=stk33,
                               geneApert=SlConstants.ACTIVATING_MUTATION, geneBpert=SlConstants.SI_RNA,
                               effecttype=SlConstants.N_A, effectsize=SlConstants.N_A,
                               cell=SlConstants.HCT_116, cellosaurus=SlConstants.HCT_116_CELLOSAURUS,
@@ -413,10 +422,9 @@ class ManualEntry:
     def _add_chen_2020(self):
         pten = 'PTEN'
         mcl1 = 'MCL1'
-        mcl1_id = 'NCBIGene:4170'
         pmid = '32737157'
         cell_line = 'isogeneic GBM cell lines'
-        sli = self.create_sli(geneA=pten, geneAid=SlConstants.PTEN_GENE_ID, geneB=mcl1, geneBid=mcl1_id,
+        sli = self.create_sli(geneA=pten, geneB=mcl1,
                               geneApert=SlConstants.LOF_MUTATION, geneBpert=SlConstants.PHARMACEUTICAL,
                               effecttype=SlConstants.N_A, effectsize=SlConstants.N_A,
                               cell=cell_line, cellosaurus=SlConstants.N_A,
@@ -426,12 +434,10 @@ class ManualEntry:
 
     def _add_yamada_2020(self):
         arid1a = 'ARID1A'
-        arid1a_id = SlConstants.ARID1A_GENE_ID
         ezh2 = 'EZH2'
-        ezh2id = SlConstants.EZH2_GENE_ID
         pmid = '32506298'
         cell_line = 'isogeneic GBM cell lines'
-        sli = self.create_sli(geneA=arid1a, geneAid=arid1a_id, geneB=ezh2, geneBid=ezh2id,
+        sli = self.create_sli(geneA=arid1a, geneB=ezh2,
                               geneApert=SlConstants.LOF_MUTATION, geneBpert=SlConstants.PHARMACEUTICAL,
                               effecttype=SlConstants.N_A, effectsize=SlConstants.N_A,
                               cell=cell_line, cellosaurus=SlConstants.N_A,
@@ -445,7 +451,7 @@ class ManualEntry:
         stag2 = 'STAG2'
         stag2id = 'NCBIGene:10735'
         pmid = '32467316'
-        sli = self.create_sli(geneA=stag1, geneAid=stag1id, geneB=stag2, geneBid=stag2id,
+        sli = self.create_sli(geneA=stag1, geneB=stag2,
                               geneApert=SlConstants.CRISPR_CAS9, geneBpert=SlConstants.LOF_MUTATION,
                               effecttype=SlConstants.N_A, effectsize=SlConstants.N_A,
                               cell=SlConstants.KBM7_CELL, cellosaurus=SlConstants.KBM7_CELLOSAURUS,
@@ -462,8 +468,7 @@ class ManualEntry:
         pten = 'PTEN'
         ep300 = 'EP300'
         pmid = "32398948"
-        sli = self.create_sli(geneA=pten, geneAid=SlConstants.PTEN_GENE_ID,
-                              geneB=ep300, geneBid=SlConstants.EP300_GENE_ID,
+        sli = self.create_sli(geneA=pten, geneB=ep300,
                               geneApert=SlConstants.LOF_MUTATION, geneBpert=SlConstants.SI_RNA,
                               effecttype=SlConstants.N_A, effectsize=SlConstants.N_A,
                               cell=SlConstants.HCT_116, cellosaurus=SlConstants.HCT_116_CELLOSAURUS,
@@ -471,8 +476,7 @@ class ManualEntry:
                               assay=SlConstants.CELL_VIABILITY_ASSAY, pmid=pmid)
         self.entries.append(sli)
         crebbp = 'CREBBP'
-        sli = self.create_sli(geneA=crebbp, geneAid=SlConstants.CREBBP_GENE_ID,
-                              geneB=ep300, geneBid=SlConstants.EP300_GENE_ID,
+        sli = self.create_sli(geneA=crebbp, geneB=ep300,
                               geneApert=SlConstants.LOF_MUTATION, geneBpert=SlConstants.SI_RNA,
                               effecttype=SlConstants.N_A, effectsize=SlConstants.N_A,
                               cell=SlConstants.HCT_116, cellosaurus=SlConstants.HCT_116_CELLOSAURUS,
@@ -484,8 +488,7 @@ class ManualEntry:
         ezh2 = 'EZH2'
         pbrm1 = 'PBRM1'
         pmid = '32093567'
-        sli = self.create_sli(geneA=ezh2, geneAid=SlConstants.EZH2_GENE_ID,
-                              geneB=pbrm1, geneBid=SlConstants.PBRM1_GENE_ID,
+        sli = self.create_sli(geneA=ezh2, geneB=pbrm1,
                               geneApert=SlConstants.PHARMACEUTICAL, geneBpert=SlConstants.LOF_MUTATION,
                               effecttype=SlConstants.N_A, effectsize=SlConstants.N_A,
                               cell=SlConstants.A704_CELL, cellosaurus=SlConstants.A704_CELLOSAURUS,
@@ -495,11 +498,9 @@ class ManualEntry:
 
     def _add_szymanska_2020(self):
         vps4a = 'VPS4A'
-        vps4a_id = 'NCBIGene:27183'
         vps4b = 'VPS4B'
-        vps4b_id = 'NCBIGene:9525'
         pmid = '31930723'
-        sli = self.create_sli(geneA=vps4a, geneAid=vps4a_id, geneB=vps4b, geneBid=vps4b_id,
+        sli = self.create_sli(geneA=vps4a, geneB=vps4b,
                               geneApert=SlConstants.SI_RNA, geneBpert=SlConstants.SI_RNA,
                               effecttype=SlConstants.N_A, effectsize=SlConstants.N_A,
                               cell=SlConstants.HCT_116, cellosaurus=SlConstants.HCT_116_CELLOSAURUS,
@@ -512,8 +513,7 @@ class ManualEntry:
         kras = 'KRAS'
         SLC7A11 = 'SLC7A11'
         pmid = '31874110'
-        sli = self.create_sli(geneA=kras, geneAid=SlConstants.KRAS_GENE_ID,
-                              geneB=SLC7A11, geneBid=SlConstants.SLC7A11_GENE_ID,
+        sli = self.create_sli(geneA=kras, geneB=SLC7A11,
                               geneApert=SlConstants.ACTIVATING_MUTATION, geneBpert=SlConstants.SI_RNA,
                               effecttype=SlConstants.N_A, effectsize=SlConstants.N_A,
                               cell='KRAS isogenic cell lines', cellosaurus=SlConstants.N_A,
@@ -525,7 +525,7 @@ class ManualEntry:
         tbk1 = 'TBK1'
         vhl = 'VHL'
         pmid = '31810986'
-        sli = self.create_sli(geneA=vhl, geneAid=SlConstants.VHL_GENE_ID, geneB=tbk1, geneBid=SlConstants.TBK1_GENE_ID,
+        sli = self.create_sli(geneA=vhl, geneB=tbk1,
                               geneApert=SlConstants.LOF_MUTATION, geneBpert=SlConstants.SI_RNA,
                               effecttype=SlConstants.N_A, effectsize=SlConstants.N_A,
                               cell=SlConstants.UMRC6_CELL, cellosaurus=SlConstants.UMRC6_CELLOSAURUS,
@@ -537,8 +537,8 @@ class ManualEntry:
         tmprss4 = 'TMPRSS4'
         ddr1 = 'DDR1'
         pmid = '31659178'
-        sli = self.create_sli(geneA=tmprss4, geneAid=SlConstants.TMPRSS4_GENE_ID,
-                              geneB=ddr1, geneBid=SlConstants.DDR1_GENE_ID,
+        sli = self.create_sli(geneA=tmprss4,
+                              geneB=ddr1,
                               geneApert=SlConstants.SI_RNA,
                               geneBpert=SlConstants.SI_RNA,
                               effecttype=SlConstants.N_A, effectsize=SlConstants.N_A,
@@ -555,9 +555,8 @@ class ManualEntry:
         """
         myc = "MYC"
         bcl2 = "BCL2"
-
         pmid = "31621996"
-        sli = self.create_sli(geneA=myc, geneAid=SlConstants.MYC_GENE_ID, geneB=bcl2, geneBid=SlConstants.BCL2_GENE_ID,
+        sli = self.create_sli(geneA=myc, geneB=bcl2,
                               geneApert=SlConstants.SI_RNA, geneBpert=SlConstants.SI_RNA,
                               effecttype=SlConstants.N_A, effectsize=SlConstants.N_A,
                               cell=SlConstants.MCF7_CELL, cellosaurus=SlConstants.MCF7_CELLOSAURUS,

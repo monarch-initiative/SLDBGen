@@ -18,6 +18,7 @@ class SlConstants:
     OVEREXPRESSION = "overexpression"
     PATIENT_DERIVED_XENOGRAFT = 'PDX'
     PHARMACEUTICAL = 'pharmaceutical'
+    AGONIST = 'agonist'
     PHARAMACEUTICAL_INHIBITION_ASSAY = "pharmaceutical inhibition assay"
     PVAL = 'p-value'
     RNA_INTERFERENCE_ASSAY = "RNA-interference assay"
@@ -52,6 +53,8 @@ class SlConstants:
     HELA_CELLOSAURUS = "CVCL_0030"
     H82_CELL = 'NCI-H82'
     H82_CELLOSAURUS = 'CVCL_1591'
+    IMR90_CELL = 'IMR-90'
+    IMR90_CELLOSAURUS = 'CVCL_0347'
     K562_CELL = "K562 chronic myeloid leukemia cells"
     K562_CELLOSAURUS = "CVCL_0004"
     KBM7_CELL = 'KBM - 7'

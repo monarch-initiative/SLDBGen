@@ -59,7 +59,7 @@ luo2009parser = Luo2009Parser()
 luo2009_list = luo2009parser.parse()
 show_stats("Luo et al 2009", luo2009_list)
 
-manual = ManualEntry()
+manual = ManualEntry(entrez=entrez_dict, ensembl=ensembl_dict, synonym=synonym_dict)
 manual_list = manual.get_entries()
 show_stats("Manually entered single-SLI studies", manual_list)
 
