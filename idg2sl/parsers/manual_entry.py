@@ -30,7 +30,7 @@ class ManualEntry(SL_DatasetParser):
         self._add_chatterjee2019()
         self._add_parvin_2019()
         self._add_park_2019()
-        self._get_van_der_meer_2014()
+        self._add_van_der_meer_2014()
         self._add_burdova_2019()
         self._add_zhang2019()
         self._add_li2019()
@@ -44,7 +44,8 @@ class ManualEntry(SL_DatasetParser):
         self._add_costa_carbral_2016()
         self._add_sanjiv_2016()
         self._add_wang_2004()
-        self._get_sun_2018()
+        self._add_sun_2018()
+        self._add_pan_2017()
 
     def create_sli(self, geneA, geneB, geneApert, geneBpert, cell, cellosaurus, cancer, ncit,
                    assay, pmid, effecttype=SlConstants.N_A, effectsize=SlConstants.N_A):
@@ -67,8 +68,24 @@ class ManualEntry(SL_DatasetParser):
                                          SL=True)
         return sli
 
+    def _add_pan_2017(self):
+        """
+        concomitant p53 activation and Bcl-2 inhibition overcome apoptosis resistance and markedly prolong survival in
+        three mouse models of resistant acute myeloid leukemia (AML). Combining the p53 activator RG with ABT at a 5:1
+        or 1:1 ratio augmented apoptosis and reduced live cell numbers to a significantly greater extent than either
+        agent alone
+        """
+        pmid = '29232553'
+        tp53 = 'TP53'
+        bcl2 = 'BCL2' # correct symbol for BCL-2
+        sli = self.create_sli(geneA=tp53, geneB=bcl2, geneApert=SlConstants.AGONIST, geneBpert=SlConstants.PHARMACEUTICAL,
+                              cell=SlConstants.MOLM13_CELL, cellosaurus=SlConstants.MOLM13_CELLOSAURUS,
+                              cancer=SlConstants.ADULT_AML, ncit=SlConstants.ADULT_AML_NCIT,
+                              assay=SlConstants.CELL_VIABILITY_ASSAY, pmid=pmid)
+        self.entries.append(sli)
 
-    def _get_sun_2018(self):
+
+    def _add_sun_2018(self):
         """
         BRD4i markedly and consistently decreased CtIP, part of the MRN complex that commits cells to DSB repair.
         BRD4i extensively rewired protein networks, including multiple components of the DNA damage response pathway
@@ -133,7 +150,7 @@ class ManualEntry(SL_DatasetParser):
                               assay=SlConstants.GROWTH_INHIBITION_ASSAY, pmid=pmid)
         self.entries.append(sli)
 
-    def _get_van_der_meer_2014(self):
+    def _add_van_der_meer_2014(self):
         pmid = '24771642'
         pim1 = 'PIM1'
         plk1 = 'PLK1'

@@ -11,3 +11,4 @@ utils/__pycache__/
 ./protein-coding_gene.txt
 .idea/
 /SL_data.tsv
+/protein-coding_gene.txt

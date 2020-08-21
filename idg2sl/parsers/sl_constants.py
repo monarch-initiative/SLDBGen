@@ -67,6 +67,8 @@ class SlConstants:
     MCF7_CELLOSAURUS = 'CVCL_0031'
     MDAMB468_CELL = 'MDA-MB-468'
     MDAMB468_CELLOSAURUS = 'CVCL_0419'
+    MOLM13_CELL = 'MOLM-13'
+    MOLM13_CELLOSAURUS = 'CVCL_2119'
     OVCAR3_CELL = "OVCAR-3"
     OVCAR3_CELLOSAURUS = "CVCL_0465"
     T98G_CELL = 'T98G'
@@ -77,6 +79,8 @@ class SlConstants:
     UMRC6_CELLOSAURUS = 'CVCL_2741'
 
     ## NCI T
+    ADULT_AML = 'Adult acute myeloid leukemia'
+    ADULT_AML_NCIT = 'NCIT: C9154'
     BLADDER_CARCINOMA = 'Bladder Carcinoma'
     BLADDER_CARCINOMA_NCIT = 'NCIT:C4912'
     BREAST_CARCINOMA  = "Breast Carcinoma"
