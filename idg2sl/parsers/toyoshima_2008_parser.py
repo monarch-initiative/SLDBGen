@@ -1,8 +1,6 @@
-from collections import defaultdict
 from idg2sl import SyntheticLethalInteraction
 from idg2sl.sl_dataset_parser import SL_DatasetParser
 from .sl_constants import SlConstants
-from idg2sl.gene_pair import GenePair
 import csv
 
 

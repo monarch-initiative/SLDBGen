@@ -29,10 +29,17 @@ brough2018 = Brough2018Parser()
 brough2018_list = brough2018.parse()
 show_stats("Brough et al 2018", brough2018_list)
 
+chakraborty2017 = Chakraborty2017Parser()
+chakraborty2017_list = chakraborty2017.parse()
+show_stats("chakraborty et al 2017", chakraborty2017_list)
 
 han2017 = Han2017Parser()
 han2017_list = han2017.parse()
 show_stats("Han et al 2017", han2017_list)
+
+kang2015 = Kang2015Parser()
+kang2015_list = kang2015.parse()
+show_stats("Kang et al 2015", kang2015_list)
 
 kessler2012 = Kessler2012Parser()
 kessler2012_list = kessler2012.parse()
@@ -60,7 +67,9 @@ mohni2014 = Mohni2014Parser(entrez=entrez_dict, ensembl=ensembl_dict, synonym=sy
 mohni2014_list = mohni2014.parse()
 show_stats("Mohni et al 2014", mohni2014_list)
 
-
+oser2019 = Oser2019Parser()
+oser2019_list = oser2019.parse()
+show_stats("Oser et al 2019", oser2019_list)
 
 schick2019 = Schick2019Parser()
 schick2019_list = schick2019.parse()
@@ -112,8 +121,8 @@ show_stats("Wang et al 2017", wang2017_list)
 
 
 
-sli_lists = [bommi2008_list, brough2018_list, han2017_list, kessler2012_list, krastev2011_list, lord2008_list,
-             luo2009_list,
+sli_lists = [bommi2008_list, brough2018_list, chakraborty2017_list, han2017_list, kang2015_list, kessler2012_list,
+             krastev2011_list, lord2008_list, luo2009_list,
              mohni2014_list, shen2015_list, shen2017_list, schick2019_list, srivas2016_list, steckel2012_list,
              sun2019_list,   toyoshima2008_list, turner2008_list, wang2017_list, manual_list]
 all_sli_list = []

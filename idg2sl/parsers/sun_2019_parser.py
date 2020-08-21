@@ -1,9 +1,6 @@
-from collections import defaultdict
 from idg2sl import SyntheticLethalInteraction
 from idg2sl.sl_dataset_parser import SL_DatasetParser
 from .sl_constants import SlConstants
-from idg2sl.gene_pair import GenePair
-import csv
 
 
 class Sun2019Parser(SL_DatasetParser):
@@ -29,7 +26,7 @@ class Sun2019Parser(SL_DatasetParser):
         sli_list = []
         unclear_gene_symbols = {'QARS', 'SARS' }
         # I could figure out that the following mappings are correct and unique with the HGNC website
-        mappings = {'ORAOV1': 'LTO1', 'VWA9': 'INTS14', 'NARFL':'CIAO3', 'VWA9': 'INTS14', 'WBSCR22': 'BUD23',
+        mappings = {'ORAOV1': 'LTO1', 'VWA9': 'INTS14', 'NARFL':'CIAO3', 'WBSCR22': 'BUD23',
                     'UFD1L': 'UFD1'}
         with open(self.fname) as f:
             for line in f:

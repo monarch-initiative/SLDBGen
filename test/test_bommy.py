@@ -1,7 +1,6 @@
 from unittest import TestCase
 import os.path
 from idg2sl import Bommi2008Parser
-import idg2sl
 
 
 

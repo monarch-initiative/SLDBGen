@@ -1,7 +1,6 @@
 from unittest import TestCase
 import os.path
 from idg2sl import Srivas2016Parser
-import idg2sl
 
 
 class TestSrivas(TestCase):

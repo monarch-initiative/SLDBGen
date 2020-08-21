@@ -1,7 +1,5 @@
-import csv
 import os
 import wget
-from .parsers.sl_constants import SlConstants
 from .hgnc_parser import HgncParser
 
 

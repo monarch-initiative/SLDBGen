@@ -23,8 +23,6 @@ class Mohni2014Parser(SL_DatasetParser):
         geneA = 'ATR'
         geneAid = 'NCBIGene:545'
         sli_dict = defaultdict(list)
-        cell_line = 'U2OS'
-        cellosaurus = 'CVCL_0042'
         with open(self.fname) as csvfile:
             csvreader = csv.DictReader(csvfile, delimiter='\t')
             for row in csvreader:
@@ -72,8 +70,8 @@ class Mohni2014Parser(SL_DatasetParser):
                                                  gene_B_pert=SlConstants.SI_RNA,
                                                  effect_type=SlConstants.ZSCORE,
                                                  effect_size=mn,
-                                                 cell_line=cell_line,
-                                                 cellosaurus_id=cellosaurus,
+                                                 cell_line=SlConstants.U2OS_CELL,
+                                                 cellosaurus_id=SlConstants.U2OS_CELLOSUARUS,
                                                  cancer_type='n/a',
                                                  ncit_id='n/a',
                                                  assay=SlConstants.RNA_INTERFERENCE_ASSAY,

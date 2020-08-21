@@ -12,7 +12,6 @@ class Turner2008Parser(SL_DatasetParser):
     sensitivity to a PARP inhibitor. EMBO J. 2008 May 7;27(9):1368-77. PubMed PMID: 18388863
     PARP1 was inhibited by the PARP inhibitor KU0058948, and a short interfering RNA library targeting
     779 human protein kinase and kinase assocaited genes was applied.
-    :param path:
     I replaced MGC5601 by ACAD10 (Gene:80724)
     HSMDPKIN by CDC42BPG Gene ID: 55561,
     FLJ35107 by TPRXL Gene ID: 348825,
