@@ -70,6 +70,8 @@ class ManualEntry(SL_DatasetParser):
         return sli
 
 
+
+
     def _get_ding_2017(self):
         pmid = '30323337'
         TALDO1 = 'TALDO1'
@@ -410,7 +412,6 @@ class ManualEntry(SL_DatasetParser):
 
         """
         smarca2 = 'SMARCA2'
-        smarca2_id = 'NCBIGene:6595'
         smarca2_perturbation = SlConstants.SI_RNA
         smarca4 = 'SMARCA4'
         smarca4_perturbation = SlConstants.LOF_MUTATION
@@ -446,9 +447,7 @@ class ManualEntry(SL_DatasetParser):
         STK33 suppression in human cancer cells. Cell. 2009;137(5):821-834.
         """
         kras = 'KRAS'
-        kras_id = 'NCBIGene:3845'
         stk33 = 'STK33'
-        stk33_id = 'NCBIGene:65975'
         pmid = '19490892'
         sli = self.create_sli(geneA=kras, geneB=stk33,
                               geneApert=SlConstants.ACTIVATING_MUTATION, geneBpert=SlConstants.SI_RNA,
@@ -486,9 +485,7 @@ class ManualEntry(SL_DatasetParser):
 
     def _add_lelij_2020(self):
         stag1 = 'STAG1'
-        stag1id = 'NCBIGene:10274'
         stag2 = 'STAG2'
-        stag2id = 'NCBIGene:10735'
         pmid = '32467316'
         sli = self.create_sli(geneA=stag1, geneB=stag2,
                               geneApert=SlConstants.CRISPR_CAS9, geneBpert=SlConstants.LOF_MUTATION,

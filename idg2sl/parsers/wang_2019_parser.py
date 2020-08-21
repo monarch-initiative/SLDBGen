@@ -5,9 +5,6 @@ from .sl_constants import SlConstants
 
 class Wang2019Parser(SL_DatasetParser):
     def __init__(self, fname=None):
-        """
-
-        """
         pmid = "30532030"
         super().__init__(fname=fname, pmid=pmid)
 

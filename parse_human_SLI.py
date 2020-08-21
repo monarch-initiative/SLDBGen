@@ -11,10 +11,12 @@ entrez_dict = hgnc.get_entrez_dictionary()
 ensembl_dict = hgnc.get_ensembl_dictionary()
 synonym_dict = hgnc.get_synonym_dictionary()
 
+
 def show_stats(name, sli_list):
     pos = sum(sli.get_SL() for sli in sli_list)
     neg = sum(not sli.get_SL() for sli in sli_list)
     print("[INFO] %s: %d positive and %d negative entries" % (name, pos, neg))
+
 
 # Blomen 2015
 blomen2015 = Blomen2015Parser()
@@ -53,7 +55,6 @@ lord2008 = Lord2008Parser()
 lord2008_list = lord2008.parse()
 show_stats("Lord et al 2008", lord2008_list)
 
-
 # Luo et al 2009
 luo2009parser = Luo2009Parser()
 luo2009_list = luo2009parser.parse()
@@ -62,6 +63,10 @@ show_stats("Luo et al 2009", luo2009_list)
 manual = ManualEntry(entrez=entrez_dict, ensembl=ensembl_dict, synonym=synonym_dict)
 manual_list = manual.get_entries()
 show_stats("Manually entered single-SLI studies", manual_list)
+
+mengwasser_2019 = Mengwasser2019Parser()
+mengwasser_2019_list = mengwasser_2019.parse()
+show_stats("Mengwasser et al 2019", mengwasser_2019_list)
 
 mohni2014 = Mohni2014Parser(entrez=entrez_dict, ensembl=ensembl_dict, synonym=synonym_dict)
 mohni2014_list = mohni2014.parse()
@@ -108,7 +113,6 @@ vizeacoumar2013 = Vizeacoumar2013Parser()
 vizeacoumar2013_list = vizeacoumar2013.parse()
 show_stats("Vizeacoumar et al 2013", vizeacoumar2013_list)
 
-
 wang2017 = Wang2017Parser()
 wang2017_list = wang2017.parse()
 print("[INFO] Wang et al 2017  n=%d SL interactions" % len(wang2017_list))
@@ -118,15 +122,12 @@ wang_2019 = Wang2019Parser()
 wang_2019_list = wang_2019.parse()
 show_stats("Wang et al 2019", wang_2019_list)
 
-
-
-
-
-sli_lists = [bommi2008_list, blomen2015_list, brough2018_list, chakraborty2017_list, han2017_list, kang2015_list, kessler2012_list,
-             krastev2011_list, lord2008_list, luo2009_list, mohni2014_list, oser2019_list,
+sli_lists = [bommi2008_list, blomen2015_list, brough2018_list, chakraborty2017_list, han2017_list, kang2015_list,
+             kessler2012_list,
+             krastev2011_list, lord2008_list, luo2009_list, mengwasser_2019_list, mohni2014_list, oser2019_list,
              shen2015_list, shen2017_list, schick2019_list, srivas2016_list, steckel2012_list,
              sun2019_list, toyoshima2008_list, turner2008_list, vizeacoumar2013_list, wang2017_list,
-             wang_2019_list,manual_list]
+             wang_2019_list, manual_list]
 all_sli_list = []
 for l in sli_lists:
     all_sli_list.extend(l)
@@ -138,14 +139,6 @@ for sli in all_sli_list:
     if sli.get_SL():
         n_SL += 1
 print("We got %d interactions including %d synthetic lethal interactions" % (n, n_SL))
-
-
-def save_SL_data(path, sli_lists):
-    with open(path, 'w') as out_f:
-        for sli in all_sli_list:
-            if sli.get_SL():
-                out_f.write(sli.get_gene_A_symbol() + "\t" + sli.get_gene_B_symbol() + "\t")
-                out_f.write(str(sli.get_effect_size()) + "\n")
 
 ensembl_file = "SL_data.tsv"
 fh = open(ensembl_file, 'wt')
