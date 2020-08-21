@@ -46,6 +46,7 @@ class ManualEntry(SL_DatasetParser):
         self._add_wang_2004()
         self._add_sun_2018()
         self._add_pan_2017()
+        self._get_ding_2017()
 
     def create_sli(self, geneA, geneB, geneApert, geneBpert, cell, cellosaurus, cancer, ncit,
                    assay, pmid, effecttype=SlConstants.N_A, effectsize=SlConstants.N_A):
@@ -67,6 +68,26 @@ class ManualEntry(SL_DatasetParser):
                                          pmid=pmid,
                                          SL=True)
         return sli
+
+
+    def _get_ding_2017(self):
+        pmid = '30323337'
+        TALDO1 = 'TALDO1'
+        ERBB2 = 'ERBB2' # current symbol for HER-2
+        sli = self.create_sli(geneA=ERBB2, geneB=TALDO1,
+                              geneApert=SlConstants.PHARMACEUTICAL,geneBpert=SlConstants.CRISPR_CAS9,
+                              cell=SlConstants.MDAMB361_CELL, cellosaurus=SlConstants.MDAMB361_CELLOSUARUS,
+                              cancer=SlConstants.N_A, ncit=SlConstants.N_A,
+                              assay=SlConstants.SG_RNA_DEPLETION_ASSAY, pmid=pmid)
+        self.entries.append(sli)
+        igf1r = 'IGF1R'
+        sli = self.create_sli(geneA=ERBB2, geneB=igf1r,
+                              geneApert=SlConstants.PHARMACEUTICAL, geneBpert=SlConstants.CRISPR_CAS9,
+                              cell=SlConstants.MDAMB361_CELL, cellosaurus=SlConstants.MDAMB361_CELLOSUARUS,
+                              cancer=SlConstants.N_A, ncit=SlConstants.N_A,
+                              assay=SlConstants.SG_RNA_DEPLETION_ASSAY, pmid=pmid)
+        self.entries.append(sli)
+
 
     def _add_pan_2017(self):
         """
