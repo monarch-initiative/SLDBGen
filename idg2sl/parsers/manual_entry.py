@@ -22,7 +22,7 @@ class ManualEntry(SL_DatasetParser):
         self._add_lelij_2020()
         self._add_liu_2020()
         self._add_huang_2020()
-        self._add_szymanska_2020
+        self._add_szymanska_2020()
         self._add_hu_2020()
         self._add_hu_2020a()
         self._add_villalba_2019()
@@ -30,6 +30,7 @@ class ManualEntry(SL_DatasetParser):
         self._add_chatterjee2019()
         self._add_parvin_2019()
         self._add_park_2019()
+        self._get_van_der_meer_2014()
         self._add_burdova_2019()
         self._add_zhang2019()
         self._add_li2019()
@@ -43,6 +44,7 @@ class ManualEntry(SL_DatasetParser):
         self._add_costa_carbral_2016()
         self._add_sanjiv_2016()
         self._add_wang_2004()
+        self._get_sun_2018()
 
     def create_sli(self, geneA, geneB, geneApert, geneBpert, cell, cellosaurus, cancer, ncit,
                    assay, pmid, effecttype=SlConstants.N_A, effectsize=SlConstants.N_A):
@@ -64,6 +66,22 @@ class ManualEntry(SL_DatasetParser):
                                          pmid=pmid,
                                          SL=True)
         return sli
+
+
+    def _get_sun_2018(self):
+        """
+        BRD4i markedly and consistently decreased CtIP, part of the MRN complex that commits cells to DSB repair.
+        BRD4i extensively rewired protein networks, including multiple components of the DNA damage response pathway
+        """
+        pmid = '29533782'
+        BRD4 = 'BRD4'
+        parp1 = 'PARP1'
+        sli = self.create_sli(geneA=parp1, geneB=BRD4,
+                              geneApert=SlConstants.PHARMACEUTICAL, geneBpert=SlConstants.PHARMACEUTICAL,
+                              cell=SlConstants.N_A, cellosaurus=SlConstants.N_A,
+                              cancer=SlConstants.N_A, ncit=SlConstants.N_A,assay=SlConstants.CELL_VIABILITY_ASSAY,
+                              pmid=pmid)
+        self.entries.append(sli)
 
     def _add_wang_2004(self):
         pmid = '15144957'
@@ -118,9 +136,7 @@ class ManualEntry(SL_DatasetParser):
     def _get_van_der_meer_2014(self):
         pmid = '24771642'
         pim1 = 'PIM1'
-        pim1id = 'NCBIGene:5292'
         plk1 = 'PLK1'
-        plk1id = 'NCBIGene:5347'
         sli = self.create_sli(geneA=pim1, geneB=plk1,
                               geneApert=SlConstants.OVEREXPRESSION, geneBpert=SlConstants.SH_RNA,
                               cell=SlConstants.LNCAP_CELL, cellosaurus=SlConstants.LNCAP_CELLOSAURUS,
@@ -313,7 +329,6 @@ class ManualEntry(SL_DatasetParser):
         """
         src = 'SRC'
         csnk2a1 = "CSNK2A1"
-        CSNK2A1_GENE_ID = "NCBIGene:1457"
         pmid = '26437225'
         effect_type = "correlation"
         sli = self.create_sli(geneA=src, geneB=csnk2a1,
@@ -325,7 +340,6 @@ class ManualEntry(SL_DatasetParser):
                               assay=SlConstants.PHARAMACEUTICAL_INHIBITION_ASSAY, pmid=pmid)
         self.entries.append(sli)
         prkce = "PRKCE"
-        PRKCE_GENE_ID = "NCBIGene:5581"
         sli = self.create_sli(geneA=src, geneB=prkce,
                               geneApert=SlConstants.PHARMACEUTICAL, geneBpert=SlConstants.COHORT_STUDY,
                               effecttype=effect_type, effectsize='-0.96',
@@ -362,7 +376,7 @@ class ManualEntry(SL_DatasetParser):
         smarca2_perturbation = SlConstants.SI_RNA
         smarca4 = 'SMARCA4'
         smarca4_perturbation = SlConstants.LOF_MUTATION
-        pmid = '31427792'
+        pmid = '24520176'
         sli = self.create_sli(geneA=smarca2, geneB=smarca4,
                               geneApert=smarca2_perturbation, geneBpert=smarca4_perturbation,
                               effecttype=SlConstants.N_A, effectsize=SlConstants.N_A,
@@ -485,9 +499,7 @@ class ManualEntry(SL_DatasetParser):
 
     def _add_szymanska_2020(self):
         vps4a = 'VPS4A'
-        vps4a_id = 'NCBIGene:27183'
         vps4b = 'VPS4B'
-        vps4b_id = 'NCBIGene:9525'
         pmid = '31930723'
         sli = self.create_sli(geneA=vps4a, geneB=vps4b,
                               geneApert=SlConstants.SI_RNA, geneBpert=SlConstants.SI_RNA,

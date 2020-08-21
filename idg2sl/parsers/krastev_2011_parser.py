@@ -13,7 +13,7 @@ class Krastev2011Parser(SL_DatasetParser):
         required for efficient growth of the knockout cells (Fig. 2a), raising the possibility that they act in
         conjunction with TP53 to maintain cellular fitness.
         """
-        pmid = "PMID:21642980"
+        pmid = "21642980"
         super().__init__(fname=fname, pmid=pmid)
 
     def create_sli(self, geneB_sym):
@@ -22,8 +22,6 @@ class Krastev2011Parser(SL_DatasetParser):
         geneB_id = self.entrez_dict.get(geneB_sym)
         tp53_perturbation = SlConstants.LOF_MUTATION
         gene_B_pert = SlConstants.SI_RNA
-        effect_type = "n/a"
-        effect_size = "n/a"
         cell_line = SlConstants.HCT_116
         cellosaurus_id = SlConstants.HCT_116_CELLOSAURUS
         cancer_type = SlConstants.COLON_CARCINOMA
@@ -55,7 +53,7 @@ class Krastev2011Parser(SL_DatasetParser):
         mastl = 'MASTL'
         sli = self.create_sli(mastl)
         sli_list.append(sli)
-        txndc16 = 'TXNDC16' # current symbol for KIAA1344
+        txndc16 = 'TXNDC16'  # current symbol for KIAA1344
         sli = self.create_sli(txndc16)
         sli_list.append(sli)
         return sli_list
