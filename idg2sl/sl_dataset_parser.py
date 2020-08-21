@@ -62,12 +62,12 @@ class SL_DatasetParser:
             else:
                 return s
 
-    def get_ncbi_gene_curie(self, symbol):
-        id = self.entrez_dict.get(symbol)
-        if id is None:
-            raise ValueError("sl_dataset_parser.py Could not find id for %s" % symbol)
+    def get_ncbigene_curie(self, symbol):
+        if symbol in self.entrez_dict:
+            geneid = self.entrez_dict.get(symbol)
+            return 'NCBIGene:%s' % geneid
         else:
-            return 'NCBIGene:%s' % id
+            raise ValueError("Could not find id for %s (sl_dataset_parser)" % symbol)
 
     @staticmethod
     def get_hgnc_file():
