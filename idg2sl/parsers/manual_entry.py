@@ -22,7 +22,7 @@ class ManualEntry(SL_DatasetParser):
         self._add_lelij_2020()
         self._add_liu_2020()
         self._add_huang_2020()
-        self._add_szymanska_2020()
+        self._add_szymanska_2020
         self._add_hu_2020()
         self._add_hu_2020a()
         self._add_villalba_2019()
@@ -42,17 +42,11 @@ class ManualEntry(SL_DatasetParser):
         self._add_ding_2019()
         self._add_costa_carbral_2016()
         self._add_sanjiv_2016()
-        self._add_wang_2015()
 
-    def create_sli(self, geneA, geneB, geneApert, geneBpert, effecttype, effectsize, cell,
-                   cellosaurus, cancer, ncit, assay, pmid):
-        geneAid = self.get_ncbi_gene_curie(geneA)
-        if geneAid is None or not geneAid.startswith('NCBIGene'):
-            print(geneA, geneAid)
-            raise ValueError("Could not find gene id for %s (geneA) in manual_entry.py" % geneA)
-        geneBid = self.get_ncbi_gene_curie(geneB)
-        if geneBid is None or not geneBid.startswith('NCBIGene'):
-            raise ValueError("Could not find gene id for %s (geneB) in manual_entry.py" % geneA)
+    def create_sli(self, geneA, geneB, geneApert, geneBpert, cell, cellosaurus, cancer, ncit,
+                   assay, pmid, effecttype=SlConstants.N_A, effectsize=SlConstants.N_A):
+        geneAid = self.get_ncbigene_curie(geneA)
+        geneBid = self.get_ncbigene_curie(geneB)
         sli = SyntheticLethalInteraction(gene_A_symbol=geneA,
                                          gene_A_id=geneAid,
                                          gene_B_symbol=geneB,
@@ -77,7 +71,7 @@ class ManualEntry(SL_DatasetParser):
         pmid = '26748709'
         atr = 'ATR'
         check1 = 'CHEK1'
-        sli = self.create_sli(geneA=atr, geneAid=SlConstants.ATR_GENE_ID, geneB=check1, geneBid=SlConstants.CHEK1_GENE_ID,
+        sli = self.create_sli(geneA=atr, geneB=check1,
                               geneApert=SlConstants.PHARMACEUTICAL, geneBpert=SlConstants.PHARMACEUTICAL,
                               cell=SlConstants.U2OS_CELL, cellosaurus=SlConstants.U2OS_CELLOSUARUS,
                               cancer=SlConstants.N_A, ncit=SlConstants.N_A,
@@ -88,8 +82,7 @@ class ManualEntry(SL_DatasetParser):
         pmid = '26881434'
         kras = 'KRAS'
         cdk1 = 'CDK1'
-        sli = self.create_sli(geneA=kras, geneAid=SlConstants.KRAS_GENE_ID, geneB=cdk1,
-                              geneBid=SlConstants.CDK1_GENE_ID,
+        sli = self.create_sli(geneA=kras, geneB=cdk1,
                               geneApert=SlConstants.ACTIVATING_MUTATION, geneBpert=SlConstants.SI_RNA,
                               cell=SlConstants.LIM1215_CELL, cellosaurus=SlConstants.LIM1215_CELLOSAURUS,
                               cancer=SlConstants.N_A, ncit=SlConstants.N_A,
@@ -103,8 +96,7 @@ class ManualEntry(SL_DatasetParser):
         pmid = '30496141'
         pten = 'PTEN'
         smarca4 = 'SMARCA4'
-        sli = self.create_sli(geneA=pten, geneAid=SlConstants.PTEN_GENE_ID, geneB=smarca4,
-                              geneBid=SlConstants.SMARCA4_GENE_ID,
+        sli = self.create_sli(geneA=pten, geneB=smarca4,
                               geneApert=SlConstants.LOF_MUTATION, geneBpert=SlConstants.SI_RNA,
                               cell=SlConstants.LNCAP_CELL, cellosaurus=SlConstants.LNCAP_CELLOSAURUS,
                               cancer=SlConstants.PROSTATE_CARCINOMA, ncit=SlConstants.PROSTATE_CARCINOMA_NCIT,
@@ -117,7 +109,7 @@ class ManualEntry(SL_DatasetParser):
         pim1id = 'NCBIGene:5292'
         plk1 = 'PLK1'
         plk1id = 'NCBIGene:5347'
-        sli = self.create_sli(geneA=pim1, geneAid=pim1id, geneB=plk1, geneBid=plk1id,
+        sli = self.create_sli(geneA=pim1, geneB=plk1,
                               geneApert=SlConstants.OVEREXPRESSION, geneBpert=SlConstants.SH_RNA,
                               cell=SlConstants.LNCAP_CELL, cellosaurus=SlConstants.LNCAP_CELLOSAURUS,
                               cancer=SlConstants.N_A, ncit=SlConstants.N_A,
@@ -128,8 +120,7 @@ class ManualEntry(SL_DatasetParser):
         aurka = 'AURKA'
         rb1 = 'RB1'
         pmid = '30373917'
-        sli = self.create_sli(geneA=rb1, geneAid=SlConstants.RB1_GENE_ID, geneB=aurka,
-                              geneBid=SlConstants.AURKA_GENE_ID,
+        sli = self.create_sli(geneA=rb1, geneB=aurka,
                               geneApert=SlConstants.LOF_MUTATION, geneBpert=SlConstants.PHARMACEUTICAL,
                               cell='RB1-Mutant Cancer Cells', cellosaurus=SlConstants.N_A,
                               cancer=SlConstants.N_A, ncit=SlConstants.N_A,
@@ -140,8 +131,7 @@ class ManualEntry(SL_DatasetParser):
         tnk2 = 'TNK2'
         ptpn11 = 'PTPN11'
         pmid = '30018082'
-        sli = self.create_sli(geneA=ptpn11, geneAid=SlConstants.PTPN11_GENE_ID, geneB=tnk2,
-                              geneBid=SlConstants.TNK2_GENE_ID,
+        sli = self.create_sli(geneA=ptpn11, geneB=tnk2,
                               geneApert=SlConstants.ACTIVATING_MUTATION, geneBpert=SlConstants.PHARMACEUTICAL,
                               cell=SlConstants.N_A, cellosaurus=SlConstants.N_A,
                               cancer=SlConstants.JMML, ncit=SlConstants.JMML_NCIT,
@@ -161,8 +151,7 @@ class ManualEntry(SL_DatasetParser):
         cdh1 = 'CDH1'
         ros1 = 'ROS1'
         pmid = '29610289'
-        sli = self.create_sli(geneA=cdh1, geneAid=SlConstants.CDH1_GENE_ID, geneB=ros1,
-                              geneBid=SlConstants.ROS1_GENE_ID,
+        sli = self.create_sli(geneA=cdh1, geneB=ros1,
                               geneApert=SlConstants.CRISPR_CAS9, geneBpert=SlConstants.SI_RNA,
                               cell=SlConstants.MCF7_CELL, cellosaurus=SlConstants.MCF7_CELLOSAURUS,
                               cancer=SlConstants.N_A, ncit=SlConstants.N_A,
@@ -173,19 +162,9 @@ class ManualEntry(SL_DatasetParser):
         atm = 'ATM'
         pten = 'PTEN'
         pmid = '29522753'
-        sli = self.create_sli(geneA=pten, geneAid=SlConstants.PTEN_GENE_ID, geneB=atm, geneBid=SlConstants.ATM_GENE_ID,
+        sli = self.create_sli(geneA=pten, geneB=atm,
                               geneApert=SlConstants.LOF_MUTATION, geneBpert=SlConstants.PHARMACEUTICAL,
                               cell=SlConstants.MDAMB468_CELL, cellosaurus=SlConstants.MDAMB468_CELLOSAURUS,
-
-    def _add_wang_2015(self):
-        pmid = '15144957'
-        myc = 'MYC'
-        TNFRSF10B = 'TNFRSF10B' # current symbol for DR5
-        sli = self.create_sli(geneA=myc, geneB=TNFRSF10B,
-                              geneApert=SlConstants.ACTIVATING_MUTATION, geneBpert=SlConstants.AGONIST,
-                              effecttype=SlConstants.N_A, effectsize=SlConstants.N_A,
-                              cell=SlConstants.IMR90_CELL, cellosaurus=SlConstants.IMR90_CELLOSAURUS,
-
                               cancer=SlConstants.N_A, ncit=SlConstants.N_A,
                               assay=SlConstants.CELL_VIABILITY_ASSAY, pmid=pmid)
         self.entries.append(sli)
@@ -197,21 +176,18 @@ class ManualEntry(SL_DatasetParser):
         bcl2l1 = 'BCL2L1'
         idh1 = 'IDH1'
         pmid = '29057925'
-        sli = self.create_sli(geneA=idh1, geneAid=SlConstants.IDH1_GENE_ID, geneB=bcl2l1,
-                              geneBid=SlConstants.BCL2L1_GENE_ID,
+        sli = self.create_sli(geneA=idh1, geneB=bcl2l1,
                               geneApert=SlConstants.LOF_MUTATION, geneBpert=SlConstants.PHARMACEUTICAL,
                               cell=SlConstants.T98G_CELL, cellosaurus=SlConstants.T98G_CELLOSAURUS,
                               cancer=SlConstants.GLIOBLASTOMA, ncit=SlConstants.GLIOBLASTOMA_NCIT,
                               assay=SlConstants.GROWTH_INHIBITION_ASSAY, pmid=pmid)
         self.entries.append(sli)
 
-
     def _add_sasaki2019(self):
         parg = 'PARG'
         dusp22 = 'DUSP22'
         pmid = '31142510'
-
-        sli = self.create_sli(geneA=parg,  geneB=dusp22,
+        sli = self.create_sli(geneA=parg, geneB=dusp22,
                               geneApert=SlConstants.SI_RNA, geneBpert=SlConstants.SH_RNA,
                               effecttype=SlConstants.N_A, effectsize=SlConstants.N_A,
                               cell=SlConstants.A549_CELL, cellosaurus=SlConstants.A549_CELLOSAURUS,
@@ -227,7 +203,7 @@ class ManualEntry(SL_DatasetParser):
         crebbp = 'CREBBP'
         ep300 = 'EP300'
         pmid = '31223286'
-        sli = self.create_sli(geneA=crebbp, geneB=ep300,
+        sli = self.create_sli(geneA=crebbp,  geneB=ep300,
                               geneApert=SlConstants.SI_RNA, geneBpert=SlConstants.SI_RNA,
                               effecttype=SlConstants.N_A, effectsize=SlConstants.N_A,
                               cell=SlConstants.CELL_5637, cellosaurus=SlConstants.CELL_5637_CELLOSAURUS,
@@ -328,7 +304,7 @@ class ManualEntry(SL_DatasetParser):
         CSNK2A1_GENE_ID = "NCBIGene:1457"
         pmid = '26437225'
         effect_type = "correlation"
-        sli = self.create_sli(geneA=src,  geneB=csnk2a1,
+        sli = self.create_sli(geneA=src, geneB=csnk2a1,
                               geneApert=SlConstants.PHARMACEUTICAL, geneBpert=SlConstants.COHORT_STUDY,
                               effecttype=effect_type, effectsize='-0.82',
                               cell=SlConstants.N_A, cellosaurus=SlConstants.N_A,
@@ -389,7 +365,6 @@ class ManualEntry(SL_DatasetParser):
         """
         kras = 'KRAS'
         tbk1 = 'TBK1'
-        tbk1_id = 'NCBIGene:29110'
         pmid = '19847166'
         sli = self.create_sli(geneA=kras, geneB=tbk1,
                               geneApert=SlConstants.ACTIVATING_MUTATION, geneBpert=SlConstants.SI_RNA,
@@ -498,7 +473,9 @@ class ManualEntry(SL_DatasetParser):
 
     def _add_szymanska_2020(self):
         vps4a = 'VPS4A'
+        vps4a_id = 'NCBIGene:27183'
         vps4b = 'VPS4B'
+        vps4b_id = 'NCBIGene:9525'
         pmid = '31930723'
         sli = self.create_sli(geneA=vps4a, geneB=vps4b,
                               geneApert=SlConstants.SI_RNA, geneBpert=SlConstants.SI_RNA,
