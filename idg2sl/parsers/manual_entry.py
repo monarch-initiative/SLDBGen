@@ -55,6 +55,8 @@ class ManualEntry(SL_DatasetParser):
         self._get_sarthy_2007()
         self._add_bukhari_2019()
         self._add_feng_2019()
+        self._add_chan_2019()
+        self._add_carbajosa_2019()
 
     def create_and_add_sli(self, geneA, geneB, geneApert, geneBpert, assay, pmid,
                            cell=SlConstants.N_A, cellosaurus=SlConstants.N_A,
@@ -79,7 +81,17 @@ class ManualEntry(SL_DatasetParser):
                                          SL=sl)
         self.entries.append(sli)
 
-    def _add_char_2019(self):
+    def _add_carbajosa_2019(self):
+        pmid = '30890549'
+        brca1 = 'BRCA1'
+        plk1= 'PLK1'
+        self.create_and_add_sli(geneA=brca1, geneB=plk1,
+                                geneApert=SlConstants.SH_RNA,
+                                geneBpert=SlConstants.SH_RNA,
+                                cell=SlConstants.HCT_116, cellosaurus=SlConstants.HCT_116_CELLOSAURUS,
+                                assay=SlConstants.PATIENT_DERIVED_XENOGRAFT, pmid=pmid)
+
+    def _add_chan_2019(self):
         """
         WRN is found to have SL with deficient DNA mismatch repair (dMMR) -- but multiple genes contribute to this.
         MMR activity of the MLH1- and MSH3-mutated MSI colorectal cell line HCT116 was restored or not by reintroducing
