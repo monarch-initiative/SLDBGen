@@ -18,7 +18,11 @@ def show_stats(name, sli_list):
     print("[INFO] %s: %d positive and %d negative entries" % (name, pos, neg))
 
 
-# Blomen 2015
+baldwin2010 = Baldwin2010Parser()
+baldwin2010_list = baldwin2010.parse()
+show_stats("Baldwin et al 2010", baldwin2010_list)
+
+
 blomen2015 = Blomen2015Parser()
 blomen2015_list = blomen2015.parse()
 show_stats("Blomen et al 2015", blomen2015_list)
@@ -135,7 +139,7 @@ wang_2019 = Wang2019Parser()
 wang_2019_list = wang_2019.parse()
 show_stats("Wang et al 2019", wang_2019_list)
 
-sli_lists = [bommi2008_list, blomen2015_list, brough2018_list, chakraborty2017_list, dai2013_list,
+sli_lists = [baldwin2010_list, bommi2008_list, blomen2015_list, brough2018_list, chakraborty2017_list, dai2013_list,
              han2017_list, kang2015_list, kessler2012_list,
              krastev2011_list, lord2008_list, luo2009_list, martin2010_list, mengwasser_2019_list, mohni2014_list,
              mondal2019_list,

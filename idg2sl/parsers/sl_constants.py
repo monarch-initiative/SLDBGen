@@ -9,6 +9,7 @@ class SlConstants:
     CRISPR_CAS9 = "CRISPR CAS9"
     CRISPR_CAS9_INTERFERENCE_ASSAY = "CRISPR-Cas9 Interference assay"
     CYTOTOXICITY_ASSAY = "cytotoxicity assay"
+    DEGRADATION = 'degradation'
     DYSFUNCTIONALITY = 'dysfunction'
     GROWTH_INHIBITION_ASSAY = "growth inhibition assay"
     KNOCKOUT = 'knockout'
