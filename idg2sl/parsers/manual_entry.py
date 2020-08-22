@@ -79,6 +79,25 @@ class ManualEntry(SL_DatasetParser):
                                          SL=sl)
         self.entries.append(sli)
 
+    def _add_char_2019(self):
+        """
+        WRN is found to have SL with deficient DNA mismatch repair (dMMR) -- but multiple genes contribute to this.
+        MMR activity of the MLH1- and MSH3-mutated MSI colorectal cell line HCT116 was restored or not by reintroducing
+        these genes or a control chromosome. A rescue was found that was  attributable to MMR restoration as
+        CRISPR/Cas9 knock out of  MLH1 re-sensitized HCT116 Ch3+5 to WRN silencing and induced DSB following WRN silencing
+        We will therefore curate SL with MLH1
+
+        """
+        pmid = '30971823'
+        wrn = 'WRN'
+        mlh1 = 'MLH1'
+        self.create_and_add_sli(geneA=mlh1, geneB=wrn, geneApert=SlConstants.LOF_MUTATION,
+                                geneBpert=SlConstants.SH_RNA, cell=SlConstants.HCT_116,
+                                cellosaurus=SlConstants.HCT_116_CELLOSAURUS, cancer=SlConstants.COLON_CARCINOMA,
+                                ncit=SlConstants.COLON_CARCINOMA_NCIT, assay=SlConstants.CELL_VIABILITY_ASSAY,
+                                pmid=pmid)
+
+
     def _add_feng_2019(self):
         """
         We  tested the sensitivity of five representative UM cell lines, 92.1, OMM1.3, OMM1.5, Mel270, and Mel202,
