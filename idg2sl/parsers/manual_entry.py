@@ -46,7 +46,8 @@ class ManualEntry(SL_DatasetParser):
         self._add_wang_2004()
         self._add_sun_2018()
         self._add_pan_2017()
-        self._get_ding_2017()
+        self._add_ding_2017()
+        self._add_kawaguchi_2015()
 
     def create_sli(self, geneA, geneB, geneApert, geneBpert, cell, cellosaurus, cancer, ncit,
                    assay, pmid, effecttype=SlConstants.N_A, effectsize=SlConstants.N_A):
@@ -70,9 +71,23 @@ class ManualEntry(SL_DatasetParser):
         return sli
 
 
+    def _add_kawaguchi_2015(self):
+        """
+        We thus treated CD26 knockdown cells with ABT-737, a Bcl-xL/-2/-w inhibitor, and observed that the synthetic
+         lethal interaction of combined Bcl-xL and CD26 inhibition induced significant apoptosis and impaired cellular viability.
+        """
+        pmid = '25297967'
+        bcl2l1 = 'BCL2L1' # was Bcl-xL
+        dpp4 = 'DPP4' # was CD26
+        # Huh-7 (CVCL_0336)
+        sli = self.create_sli(geneA=bcl2l1, geneB=dpp4,
+                              geneApert=SlConstants.PHARMACEUTICAL, geneBpert=SlConstants.SI_RNA,
+                              cell=SlConstants.HUH7_CELL, cellosaurus=SlConstants.HUH7_CELLOSAURUS,
+                              cancer=SlConstants.HEPATOCELLULAR_CARCINOMA,ncit=SlConstants.HEPATOCELLULAR_CARCINOMA_NCIT,
+                              assay=SlConstants.CELL_VIABILITY_ASSAY, pmid=pmid)
+        self.entries.append(sli)
 
-
-    def _get_ding_2017(self):
+    def _add_ding_2017(self):
         pmid = '30323337'
         TALDO1 = 'TALDO1'
         ERBB2 = 'ERBB2' # current symbol for HER-2

@@ -60,6 +60,8 @@ class SlConstants:
     HEC59_CELLOSAURUS = 'CVCL_2930'
     HELA_CELL = "HeLa-Cells"
     HELA_CELLOSAURUS = "CVCL_0030"
+    HUH7_CELL = 'Huh-7'
+    HUH7_CELLOSAURUS = 'CVCL_0336'
     H82_CELL = 'NCI-H82'
     H82_CELLOSAURUS = 'CVCL_1591'
     IMR90_CELL = 'IMR-90'
@@ -113,6 +115,8 @@ class SlConstants:
     GASTRIC_CARCINOMA_NCIT = 'NCIT:C4911'
     GLIOBLASTOMA = 'Glioblastoma'
     GLIOBLASTOMA_NCIT = 'NCIT:C3058'
+    HEPATOCELLULAR_CARCINOMA = 'Adult hepatocellular carcinoma'
+    HEPATOCELLULAR_CARCINOMA_NCIT = 'NCIT:C7956'
     JMML = 'Juvenile Myelomonocytic Leukemia'
     JMML_NCIT = 'NCIT:C9233'
     LUNG_ADENOCARCINOMA = "Lung adenocarcinoma"
