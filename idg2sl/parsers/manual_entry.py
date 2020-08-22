@@ -51,8 +51,10 @@ class ManualEntry(SL_DatasetParser):
         self._get_add_2016()
         self._add_shapiro_2014()
 
-    def create_sli(self, geneA, geneB, geneApert, geneBpert, cell, cellosaurus, cancer, ncit,
-                   assay, pmid, effecttype=SlConstants.N_A, effectsize=SlConstants.N_A):
+    def create_sli(self, geneA, geneB, geneApert, geneBpert,  assay, pmid,
+                   cell=SlConstants.N_A, cellosaurus=SlConstants.N_A,
+                   cancer=SlConstants.N_A, ncit=SlConstants.N_A,
+                    effecttype=SlConstants.N_A, effectsize=SlConstants.N_A):
         geneAid = self.get_ncbigene_curie(geneA)
         geneBid = self.get_ncbigene_curie(geneB)
         sli = SyntheticLethalInteraction(gene_A_symbol=geneA,
@@ -71,6 +73,27 @@ class ManualEntry(SL_DatasetParser):
                                          pmid=pmid,
                                          SL=True)
         return sli
+
+    def _get_noll_2016(self):
+        """
+        This stusy ruled out SLIs for two pairs of genes
+        """
+        pmid = '27375368'
+        parg = 'PARG'
+        brca1 = 'BRCA1'
+        pten = 'PTEN'
+        sli = self.create_sli(geneA=brca1, geneB=parg,
+                                geneApert=SlConstants.LOF_MUTATION, geneBpert=SlConstants.SI_RNA,
+                                cell=SlConstants.UWB1_CELL, cellosaurus=SlConstants.UWB1_CELLOSAURUS,
+                                assay=SlConstants.CELL_VIABILITY_ASSAY, pmid=pmid, SL=False)
+        self.entries.append(sli)
+        sli = self.create_sli(geneA=pten, geneB=parg,
+                              geneApert=SlConstants.LOF_MUTATION, geneBpert=SlConstants.SI_RNA,
+                              cell=SlConstants.U2OS_CELL, cellosaurus=SlConstants.U2OS_CELLOSAURUS,
+                              assay=SlConstants.CELL_VIABILITY_ASSAY, pmid=pmid, SL=False)
+        self.entries.append(sli)
+
+
 
     def _add_shapiro_2014(self):
         pmid = '24848258'
@@ -184,7 +207,7 @@ class ManualEntry(SL_DatasetParser):
         check1 = 'CHEK1'
         sli = self.create_sli(geneA=atr, geneB=check1,
                               geneApert=SlConstants.PHARMACEUTICAL, geneBpert=SlConstants.PHARMACEUTICAL,
-                              cell=SlConstants.U2OS_CELL, cellosaurus=SlConstants.U2OS_CELLOSUARUS,
+                              cell=SlConstants.U2OS_CELL, cellosaurus=SlConstants.U2OS_CELLOSAURUS,
                               cancer=SlConstants.N_A, ncit=SlConstants.N_A,
                               assay=SlConstants.CELL_VIABILITY_ASSAY, pmid=pmid)
         self.entries.append(sli)
