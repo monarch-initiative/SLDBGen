@@ -12,6 +12,7 @@ from .parsers.kessler_2012_parser import Kessler2012Parser
 from .parsers.krastev_2011_parser import Krastev2011Parser
 from .parsers.lord_2008_parser import Lord2008Parser
 from .parsers.luo_2009 import Luo2009Parser
+from .parsers.martin_2010_parser import Martin2010and2011Parser
 from .parsers.mengwasser2019_parser import Mengwasser2019Parser
 from .parsers.mohni_2014_parser import Mohni2014Parser
 from .parsers.mondal_2019_parser import Mondal2019Parser
@@ -45,6 +46,7 @@ __all__ = ["SyntheticLethalInteraction",
             "Krastev2011Parser",
             "Lord2008Parser",
             "Luo2009Parser",
+           "Martin2010and2011Parser",
             "Mengwasser2019Parser",
             "Mohni2014Parser",
             "Mondal2019Parser",

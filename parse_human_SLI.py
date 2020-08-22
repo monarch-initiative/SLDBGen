@@ -68,6 +68,11 @@ manual = ManualEntry(entrez=entrez_dict, ensembl=ensembl_dict, synonym=synonym_d
 manual_list = manual.get_entries()
 show_stats("Manually entered single-SLI studies", manual_list)
 
+martin2010 = Martin2010and2011Parser()
+martin2010_list = martin2010.parse()
+show_stats("Martin et al 2010/2011", martin2010_list)
+
+
 mengwasser_2019 = Mengwasser2019Parser()
 mengwasser_2019_list = mengwasser_2019.parse()
 show_stats("Mengwasser et al 2019", mengwasser_2019_list)
@@ -132,7 +137,8 @@ show_stats("Wang et al 2019", wang_2019_list)
 
 sli_lists = [bommi2008_list, blomen2015_list, brough2018_list, chakraborty2017_list, dai2013_list,
              han2017_list, kang2015_list, kessler2012_list,
-             krastev2011_list, lord2008_list, luo2009_list, mengwasser_2019_list, mohni2014_list, mondal2019_list,
+             krastev2011_list, lord2008_list, luo2009_list, martin2010_list, mengwasser_2019_list, mohni2014_list,
+             mondal2019_list,
              oser2019_list,
              shen2015_list, shen2017_list, schick2019_list, srivas2016_list, steckel2012_list,
              sun2019_list, toyoshima2008_list, turner2008_list, vizeacoumar2013_list, wang2017_list,
