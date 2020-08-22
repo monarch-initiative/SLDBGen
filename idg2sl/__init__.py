@@ -5,6 +5,7 @@ from .parsers.blomen_2015_parser import Blomen2015Parser
 from .parsers.bommi_2008_parser import Bommi2008Parser
 from .parsers.brough_2018_parser import Brough2018Parser
 from .parsers.chakraborty_2017_parser import Chakraborty2017Parser
+from .parsers.dai_2013_parser import Dai2013Parser
 from .parsers.han_2017_parser import Han2017Parser
 from .parsers.kang_2015_parser import Kang2015Parser
 from .parsers.kessler_2012_parser import Kessler2012Parser
@@ -37,6 +38,7 @@ __all__ = ["SyntheticLethalInteraction",
             "Bommi2008Parser",
             "Brough2018Parser",
             "Chakraborty2017Parser",
+            "Dai2013Parser",
             "Han2017Parser",
             "Kang2015Parser",
             "Kessler2012Parser",

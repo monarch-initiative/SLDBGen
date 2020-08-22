@@ -1,3 +1,4 @@
+from .parsers.sl_constants import SlConstants
 
 class SyntheticLethalInteraction:
     """
@@ -7,7 +8,8 @@ class SyntheticLethalInteraction:
     experiments to this common datastructure
     """
 
-    def __init__(self, gene_A_symbol=None,
+    def __init__(self,
+                 gene_A_symbol=None,
                  gene_A_id=None,
                  gene_B_symbol=None,
                  gene_B_id=None,
@@ -22,6 +24,9 @@ class SyntheticLethalInteraction:
                  ncit_id="",
                  assay=None,
                  pmid=None,
+                 background_dependency_status=SlConstants.N_A,
+                 background_dependency_gene_symbol=SlConstants.N_A,
+                 background_dependency_gene_id=SlConstants.N_A,
                  SL=None):
         """
 
@@ -64,6 +69,9 @@ class SyntheticLethalInteraction:
         else:
             self.effect_type = effect_type
             self.effect_size = effect_size
+        self._background_dependency_status = background_dependency_status
+        self._background_dependency_gene_symbol = background_dependency_gene_symbol
+        self._background_dependency_gene_id = background_dependency_gene_id
         self.SL = SL # True: synthetic lethal, False: negative control
         self.maximum_value = False
 
@@ -161,6 +169,9 @@ class SyntheticLethalInteraction:
                'cellosaurus.id',
                'cancer',
                'ncit.id',
+               'background.dependency.status',
+               'background.dependency.genesymbol',
+               'background.dependency.geneid',
                'pmid',
                'SL']
         return "\t".join(lst)
@@ -190,6 +201,9 @@ class SyntheticLethalInteraction:
                self.cellosaurus_id,
                self.cancer_type,
                self.ncit_id,
+               self._background_dependency_status,
+               self._background_dependency_gene_symbol,
+               self._background_dependency_gene_id,
                self.pmid,
                sl]
         return "\t".join(lst)

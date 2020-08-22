@@ -26,6 +26,7 @@ class SlConstants:
     SG_RNA_DEPLETION_ASSAY = 'sgRNA depletion assay'
     SH_RNA = 'shRNA'
     SI_RNA = 'siRNA'
+    WILDTYPE = 'wildtype'
     ZSCORE = "Z-score"
 
 
@@ -51,6 +52,8 @@ class SlConstants:
     HCT_116_CELLOSAURUS = 'CVCL_0291'
     HAP1_CELL = 'HAP1'
     HAP1_CELLOSAURUS = 'CVCL_Y019'
+    HCC193_CELL = 'HCC193'
+    HCC193_CELLOSAURUS = 'CVCL_5130'
     HELA_CELL = "HeLa-Cells"
     HELA_CELLOSAURUS = "CVCL_0030"
     H82_CELL = 'NCI-H82'
@@ -114,6 +117,8 @@ class SlConstants:
     MELANOMA_NCIT = 'NCIT:C3224'
     MINIMALLY_INVASIVE_LUNG_ADENOCARCINOMA = 'Minimally invasive lung adenocarcinoma'
     MINIMALLY_INVASIVE_LUNG_ADENOCARCINOMA_NCIT = 'NCIT:C2923'
+    NON_SMALL_CELL_LUNG = 'Lung Non-Small Cell Carcinoma'
+    NON_SMALL_CELL_LUNG_NCIT = 'NCIT:C2926'
     OVARIAN_SEROUS_ADENOCARCINOMA = "Ovarian serous adenocarcinoma"
     OVARIAN_SEROUS_ADENOCARCINOMA_NCIT ="NCIT:C105555"
     PROSTATE_CARCINOMA = 'Prostate Carcinoma'

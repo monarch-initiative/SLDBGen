@@ -13,8 +13,8 @@ synonym_dict = hgnc.get_synonym_dictionary()
 
 
 def show_stats(name, sli_list):
-    pos = sum(sli.get_SL() for sli in sli_list)
-    neg = sum(not sli.get_SL() for sli in sli_list)
+    pos = sum(sl.get_SL() for sl in sli_list)
+    neg = sum(not sl.get_SL() for sl in sli_list)
     print("[INFO] %s: %d positive and %d negative entries" % (name, pos, neg))
 
 
@@ -34,6 +34,10 @@ show_stats("Brough et al 2018", brough2018_list)
 chakraborty2017 = Chakraborty2017Parser()
 chakraborty2017_list = chakraborty2017.parse()
 show_stats("chakraborty et al 2017", chakraborty2017_list)
+
+dai2013 = Dai2013Parser()
+dai2013_list = dai2013.parse()
+show_stats("Dai et al 2013", dai2013_list)
 
 han2017 = Han2017Parser()
 han2017_list = han2017.parse()
@@ -126,8 +130,8 @@ wang_2019 = Wang2019Parser()
 wang_2019_list = wang_2019.parse()
 show_stats("Wang et al 2019", wang_2019_list)
 
-sli_lists = [bommi2008_list, blomen2015_list, brough2018_list, chakraborty2017_list, han2017_list, kang2015_list,
-             kessler2012_list,
+sli_lists = [bommi2008_list, blomen2015_list, brough2018_list, chakraborty2017_list, dai2013_list,
+             han2017_list, kang2015_list, kessler2012_list,
              krastev2011_list, lord2008_list, luo2009_list, mengwasser_2019_list, mohni2014_list, mondal2019_list,
              oser2019_list,
              shen2015_list, shen2017_list, schick2019_list, srivas2016_list, steckel2012_list,
