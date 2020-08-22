@@ -48,6 +48,8 @@ class ManualEntry(SL_DatasetParser):
         self._add_pan_2017()
         self._add_ding_2017()
         self._add_kawaguchi_2015()
+        self._get_add_2016()
+        self._add_shapiro_2014()
 
     def create_sli(self, geneA, geneB, geneApert, geneBpert, cell, cellosaurus, cancer, ncit,
                    assay, pmid, effecttype=SlConstants.N_A, effectsize=SlConstants.N_A):
@@ -69,6 +71,30 @@ class ManualEntry(SL_DatasetParser):
                                          pmid=pmid,
                                          SL=True)
         return sli
+
+    def _add_shapiro_2014(self):
+        pmid = '24848258'
+        ptk2 = 'PTK2' # (current symbol for FAK, see PMID: 27786412)
+        nf2 = 'NF2' # Merlin
+        sli = self.create_sli(geneA=nf2, geneB=ptk2,
+                              geneApert=SlConstants.LOF_MUTATION, geneBpert=SlConstants.PHARMACEUTICAL,
+                              cell='malignant pleural mesothelioma cells', cellosaurus=SlConstants.N_A,
+                              cancer=SlConstants.PLEURAL_MALIGNANT_MESOTHELIOMA,
+                              ncit=SlConstants.PLEURAL_MALIGNANT_MESOTHELIOMA_NCIT,
+                              assay=SlConstants.GROWTH_INHIBITION_ASSAY, pmid=pmid)
+        self.entries.append(sli)
+
+    def _get_add_2016(self):
+        pmid = '26647789'
+        cdkn2a = 'CDKN2A'
+        rb1 = 'RB1'
+        sli = self.create_sli(geneA=rb1, geneB=cdkn2a,
+                              geneApert=SlConstants.SI_RNA,
+                              geneBpert=SlConstants.LOF_MUTATION,
+                              cell=SlConstants.H82_CELL, cellosaurus=SlConstants.H82_CELLOSAURUS,
+                              cancer=SlConstants.NON_SMALL_CELL_LUNG, ncit=SlConstants.NON_SMALL_CELL_LUNG_NCIT,
+                              assay=SlConstants.CELL_VIABILITY_ASSAY, pmid=pmid)
+        self.entries.append(sli)
 
 
     def _add_kawaguchi_2015(self):
