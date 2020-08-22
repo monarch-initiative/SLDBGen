@@ -5,7 +5,7 @@ from .sl_constants import SlConstants
 
 class Mengwasser2019Parser(SL_DatasetParser):
     def __init__(self, fname=None):
-        pmid = " 30686591"
+        pmid = "30686591"
         super().__init__(fname=fname, pmid=pmid)
 
     def parse(self):

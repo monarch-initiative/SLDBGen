@@ -72,6 +72,10 @@ mohni2014 = Mohni2014Parser(entrez=entrez_dict, ensembl=ensembl_dict, synonym=sy
 mohni2014_list = mohni2014.parse()
 show_stats("Mohni et al 2014", mohni2014_list)
 
+mondal2019 = Mondal2019Parser()
+mondal2019_list = mondal2019.parse()
+show_stats("Mondal et al 2019", mondal2019_list)
+
 oser2019 = Oser2019Parser()
 oser2019_list = oser2019.parse()
 show_stats("Oser et al 2019", oser2019_list)
@@ -124,7 +128,8 @@ show_stats("Wang et al 2019", wang_2019_list)
 
 sli_lists = [bommi2008_list, blomen2015_list, brough2018_list, chakraborty2017_list, han2017_list, kang2015_list,
              kessler2012_list,
-             krastev2011_list, lord2008_list, luo2009_list, mengwasser_2019_list, mohni2014_list, oser2019_list,
+             krastev2011_list, lord2008_list, luo2009_list, mengwasser_2019_list, mohni2014_list, mondal2019_list,
+             oser2019_list,
              shen2015_list, shen2017_list, schick2019_list, srivas2016_list, steckel2012_list,
              sun2019_list, toyoshima2008_list, turner2008_list, vizeacoumar2013_list, wang2017_list,
              wang_2019_list, manual_list]
