@@ -111,6 +111,8 @@ class SlConstants:
     CML_BCRABL_POS_NCIT = 'NCIt: C3174'
     COLON_CARCINOMA = 'Colon carcinoma'
     COLON_CARCINOMA_NCIT = 'NCIT:C4910'
+    COLON_ADENOCARCINOMA = 'Colon adenocarcinoma'
+    COLON_ADENOCARCINOMA_NCIT = 'NCIT:C4349'
     COLORECTAL_CARCINOMA = "Colorectal Carcinoma"
     COLORECTAL_CARCINOMA_NCIT = "NCIT:C2955"
     GASTRIC_CARCINOMA = 'Gastric Carcinoma'

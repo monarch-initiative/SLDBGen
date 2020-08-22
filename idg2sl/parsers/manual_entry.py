@@ -50,11 +50,13 @@ class ManualEntry(SL_DatasetParser):
         self._add_kawaguchi_2015()
         self._get_add_2016()
         self._add_shapiro_2014()
+        self._get_noll_2016()
+        self._get_sarthy_2007()
 
     def create_sli(self, geneA, geneB, geneApert, geneBpert,  assay, pmid,
                    cell=SlConstants.N_A, cellosaurus=SlConstants.N_A,
                    cancer=SlConstants.N_A, ncit=SlConstants.N_A,
-                    effecttype=SlConstants.N_A, effectsize=SlConstants.N_A):
+                    effecttype=SlConstants.N_A, effectsize=SlConstants.N_A, sl=True):
         geneAid = self.get_ncbigene_curie(geneA)
         geneBid = self.get_ncbigene_curie(geneB)
         sli = SyntheticLethalInteraction(gene_A_symbol=geneA,
@@ -71,8 +73,28 @@ class ManualEntry(SL_DatasetParser):
                                          ncit_id=ncit,
                                          assay=assay,
                                          pmid=pmid,
-                                         SL=True)
+                                         SL=sl)
         return sli
+
+    def _get_sarthy_2007(self):
+        """
+        survivin, CDC2, and C20ORF18 induced differential cell killing in the DLD-1 versus DKS-8 cells.
+        C20ORF18 is now RBCK1 (RANBP2-type and C3HC4-type zinc finger containing 1)
+        """
+        pmid = '17237286'
+        kras = 'KRAS'
+        birc5 = 'BIRC5' # gene symbol for survivin
+        rbck1 = 'RBCK1'
+        gene_b_list = {birc5, rbck1}
+        # cannot unambiguously identify CDC2, this symbol is an alias for two current gene symbols
+        for geneB in gene_b_list:
+            sli = self.create_sli(geneA=kras, geneB=geneB, geneApert=SlConstants.ACTIVATING_MUTATION,
+                              geneBpert=SlConstants.SI_RNA, cell=SlConstants.DLD1_CELL,
+                              cellosaurus=SlConstants.DLD1_CELLOSAURUS, cancer=SlConstants.COLON_ADENOCARCINOMA,
+                              ncit=SlConstants.COLON_ADENOCARCINOMA_NCIT, assay=SlConstants.CELL_VIABILITY_ASSAY,
+                              pmid=pmid)
+            self.entries.append(sli)
+
 
     def _get_noll_2016(self):
         """
@@ -85,12 +107,12 @@ class ManualEntry(SL_DatasetParser):
         sli = self.create_sli(geneA=brca1, geneB=parg,
                                 geneApert=SlConstants.LOF_MUTATION, geneBpert=SlConstants.SI_RNA,
                                 cell=SlConstants.UWB1_CELL, cellosaurus=SlConstants.UWB1_CELLOSAURUS,
-                                assay=SlConstants.CELL_VIABILITY_ASSAY, pmid=pmid, SL=False)
+                                assay=SlConstants.CELL_VIABILITY_ASSAY, pmid=pmid, sl=False)
         self.entries.append(sli)
         sli = self.create_sli(geneA=pten, geneB=parg,
                               geneApert=SlConstants.LOF_MUTATION, geneBpert=SlConstants.SI_RNA,
                               cell=SlConstants.U2OS_CELL, cellosaurus=SlConstants.U2OS_CELLOSAURUS,
-                              assay=SlConstants.CELL_VIABILITY_ASSAY, pmid=pmid, SL=False)
+                              assay=SlConstants.CELL_VIABILITY_ASSAY, pmid=pmid, sl=False)
         self.entries.append(sli)
 
 
