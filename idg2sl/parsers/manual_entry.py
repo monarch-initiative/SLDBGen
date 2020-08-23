@@ -58,6 +58,7 @@ class ManualEntry(SL_DatasetParser):
         self._add_chan_2019()
         self._add_carbajosa_2019()
         self._add_zhu_2010()
+        self._add_prahallad_2012()
 
     def create_and_add_sli(self, geneA, geneB, geneApert, geneBpert, assay, pmid,
                            cell=SlConstants.N_A, cellosaurus=SlConstants.N_A,
@@ -89,6 +90,22 @@ class ManualEntry(SL_DatasetParser):
                                          SL=sl)
         self.entries.append(sli)
 
+
+
+    def _add_prahallad_2012(self):
+        """
+        blockade of the epidermal growth factor receptor (EGFR) shows strong synergy with BRAF(V600E) inhibition.
+        We find in multiple BRAF(V600E) mutant colon cancers that inhibition of EGFR by the antibody drug cetuximab or
+        the small-molecule drugs gefitinib or erlotinib is strongly synergistic with BRAF(V600E) inhibition, both in
+        vitro and in vivo.
+        """
+        pmid = '22281684'
+        egfr = 'EGFR'
+        braf = 'BRAF'
+        self.create_and_add_sli(geneA=braf, geneB=egfr, geneApert=SlConstants.PHARMACEUTICAL,
+                                geneBpert=SlConstants.PHARMACEUTICAL, cancer=SlConstants.COLON_CARCINOMA,
+                                ncit=SlConstants.COLON_CARCINOMA_NCIT, assay=SlConstants.PHARAMACEUTICAL_INHIBITION_ASSAY,
+                                pmid=pmid)
 
     def _add_zhu_2010(self):
         pmid = '21031151'
