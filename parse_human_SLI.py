@@ -122,6 +122,10 @@ steckel2012 = Steckel2012Parser()
 steckel2012_list = steckel2012.parse()
 show_stats("Steckel et al 2012", steckel2012_list)
 
+sullivan2012 = Sullivan2012Parser()
+sullivan2012_list = sullivan2012.parse()
+show_stats("Sullivan et al 2012", sullivan2012_list)
+
 sun2019 = Sun2019Parser()
 sun2019_list = sun2019.parse()
 show_stats("Sun et al 2019", sun2019_list)
@@ -152,7 +156,7 @@ sli_lists = [baldwin2010_list, bommi2008_list, blomen2015_list, brough2018_list,
              krastev2011_list, lord2008_list, luo2009_list, martin2010_list, mengwasser_2019_list, mohni2014_list,
              mondal2019_list,
              oser2019_list,
-             shen2015_list, shen2017_list, schick2019_list, srivas2016_list, steckel2012_list,
+             shen2015_list, shen2017_list, schick2019_list, srivas2016_list, steckel2012_list, sullivan2012_list,
              sun2019_list, toyoshima2008_list, turner2008_list, vizeacoumar2013_list, wang2017_list,
              wang_2019_list, manual_list, manual_one_list]
 all_sli_list = []

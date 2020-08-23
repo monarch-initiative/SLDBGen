@@ -84,6 +84,5 @@ class ManualEntryOne(SL_DatasetParser):
                                 assay=SlConstants.GROWTH_INHIBITION_ASSAY, pmid=pmid)
 
 
-
     def get_entries(self):
         return self.entries
