@@ -16,6 +16,7 @@ class ManualEntryOne(SL_DatasetParser):
         super().__init__(fname=None, pmid=None, entrez=entrez, ensembl=ensembl, synonym=synonym)
         self.entries = []
         self._add_mcmanus_2009()
+        self._add_ward_2017()
 
     def create_and_add_sli(self, geneA, geneB, geneApert, geneBpert, assay, pmid,
                            cell=SlConstants.N_A, cellosaurus=SlConstants.N_A,
@@ -57,6 +58,17 @@ class ManualEntryOne(SL_DatasetParser):
         self.create_and_add_sli(geneA=rad54b, geneB=fen1, geneApert=SlConstants.ACTIVATING_MUTATION,
                                 geneBpert=SlConstants.SH_RNA, cell=SlConstants.HCT_116, cellosaurus=SlConstants.HCT_116_CELLOSAURUS,
                                 assay=SlConstants.GROWTH_INHIBITION_ASSAY, pmid=pmid)
+
+    def _add_ward_2017(self):
+        """
+        Multiple lines of evidence.
+        """
+        pmid = '28628639'
+        fen1 = 'FEN1'
+        mre11a = 'MRE11' # (current symbol for MRE11A)
+        self.create_and_add_sli(geneA=fen1, geneB=mre11a,
+                                geneApert=SlConstants.PHARMACEUTICAL, geneBpert=SlConstants.LOF_MUTATION,
+                                assay=SlConstants.CELL_VIABILITY_ASSAY,pmid=pmid)
 
 
     def get_entries(self):
