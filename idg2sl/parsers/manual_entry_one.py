@@ -24,6 +24,7 @@ class ManualEntryOne(SL_DatasetParser):
         self._add_sayesh_2013()
         self._add_pourdehnad_2013()
         self._add_ali_2018()
+        self._add_kim_2015()
 
     def create_and_add_sli(self, geneA, geneB, geneApert, geneBpert, assay, pmid,
                            cell=SlConstants.N_A, cellosaurus=SlConstants.N_A,
@@ -54,6 +55,23 @@ class ManualEntryOne(SL_DatasetParser):
                                          pmid=pmid,
                                          SL=sl)
         self.entries.append(sli)
+
+    def _add_kim_2015(self):
+        """
+        We chose the  24 genes sensitized at least three of these cell lines to the effects of a Met targeting antibody.
+        (Figure 1c).
+        """
+        pmid = '24662823'
+        met = 'MET'
+        metid = self.get_ncbigene_curie(met)
+        sli_symbols = {'SERPINA3', 'PARP1', 'AREG', 'ATP1A2', 'BCL2L1', 'AKT2', 'BCR', 'FOS', 'CDKN2C','SRF','FGFR3',
+                       'CALR', 'CRK', 'INSRR','CD247', 'CASP1', 'CTTN', 'CHRNA7', 'ITGB3', 'CASP2', 'CD151', 'CCND2',
+                       'CTSD', 'EPB41L2'}
+        for geneB in sli_symbols:
+            self.create_and_add_sli(geneA=met, geneB=geneB, geneApert=SlConstants.INHIBITORY_ANTIBODY,
+                                    geneBpert=SlConstants.SI_RNA,
+                                    cell=SlConstants.MKN45_CELL, cellosaurus=SlConstants.MKN45_CELLOSAURUS,
+                                    assay=SlConstants.CELL_VIABILITY_ASSAY, pmid=pmid)
 
     def _add_ali_2018(self):
         pmid = '30297533'
