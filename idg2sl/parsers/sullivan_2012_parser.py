@@ -1,7 +1,7 @@
 from idg2sl import SyntheticLethalInteraction
 from idg2sl.sl_dataset_parser import SL_DatasetParser
 from .sl_constants import SlConstants
-import csv
+
 
 
 class Sullivan2012Parser(SL_DatasetParser):

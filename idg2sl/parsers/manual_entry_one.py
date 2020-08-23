@@ -20,6 +20,8 @@ class ManualEntryOne(SL_DatasetParser):
         self._add_helming_2014()
         self._add_koundinya_2018()
         self._add_turchick_2019()
+        self._add_guppy_2017()
+        self._add_sayesh_2013()
 
     def create_and_add_sli(self, geneA, geneB, geneApert, geneBpert, assay, pmid,
                            cell=SlConstants.N_A, cellosaurus=SlConstants.N_A,
@@ -50,6 +52,22 @@ class ManualEntryOne(SL_DatasetParser):
                                          pmid=pmid,
                                          SL=sl)
         self.entries.append(sli)
+
+    def _add_sayesh_2013(self):
+        pmid = '24002644'
+        rad54b = 'RAD54B'
+        sod1 = 'RAD54B'
+        self.create_and_add_sli(geneA=rad54b, geneB=sod1, geneApert=SlConstants.SI_RNA, geneBpert=SlConstants.LOF_MUTATION,
+                                cell=SlConstants.HCT_116, cellosaurus=SlConstants.HCT_116_CELLOSAURUS,
+                                assay=SlConstants.CELL_VIABILITY_ASSAY,pmid=pmid)
+
+    def _add_guppy_2017(self):
+        pmid = '28462496'
+        parp1 = 'PARP1'
+        rnf20 = 'RNF20'
+        self.create_and_add_sli(geneA=parp1, geneB=rnf20, geneApert=SlConstants.SI_RNA, geneBpert=SlConstants.SI_RNA,
+                                cell=SlConstants.HCT_116, cellosaurus=SlConstants.HCT_116_CELLOSAURUS,
+                                assay=SlConstants.CELL_VIABILITY_ASSAY, pmid=pmid)
 
     def _add_turchick_2019(self):
         pmid = '30863489'
