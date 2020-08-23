@@ -17,6 +17,7 @@ class ManualEntryOne(SL_DatasetParser):
         self.entries = []
         self._add_mcmanus_2009()
         self._add_ward_2017()
+        self._add_helming_2014()
 
     def create_and_add_sli(self, geneA, geneB, geneApert, geneBpert, assay, pmid,
                            cell=SlConstants.N_A, cellosaurus=SlConstants.N_A,
@@ -74,7 +75,13 @@ class ManualEntryOne(SL_DatasetParser):
                                 cell=SlConstants.FADU_CELL, cellosaurus=SlConstants.FADU_CELLOSAURUS,
                                 assay=SlConstants.CELL_VIABILITY_ASSAY, pmid=pmid)
 
-
+    def _add_helming_2014(self):
+        pmid = '24562383'
+        arid1a = 'ARID1A'
+        arid1b = 'ARID1B'
+        self.create_and_add_sli(geneA=arid1a, geneB=arid1b, geneApert=SlConstants.LOF_MUTATION,
+                                geneBpert=SlConstants.SH_RNA,cell=SlConstants.TOV21G_CELL, cellosaurus=SlConstants.TOV21G_CELLOSAURUS,
+                                assay=SlConstants.GROWTH_INHIBITION_ASSAY, pmid=pmid)
 
 
 
