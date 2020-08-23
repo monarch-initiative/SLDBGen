@@ -47,6 +47,10 @@ han2017 = Han2017Parser()
 han2017_list = han2017.parse()
 show_stats("Han et al 2017", han2017_list)
 
+josse2014 = Josse2014Parser()
+josse2014_list = josse2014.parse()
+show_stats("Josse et al 2014", josse2014_list)
+
 kang2015 = Kang2015Parser()
 kang2015_list = kang2015.parse()
 show_stats("Kang et al 2015", kang2015_list)
@@ -144,7 +148,7 @@ wang_2019_list = wang_2019.parse()
 show_stats("Wang et al 2019", wang_2019_list)
 
 sli_lists = [baldwin2010_list, bommi2008_list, blomen2015_list, brough2018_list, chakraborty2017_list, dai2013_list,
-             han2017_list, kang2015_list, kessler2012_list,
+             han2017_list, josse2014_list, kang2015_list, kessler2012_list,
              krastev2011_list, lord2008_list, luo2009_list, martin2010_list, mengwasser_2019_list, mohni2014_list,
              mondal2019_list,
              oser2019_list,
