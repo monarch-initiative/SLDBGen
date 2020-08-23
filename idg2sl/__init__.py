@@ -1,5 +1,6 @@
 from .synthetic_lethal_interaction import SyntheticLethalInteraction
 from idg2sl.parsers.manual_entry import ManualEntry
+from .parsers.manual_entry_one import ManualEntryOne
 from .parsers.sl_constants import SlConstants
 from .parsers.baldwin_2010_parser import Baldwin2010Parser
 from .parsers.blomen_2015_parser import Blomen2015Parser
@@ -65,4 +66,5 @@ __all__ = ["SyntheticLethalInteraction",
             "Wang2017Parser",
             "Wang2019Parser",
             "HgncParser",
-            "ManualEntry"]
+            "ManualEntry",
+            "ManualEntryOne"]

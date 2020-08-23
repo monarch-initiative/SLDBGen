@@ -103,6 +103,21 @@ class ManualEntry(SL_DatasetParser):
                                 geneApert=SlConstants.SI_RNA, geneBpert=SlConstants.SI_RNA,
                                 cell=SlConstants.HAP1_CELL, cellosaurus=SlConstants.HAP1_CELL,
                                 assay=SlConstants.CELL_VIABILITY_ASSAY, pmid=pmid)
+        # There were various negative interactions
+        # This synergy was specific to WRN as dual KD of BLM and MLH1 did not exhibit a significant effect on cell proliferation
+        blm = 'BLM'
+        self.create_and_add_sli(geneA=mlh1, geneB=blm,
+                                geneApert=SlConstants.SI_RNA, geneBpert=SlConstants.SI_RNA,
+                                cell=SlConstants.HAP1_CELL, cellosaurus=SlConstants.HAP1_CELL,
+                                assay=SlConstants.CELL_VIABILITY_ASSAY, pmid=pmid, sl=False)
+        # Dual KD of WRN and the other genes involved in mismatch recognition pathways, MSH2, PMS1, and PMS2,
+        # did not phenocopy the synergy observed in WRN and MLH1 dual KD
+        sl_neg = { 'MSH2', 'PMS1', 'PMS2'}
+        for geneB in sl_neg:
+            self.create_and_add_sli(geneA=wrn, geneB=geneB,
+                                    geneApert=SlConstants.SI_RNA, geneBpert=SlConstants.SI_RNA,
+                                    cell=SlConstants.HAP1_CELL, cellosaurus=SlConstants.HAP1_CELL,
+                                    assay=SlConstants.CELL_VIABILITY_ASSAY, pmid=pmid, sl=False)
 
     def _add_prahallad_2012(self):
         """

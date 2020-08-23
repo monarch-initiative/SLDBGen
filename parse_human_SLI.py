@@ -70,7 +70,11 @@ show_stats("Luo et al 2009", luo2009_list)
 
 manual = ManualEntry(entrez=entrez_dict, ensembl=ensembl_dict, synonym=synonym_dict)
 manual_list = manual.get_entries()
-show_stats("Manually entered single-SLI studies", manual_list)
+show_stats("Manually entered single-SLI studies (part zero)", manual_list)
+
+manual_one = ManualEntryOne(entrez=entrez_dict, ensembl=ensembl_dict, synonym=synonym_dict)
+manual_one_list = manual_one.get_entries()
+show_stats("Manually entered single-SLI studies (part one)", manual_one_list)
 
 martin2010 = Martin2010and2011Parser()
 martin2010_list = martin2010.parse()
@@ -146,7 +150,7 @@ sli_lists = [baldwin2010_list, bommi2008_list, blomen2015_list, brough2018_list,
              oser2019_list,
              shen2015_list, shen2017_list, schick2019_list, srivas2016_list, steckel2012_list,
              sun2019_list, toyoshima2008_list, turner2008_list, vizeacoumar2013_list, wang2017_list,
-             wang_2019_list, manual_list]
+             wang_2019_list, manual_list, manual_one_list]
 all_sli_list = []
 for l in sli_lists:
     all_sli_list.extend(l)
