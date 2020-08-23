@@ -57,11 +57,16 @@ class ManualEntry(SL_DatasetParser):
         self._add_feng_2019()
         self._add_chan_2019()
         self._add_carbajosa_2019()
+        self._add_zhu_2010()
 
     def create_and_add_sli(self, geneA, geneB, geneApert, geneBpert, assay, pmid,
                            cell=SlConstants.N_A, cellosaurus=SlConstants.N_A,
                            cancer=SlConstants.N_A, ncit=SlConstants.N_A,
-                           effecttype=SlConstants.N_A, effectsize=SlConstants.N_A, sl=True):
+                           effecttype=SlConstants.N_A, effectsize=SlConstants.N_A,
+                           background_dependency_status=SlConstants.N_A,
+                           background_dependency_gene_symbol=SlConstants.N_A,
+                           background_dependency_gene_id=SlConstants.N_A,
+                           sl=True):
         geneAid = self.get_ncbigene_curie(geneA)
         geneBid = self.get_ncbigene_curie(geneB)
         sli = SyntheticLethalInteraction(gene_A_symbol=geneA,
@@ -77,9 +82,30 @@ class ManualEntry(SL_DatasetParser):
                                          cancer_type=cancer,
                                          ncit_id=ncit,
                                          assay=assay,
+                                         background_dependency_status=background_dependency_status,
+                                         background_dependency_gene_symbol=background_dependency_gene_symbol,
+                                         background_dependency_gene_id=background_dependency_gene_id,
                                          pmid=pmid,
                                          SL=sl)
         self.entries.append(sli)
+
+
+    def _add_zhu_2010(self):
+        pmid = '21031151'
+        prkcd = 'PRKCD'  # protein kinase C, delta
+        hras = 'HRAS'
+        # These are mouse cells but other experiments were done with human cells
+        # that document sufficiently the effect
+        cell = 'NIH 3T3'
+        cellosaurus = 'CVCL_0594'
+        mapk8 = 'MAPK8' # current symbol for JNK
+        mapk8_id = self.get_ncbigene_curie(mapk8)
+        self.create_and_add_sli(geneA=hras, geneB=prkcd, geneApert=SlConstants.ACTIVATING_MUTATION,
+                                geneBpert=SlConstants.SH_RNA, cell=cell, cellosaurus=cellosaurus,
+                                background_dependency_status=SlConstants.OVEREXPRESSION,
+                                background_dependency_gene_symbol=mapk8,
+                                background_dependency_gene_id=mapk8_id,
+                                assay=SlConstants.APOPTOSIS_ASSAY, pmid=pmid)
 
     def _add_carbajosa_2019(self):
         pmid = '30890549'

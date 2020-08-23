@@ -1,7 +1,8 @@
 
 
 class SlConstants:
-    ACTIVATING_MUTATION = 'activating_mutation'
+    ACTIVATING_MUTATION = 'activating mutation'
+    APOPTOSIS_ASSAY = 'apoptosis assay'
     CELL_VIABILITY_ASSAY = 'cell viability assay'
     CISPLATIN_CYTOTOXICITY_ASSAY = "cisplatin toxicity assay"
     COHORT_STUDY = "cohort study"
@@ -38,6 +39,8 @@ class SlConstants:
     CELL_5637_CELLOSAURUS = 'CVCL_0126'
     A375_CELL = 'A375'
     A375_CELLOSAURUS = 'CVCL_0132'
+    A431_CELL = 'A-431'
+    A431_CELLOSAURUS = 'CVCL_0037'
     A498_CELL = 'A-498'
     A498_CELLOSAURUS = 'CVCL_1056'
     A549_CELL = "A-549"
