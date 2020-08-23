@@ -13,6 +13,7 @@ class SlConstants:
     DEGRADATION = 'degradation'
     DYSFUNCTIONALITY = 'dysfunction'
     GROWTH_INHIBITION_ASSAY = "growth inhibition assay"
+    INHIBITORY_ANTIBODY = 'inhibitory antibody'
     KNOCKOUT = 'knockout'
     LOF_MUTATION = 'lof_mutation'
     LOG2_DECREASE_IN_ABUNDANCE = "log2 decrease in abundance"
@@ -103,6 +104,8 @@ class SlConstants:
     T98G_CELLOSAURUS = 'CVCL_0556'
     TOV21G_CELL = 'TOV-21G'
     TOV21G_CELLOSAURUS = 'CVCL_3613'
+    U251MG_CELL = 'U-251MG'
+    U251MG_CELLOSAURUS = 'CVCL_0021'
     U2OS_CELL = 'U2OS'
     U2OS_CELLOSAURUS = 'CVCL_0042'
     UWB1_CELL = 'UWB1.289'

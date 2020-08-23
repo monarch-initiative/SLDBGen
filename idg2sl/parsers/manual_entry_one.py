@@ -18,6 +18,8 @@ class ManualEntryOne(SL_DatasetParser):
         self._add_mcmanus_2009()
         self._add_ward_2017()
         self._add_helming_2014()
+        self._add_koundinya_2018()
+        self._add_turchick_2019()
 
     def create_and_add_sli(self, geneA, geneB, geneApert, geneBpert, assay, pmid,
                            cell=SlConstants.N_A, cellosaurus=SlConstants.N_A,
@@ -48,6 +50,16 @@ class ManualEntryOne(SL_DatasetParser):
                                          pmid=pmid,
                                          SL=sl)
         self.entries.append(sli)
+
+    def _add_turchick_2019(self):
+        pmid = '30863489'
+        pten = 'PTEN'
+        rad51 = 'RAD51'
+        self.create_and_add_sli(geneA=pten, geneB=rad51, geneApert=SlConstants.LOF_MUTATION,
+                                geneBpert=SlConstants.INHIBITORY_ANTIBODY, cell=SlConstants.U251MG_CELL,
+                                cellosaurus=SlConstants.U251MG_CELLOSAURUS, cancer=SlConstants.MELANOMA,
+                                ncit=SlConstants.MELANOMA_NCIT, assay=SlConstants.CELL_VIABILITY_ASSAY,
+                                pmid=pmid)
 
     def _add_mcmanus_2009(self):
         pmid = '19218431'
@@ -83,6 +95,14 @@ class ManualEntryOne(SL_DatasetParser):
                                 geneBpert=SlConstants.SH_RNA,cell=SlConstants.TOV21G_CELL, cellosaurus=SlConstants.TOV21G_CELLOSAURUS,
                                 assay=SlConstants.GROWTH_INHIBITION_ASSAY, pmid=pmid)
 
+    def _add_koundinya_2018(self):
+        pmid = '29628435'
+        kras = 'KRAS'
+        dhodh = 'DHODH'
+        self.create_and_add_sli(geneA=kras, geneB=dhodh, geneApert=SlConstants.ACTIVATING_MUTATION,
+                                geneBpert=SlConstants.PHARMACEUTICAL, cell=SlConstants.HCT_116,
+                                cellosaurus=SlConstants.HCT_116_CELLOSAURUS,
+                                assay=SlConstants.GROWTH_INHIBITION_ASSAY, pmid=pmid)
 
     def get_entries(self):
         return self.entries
