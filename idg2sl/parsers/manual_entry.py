@@ -59,6 +59,7 @@ class ManualEntry(SL_DatasetParser):
         self._add_carbajosa_2019()
         self._add_zhu_2010()
         self._add_prahallad_2012()
+        self._add_kategaya_2019()
 
     def create_and_add_sli(self, geneA, geneB, geneApert, geneBpert, assay, pmid,
                            cell=SlConstants.N_A, cellosaurus=SlConstants.N_A,
@@ -90,7 +91,18 @@ class ManualEntry(SL_DatasetParser):
                                          SL=sl)
         self.entries.append(sli)
 
-
+    def _add_kategaya_2019(self):
+        """
+        Of the diverse DDR genes interrogated by acute RNAi-mediated KD, only MMR gene,
+        MLH1, showed SL interaction with WRN.
+        """
+        pmid = '30898619'
+        wrn = 'WRN'
+        mlh1 = 'MLH1'
+        self.create_and_add_sli(geneA=mlh1, geneB=wrn,
+                                geneApert=SlConstants.SI_RNA, geneBpert=SlConstants.SI_RNA,
+                                cell=SlConstants.HAP1_CELL, cellosaurus=SlConstants.HAP1_CELL,
+                                assay=SlConstants.CELL_VIABILITY_ASSAY, pmid=pmid)
 
     def _add_prahallad_2012(self):
         """
