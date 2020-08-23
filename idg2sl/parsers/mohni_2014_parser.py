@@ -71,7 +71,7 @@ class Mohni2014Parser(SL_DatasetParser):
                                                  effect_type=SlConstants.ZSCORE,
                                                  effect_size=mn,
                                                  cell_line=SlConstants.U2OS_CELL,
-                                                 cellosaurus_id=SlConstants.U2OS_CELLOSUARUS,
+                                                 cellosaurus_id=SlConstants.U2OS_CELLOSAURUS,
                                                  cancer_type='n/a',
                                                  ncit_id='n/a',
                                                  assay=SlConstants.RNA_INTERFERENCE_ASSAY,
