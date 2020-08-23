@@ -69,6 +69,11 @@ class ManualEntryOne(SL_DatasetParser):
         self.create_and_add_sli(geneA=fen1, geneB=mre11a,
                                 geneApert=SlConstants.PHARMACEUTICAL, geneBpert=SlConstants.LOF_MUTATION,
                                 assay=SlConstants.CELL_VIABILITY_ASSAY,pmid=pmid)
+        atm = 'ATM'
+        self.create_and_add_sli(geneA=fen1, geneB=atm, geneApert=SlConstants.PHARMACEUTICAL, geneBpert=SlConstants.SH_RNA,
+                                cell=SlConstants.FADU_CELL, cellosaurus=SlConstants.FADU_CELLOSAURUS,
+                                assay=SlConstants.CELL_VIABILITY_ASSAY, pmid=pmid)
+
 
 
     def get_entries(self):
