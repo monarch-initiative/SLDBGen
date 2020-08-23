@@ -30,6 +30,7 @@ class SlConstants:
     SG_RNA_DEPLETION_ASSAY = 'sgRNA depletion assay'
     SH_RNA = 'shRNA'
     SI_RNA = 'siRNA'
+    TRANSGENIC_MOUSE_MODEL = 'transgenic mouse model'
     WILDTYPE = 'wildtype'
     ZSCORE = "Z-score"
 

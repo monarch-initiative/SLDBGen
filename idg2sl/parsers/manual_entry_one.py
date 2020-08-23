@@ -22,6 +22,8 @@ class ManualEntryOne(SL_DatasetParser):
         self._add_turchick_2019()
         self._add_guppy_2017()
         self._add_sayesh_2013()
+        self._add_pourdehnad_2013()
+        self._add_ali_2018()
 
     def create_and_add_sli(self, geneA, geneB, geneApert, geneBpert, assay, pmid,
                            cell=SlConstants.N_A, cellosaurus=SlConstants.N_A,
@@ -52,6 +54,24 @@ class ManualEntryOne(SL_DatasetParser):
                                          pmid=pmid,
                                          SL=sl)
         self.entries.append(sli)
+
+    def _add_ali_2018(self):
+        pmid = '30297533'
+        parp1 = 'PARP1'
+        xrcc1 = 'XRCC1'
+        self.create_and_add_sli(geneA=xrcc1, geneB=parp1, geneApert=SlConstants.LOF_MUTATION,
+                                geneBpert=SlConstants.PHARMACEUTICAL, cell=SlConstants.MDAMB231_CELL,
+                                cellosaurus=SlConstants.MDAMB231_CELLOSAURUS, assay=SlConstants.CELL_VIABILITY_ASSAY,
+                                pmid=pmid)
+
+    def _add_pourdehnad_2013(self):
+        pmid = '23803853'
+        # eukaryotic translation initiation factor 4E (eIF4E) binding protein 1 (4EBP1)
+        myc = 'MYC'
+        eif4ebp1 = 'EIF4EBP1'
+        self.create_and_add_sli(geneA=myc, geneB=eif4ebp1, geneApert=SlConstants.ACTIVATING_MUTATION,
+                                geneBpert=SlConstants.LOF_MUTATION, assay=SlConstants.TRANSGENIC_MOUSE_MODEL,
+                                pmid=pmid)
 
     def _add_sayesh_2013(self):
         pmid = '24002644'
