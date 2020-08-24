@@ -9,6 +9,9 @@ class ManualEntry(SL_DatasetParser):
     These are very valuable. It is easiest to enter this information by hand.
     """
 
+    def parse(self):
+        pass  # Not implemented. We use other methods from the superclass
+
     def __init__(self, entrez, ensembl, synonym):
         super().__init__(fname=None, pmid=None, entrez=entrez, ensembl=ensembl, synonym=synonym)
         self.entries = []
@@ -112,7 +115,7 @@ class ManualEntry(SL_DatasetParser):
                                 assay=SlConstants.CELL_VIABILITY_ASSAY, pmid=pmid, sl=False)
         # Dual KD of WRN and the other genes involved in mismatch recognition pathways, MSH2, PMS1, and PMS2,
         # did not phenocopy the synergy observed in WRN and MLH1 dual KD
-        sl_neg = { 'MSH2', 'PMS1', 'PMS2'}
+        sl_neg = {'MSH2', 'PMS1', 'PMS2'}
         for geneB in sl_neg:
             self.create_and_add_sli(geneA=wrn, geneB=geneB,
                                     geneApert=SlConstants.SI_RNA, geneBpert=SlConstants.SI_RNA,
@@ -521,7 +524,7 @@ class ManualEntry(SL_DatasetParser):
                                 geneBpert=SlConstants.CRISPR_CAS9,
                                 effecttype=SlConstants.N_A,
                                 effectsize=SlConstants.N_A,
-                                cell='cyclin F knock‐out cell line', cellosaurus=SlConstants.N_A,
+                                cell='cyclin F knock-out cell line', cellosaurus=SlConstants.N_A,
                                 cancer=SlConstants.N_A, ncit=SlConstants.N_A,
                                 assay=SlConstants.CELL_VIABILITY_ASSAY, pmid=pmid)
 
@@ -659,7 +662,7 @@ class ManualEntry(SL_DatasetParser):
     def _add_scholl_2009(self):
         """
         KRAS and  STK33
-        Scholl C, Fröhling S, Dunn IF, et al. Synthetic lethal interaction between oncogenic KRAS dependency and
+        Scholl C et al. Synthetic lethal interaction between oncogenic KRAS dependency and
         STK33 suppression in human cancer cells. Cell. 2009;137(5):821-834.
         """
         kras = 'KRAS'
