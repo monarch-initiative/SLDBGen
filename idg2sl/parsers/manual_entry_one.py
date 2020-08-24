@@ -56,6 +56,7 @@ class ManualEntryOne(SL_DatasetParser):
                                          SL=sl)
         self.entries.append(sli)
 
+
     def _add_kim_2015(self):
         """
         We chose the  24 genes sensitized at least three of these cell lines to the effects of a Met targeting antibody.

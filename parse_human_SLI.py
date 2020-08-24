@@ -142,9 +142,12 @@ vizeacoumar2013 = Vizeacoumar2013Parser()
 vizeacoumar2013_list = vizeacoumar2013.parse()
 show_stats("Vizeacoumar et al 2013", vizeacoumar2013_list)
 
+wang2016 = Wang2016Parser()
+wang2016_list = wang2016.parse()
+show_stats("Wang et al 2016", wang2016_list)
+
 wang2017 = Wang2017Parser()
 wang2017_list = wang2017.parse()
-print("[INFO] Wang et al 2017  n=%d SL interactions" % len(wang2017_list))
 show_stats("Wang et al 2017", wang2017_list)
 
 wang_2019 = Wang2019Parser()
@@ -157,7 +160,7 @@ sli_lists = [baldwin2010_list, bommi2008_list, blomen2015_list, brough2018_list,
              mondal2019_list,
              oser2019_list,
              shen2015_list, shen2017_list, schick2019_list, srivas2016_list, steckel2012_list, sullivan2012_list,
-             sun2019_list, toyoshima2008_list, turner2008_list, vizeacoumar2013_list, wang2017_list,
+             sun2019_list, toyoshima2008_list, turner2008_list, vizeacoumar2013_list, wang2016_list, wang2017_list,
              wang_2019_list, manual_list, manual_one_list]
 all_sli_list = []
 for l in sli_lists:
