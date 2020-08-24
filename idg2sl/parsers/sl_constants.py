@@ -3,6 +3,7 @@
 class SlConstants:
     ACTIVATING_MUTATION = 'activating mutation'
     APOPTOSIS_ASSAY = 'apoptosis assay'
+    ANTISENSE_OLIGO = 'antisense oligonucleotide'
     CELL_VIABILITY_ASSAY = 'cell viability assay'
     CISPLATIN_CYTOTOXICITY_ASSAY = "cisplatin toxicity assay"
     COHORT_STUDY = "cohort study"
@@ -97,12 +98,20 @@ class SlConstants:
     MKN45_CELLOSAURUS = 'CVCL_0434'
     MOLM13_CELL = 'MOLM-13'
     MOLM13_CELLOSAURUS = 'CVCL_2119'
+    OPM1_CELL = 'OPM-1'
+    OPM1_CELLOSAURUS = 'CVCL_5210'
     OVCAR3_CELL = "OVCAR-3"
     OVCAR3_CELLOSAURUS = "CVCL_0465"
     PEO1_CELL = 'PEO1'
     PEO1_CELLOSAURUS = 'CVCL_2686'
+    RMG1_CELL = 'RMG-I'
+    RMG1_CELLOSAURUS = 'CVCL_1662'
+    SKBR3_CELL = 'SK-BR-3'
+    SKBR3_CELLOSAURUS = 'CVCL_0033'
     SNU601_CELL = 'SNU-601'
     SNU601_CELLOSAURUS = 'CVCL_0101'
+    SW620_CELL = 'SW620'
+    SW620_CELLOSAURUS = 'CVCL_0547'
     T98G_CELL = 'T98G'
     T98G_CELLOSAURUS = 'CVCL_0556'
     TOV21G_CELL = 'TOV-21G'
@@ -115,6 +124,8 @@ class SlConstants:
     UWB1_CELLOSAURUS = 'CVCL_B079'
     UMRC6_CELL = 'UM-RC-6'
     UMRC6_CELLOSAURUS = 'CVCL_2741'
+    WI38_CELL = 'WI-38'
+    WI38_CELLOSAURUS = 'CVCL_0579'
 
     ## NCI T
     ADULT_AML = 'Adult acute myeloid leukemia'
@@ -152,6 +163,8 @@ class SlConstants:
     MINIMALLY_INVASIVE_LUNG_ADENOCARCINOMA_NCIT = 'NCIT:C2923'
     NON_SMALL_CELL_LUNG = 'Lung Non-Small Cell Carcinoma'
     NON_SMALL_CELL_LUNG_NCIT = 'NCIT:C2926'
+    OVARIAN_CCC = 'Ovarian clear cell adenocarcinoma'
+    OVARIAN_CCC_NCIT = 'NCIT:C40078'
     OVARIAN_SEROUS_ADENOCARCINOMA = "Ovarian serous adenocarcinoma"
     OVARIAN_SEROUS_ADENOCARCINOMA_NCIT ="NCIT:C105555"
     PLEURAL_MALIGNANT_MESOTHELIOMA = 'Pleural Malignant Mesothelioma'
@@ -162,6 +175,8 @@ class SlConstants:
     RECURRENT_OVARIAN_CANCER_NCIT = "NCIT:C7833"
     RENAL_CELL_CARCINOMA = ' Renal cell carcinoma'
     RENAL_CELL_CARCINOMA_NCIT = 'NCIT:C9385'
+    THP1_CELL = 'THP-1'
+    THP1_CELLOSAURUS = 'CVCL_0006'
     TRIPLE_NEG_BREAST_CARCINOMA = 'Triple-Negative Breast Carcinoma'
     TRIPLE_NEG_BREAST_CARCINOMA_NCIT = 'NCIT:C71732'
     UVEAL_MELANOMA = 'Uveal melanoma'
