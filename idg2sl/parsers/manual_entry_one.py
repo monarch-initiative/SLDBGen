@@ -33,6 +33,8 @@ class ManualEntryOne(SL_DatasetParser):
         self._add_sinha_2017()
         self._add_morandell_2013()
         self._add_imai_2014()
+        self._add_wu_2018()
+        self._add_zhou_2014()
 
     def create_and_add_sli(self, geneA, geneB, geneApert, geneBpert, assay, pmid,
                            cell=SlConstants.N_A, cellosaurus=SlConstants.N_A,
@@ -63,6 +65,24 @@ class ManualEntryOne(SL_DatasetParser):
                                          pmid=pmid,
                                          SL=sl)
         self.entries.append(sli)
+
+    def _add_zhou_2014(self):
+        pmid = '25495526'
+        myc = 'MYC'
+        prkdc = 'PRKDC'
+        self.create_and_add_sli(geneA=myc, geneB=prkdc, geneApert=SlConstants.ACTIVATING_MUTATION,
+                                geneBpert=SlConstants.SH_RNA, cell=SlConstants.WI38_CELL,
+                                cellosaurus=SlConstants.WI38_CELLOSAURUS, assay=SlConstants.GROWTH_INHIBITION_ASSAY,
+                                pmid=pmid)
+
+    def _add_wu_2018(self):
+        pmid = '30097580'
+        arid1a = 'ARID1A'
+        aurka = 'AURKA'
+        self.create_and_add_sli(geneA=arid1a, geneB=aurka, geneApert=SlConstants.CRISPR_CAS9,
+                                geneBpert=SlConstants.SI_RNA, cell=SlConstants.HCT_116,
+                                cellosaurus=SlConstants.HCT_116_CELLOSAURUS, assay=SlConstants.CELL_VIABILITY_ASSAY,
+                                pmid=pmid)
 
     def _add_imai_2014(self):
         pmid = '24378760'

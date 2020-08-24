@@ -124,6 +124,8 @@ class SlConstants:
     UWB1_CELLOSAURUS = 'CVCL_B079'
     UMRC6_CELL = 'UM-RC-6'
     UMRC6_CELLOSAURUS = 'CVCL_2741'
+    WI38_CELL = 'WI-38'
+    WI38_CELLOSAURUS = 'CVCL_0579'
 
     ## NCI T
     ADULT_AML = 'Adult acute myeloid leukemia'
