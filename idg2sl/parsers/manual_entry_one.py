@@ -31,6 +31,8 @@ class ManualEntryOne(SL_DatasetParser):
         self._add_lee_2018()
         self._add_bitler_2015()
         self._add_sinha_2017()
+        self._add_morandell_2013()
+        self._add_imai_2014()
 
     def create_and_add_sli(self, geneA, geneB, geneApert, geneBpert, assay, pmid,
                            cell=SlConstants.N_A, cellosaurus=SlConstants.N_A,
@@ -62,6 +64,23 @@ class ManualEntryOne(SL_DatasetParser):
                                          SL=sl)
         self.entries.append(sli)
 
+    def _add_imai_2014(self):
+        pmid = '24378760'
+        tp53 = 'TP53' # specific for R175H
+        id1 = 'ID1'
+        self.create_and_add_sli(geneA=tp53, geneB=id1, geneApert=SlConstants.LOF_MUTATION,
+                                geneBpert=SlConstants.SI_RNA, cell=SlConstants.SKBR3_CELL,
+                                cellosaurus=SlConstants.SKBR3_CELLOSAURUS,assay=SlConstants.GROWTH_INHIBITION_ASSAY,
+                                pmid=pmid)
+
+    def _add_morandell_2013(self):
+        pmid = '24239348'
+        tp53 = 'TP53'
+        MAPKAPK2 = 'MAPKAPK2' # current symbol for MK2
+        self.create_and_add_sli(geneA=tp53, geneB=MAPKAPK2, geneApert=SlConstants.LOF_MUTATION,
+                                geneBpert=SlConstants.SI_RNA, cell=SlConstants.A549_CELL,
+                                cellosaurus=SlConstants.A549_CELLOSAURUS, assay=SlConstants.CELL_VIABILITY_ASSAY,
+                                pmid=pmid)
 
     def _add_sinha_2017(self):
         """
