@@ -27,6 +27,10 @@ class ManualEntryOne(SL_DatasetParser):
         self._add_kim_2015()
         self._add_Xu_2019()
         self._add_oike_2013()
+        self._add_bajrami_2012()
+        self._add_lee_2018()
+        self._add_bitler_2015()
+        self._add_sinha_2017()
 
     def create_and_add_sli(self, geneA, geneB, geneApert, geneBpert, assay, pmid,
                            cell=SlConstants.N_A, cellosaurus=SlConstants.N_A,
@@ -58,6 +62,63 @@ class ManualEntryOne(SL_DatasetParser):
                                          SL=sl)
         self.entries.append(sli)
 
+
+    def _add_sinha_2017(self):
+        """
+        Mainly a computational paper, but the authors validate one SLI
+        """
+        pmid = '28561042'
+        idh1 = 'IDH1'
+        acaca = 'ACACA'
+        self.create_and_add_sli(geneA=idh1, geneB=acaca, geneApert=SlConstants.LOF_MUTATION,
+                                geneBpert=SlConstants.PHARMACEUTICAL, cell=SlConstants.THP1_CELL,
+                                cellosaurus=SlConstants.THP1_CELLOSAURUS,assay=SlConstants.CELL_VIABILITY_ASSAY,
+                                pmid=pmid)
+
+    def _add_bitler_2015(self):
+        """
+        Highly specific EZH2 inhibitors (such as GSK126)
+        """
+        pmid = '25686104'
+        arid1a = 'ARID1A'
+        ezh2 = 'EZH2'
+        self.create_and_add_sli(geneA=arid1a, geneB=ezh2, geneApert=SlConstants.LOF_MUTATION,
+                                geneBpert=SlConstants.PHARMACEUTICAL, cell=SlConstants.RMG1_CELL,
+                                cellosaurus=SlConstants.RMG1_CELLOSAURUS, cancer=SlConstants.OVARIAN_CCC,
+                                ncit=SlConstants.OVARIAN_CCC_NCIT, assay=SlConstants.GROWTH_INHIBITION_ASSAY,
+                                pmid=pmid)
+
+    def _add_lee_2018(self):
+        pmid = '30101194'
+        tlk2 = 'TLK2'
+        chk1 = 'CHEK1'
+        # we observed DNA damage signaling in cells treated with the checkpoint inhibitor UCN-01 (Fig. 4A and fig. S4A).
+        # Co-depletion of TLK2 substantially enhanced this response
+        self.create_and_add_sli(geneA=tlk2, geneB=chk1, geneApert=SlConstants.SI_RNA,
+                                geneBpert=SlConstants.PHARMACEUTICAL,
+                                cell=SlConstants.MDAMB231_CELL, cellosaurus=SlConstants.MDAMB231_CELLOSAURUS,
+                                assay=SlConstants.CELL_VIABILITY_ASSAY, pmid=pmid)
+        # Similar results were obtained in U-2-OS cells treated with two different CHK1 inhibitors,
+        # in MDA-MB-231 cells treated with a CHK1 inhibitor (AZD7762; fig. S4C), and upon treatment with ATR inhibitors
+        # (AZ20 and ETP-46464; fig. S4, D and E) (26–29).
+        atr = 'ATR'
+        self.create_and_add_sli(geneA=tlk2, geneB=atr, geneApert=SlConstants.SI_RNA,
+                                geneBpert=SlConstants.PHARMACEUTICAL,
+                                cell=SlConstants.MDAMB231_CELL, cellosaurus=SlConstants.MDAMB231_CELLOSAURUS,
+                                assay=SlConstants.CELL_VIABILITY_ASSAY, pmid=pmid)
+        parp1 = 'PARP1'
+        #We found that the addition of olaparib strongly decreased the survival of MDA-MB-231 cells depleted for TLK activity
+        self.create_and_add_sli(geneA=tlk2, geneB=parp1, geneApert=SlConstants.SI_RNA, geneBpert=SlConstants.PHARMACEUTICAL,
+                                cell=SlConstants.MDAMB231_CELL, cellosaurus=SlConstants.MDAMB231_CELLOSAURUS,
+                                assay=SlConstants.CELL_VIABILITY_ASSAY, pmid=pmid)
+
+    def _add_bajrami_2012(self):
+        pmid = '22933245'
+        parp1 = 'PARP1'
+        nampt = 'NAMPT'
+        self.create_and_add_sli(geneA=parp1, geneB=nampt, geneApert=SlConstants.PHARMACEUTICAL,
+                                geneBpert=SlConstants.SI_RNA, cell='panel of TN models', cellosaurus=SlConstants.N_A,
+                                assay=SlConstants.CELL_VIABILITY_ASSAY, pmid=pmid)
 
     def _add_oike_2013(self):
         pmid = '23872584'
