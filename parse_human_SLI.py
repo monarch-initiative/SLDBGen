@@ -59,6 +59,11 @@ kessler2012 = Kessler2012Parser()
 kessler2012_list = kessler2012.parse()
 show_stats("Kessler et al 2012", kessler2012_list)
 
+kim2011 = Kim2011Parser()
+kim2011_list = kim2011.parse()
+show_stats("Kim et al 2011", kim2011_list)
+exit(9)
+
 krastev2011 = Krastev2011Parser()
 krastev2011_list = krastev2011.parse()
 show_stats("Krastev et al 2011", krastev2011_list)

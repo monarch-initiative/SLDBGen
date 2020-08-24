@@ -13,6 +13,7 @@ class SlConstants:
     CYTOTOXICITY_ASSAY = "cytotoxicity assay"
     DEGRADATION = 'degradation'
     DYSFUNCTIONALITY = 'dysfunction'
+    FOLD_CHANGE = 'fold change'
     GROWTH_INHIBITION_ASSAY = "growth inhibition assay"
     INHIBITORY_ANTIBODY = 'inhibitory antibody'
     KNOCKOUT = 'knockout'
@@ -116,6 +117,8 @@ class SlConstants:
     T98G_CELLOSAURUS = 'CVCL_0556'
     TOV21G_CELL = 'TOV-21G'
     TOV21G_CELLOSAURUS = 'CVCL_3613'
+    U87WT_CELL = 'U87/WT'
+    U87WT_CELLOSAURUS = 'CVCL_3429'
     U251MG_CELL = 'U-251MG'
     U251MG_CELLOSAURUS = 'CVCL_0021'
     U2OS_CELL = 'U2OS'
