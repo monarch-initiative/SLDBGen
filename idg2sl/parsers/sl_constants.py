@@ -26,6 +26,7 @@ class SlConstants:
     PHARMACEUTICAL = 'pharmaceutical'
     AGONIST = 'agonist'
     PHARAMACEUTICAL_INHIBITION_ASSAY = "pharmaceutical inhibition assay"
+    PROMOTER_HYPERMETHYLATION = 'promoter hypermethylation'
     PVAL = 'p-value'
     RNA_INTERFERENCE_ASSAY = "RNA-interference assay"
     SG_RNA = "sgRNA"

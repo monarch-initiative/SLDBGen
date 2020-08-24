@@ -36,6 +36,8 @@ class ManualEntryOne(SL_DatasetParser):
         self._add_wu_2018()
         self._add_zhou_2014()
         self._add_sajesh_2015()
+        self._add_hocke_2016()
+        self._add_paul_2016()
 
     def create_and_add_sli(self, geneA, geneB, geneApert, geneBpert, assay, pmid,
                            cell=SlConstants.N_A, cellosaurus=SlConstants.N_A,
@@ -66,6 +68,23 @@ class ManualEntryOne(SL_DatasetParser):
                                          pmid=pmid,
                                          SL=sl)
         self.entries.append(sli)
+
+    def _add_paul_2016(self):
+        pmid = '27418135'
+        ephb6 = 'EPHB6'
+        src = 'SRC'
+        self.create_and_add_sli(geneA=ephb6, geneB=src, geneApert=SlConstants.PROMOTER_HYPERMETHYLATION,
+                                geneBpert=SlConstants.SH_RNA, assay=SlConstants.GROWTH_INHIBITION_ASSAY,
+                                pmid=pmid)
+
+    def _add_hocke_2016(self):
+        pmid = '26755646'
+        atr = 'ATR'
+        pold1 = 'POLD1'
+        self.create_and_add_sli(geneA=atr, geneB=pold1, geneApert=SlConstants.LOF_MUTATION,
+                                geneBpert=SlConstants.SI_RNA, cell=SlConstants.DLD1_CELL,
+                                cellosaurus=SlConstants.DLD1_CELLOSAURUS, assay=SlConstants.GROWTH_INHIBITION_ASSAY,
+                                pmid=pmid)
 
     def _add_sajesh_2015(self):
         pmid = '26318585'
