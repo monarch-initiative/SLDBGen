@@ -25,6 +25,8 @@ class ManualEntryOne(SL_DatasetParser):
         self._add_pourdehnad_2013()
         self._add_ali_2018()
         self._add_kim_2015()
+        self._add_Xu_2019()
+        self._add_oike_2013()
 
     def create_and_add_sli(self, geneA, geneB, geneApert, geneBpert, assay, pmid,
                            cell=SlConstants.N_A, cellosaurus=SlConstants.N_A,
@@ -56,6 +58,24 @@ class ManualEntryOne(SL_DatasetParser):
                                          SL=sl)
         self.entries.append(sli)
 
+
+    def _add_oike_2013(self):
+        pmid = '23872584'
+        smarca4 = 'SMARCA4'  # current symbol for BRG1
+        smarca2 = 'SMARCA2'  # current symbol for BRM
+        self.create_and_add_sli(geneA=smarca2, geneB=smarca4, geneApert=SlConstants.LOF_MUTATION,
+                                geneBpert=SlConstants.SI_RNA, cell='multiple BRG1-deficient cells',
+                                cellosaurus=SlConstants.N_A, assay=SlConstants.CELL_VIABILITY_ASSAY,pmid=pmid)
+
+
+    def _add_Xu_2019(self):
+        pmid = '30885978'
+        hk1 = 'HK1'
+        hk2 = 'HK2'
+        self.create_and_add_sli(geneA=hk1, geneB=hk2, geneApert=SlConstants.ANTISENSE_OLIGO,
+                                geneBpert=SlConstants.LOF_MUTATION, cell=SlConstants.OPM1_CELL,
+                                cellosaurus=SlConstants.OPM1_CELLOSAURUS, assay=SlConstants.GROWTH_INHIBITION_ASSAY,
+                                pmid=pmid)
 
     def _add_kim_2015(self):
         """

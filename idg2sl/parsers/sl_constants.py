@@ -3,6 +3,7 @@
 class SlConstants:
     ACTIVATING_MUTATION = 'activating mutation'
     APOPTOSIS_ASSAY = 'apoptosis assay'
+    ANTISENSE_OLIGO = 'antisense oligonucleotide'
     CELL_VIABILITY_ASSAY = 'cell viability assay'
     CISPLATIN_CYTOTOXICITY_ASSAY = "cisplatin toxicity assay"
     COHORT_STUDY = "cohort study"
@@ -97,6 +98,8 @@ class SlConstants:
     MKN45_CELLOSAURUS = 'CVCL_0434'
     MOLM13_CELL = 'MOLM-13'
     MOLM13_CELLOSAURUS = 'CVCL_2119'
+    OPM1_CELL = 'OPM-1'
+    OPM1_CELLOSAURUS = 'CVCL_5210'
     OVCAR3_CELL = "OVCAR-3"
     OVCAR3_CELLOSAURUS = "CVCL_0465"
     PEO1_CELL = 'PEO1'
