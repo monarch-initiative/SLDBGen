@@ -87,6 +87,7 @@ class ManualEntryOne(SL_DatasetParser):
                                          SL=sl)
         self.entries.append(sli)
 
+
     def _add_dietlein_2015(self):
         pmid = '26140595'
         chek1 = 'CHEK1'  # current symbol for Chk1
@@ -95,7 +96,8 @@ class ManualEntryOne(SL_DatasetParser):
         self.create_and_add_sli(geneA=chek1, geneB=mapkapk2, geneApert=SlConstants.PHARMACEUTICAL,
                                 geneBpert=SlConstants.PHARMACEUTICAL, cell='KRAS-Driven Cancer Cells',
                                 cellosaurus=SlConstants.N_A, background_dependency_gene_symbol=kras,
-                                background_dependency_status=SlConstants.ACTIVATING_MUTATION,pmid=pmid)
+                                background_dependency_status=SlConstants.ACTIVATING_MUTATION,
+                                assay= SlConstants.PATIENT_DERIVED_XENOGRAFT, pmid=pmid)
 
 
     def _add_sullivan_reed_2018(self):

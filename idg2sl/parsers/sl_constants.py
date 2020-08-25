@@ -31,6 +31,7 @@ class SlConstants:
     RNA_INTERFERENCE_ASSAY = "RNA-interference assay"
     SG_RNA = "sgRNA"
     SG_RNA_DEPLETION_ASSAY = 'sgRNA depletion assay'
+    SH_RNA_DEPLETION_ASSAY = 'shRNA depletion assay'
     SH_RNA = 'shRNA'
     SI_RNA = 'siRNA'
     TRANSGENIC_MOUSE_MODEL = 'transgenic mouse model'
