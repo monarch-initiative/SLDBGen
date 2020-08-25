@@ -75,6 +75,7 @@ class ManualEntryOne(SL_DatasetParser):
                                          SL=sl)
         self.entries.append(sli)
 
+
     def _add_wittig_blaich_2017(self):
         pmid = '28423600'
         braf = 'BRAF'
