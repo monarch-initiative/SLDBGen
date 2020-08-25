@@ -78,6 +78,8 @@ class SlConstants:
     HUH7_CELLOSAURUS = 'CVCL_0336'
     H82_CELL = 'NCI-H82'
     H82_CELLOSAURUS = 'CVCL_1591'
+    IMR32_CELL = 'IMR-32'
+    IMR32_CELLOSAURUS = 'CVCL_0346'
     IMR90_CELL = 'IMR-90'
     IMR90_CELLOSAURUS = 'CVCL_0347'
     K562_CELL = "K562 chronic myeloid leukemia cells"

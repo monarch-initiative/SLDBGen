@@ -44,6 +44,7 @@ class ManualEntryOne(SL_DatasetParser):
         self._add_bian_2014()
         self._add_dietlein_2014()
         self._add_wittig_blaich_2017()
+        self._add_molenaar_2009()
 
     def create_and_add_sli(self, geneA, geneB, geneApert, geneBpert, assay, pmid,
                            cell=SlConstants.N_A, cellosaurus=SlConstants.N_A,
@@ -75,6 +76,15 @@ class ManualEntryOne(SL_DatasetParser):
                                          SL=sl)
         self.entries.append(sli)
 
+
+    def _add_molenaar_2009(self):
+        pmid = '19525400'
+        mycn = 'MYCN'
+        cdk2 = 'CDK2'
+        self.create_and_add_sli(geneA=mycn, geneB=cdk2, geneApert=SlConstants.OVEREXPRESSION,
+                                geneBpert=SlConstants.SI_RNA, cell=SlConstants.IMR32_CELL,
+                                cellosaurus=SlConstants.IMR32_CELLOSAURUS, assay=SlConstants.CELL_VIABILITY_ASSAY,
+                                pmid=pmid)
 
     def _add_wittig_blaich_2017(self):
         pmid = '28423600'
