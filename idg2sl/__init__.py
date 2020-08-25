@@ -33,6 +33,7 @@ from .parsers.turner_2008_parser import Turner2008Parser
 from .parsers.wang_2016_parser import Wang2016Parser
 from .parsers.wang_2017_parser import Wang2017Parser
 from .parsers.wang_2019_parser import Wang2019Parser
+from .parsers.williamson_2016_parser import Williamson2016Parser
 from .parsers.vizeacoumar_2013_parser import Vizeacoumar2013Parser
 from .hgnc_parser import HgncParser
 from idg2sl.sl_dataset_parser import SL_DatasetParser
@@ -72,6 +73,7 @@ __all__ = ["SyntheticLethalInteraction",
            "Wang2016Parser",
            "Wang2017Parser",
            "Wang2019Parser",
+           "Williamson2016Parser",
            "HgncParser",
            "ManualEntry",
            "ManualEntryOne"]

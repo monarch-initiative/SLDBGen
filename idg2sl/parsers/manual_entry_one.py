@@ -46,6 +46,7 @@ class ManualEntryOne(SL_DatasetParser):
         self._add_wittig_blaich_2017()
         self._add_molenaar_2009()
         self._add_bajrami_2014()
+        self._add_yi_2015()
 
     def create_and_add_sli(self, geneA, geneB, geneApert, geneBpert, assay, pmid,
                            cell=SlConstants.N_A, cellosaurus=SlConstants.N_A,
@@ -76,6 +77,15 @@ class ManualEntryOne(SL_DatasetParser):
                                          pmid=pmid,
                                          SL=sl)
         self.entries.append(sli)
+
+    def _add_yi_2015(self):
+        pmid = '25955731'
+        egfr = 'EGFR'
+        met = 'MET'
+        self.create_and_add_sli(geneA=egfr, geneB=met, geneApert=SlConstants.PHARMACEUTICAL,
+                                geneBpert=SlConstants.PHARMACEUTICAL, cell=SlConstants.MDAMB231_CELL,
+                                cellosaurus=SlConstants.MDAMB231_CELLOSAURUS, assay=SlConstants.CELL_VIABILITY_ASSAY,
+                                pmid=pmid)
 
     def _add_bajrami_2014(self):
         pmid = '24240700'
