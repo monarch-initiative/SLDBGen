@@ -13,6 +13,7 @@ class SlConstants:
     CYTOTOXICITY_ASSAY = "cytotoxicity assay"
     DEGRADATION = 'degradation'
     DYSFUNCTIONALITY = 'dysfunction'
+    FOLD_CHANGE = 'fold change'
     GROWTH_INHIBITION_ASSAY = "growth inhibition assay"
     INHIBITORY_ANTIBODY = 'inhibitory antibody'
     KNOCKOUT = 'knockout'
@@ -25,6 +26,7 @@ class SlConstants:
     PHARMACEUTICAL = 'pharmaceutical'
     AGONIST = 'agonist'
     PHARAMACEUTICAL_INHIBITION_ASSAY = "pharmaceutical inhibition assay"
+    PROMOTER_HYPERMETHYLATION = 'promoter hypermethylation'
     PVAL = 'p-value'
     RNA_INTERFERENCE_ASSAY = "RNA-interference assay"
     SG_RNA = "sgRNA"
@@ -64,6 +66,8 @@ class SlConstants:
     HCT_116_CELLOSAURUS = 'CVCL_0291'
     HAP1_CELL = 'HAP1'
     HAP1_CELLOSAURUS = 'CVCL_Y019'
+    HCC44_CELL = 'HCC44'
+    HCC44_CELLOSAURUS = 'CVCL_2060'
     HCC193_CELL = 'HCC193'
     HCC193_CELLOSAURUS = 'CVCL_5130'
     HEC59_CELL = 'HEC-59'
@@ -84,6 +88,8 @@ class SlConstants:
     LIM1215_CELLOSAURUS = 'CVCL_2574'
     LNCAP_CELL = 'LNCaP'
     LNCAP_CELLOSAURUS = 'CVCL_0395'
+    LU134A_CELL = 'Lu-134-A'
+    LU134A_CELLOSAURUS = 'CVCL_1387'
     MCF7_CELL = 'MCF-7'
     MCF7_CELLOSAURUS = 'CVCL_0031'
     MDAMB231_CELL = 'MDA-MB-231'
@@ -116,6 +122,8 @@ class SlConstants:
     T98G_CELLOSAURUS = 'CVCL_0556'
     TOV21G_CELL = 'TOV-21G'
     TOV21G_CELLOSAURUS = 'CVCL_3613'
+    U87WT_CELL = 'U87/WT'
+    U87WT_CELLOSAURUS = 'CVCL_3429'
     U251MG_CELL = 'U-251MG'
     U251MG_CELLOSAURUS = 'CVCL_0021'
     U2OS_CELL = 'U2OS'

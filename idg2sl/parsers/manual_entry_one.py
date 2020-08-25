@@ -35,6 +35,15 @@ class ManualEntryOne(SL_DatasetParser):
         self._add_imai_2014()
         self._add_wu_2018()
         self._add_zhou_2014()
+        self._add_sajesh_2015()
+        self._add_hocke_2016()
+        self._add_paul_2016()
+        self._add_christodoulou_2017()
+        self._add_wang_2010()
+        self._add_romero_2014()
+        self._add_bian_2014()
+        self._add_dietlein_2014()
+        self._add_wittig_blaich_2017()
 
     def create_and_add_sli(self, geneA, geneB, geneApert, geneBpert, assay, pmid,
                            cell=SlConstants.N_A, cellosaurus=SlConstants.N_A,
@@ -65,6 +74,103 @@ class ManualEntryOne(SL_DatasetParser):
                                          pmid=pmid,
                                          SL=sl)
         self.entries.append(sli)
+
+
+    def _add_wittig_blaich_2017(self):
+        pmid = '28423600'
+        braf = 'BRAF'
+        dusp6 = 'DUSP6'
+        self.create_and_add_sli(geneA=braf, geneB=dusp6, geneApert=SlConstants.ACTIVATING_MUTATION,
+                                geneBpert=SlConstants.SI_RNA, assay=SlConstants.CELL_VIABILITY_ASSAY,
+                                cell=SlConstants.N_A,
+                                cellosaurus=SlConstants.N_A,
+                                cancer=SlConstants.MELANOMA,ncit=SlConstants.MELANOMA_NCIT,
+                                pmid=pmid)
+
+    def _add_dietlein_2014(self):
+        """
+        mutations in PRKDC were strongly associated with KU60648 resistance
+        """
+        pmid = '24556366'
+        msh3 = 'MSH3'
+        prkdc = 'PRKDC'
+        self.create_and_add_sli(geneA=msh3, geneB=prkdc, geneApert=SlConstants.LOF_MUTATION,
+                                geneBpert=SlConstants.SI_RNA, cell=SlConstants.HCC44_CELL,
+                                cellosaurus=SlConstants.HCC44_CELLOSAURUS,
+                                assay=SlConstants.GROWTH_INHIBITION_ASSAY,
+                                pmid=pmid)
+
+
+    def _add_bian_2014(self):
+        pmid = '24425774'
+        ppp2r1a = 'PPP2R1A'
+        mad2l1 = 'MAD2L1' # current symbol for MAD2
+        self.create_and_add_sli(geneA=mad2l1, geneB=ppp2r1a, geneApert=SlConstants.OVEREXPRESSION,
+                                geneBpert=SlConstants.SI_RNA, cell=SlConstants.HELA_CELL,
+                                cellosaurus=SlConstants.HELA_CELLOSAURUS, assay=SlConstants.GROWTH_INHIBITION_ASSAY,
+                                pmid=pmid)
+
+
+    def _add_romero_2014(self):
+        """
+        Depletion of BRG1 dramatically impaired (by >95%) cell viability in the MAX-deficient cells. To test whether
+        this behavior also took place in cancer cells with wild-type MAX, we depleted BRG1 in a panel of six lung
+        cancer cell lines with amplification of either MYC, MYCL, or MYCN. Only a moderate decrease (<25%) in cell
+        growth was found in some cells, implying that the depletion of BRG1 was preferentially toxic in
+         MAX-deficient cells.
+        """
+        pmid = '24362264'
+        max = 'MAX'
+        smarca4 = 'SMARCA4' # previously BRG1
+        self.create_and_add_sli(geneA=max, geneB=smarca4, geneApert=SlConstants.LOF_MUTATION,
+                                geneBpert=SlConstants.SI_RNA, cell=SlConstants.LU134A_CELL,
+                                cellosaurus=SlConstants.LU134A_CELLOSAURUS, assay=SlConstants.CELL_VIABILITY_ASSAY,
+                                pmid=pmid)
+
+    def _add_wang_2010(self):
+        pmid = '20562906'
+        kras = 'KRAS'
+        snai2 = 'SNAI2' # previous symbol SNAIL2
+        self.create_and_add_sli(geneA=kras, geneB=snai2, geneApert=SlConstants.ACTIVATING_MUTATION,
+                                geneBpert=SlConstants.SI_RNA, cell=SlConstants.HCT_116,
+                                cellosaurus=SlConstants.HCT_116_CELLOSAURUS, assay=SlConstants.SG_RNA_DEPLETION_ASSAY,
+                                pmid=pmid)
+
+    def _add_christodoulou_2017(self):
+        pmid = '28415695'
+        kras = 'KRAS'
+        copb2 = 'COPB2'
+        self.create_and_add_sli(geneA=kras, geneB=copb2, geneApert=SlConstants.ACTIVATING_MUTATION,
+                                geneBpert=SlConstants.SI_RNA, cell='Homozygous pancreatic KRAS mutated cell lines',
+                                assay=SlConstants.CELL_VIABILITY_ASSAY, pmid=pmid)
+
+    def _add_paul_2016(self):
+        pmid = '27418135'
+        ephb6 = 'EPHB6'
+        src = 'SRC'
+        self.create_and_add_sli(geneA=ephb6, geneB=src, geneApert=SlConstants.PROMOTER_HYPERMETHYLATION,
+                                geneBpert=SlConstants.SH_RNA, assay=SlConstants.GROWTH_INHIBITION_ASSAY,
+                                pmid=pmid)
+
+    def _add_hocke_2016(self):
+        pmid = '26755646'
+        atr = 'ATR'
+        pold1 = 'POLD1'
+        self.create_and_add_sli(geneA=atr, geneB=pold1, geneApert=SlConstants.LOF_MUTATION,
+                                geneBpert=SlConstants.SI_RNA, cell=SlConstants.DLD1_CELL,
+                                cellosaurus=SlConstants.DLD1_CELLOSAURUS, assay=SlConstants.GROWTH_INHIBITION_ASSAY,
+                                pmid=pmid)
+
+    def _add_sajesh_2015(self):
+        pmid = '26318585'
+        sod1 = 'SOD1'
+        sl_genes = {'BLM', 'CHEK2'}
+        for geneB in sl_genes:
+            self.create_and_add_sli(geneA=sod1, geneB=geneB,
+                                    geneApert=SlConstants.LOF_MUTATION,
+                                    geneBpert=SlConstants.SI_RNA,
+                                    cell=SlConstants.HCT_116, cellosaurus=SlConstants.HCT_116_CELLOSAURUS,
+                                    assay=SlConstants.CELL_VIABILITY_ASSAY, pmid=pmid)
 
     def _add_zhou_2014(self):
         pmid = '25495526'
