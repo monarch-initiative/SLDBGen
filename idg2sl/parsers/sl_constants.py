@@ -31,6 +31,7 @@ class SlConstants:
     RNA_INTERFERENCE_ASSAY = "RNA-interference assay"
     SG_RNA = "sgRNA"
     SG_RNA_DEPLETION_ASSAY = 'sgRNA depletion assay'
+    SH_RNA_DEPLETION_ASSAY = 'shRNA depletion assay'
     SH_RNA = 'shRNA'
     SI_RNA = 'siRNA'
     TRANSGENIC_MOUSE_MODEL = 'transgenic mouse model'
@@ -108,6 +109,8 @@ class SlConstants:
     MDAMB231_CELLOSAURUS = 'CVCL_0062'
     MDAMB361_CELL = 'MDA-MB-361'
     MDAMB361_CELLOSUARUS = 'CVCL_0620'
+    MDAMB436_CELL = 'MDA-MB-436'
+    MDAMB436_CELLOSAURUS = 'CVCL_0623'
     MDAMB468_CELL = 'MDA-MB-468'
     MDAMB468_CELLOSAURUS = 'CVCL_0419'
     MEL270_CELL = 'Mel270'
