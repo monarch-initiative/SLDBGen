@@ -47,6 +47,8 @@ class ManualEntryOne(SL_DatasetParser):
         self._add_molenaar_2009()
         self._add_bajrami_2014()
         self._add_yi_2015()
+        self._add_lee_2019()
+        self._add_kwok_2016()
 
     def create_and_add_sli(self, geneA, geneB, geneApert, geneBpert, assay, pmid,
                            cell=SlConstants.N_A, cellosaurus=SlConstants.N_A,
@@ -77,6 +79,28 @@ class ManualEntryOne(SL_DatasetParser):
                                          pmid=pmid,
                                          SL=sl)
         self.entries.append(sli)
+
+
+    def _add_kwok_2016(self):
+        pmid = '26563132'
+        atr = 'ATR'
+        atm = 'ATM'
+        tp53 = 'TP53'
+        self.create_and_add_sli(geneA=tp53, geneB=atr, geneApert=SlConstants.LOF_MUTATION,
+                                geneBpert=SlConstants.PHARMACEUTICAL, cell=SlConstants.MEC1_CELL,
+                                cellosaurus=SlConstants.MEC1_CELLOSAURUS,
+                                assay=SlConstants.CELL_VIABILITY_ASSAY, pmid=pmid)
+        self.create_and_add_sli(geneA=atm, geneB=atr, geneApert=SlConstants.LOF_MUTATION,
+                                geneBpert=SlConstants.PHARMACEUTICAL, assay=SlConstants.CELL_VIABILITY_ASSAY,
+                                pmid=pmid)
+
+    def _add_lee_2019(self):
+        pmid = '30266755'
+        myc = 'MYC'
+        tnfsf10 = 'TNFSF10' # current symbol for TRAIL
+        self.create_and_add_sli(geneA=myc, geneB=tnfsf10, geneApert=SlConstants.ACTIVATING_MUTATION,
+                                geneBpert=SlConstants.SI_RNA, assay=SlConstants.CELL_VIABILITY_ASSAY,
+                                pmid=pmid)
 
     def _add_yi_2015(self):
         pmid = '25955731'
