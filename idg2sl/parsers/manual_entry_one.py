@@ -41,6 +41,7 @@ class ManualEntryOne(SL_DatasetParser):
         self._add_christodoulou_2017()
         self._add_wang_2010()
         self._add_romero_2014()
+        self._add_bian_2014()
 
     def create_and_add_sli(self, geneA, geneB, geneApert, geneBpert, assay, pmid,
                            cell=SlConstants.N_A, cellosaurus=SlConstants.N_A,
@@ -71,6 +72,17 @@ class ManualEntryOne(SL_DatasetParser):
                                          pmid=pmid,
                                          SL=sl)
         self.entries.append(sli)
+
+
+    def _add_bian_2014(self):
+        pmid = '24425774'
+        ppp2r1a = 'PPP2R1A'
+        mad2l1 = 'MAD2L1' # current symbol for MAD2
+        self.create_and_add_sli(geneA=mad2l1, geneB=ppp2r1a, geneApert=SlConstants.OVEREXPRESSION,
+                                geneBpert=SlConstants.SI_RNA, cell=SlConstants.HELA_CELL,
+                                cellosaurus=SlConstants.HELA_CELLOSAURUS, assay=SlConstants.GROWTH_INHIBITION_ASSAY,
+                                pmid=pmid)
+
 
     def _add_romero_2014(self):
         """
