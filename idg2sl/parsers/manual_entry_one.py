@@ -50,6 +50,7 @@ class ManualEntryOne(SL_DatasetParser):
         self._add_kwok_2016()
         self._add_konda_2017()
         self._add_tiong_2014()
+        self._add_bryant_2005()
 
     def create_and_add_sli(self, geneA, geneB, geneApert, geneBpert, assay, pmid,
                            cell=SlConstants.N_A, cellosaurus=SlConstants.N_A,
@@ -80,6 +81,15 @@ class ManualEntryOne(SL_DatasetParser):
                                          pmid=pmid,
                                          SL=sl)
         self.entries.append(sli)
+
+    def _add_bryant_2005(self):
+        pmid = '15829966'
+        brca2 = 'BRCA2'
+        parp1 = 'PARP1'
+        self.create_and_add_sli(geneA=brca2, geneB=parp1, geneApert=SlConstants.LOF_MUTATION,
+                                geneBpert=SlConstants.PHARMACEUTICAL, cell=SlConstants.MDAMB231_CELL,
+                                cellosaurus=SlConstants.MDAMB231_CELLOSAURUS, assay=SlConstants.GROWTH_INHIBITION_ASSAY,
+                                pmid=pmid)
 
     def _add_tiong_2014(self):
         pmid = '24947187'
