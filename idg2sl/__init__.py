@@ -2,6 +2,7 @@ from .synthetic_lethal_interaction import SyntheticLethalInteraction
 from idg2sl.parsers.manual_entry import ManualEntry
 from .parsers.manual_entry_one import ManualEntryOne
 from .parsers.sl_constants import SlConstants
+from .parsers.astsaturov_2010_parser import Astsaturov2010Parser
 from .parsers.baldwin_2010_parser import Baldwin2010Parser
 from .parsers.blomen_2015_parser import Blomen2015Parser
 from .parsers.bommi_2008_parser import Bommi2008Parser
@@ -33,6 +34,7 @@ from .parsers.turner_2008_parser import Turner2008Parser
 from .parsers.wang_2016_parser import Wang2016Parser
 from .parsers.wang_2017_parser import Wang2017Parser
 from .parsers.wang_2019_parser import Wang2019Parser
+from .parsers.williamson_2016_parser import Williamson2016Parser
 from .parsers.vizeacoumar_2013_parser import Vizeacoumar2013Parser
 from .hgnc_parser import HgncParser
 from idg2sl.sl_dataset_parser import SL_DatasetParser
@@ -40,6 +42,7 @@ from idg2sl.sl_dataset_parser import SL_DatasetParser
 __all__ = ["SyntheticLethalInteraction",
            "SL_DatasetParser",
            "SlConstants",
+           "Astsaturov2010Parser",
            "Baldwin2010Parser",
            "Blomen2015Parser",
            "Bommi2008Parser",
@@ -72,6 +75,7 @@ __all__ = ["SyntheticLethalInteraction",
            "Wang2016Parser",
            "Wang2017Parser",
            "Wang2019Parser",
+           "Williamson2016Parser",
            "HgncParser",
            "ManualEntry",
            "ManualEntryOne"]

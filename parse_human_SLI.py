@@ -18,6 +18,10 @@ def show_stats(name, sli_list):
     print("[INFO] %s: %d positive and %d negative entries" % (name, pos, neg))
 
 
+astsaturov2010 = Astsaturov2010Parser()
+astsaturov2010_list = astsaturov2010.parse()
+show_stats("Astsaturov et al 2010", astsaturov2010_list)
+
 baldwin2010 = Baldwin2010Parser()
 baldwin2010_list = baldwin2010.parse()
 show_stats("Baldwin et al 2010", baldwin2010_list)
@@ -158,14 +162,18 @@ wang_2019 = Wang2019Parser()
 wang_2019_list = wang_2019.parse()
 show_stats("Wang et al 2019", wang_2019_list)
 
-sli_lists = [baldwin2010_list, bommi2008_list, blomen2015_list, brough2018_list, chakraborty2017_list, dai2013_list,
-             han2017_list, josse2014_list, kang2015_list, kessler2012_list,
+williamson2016 = Williamson2016Parser()
+williamson2016_list = williamson2016.parse()
+show_stats("Williamson et al 2016", williamson2016_list)
+
+
+sli_lists = [astsaturov2010_list, baldwin2010_list, bommi2008_list, blomen2015_list, brough2018_list,
+             chakraborty2017_list, dai2013_list, han2017_list, josse2014_list, kang2015_list, kessler2012_list,
              krastev2011_list, lord2008_list, luo2009_list, martin2010_list, mengwasser_2019_list, mohni2014_list,
-             mondal2019_list,
-             oser2019_list,
+             mondal2019_list,  oser2019_list,
              shen2015_list, shen2017_list, schick2019_list, srivas2016_list, steckel2012_list, sullivan2012_list,
              sun2019_list, toyoshima2008_list, turner2008_list, vizeacoumar2013_list, wang2016_list, wang2017_list,
-             wang_2019_list, manual_list, manual_one_list]
+             wang_2019_list, williamson2016_list,manual_list, manual_one_list]
 all_sli_list = []
 for l in sli_lists:
     all_sli_list.extend(l)

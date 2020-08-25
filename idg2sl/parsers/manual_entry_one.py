@@ -3,7 +3,6 @@ from idg2sl import SyntheticLethalInteraction
 from idg2sl.sl_dataset_parser import SL_DatasetParser
 
 
-
 class ManualEntryOne(SL_DatasetParser):
     """
        In a number of papers, only one or a handful of synthetic lethal interactions are described.
@@ -44,6 +43,14 @@ class ManualEntryOne(SL_DatasetParser):
         self._add_bian_2014()
         self._add_dietlein_2014()
         self._add_wittig_blaich_2017()
+        self._add_molenaar_2009()
+        self._add_bajrami_2014()
+        self._add_yi_2015()
+        self._add_lee_2019()
+        self._add_kwok_2016()
+        self._add_konda_2017()
+        self._add_tiong_2014()
+        self._add_bryant_2005()
 
     def create_and_add_sli(self, geneA, geneB, geneApert, geneBpert, assay, pmid,
                            cell=SlConstants.N_A, cellosaurus=SlConstants.N_A,
@@ -75,6 +82,97 @@ class ManualEntryOne(SL_DatasetParser):
                                          SL=sl)
         self.entries.append(sli)
 
+    def _add_bryant_2005(self):
+        pmid = '15829966'
+        brca2 = 'BRCA2'
+        parp1 = 'PARP1'
+        self.create_and_add_sli(geneA=brca2, geneB=parp1, geneApert=SlConstants.LOF_MUTATION,
+                                geneBpert=SlConstants.PHARMACEUTICAL, cell=SlConstants.MDAMB231_CELL,
+                                cellosaurus=SlConstants.MDAMB231_CELLOSAURUS, assay=SlConstants.GROWTH_INHIBITION_ASSAY,
+                                pmid=pmid)
+
+    def _add_tiong_2014(self):
+        pmid = '24947187'
+        tp53 = 'TP53'
+        csnk1e = 'CSNK1E'
+        self.create_and_add_sli(geneA=tp53, geneB=csnk1e, geneApert=SlConstants.LOF_MUTATION,
+                                geneBpert=SlConstants.SH_RNA, cell=SlConstants.HCT_116,
+                                cellosaurus=SlConstants.HCT_116_CELLOSAURUS, assay=SlConstants.CELL_VIABILITY_ASSAY,
+                                pmid=pmid)
+        ctnnb1 = 'CTNNB1'
+        self.create_and_add_sli(geneA=tp53, geneB=ctnnb1, geneApert=SlConstants.LOF_MUTATION,
+                                geneBpert=SlConstants.SH_RNA, cell=SlConstants.HCT_116,
+                                cellosaurus=SlConstants.HCT_116_CELLOSAURUS, assay=SlConstants.CELL_VIABILITY_ASSAY,
+                                pmid=pmid)
+
+    def _add_konda_2017(self):
+        pmid = '28182330'
+        hsbp1 = 'HSPB1'  # heat shock protein family B (small) member 1
+        met = 'MET'
+        self.create_and_add_sli(geneA=met, geneB=hsbp1, geneApert=SlConstants.OVEREXPRESSION,
+                                geneBpert=SlConstants.PHARMACEUTICAL, cell=SlConstants.EBC1_CELL,
+                                cellosaurus=SlConstants.EBC1_CELLOSAURUS, assay=SlConstants.APOPTOSIS_ASSAY,
+                                pmid=pmid)
+        egfr = 'EGFR'
+        self.create_and_add_sli(geneA=egfr, geneB=hsbp1, geneApert=SlConstants.OVEREXPRESSION,
+                                geneBpert=SlConstants.PHARMACEUTICAL, cell=SlConstants.DIFI_CELL,
+                                cellosaurus=SlConstants.DIFI_CELLOSAURUS, assay=SlConstants.APOPTOSIS_ASSAY,
+                                pmid=pmid)
+        braf = 'BRAF'
+        self.create_and_add_sli(geneA=braf, geneB=hsbp1, geneApert=SlConstants.ACTIVATING_MUTATION,
+                                geneBpert=SlConstants.PHARMACEUTICAL, cell=SlConstants.COLO205_CELL,
+                                cellosaurus=SlConstants.COLO205_CELLOSAURUS, assay=SlConstants.APOPTOSIS_ASSAY,
+                                pmid=pmid)
+
+    def _add_kwok_2016(self):
+        pmid = '26563132'
+        atr = 'ATR'
+        atm = 'ATM'
+        tp53 = 'TP53'
+        self.create_and_add_sli(geneA=tp53, geneB=atr, geneApert=SlConstants.LOF_MUTATION,
+                                geneBpert=SlConstants.PHARMACEUTICAL, cell=SlConstants.MEC1_CELL,
+                                cellosaurus=SlConstants.MEC1_CELLOSAURUS,
+                                assay=SlConstants.CELL_VIABILITY_ASSAY, pmid=pmid)
+        self.create_and_add_sli(geneA=atm, geneB=atr, geneApert=SlConstants.LOF_MUTATION,
+                                geneBpert=SlConstants.PHARMACEUTICAL, assay=SlConstants.CELL_VIABILITY_ASSAY,
+                                pmid=pmid)
+
+    def _add_lee_2019(self):
+        pmid = '30266755'
+        myc = 'MYC'
+        tnfsf10 = 'TNFSF10'  # current symbol for TRAIL
+        self.create_and_add_sli(geneA=myc, geneB=tnfsf10, geneApert=SlConstants.ACTIVATING_MUTATION,
+                                geneBpert=SlConstants.SI_RNA, assay=SlConstants.CELL_VIABILITY_ASSAY,
+                                pmid=pmid)
+
+    def _add_yi_2015(self):
+        pmid = '25955731'
+        egfr = 'EGFR'
+        met = 'MET'
+        self.create_and_add_sli(geneA=egfr, geneB=met, geneApert=SlConstants.PHARMACEUTICAL,
+                                geneBpert=SlConstants.PHARMACEUTICAL, cell=SlConstants.MDAMB231_CELL,
+                                cellosaurus=SlConstants.MDAMB231_CELLOSAURUS, assay=SlConstants.CELL_VIABILITY_ASSAY,
+                                pmid=pmid)
+
+    def _add_bajrami_2014(self):
+        pmid = '24240700'
+        parp1 = 'PARP1'
+        cdk12 = 'CDK12'
+        self.create_and_add_sli(geneA=parp1, geneB=cdk12, geneApert=SlConstants.PHARMACEUTICAL,
+                                geneBpert=SlConstants.SI_RNA, cell=SlConstants.OV90_CELL,
+                                cellosaurus=SlConstants.OV90_CELLOSAURUS,
+                                cancer=SlConstants.OVARIAN_SEROUS_ADENOCARCINOMA,
+                                ncit=SlConstants.OVARIAN_SEROUS_ADENOCARCINOMA_NCIT,
+                                assay=SlConstants.CELL_VIABILITY_ASSAY, pmid=pmid)
+
+    def _add_molenaar_2009(self):
+        pmid = '19525400'
+        mycn = 'MYCN'
+        cdk2 = 'CDK2'
+        self.create_and_add_sli(geneA=mycn, geneB=cdk2, geneApert=SlConstants.OVEREXPRESSION,
+                                geneBpert=SlConstants.SI_RNA, cell=SlConstants.IMR32_CELL,
+                                cellosaurus=SlConstants.IMR32_CELLOSAURUS, assay=SlConstants.CELL_VIABILITY_ASSAY,
+                                pmid=pmid)
 
     def _add_wittig_blaich_2017(self):
         pmid = '28423600'
@@ -84,7 +182,7 @@ class ManualEntryOne(SL_DatasetParser):
                                 geneBpert=SlConstants.SI_RNA, assay=SlConstants.CELL_VIABILITY_ASSAY,
                                 cell=SlConstants.N_A,
                                 cellosaurus=SlConstants.N_A,
-                                cancer=SlConstants.MELANOMA,ncit=SlConstants.MELANOMA_NCIT,
+                                cancer=SlConstants.MELANOMA, ncit=SlConstants.MELANOMA_NCIT,
                                 pmid=pmid)
 
     def _add_dietlein_2014(self):
@@ -100,16 +198,14 @@ class ManualEntryOne(SL_DatasetParser):
                                 assay=SlConstants.GROWTH_INHIBITION_ASSAY,
                                 pmid=pmid)
 
-
     def _add_bian_2014(self):
         pmid = '24425774'
         ppp2r1a = 'PPP2R1A'
-        mad2l1 = 'MAD2L1' # current symbol for MAD2
+        mad2l1 = 'MAD2L1'  # current symbol for MAD2
         self.create_and_add_sli(geneA=mad2l1, geneB=ppp2r1a, geneApert=SlConstants.OVEREXPRESSION,
                                 geneBpert=SlConstants.SI_RNA, cell=SlConstants.HELA_CELL,
                                 cellosaurus=SlConstants.HELA_CELLOSAURUS, assay=SlConstants.GROWTH_INHIBITION_ASSAY,
                                 pmid=pmid)
-
 
     def _add_romero_2014(self):
         """
@@ -121,7 +217,7 @@ class ManualEntryOne(SL_DatasetParser):
         """
         pmid = '24362264'
         max = 'MAX'
-        smarca4 = 'SMARCA4' # previously BRG1
+        smarca4 = 'SMARCA4'  # previously BRG1
         self.create_and_add_sli(geneA=max, geneB=smarca4, geneApert=SlConstants.LOF_MUTATION,
                                 geneBpert=SlConstants.SI_RNA, cell=SlConstants.LU134A_CELL,
                                 cellosaurus=SlConstants.LU134A_CELLOSAURUS, assay=SlConstants.CELL_VIABILITY_ASSAY,
@@ -130,7 +226,7 @@ class ManualEntryOne(SL_DatasetParser):
     def _add_wang_2010(self):
         pmid = '20562906'
         kras = 'KRAS'
-        snai2 = 'SNAI2' # previous symbol SNAIL2
+        snai2 = 'SNAI2'  # previous symbol SNAIL2
         self.create_and_add_sli(geneA=kras, geneB=snai2, geneApert=SlConstants.ACTIVATING_MUTATION,
                                 geneBpert=SlConstants.SI_RNA, cell=SlConstants.HCT_116,
                                 cellosaurus=SlConstants.HCT_116_CELLOSAURUS, assay=SlConstants.SG_RNA_DEPLETION_ASSAY,
@@ -192,17 +288,17 @@ class ManualEntryOne(SL_DatasetParser):
 
     def _add_imai_2014(self):
         pmid = '24378760'
-        tp53 = 'TP53' # specific for R175H
+        tp53 = 'TP53'  # specific for R175H
         id1 = 'ID1'
         self.create_and_add_sli(geneA=tp53, geneB=id1, geneApert=SlConstants.LOF_MUTATION,
                                 geneBpert=SlConstants.SI_RNA, cell=SlConstants.SKBR3_CELL,
-                                cellosaurus=SlConstants.SKBR3_CELLOSAURUS,assay=SlConstants.GROWTH_INHIBITION_ASSAY,
+                                cellosaurus=SlConstants.SKBR3_CELLOSAURUS, assay=SlConstants.GROWTH_INHIBITION_ASSAY,
                                 pmid=pmid)
 
     def _add_morandell_2013(self):
         pmid = '24239348'
         tp53 = 'TP53'
-        MAPKAPK2 = 'MAPKAPK2' # current symbol for MK2
+        MAPKAPK2 = 'MAPKAPK2'  # current symbol for MK2
         self.create_and_add_sli(geneA=tp53, geneB=MAPKAPK2, geneApert=SlConstants.LOF_MUTATION,
                                 geneBpert=SlConstants.SI_RNA, cell=SlConstants.A549_CELL,
                                 cellosaurus=SlConstants.A549_CELLOSAURUS, assay=SlConstants.CELL_VIABILITY_ASSAY,
@@ -217,7 +313,7 @@ class ManualEntryOne(SL_DatasetParser):
         acaca = 'ACACA'
         self.create_and_add_sli(geneA=idh1, geneB=acaca, geneApert=SlConstants.LOF_MUTATION,
                                 geneBpert=SlConstants.PHARMACEUTICAL, cell=SlConstants.THP1_CELL,
-                                cellosaurus=SlConstants.THP1_CELLOSAURUS,assay=SlConstants.CELL_VIABILITY_ASSAY,
+                                cellosaurus=SlConstants.THP1_CELLOSAURUS, assay=SlConstants.CELL_VIABILITY_ASSAY,
                                 pmid=pmid)
 
     def _add_bitler_2015(self):
@@ -252,8 +348,9 @@ class ManualEntryOne(SL_DatasetParser):
                                 cell=SlConstants.MDAMB231_CELL, cellosaurus=SlConstants.MDAMB231_CELLOSAURUS,
                                 assay=SlConstants.CELL_VIABILITY_ASSAY, pmid=pmid)
         parp1 = 'PARP1'
-        #We found that the addition of olaparib strongly decreased the survival of MDA-MB-231 cells depleted for TLK activity
-        self.create_and_add_sli(geneA=tlk2, geneB=parp1, geneApert=SlConstants.SI_RNA, geneBpert=SlConstants.PHARMACEUTICAL,
+        # We found that the addition of olaparib strongly decreased the survival of MDA-MB-231 cells depleted for TLK activity
+        self.create_and_add_sli(geneA=tlk2, geneB=parp1, geneApert=SlConstants.SI_RNA,
+                                geneBpert=SlConstants.PHARMACEUTICAL,
                                 cell=SlConstants.MDAMB231_CELL, cellosaurus=SlConstants.MDAMB231_CELLOSAURUS,
                                 assay=SlConstants.CELL_VIABILITY_ASSAY, pmid=pmid)
 
@@ -271,8 +368,7 @@ class ManualEntryOne(SL_DatasetParser):
         smarca2 = 'SMARCA2'  # current symbol for BRM
         self.create_and_add_sli(geneA=smarca2, geneB=smarca4, geneApert=SlConstants.LOF_MUTATION,
                                 geneBpert=SlConstants.SI_RNA, cell='multiple BRG1-deficient cells',
-                                cellosaurus=SlConstants.N_A, assay=SlConstants.CELL_VIABILITY_ASSAY,pmid=pmid)
-
+                                cellosaurus=SlConstants.N_A, assay=SlConstants.CELL_VIABILITY_ASSAY, pmid=pmid)
 
     def _add_Xu_2019(self):
         pmid = '30885978'
@@ -291,8 +387,8 @@ class ManualEntryOne(SL_DatasetParser):
         pmid = '24662823'
         met = 'MET'
         metid = self.get_ncbigene_curie(met)
-        sli_symbols = {'SERPINA3', 'PARP1', 'AREG', 'ATP1A2', 'BCL2L1', 'AKT2', 'BCR', 'FOS', 'CDKN2C','SRF','FGFR3',
-                       'CALR', 'CRK', 'INSRR','CD247', 'CASP1', 'CTTN', 'CHRNA7', 'ITGB3', 'CASP2', 'CD151', 'CCND2',
+        sli_symbols = {'SERPINA3', 'PARP1', 'AREG', 'ATP1A2', 'BCL2L1', 'AKT2', 'BCR', 'FOS', 'CDKN2C', 'SRF', 'FGFR3',
+                       'CALR', 'CRK', 'INSRR', 'CD247', 'CASP1', 'CTTN', 'CHRNA7', 'ITGB3', 'CASP2', 'CD151', 'CCND2',
                        'CTSD', 'EPB41L2'}
         for geneB in sli_symbols:
             self.create_and_add_sli(geneA=met, geneB=geneB, geneApert=SlConstants.INHIBITORY_ANTIBODY,
@@ -322,9 +418,10 @@ class ManualEntryOne(SL_DatasetParser):
         pmid = '24002644'
         rad54b = 'RAD54B'
         sod1 = 'RAD54B'
-        self.create_and_add_sli(geneA=rad54b, geneB=sod1, geneApert=SlConstants.SI_RNA, geneBpert=SlConstants.LOF_MUTATION,
+        self.create_and_add_sli(geneA=rad54b, geneB=sod1, geneApert=SlConstants.SI_RNA,
+                                geneBpert=SlConstants.LOF_MUTATION,
                                 cell=SlConstants.HCT_116, cellosaurus=SlConstants.HCT_116_CELLOSAURUS,
-                                assay=SlConstants.CELL_VIABILITY_ASSAY,pmid=pmid)
+                                assay=SlConstants.CELL_VIABILITY_ASSAY, pmid=pmid)
 
     def _add_guppy_2017(self):
         pmid = '28462496'
@@ -352,7 +449,8 @@ class ManualEntryOne(SL_DatasetParser):
         # that document sufficiently the effect
 
         self.create_and_add_sli(geneA=rad54b, geneB=fen1, geneApert=SlConstants.ACTIVATING_MUTATION,
-                                geneBpert=SlConstants.SH_RNA, cell=SlConstants.HCT_116, cellosaurus=SlConstants.HCT_116_CELLOSAURUS,
+                                geneBpert=SlConstants.SH_RNA, cell=SlConstants.HCT_116,
+                                cellosaurus=SlConstants.HCT_116_CELLOSAURUS,
                                 assay=SlConstants.GROWTH_INHIBITION_ASSAY, pmid=pmid)
 
     def _add_ward_2017(self):
@@ -361,12 +459,13 @@ class ManualEntryOne(SL_DatasetParser):
         """
         pmid = '28628639'
         fen1 = 'FEN1'
-        mre11a = 'MRE11' # (current symbol for MRE11A)
+        mre11a = 'MRE11'  # (current symbol for MRE11A)
         self.create_and_add_sli(geneA=fen1, geneB=mre11a,
                                 geneApert=SlConstants.PHARMACEUTICAL, geneBpert=SlConstants.LOF_MUTATION,
-                                assay=SlConstants.CELL_VIABILITY_ASSAY,pmid=pmid)
+                                assay=SlConstants.CELL_VIABILITY_ASSAY, pmid=pmid)
         atm = 'ATM'
-        self.create_and_add_sli(geneA=fen1, geneB=atm, geneApert=SlConstants.PHARMACEUTICAL, geneBpert=SlConstants.SH_RNA,
+        self.create_and_add_sli(geneA=fen1, geneB=atm, geneApert=SlConstants.PHARMACEUTICAL,
+                                geneBpert=SlConstants.SH_RNA,
                                 cell=SlConstants.FADU_CELL, cellosaurus=SlConstants.FADU_CELLOSAURUS,
                                 assay=SlConstants.CELL_VIABILITY_ASSAY, pmid=pmid)
 
@@ -375,7 +474,8 @@ class ManualEntryOne(SL_DatasetParser):
         arid1a = 'ARID1A'
         arid1b = 'ARID1B'
         self.create_and_add_sli(geneA=arid1a, geneB=arid1b, geneApert=SlConstants.LOF_MUTATION,
-                                geneBpert=SlConstants.SH_RNA,cell=SlConstants.TOV21G_CELL, cellosaurus=SlConstants.TOV21G_CELLOSAURUS,
+                                geneBpert=SlConstants.SH_RNA, cell=SlConstants.TOV21G_CELL,
+                                cellosaurus=SlConstants.TOV21G_CELLOSAURUS,
                                 assay=SlConstants.GROWTH_INHIBITION_ASSAY, pmid=pmid)
 
     def _add_koundinya_2018(self):
