@@ -43,6 +43,7 @@ class ManualEntryOne(SL_DatasetParser):
         self._add_romero_2014()
         self._add_bian_2014()
         self._add_dietlein_2014()
+        self._add_wittig_blaich_2017()
 
     def create_and_add_sli(self, geneA, geneB, geneApert, geneBpert, assay, pmid,
                            cell=SlConstants.N_A, cellosaurus=SlConstants.N_A,
@@ -74,7 +75,16 @@ class ManualEntryOne(SL_DatasetParser):
                                          SL=sl)
         self.entries.append(sli)
 
-
+    def _add_wittig_blaich_2017(self):
+        pmid = '28423600'
+        braf = 'BRAF'
+        dusp6 = 'DUSP6'
+        self.create_and_add_sli(geneA=braf, geneB=dusp6, geneApert=SlConstants.ACTIVATING_MUTATION,
+                                geneBpert=SlConstants.SI_RNA, assay=SlConstants.CELL_VIABILITY_ASSAY,
+                                cell=SlConstants.N_A,
+                                cellosaurus=SlConstants.N_A,
+                                cancer=SlConstants.MELANOMA,ncit=SlConstants.MELANOMA_NCIT,
+                                pmid=pmid)
 
     def _add_dietlein_2014(self):
         """
@@ -85,7 +95,8 @@ class ManualEntryOne(SL_DatasetParser):
         prkdc = 'PRKDC'
         self.create_and_add_sli(geneA=msh3, geneB=prkdc, geneApert=SlConstants.LOF_MUTATION,
                                 geneBpert=SlConstants.SI_RNA, cell=SlConstants.HCC44_CELL,
-                                cellosaurus=SlConstants.HCC44_CELLOSAURUS, assay=SlConstants.GROWTH_INHIBITION_ASSAY,
+                                cellosaurus=SlConstants.HCC44_CELLOSAURUS,
+                                assay=SlConstants.GROWTH_INHIBITION_ASSAY,
                                 pmid=pmid)
 
 
