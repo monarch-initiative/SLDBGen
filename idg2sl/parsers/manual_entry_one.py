@@ -52,6 +52,7 @@ class ManualEntryOne(SL_DatasetParser):
         self._add_tiong_2014()
         self._add_bryant_2005()
         self._add_sullivan_reed_2018()
+        self._add_dietlein_2015()
 
     def create_and_add_sli(self, geneA, geneB, geneApert, geneBpert, assay, pmid,
                            cell=SlConstants.N_A, cellosaurus=SlConstants.N_A,
@@ -85,6 +86,17 @@ class ManualEntryOne(SL_DatasetParser):
                                          pmid=pmid,
                                          SL=sl)
         self.entries.append(sli)
+
+    def _add_dietlein_2015(self):
+        pmid = '26140595'
+        chek1 = 'CHEK1'  # current symbol for Chk1
+        mapkapk2 = 'MAPKAPK2'  # current symbol for MK2
+        kras = 'KRAS'
+        self.create_and_add_sli(geneA=chek1, geneB=mapkapk2, geneApert=SlConstants.PHARMACEUTICAL,
+                                geneBpert=SlConstants.PHARMACEUTICAL, cell='KRAS-Driven Cancer Cells',
+                                cellosaurus=SlConstants.N_A, background_dependency_gene_symbol=kras,
+                                background_dependency_status=SlConstants.ACTIVATING_MUTATION,pmid=pmid)
+
 
     def _add_sullivan_reed_2018(self):
         pmid = '29898385'
