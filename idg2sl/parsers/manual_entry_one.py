@@ -51,6 +51,7 @@ class ManualEntryOne(SL_DatasetParser):
         self._add_konda_2017()
         self._add_tiong_2014()
         self._add_bryant_2005()
+        self._add_sullivan_reed_2018()
 
     def create_and_add_sli(self, geneA, geneB, geneApert, geneBpert, assay, pmid,
                            cell=SlConstants.N_A, cellosaurus=SlConstants.N_A,
@@ -58,10 +59,13 @@ class ManualEntryOne(SL_DatasetParser):
                            effecttype=SlConstants.N_A, effectsize=SlConstants.N_A,
                            background_dependency_status=SlConstants.N_A,
                            background_dependency_gene_symbol=SlConstants.N_A,
-                           background_dependency_gene_id=SlConstants.N_A,
                            sl=True):
         geneAid = self.get_ncbigene_curie(geneA)
         geneBid = self.get_ncbigene_curie(geneB)
+        if background_dependency_gene_symbol != SlConstants.N_A:
+            background_gene_id = self.get_ncbigene_curie(background_dependency_gene_symbol)
+        else:
+            background_gene_id = SlConstants.N_A
         sli = SyntheticLethalInteraction(gene_A_symbol=geneA,
                                          gene_A_id=geneAid,
                                          gene_B_symbol=geneB,
@@ -77,10 +81,33 @@ class ManualEntryOne(SL_DatasetParser):
                                          assay=assay,
                                          background_dependency_status=background_dependency_status,
                                          background_dependency_gene_symbol=background_dependency_gene_symbol,
-                                         background_dependency_gene_id=background_dependency_gene_id,
+                                         background_dependency_gene_id=background_gene_id,
                                          pmid=pmid,
                                          SL=sl)
         self.entries.append(sli)
+
+    def _add_sullivan_reed_2018(self):
+        pmid = '29898385'
+        rad52 = 'RAD52'
+        parp1 = 'PARP1'
+        brca1 = 'BRCA1'
+        self.create_and_add_sli(geneA=rad52, geneB=parp1, geneApert=SlConstants.PHARMACEUTICAL,
+                                geneBpert=SlConstants.PHARMACEUTICAL, cell=SlConstants.MDAMB436_CELL,
+                                cellosaurus=SlConstants.MDAMB436_CELLOSAURUS, background_dependency_status=SlConstants.LOF_MUTATION,
+                                background_dependency_gene_symbol=brca1, assay=SlConstants.GROWTH_INHIBITION_ASSAY,
+                                pmid=pmid)
+
+    def _add_voss_2017(self):
+        pmid = '28138868'
+        parp1 = 'PARP1'
+        ddx3 = 'DDX3'
+        brca1 = 'BRCA1'
+        self.create_and_add_sli(geneA=ddx3, geneB=parp1, geneApert=SlConstants.PHARMACEUTICAL,
+                                geneBpert=SlConstants.PHARMACEUTICAL, cell=SlConstants.MCF7_CELL,
+                                cellosaurus=SlConstants.MCF7_CELLOSAURUS, assay=SlConstants.GROWTH_INHIBITION_ASSAY,
+                                background_dependency_status=SlConstants.WILDTYPE,
+                                background_dependency_gene_symbol=brca1,
+                                pmid=pmid)
 
     def _add_bryant_2005(self):
         pmid = '15829966'
@@ -386,7 +413,6 @@ class ManualEntryOne(SL_DatasetParser):
         """
         pmid = '24662823'
         met = 'MET'
-        metid = self.get_ncbigene_curie(met)
         sli_symbols = {'SERPINA3', 'PARP1', 'AREG', 'ATP1A2', 'BCL2L1', 'AKT2', 'BCR', 'FOS', 'CDKN2C', 'SRF', 'FGFR3',
                        'CALR', 'CRK', 'INSRR', 'CD247', 'CASP1', 'CTTN', 'CHRNA7', 'ITGB3', 'CASP2', 'CD151', 'CCND2',
                        'CTSD', 'EPB41L2'}
