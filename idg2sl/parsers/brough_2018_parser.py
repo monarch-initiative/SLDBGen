@@ -38,7 +38,7 @@ class Brough2018Parser(SL_DatasetParser):
     def parse_suppl9(self):
         fname = 'data/brough_2012_suppl9.tsv'
         rb1 = 'RB1'
-        rb1_id = self.entrez_dict.get(rb1)
+        rb1_id = SlConstants.RB1_GENE_ID
         rb1_perturbation = SlConstants.LOF_MUTATION
         gene2_perturbation = SlConstants.SI_RNA
         assay_string = "siMEM+penetrance"
@@ -81,7 +81,7 @@ class Brough2018Parser(SL_DatasetParser):
 
     def parse_suppl10_11(self, fname):
         rb1 = 'RB1'
-        rb1_id = self.entrez_dict.get(rb1)
+        rb1_id = SlConstants.RB1_GENE_ID
         rb1_perturbation = SlConstants.LOF_MUTATION
         gene2_perturbation = SlConstants.SI_RNA
         assay_string = "siMEM+penetrance"
@@ -100,7 +100,7 @@ class Brough2018Parser(SL_DatasetParser):
                     continue # We cannot assign an effect unambiguously to one of the genes
                     # some of the entries are like  PMS2,PMS2CL
                 if geneBsym in self.entrez_dict:
-                    geneB_id = "NCBIGene:{}".format(self.entrez_dict.get(geneBsym))
+                    geneB_id = self.get_ncbigene_curie(geneBsym)
                 elif geneBsym in self.unclear_gene_symbols:
                     continue
                 else:
