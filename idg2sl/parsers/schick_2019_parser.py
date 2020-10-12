@@ -16,8 +16,8 @@ class Schick2019Parser(SL_DatasetParser):
     def get_sli(self, geneA_sym, geneA_id, geneB_sym, geneB_id):
         # Gene A should be eighter NRAS or KRAS.
         # These genes had activating mutations in the cell lines
-        ncit = "n/a"
-        cancer = "n/a"
+        ncit = SlConstants.N_A
+        cancer = SlConstants.N_A
         sli = SyntheticLethalInteraction(gene_A_symbol=geneA_sym,
                                          species_id="10090",
                                          gene_A_id=geneA_id,
@@ -25,10 +25,10 @@ class Schick2019Parser(SL_DatasetParser):
                                          gene_B_id=geneB_id,
                                          gene_A_pert=SlConstants.SI_RNA,
                                          gene_B_pert=SlConstants.SI_RNA,
-                                         effect_type="n/a",
-                                         effect_size="n/a",
-                                         cell_line="n/a",
-                                         cellosaurus_id="n/a",
+                                         effect_type=SlConstants.N_A,
+                                         effect_size=SlConstants.N_A,
+                                         cell_line=SlConstants.N_A,
+                                         cellosaurus_id=SlConstants.N_A,
                                          cancer_type=cancer,
                                          ncit_id=ncit,
                                          assay=SlConstants.MULTICOLOR_COMPETITION_ASSAY,

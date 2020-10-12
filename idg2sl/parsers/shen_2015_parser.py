@@ -27,7 +27,6 @@ class Shen2015Parser(SL_DatasetParser):
         cellosaurus = "CVCL_0030"
         cancer = ""
         ncit = ""  #
-        sli_list = []
         # The following keeps track of the current largest effect size SLI for any given gene A/gene B pair
         sli_dict = defaultdict(list)
         with open(self.fname) as csvfile:
