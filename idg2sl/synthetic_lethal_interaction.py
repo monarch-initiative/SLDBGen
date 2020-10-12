@@ -53,6 +53,8 @@ class SyntheticLethalInteraction:
             raise ValueError("Need to pass pmid")
         if SL is None:
             raise ValueError("Need to pass True or False for SL")
+        if gene_A_id == gene_B_id:
+            raise ValueError("Self loops not allowed -- you passed the same gene ID for gene A and gene B (%s/%s)" % (gene_B_symbol, gene_B_id))
         self.gene_A_symbol = gene_A_symbol
         self.gene_A_id = gene_A_id
         self.gene_B_symbol = gene_B_symbol

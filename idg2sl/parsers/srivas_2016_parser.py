@@ -42,6 +42,8 @@ class Srivas2016Parser(SL_DatasetParser):
                         geneA_id = "NCBIGene:{}".format(self.entrez_dict.get(i))
                     else:
                         raise ValueError("Could not find id for geneA %s in Srivasa 2016" % i)
+                    if geneA_id == geneB_id:
+                        continue  # There are a few self loops in the data, but these are not SLIs, so we skip them
                     sli = SyntheticLethalInteraction(gene_A_symbol=i,
                                                      gene_A_id=geneA_id,
                                                      gene_B_symbol=geneB_sym,

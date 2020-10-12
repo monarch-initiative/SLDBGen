@@ -29,6 +29,8 @@ class Williamson2016Parser(SL_DatasetParser):
                 mcf12 = float(row['MCF12A.Z-score'])
                 hcc1143 = float(row['HCC1143.Z-score'])
                 meanz = 0.5 * (mcf12 + hcc1143)
+                if geneBsym == atr:
+                    continue  # There is one self-loop in the dataset, but we skip it, it cannot be an SLI
                 sli = SyntheticLethalInteraction(gene_A_symbol=atr,
                                                  gene_A_id=atr_id,
                                                  gene_B_symbol=geneBsym,

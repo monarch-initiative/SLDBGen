@@ -457,7 +457,7 @@ class ManualEntryOne(SL_DatasetParser):
     def _add_sayesh_2013(self):
         pmid = '24002644'
         rad54b = 'RAD54B'
-        sod1 = 'RAD54B'
+        sod1 = 'SOD1'
         self.create_and_add_sli(geneA=rad54b, geneB=sod1, geneApert=SlConstants.SI_RNA,
                                 geneBpert=SlConstants.LOF_MUTATION,
                                 cell=SlConstants.HCT_116, cellosaurus=SlConstants.HCT_116_CELLOSAURUS,
