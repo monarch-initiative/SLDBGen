@@ -38,7 +38,7 @@ class Mohni2014Parser(SL_DatasetParser):
                 elif geneB == 'CXORF53':
                     geneB = 'BRCC3'
                 if geneB in self.entrez_dict:
-                    geneBid = self.entrez_dict.get(geneB)
+                    geneBid = self.get_ncbigene_curie(geneB)
                 else:
                     raise ValueError("Could not find id for gene %s in Mohni 2014" % geneB)
                 mock1 = float(row['Mock.1'])

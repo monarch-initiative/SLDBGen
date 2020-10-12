@@ -49,12 +49,12 @@ class Oser2019Parser(SL_DatasetParser):
                      'PCF11': '0.043200', 'WDR82': '0.045000', 'RBBP4': '0.046100', 'ESPL1': '0.047500',
                      'PMF1': '0.048000', 'CENPP': '0.048800', 'HIST1H2BL': '0.047800'}
         rb1 = 'RB1'
-        geneAid = self.entrez_dict.get(rb1)
+        geneAid = self.get_ncbigene_curie(rb1)
         sli_list = []
         for k, v in oserGenes.items():
             geneB = self.get_current_symbol(k)
             if geneB in self.entrez_dict:
-                geneBid = self.entrez_dict.get(geneB)
+                geneBid = self.get_ncbigene_curie(geneB)
             else:
                 raise ValueError("Could not find id for %s in Oser 2019" % geneB)
             sli = SyntheticLethalInteraction(gene_A_symbol=rb1,

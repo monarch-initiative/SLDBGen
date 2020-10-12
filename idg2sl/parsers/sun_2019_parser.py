@@ -32,14 +32,14 @@ class Sun2019Parser(SL_DatasetParser):
             for line in f:
                 geneBsym = line.strip()
                 if geneBsym in self.entrez_dict:
-                    geneBid = self.entrez_dict.get(geneBsym)
+                    geneBid = self.get_ncbigene_curie(geneBsym)
                 elif geneBsym == 'DARS' or geneBsym == 'NARS' or geneBsym == 'KARS' or geneBsym == 'YARS':
                     # A group of tRNA genes that need to have the '1' (I could map these uniquely with HGNC)
                     geneBsym = "%s1" % geneBsym
-                    geneBid = self.entrez_dict.get(geneBsym)
+                    geneBid = self.get_ncbigene_curie(geneBsym)
                 elif geneBsym in mappings:
                     geneBsym = mappings.get(geneBsym)
-                    geneBid = self.entrez_dict.get(geneBsym)
+                    geneBid = self.get_ncbigene_curie(geneBsym)
                 elif geneBsym in unclear_gene_symbols:
                     continue
                 else:

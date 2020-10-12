@@ -35,10 +35,14 @@ class SyntheticLethalInteraction:
             raise ValueError("Need to pass gene A")
         if gene_A_id is None:
             raise ValueError("Need to pass gene A id")
+        if not gene_A_id.startswith("NCBIGene:"):
+            raise("Error Gene A id (%s) did not start with NCBIGene" % gene_A_id)
         if gene_B_symbol is None:
             raise ValueError("Need to pass gene B")
         if gene_B_id is None:
             raise ValueError("Need to pass gene B id")
+        if not gene_B_id.startswith("NCBIGene:"):
+            raise ValueError("Error Gene B id (%s) did not start with NCBIGene" % gene_B_id)
         if gene_A_pert is None:
             raise ValueError("Need to pass gene A perturbation")
         if gene_B_pert is None:
@@ -49,6 +53,8 @@ class SyntheticLethalInteraction:
             raise ValueError("Need to pass pmid")
         if SL is None:
             raise ValueError("Need to pass True or False for SL")
+        if gene_A_id == gene_B_id:
+            raise ValueError("Self loops not allowed -- you passed the same gene ID for gene A and gene B (%s/%s)" % (gene_B_symbol, gene_B_id))
         self.gene_A_symbol = gene_A_symbol
         self.gene_A_id = gene_A_id
         self.gene_B_symbol = gene_B_symbol

@@ -81,7 +81,7 @@ class Chakraborty2017Parser(SL_DatasetParser):
         for geneB, pval in pvals.items():
             if pval < 0.1:
                 if geneB in self.entrez_dict:
-                    geneBid = self.entrez_dict.get(geneB)
+                    geneBid = self.get_ncbigene_curie(geneB)
                 elif geneB in unclear_gene_symbols:
                     continue
                 else:
@@ -90,7 +90,7 @@ class Chakraborty2017Parser(SL_DatasetParser):
                 sli_list.append(sli)
             elif 0.4 < pval < 0.6:
                 if geneB in self.entrez_dict:
-                    geneBid = self.entrez_dict.get(geneB)
+                    geneBid = self.get_ncbigene_curie(geneB)
                 else:
                     continue # don't worry, we are looking for negative genes
                 sli = self.get_sli(geneB_sym=geneB, geneB_id=geneBid, pval=pval, slstatus=False)

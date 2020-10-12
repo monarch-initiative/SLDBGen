@@ -113,6 +113,10 @@ oser2019 = Oser2019Parser()
 oser2019_list = oser2019.parse()
 show_stats("Oser et al 2019", oser2019_list)
 
+patidar2020 = Patidar2020Parser()
+patidar2020_list = patidar2020.parse()
+show_stats("Patidar 2020", patidar2020_list)
+
 schick2019 = Schick2019Parser()
 schick2019_list = schick2019.parse()
 print("[INFO] Schick et al 2019  n=%d SL interactions" % len(schick2019_list))
@@ -174,7 +178,7 @@ show_stats("Williamson et al 2016", williamson2016_list)
 sli_lists = [astsaturov2010_list, baldwin2010_list, bommi2008_list, blomen2015_list, brough2018_list,
              chakraborty2017_list, dai2013_list, etemadmoghadam2013_list, han2017_list, josse2014_list, kang2015_list,
              kessler2012_list, krastev2011_list, lord2008_list, luo2009_list, martin2010_list, mengwasser_2019_list,
-             mohni2014_list, mondal2019_list,  oser2019_list,
+             mohni2014_list, mondal2019_list,  oser2019_list, patidar2020_list,
              shen2015_list, shen2017_list, schick2019_list, srivas2016_list, steckel2012_list, sullivan2012_list,
              sun2019_list, toyoshima2008_list, turner2008_list, vizeacoumar2013_list, wang2016_list, wang2017_list,
              wang_2019_list, williamson2016_list,manual_list, manual_one_list]
