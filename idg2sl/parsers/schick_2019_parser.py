@@ -16,8 +16,8 @@ class Schick2019Parser(SL_DatasetParser):
     def get_sli(self, geneA_sym, geneA_id, geneB_sym, geneB_id):
         # Gene A should be eighter NRAS or KRAS.
         # These genes had activating mutations in the cell lines
-        ncit = "n/a"
-        cancer = "n/a"
+        ncit = SlConstants.N_A
+        cancer = SlConstants.N_A
         sli = SyntheticLethalInteraction(gene_A_symbol=geneA_sym,
                                          species_id="10090",
                                          gene_A_id=geneA_id,
@@ -25,10 +25,10 @@ class Schick2019Parser(SL_DatasetParser):
                                          gene_B_id=geneB_id,
                                          gene_A_pert=SlConstants.SI_RNA,
                                          gene_B_pert=SlConstants.SI_RNA,
-                                         effect_type="n/a",
-                                         effect_size="n/a",
-                                         cell_line="n/a",
-                                         cellosaurus_id="n/a",
+                                         effect_type=SlConstants.N_A,
+                                         effect_size=SlConstants.N_A,
+                                         cell_line=SlConstants.N_A,
+                                         cellosaurus_id=SlConstants.N_A,
                                          cancer_type=cancer,
                                          ncit_id=ncit,
                                          assay=SlConstants.MULTICOLOR_COMPETITION_ASSAY,
@@ -39,20 +39,20 @@ class Schick2019Parser(SL_DatasetParser):
     def parse(self):
         # SMARCA4-ARID2, SMARCA4-ACTB and SMARCC1-SMARCC2.
         smarca4 = "SMARCA4"
-        smarca4id = self.entrez_dict.get(smarca4)
+        smarca4id = self.get_ncbigene_curie(smarca4)
         arid2 = "ARID2"
-        arid2id = self.entrez_dict.get(arid2)
+        arid2id = self.get_ncbigene_curie(arid2)
         sli_list = []
         sli = self.get_sli(geneA_sym=smarca4, geneA_id=smarca4id, geneB_sym=arid2, geneB_id=arid2id)
         sli_list.append(sli)
         actb = 'ACTB'
-        actbid = self.entrez_dict.get(actb)
+        actbid = self.get_ncbigene_curie(actb)
         sli = self.get_sli(geneA_sym=smarca4, geneA_id=smarca4id, geneB_sym=actb, geneB_id=actbid)
         sli_list.append(sli)
         smarcc1 = 'SMARCC1'
-        smarcc1_id = self.entrez_dict.get(smarcc1)
+        smarcc1_id = self.get_ncbigene_curie(smarcc1)
         smarcc2 = 'SMARCC2'
-        smarcc2_id = self.entrez_dict.get(smarcc2)
+        smarcc2_id = self.get_ncbigene_curie(smarcc2)
         sli = self.get_sli(geneA_sym=smarcc1, geneA_id=smarcc1_id, geneB_sym=smarcc2, geneB_id=smarcc2_id)
         sli_list.append(sli)
         return sli_list

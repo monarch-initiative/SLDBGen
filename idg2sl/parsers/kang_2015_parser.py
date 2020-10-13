@@ -27,7 +27,7 @@ class Kang2015Parser(SL_DatasetParser):
         # These genes had activating mutations in the cell lines
         braf = 'BRAF'
         brafID = SlConstants.BRAF_GENE_ID
-        geneB_id = self.entrez_dict.get(geneB_sym)
+        geneB_id = self.get_ncbigene_curie(geneB_sym)
         sli = SyntheticLethalInteraction(gene_A_symbol=braf,
                                          species_id="10090",
                                          gene_A_id=brafID,

@@ -92,6 +92,8 @@ class Lord2008Parser(SL_DatasetParser):
                 sli_list.append(sli)
             else:
                 effectsize = min(parp_sens_list[0], parp_sens_list[1])
+                if geneB_id == parp1_id:
+                    continue  # We do not consider self-loops
                 if effectsize > -0.05:
                     sli = SyntheticLethalInteraction(gene_A_symbol=parp1_symbol,
                                                      gene_A_id=parp1_id,

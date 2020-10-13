@@ -13,7 +13,7 @@ class Etemadmoghadam2013Parser(SL_DatasetParser):
         ccne1 = 'CCNE1'
         ccne1_id = self.get_ncbigene_curie(ccne1)
         sli_list = []
-        sligenes = {'CDK2', 'CCNE1', 'ACAT2', 'CSE1L', 'BRCA1', 'CCNA2', 'CDC42', 'CHD2', 'DDX17', 'DUSP16', 'ENPP2',
+        sligenes = {'CDK2', 'ACAT2', 'CSE1L', 'BRCA1', 'CCNA2', 'CDC42', 'CHD2', 'DDX17', 'DUSP16', 'ENPP2',
                     'HNRNPA3', 'IARS2', 'MYC', 'PSMA5', 'RRM1', 'SLC35A3', 'SMC2', 'SPATA6', 'SRBD1', 'TPX2', 'TUBB',
                     'UBA1', 'VCP', 'XRCC2'}
         for geneB in sligenes:

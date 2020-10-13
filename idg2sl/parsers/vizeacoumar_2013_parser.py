@@ -23,7 +23,7 @@ class Vizeacoumar2013Parser(SL_DatasetParser):
         """
         BLM, MUS81, PTEN, PTTG1
         """
-        geneAid = self.entrez_dict.get(geneA)
+        geneAid = self.get_ncbigene_curie(geneA)
         with open(fname) as csvfile:
             csvreader = csv.DictReader(csvfile, delimiter='\t')
             for row in csvreader:
@@ -31,7 +31,7 @@ class Vizeacoumar2013Parser(SL_DatasetParser):
                     continue
                 geneBsym = self.get_current_symbol(row['human gene'])
                 if geneBsym in self.entrez_dict:
-                    geneB_id = "NCBIGene:{}".format(self.entrez_dict.get(geneBsym))
+                    geneB_id = self.get_ncbigene_curie(geneBsym)
                 elif geneBsym in self.unclear_gene_symbols:
                     continue
                 else:
@@ -60,7 +60,7 @@ class Vizeacoumar2013Parser(SL_DatasetParser):
         BLM is BLM RecQ like helicase
         """
         geneA = 'KRAS'
-        geneAid = self.get_current_symbol(geneA)
+        geneAid = self.get_ncbigene_curie(geneA)
         fname = 'data/vizeacoumarSuppl4-PTEN.tsv'
         geneA_perturbation = SlConstants.ACTIVATING_MUTATION
         gene2_perturbation = SlConstants.SI_RNA
@@ -77,7 +77,7 @@ class Vizeacoumar2013Parser(SL_DatasetParser):
                     continue
                 geneBsym = self.get_current_symbol(row['human gene'])
                 if geneBsym in self.entrez_dict:
-                    geneB_id = "NCBIGene:{}".format(self.entrez_dict.get(geneBsym))
+                    geneB_id = self.get_ncbigene_curie(geneBsym)
                 elif geneBsym in self.unclear_gene_symbols:
                     continue
                 else:

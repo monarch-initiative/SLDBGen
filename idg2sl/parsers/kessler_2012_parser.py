@@ -20,7 +20,7 @@ class Kessler2012Parser(SL_DatasetParser):
 
     def parse(self):
         myc = 'MYC'
-        myc_id = self.entrez_dict.get(myc)
+        myc_id = self.get_ncbigene_curie(myc)
         myc_perturbation = SlConstants.OVEREXPRESSION
         geneB_perturbation = SlConstants.SI_RNA
         assay_string = SlConstants.RNA_INTERFERENCE_ASSAY
@@ -43,7 +43,7 @@ class Kessler2012Parser(SL_DatasetParser):
                 geneBsym = row['symbol']
                 geneBsym = self.get_current_symbol(geneBsym)
                 if geneBsym in self.entrez_dict:
-                    geneB_id = "NCBIGene:{}".format(self.entrez_dict.get(geneBsym))
+                    geneB_id = self.get_ncbigene_curie(geneBsym)
                 elif geneBsym in unclear_gene_symbols:
                     continue
                 else:

@@ -27,7 +27,6 @@ class Shen2015Parser(SL_DatasetParser):
         cellosaurus = "CVCL_0030"
         cancer = ""
         ncit = ""  #
-        sli_list = []
         # The following keeps track of the current largest effect size SLI for any given gene A/gene B pair
         sli_dict = defaultdict(list)
         with open(self.fname) as csvfile:
@@ -38,6 +37,8 @@ class Shen2015Parser(SL_DatasetParser):
                     raise ValueError("Only got %d fields but was expecting at least 3" % len(row))
                 geneB_sym = row['Symbol']
                 geneB_sym = self.get_current_symbol(geneB_sym)
+                if geneB_sym == 'CHEK1':
+                    continue  # Do not allow self-loops!
                 if geneB_sym in self.entrez_dict:
                     geneB_id = "NCBIGene:{}".format(self.entrez_dict.get(geneB_sym))
                 else:

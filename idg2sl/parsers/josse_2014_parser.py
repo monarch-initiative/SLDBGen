@@ -32,6 +32,9 @@ class Josse2014Parser(SL_DatasetParser):
                 if sym in self.entrez_dict:
                     # We skip symbols that cannot be identified for this negative list
                     geneB_id = self.get_ncbigene_curie(sym)
+                    if top1_id == geneB_id:
+                        continue  # There is one self-loop in the data, we discard it because self-loops
+                        # cannot be SLIs
                     sli = SyntheticLethalInteraction(gene_A_symbol=top1,
                                                      gene_A_id=top1_id,
                                                      gene_B_symbol=sym,

@@ -18,8 +18,8 @@ class Krastev2011Parser(SL_DatasetParser):
 
     def create_sli(self, geneB_sym):
         tp53 = 'TP53'
-        tp53id = self.entrez_dict.get(tp53)
-        geneB_id = self.entrez_dict.get(geneB_sym)
+        tp53id = self.get_ncbigene_curie(tp53)
+        geneB_id = self.get_ncbigene_curie(geneB_sym)
         tp53_perturbation = SlConstants.LOF_MUTATION
         gene_B_pert = SlConstants.SI_RNA
         cell_line = SlConstants.HCT_116
