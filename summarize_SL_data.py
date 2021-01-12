@@ -16,12 +16,11 @@ all_symbols = set()
 all_symbols_positive_set = set()
 connections = defaultdict(set)
 degrees = defaultdict(int)
+sli_count = 0
 
 with open(sl_data_file) as f:
     creader = csv.DictReader(f, delimiter="\t")
-    for row in creader:
-        #if len(row) != 20:
-        #    raise ValueError("Malformed line (we were expecting 20 fields: " + ";".join(row))
+    for row in creader: 
         geneA = row['geneA']
         geneB = row['geneB']
         all_symbols.add(geneA)
@@ -30,8 +29,9 @@ with open(sl_data_file) as f:
         if SL == 'T':
             all_symbols_positive_set.add(geneA)
             all_symbols_positive_set.add(geneB)
-            sorted_pair = sorted([geneA, geneB])
-            connections[sorted_pair[0]].add(sorted_pair[1])
+            connections[geneA].add(geneB)
+            connections[geneB].add(geneA)
+            sli_count += 1
 
 print("[INFO] Total genes: %d" % len(all_symbols))
 print("[INFO] Total genes in positive set: %d" % len(all_symbols_positive_set))
@@ -44,6 +44,7 @@ for k, v in connections.items():
 print("[INFO] Degree distribution:")
 for k, v in degrees.items():
     print("Degree: %d, number of genes: %d" % (k, v))
+print("[INFO] Total number of SLI %d" % sli_count)
 
 # Plot with seaborn. First put the data into a Pandas DataFrame
 dict_list = []
