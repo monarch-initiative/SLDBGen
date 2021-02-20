@@ -36,6 +36,7 @@ class SyntheticLethalInteraction:
         if gene_A_id is None:
             raise ValueError("Need to pass gene A id")
         if not gene_A_id.startswith("NCBIGene:"):
+            print("Error Gene A id (%s) did not start with NCBIGene" % gene_A_id)
             raise("Error Gene A id (%s) did not start with NCBIGene" % gene_A_id)
         if gene_B_symbol is None:
             raise ValueError("Need to pass gene B")

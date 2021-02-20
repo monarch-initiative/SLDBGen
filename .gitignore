@@ -12,3 +12,5 @@ utils/__pycache__/
 .idea/
 /SL_data.tsv
 /protein-coding_gene.txt
+p38
+*.pdf

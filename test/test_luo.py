@@ -37,7 +37,7 @@ class TestLuo(TestCase):
         self.assertEqual("ANAPC1", self.first_entry.get_gene_B_symbol())
 
     def test_get_perturbation(self):
-        self.assertEqual("activating_mutation", self.first_entry.get_gene_A_pert())
+        self.assertEqual("activating mutation", self.first_entry.get_gene_A_pert())
         self.assertEqual("shRNA", self.first_entry.get_gene_B_pert())
 
     def test_get_cellosaurus(self):

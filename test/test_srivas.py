@@ -20,14 +20,33 @@ class TestSrivas(TestCase):
 
     def test_count_entries(self):
         """
-        There are 16 unique genes in srivas_small.
+        There are 12 unique genes in srivas_small.
+        1 BRCA2
+        2 TOP1
+        3 CHEK1
+        4 CDC6
+        5 TOP3A
+        6 CDC73
+        7 ADA
+        8 PARP1
+        9 TOP2A
+        10 IMPDH1
+        11 WEE1
+        12 CHEK2
         There are 16 genes altogether.
         Thus, 16 of the entries should be marked as max
         :return:
         """
-        self.assertEqual(16, len(self.srivas_list))
+        srivas_genes = set()
+        for sli in self.srivas_list:
+            geneA = sli.get_gene_A_symbol()
+            geneB = sli.get_gene_B_symbol()
+            srivas_genes.add(geneA)
+            srivas_genes.add(geneB)
+        self.assertEqual(12, len(srivas_genes))
         num_max = sum([1 for item in self.srivas_list if item.is_maximum()])
-        self.assertEqual(16, num_max)
+        # 15 because we skip the positive control
+        self.assertEqual(15, num_max)
 
     def test_get_symbol(self):
         self.assertEqual("IMPDH1", self.first_entry.get_gene_A_symbol())

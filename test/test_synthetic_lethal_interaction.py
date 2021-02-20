@@ -5,10 +5,10 @@ from idg2sl import SyntheticLethalInteraction
 class TestSyntheticLethalInteraction(unittest.TestCase):
     def setUp(self) -> None:
         self.parameters = {
-             'gene_A_symbol': 'symA',
-             'gene_A_id': 'idA',
-             'gene_B_symbol': 'symB',
-             'gene_B_id': 'idB',
+             'gene_A_symbol': 'VPS54',
+             'gene_A_id': 'NCBIGene:51542',
+             'gene_B_symbol': 'PTAR1',
+             'gene_B_id': 'NCBIGene:375743',
              'gene_A_pert': 'pert1',
              'gene_B_pert': 'pert2',
              'effect_type': 'thisEff',
