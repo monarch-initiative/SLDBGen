@@ -1,0 +1,284 @@
+id: https://w3id.org/sldb
+name: sldb
+description: >-
+  Sldb
+imports:
+ - biolinkml:types
+prefixes:
+  biolinkml: https://w3id.org/biolink/biolinkml/
+  biolink: https://w3id.org/biolink/vocab/
+  sldb: https://w3id.org/sldb/
+default_prefix: sldb
+
+types:
+  external id:
+    typeof: string  ## e.g. 983-4delTA
+  gene symbol type:
+    typeof: string  ## e.g. 983-4delTA
+
+classes:
+  synthetic lethal interaction:
+    slots:
+    - geneA
+    - geneA.ncbi-id
+    - geneA.ensembl-id
+    - geneB
+    - geneB.ncbi-id
+    - geneB.ensembl-id
+    - geneA.perturbation
+    - geneB.perturbation
+    - effect.type
+    - effect.size
+    - assay
+    - cell.line
+    - cellosaurus.id
+    - cancer
+    - ncit.id
+    - background.dependency.status
+    - background.dependency.genesymbol
+    - background.dependency.geneid
+    - pmid
+    - SL
+    broad_mappings:
+      - biolink:Interaction
+slots:
+  id:
+    identifier: true
+  geneA:
+    range: gene symbol type
+    examples:
+      value: CHEK1
+  geneA.ncbi-id:
+    range: external id
+    examples:
+      value: NCBIGene:1111
+  geneA.ensembl-id:
+    range: external id
+    examples:
+      value: ENSG00000149554
+  geneB:
+    range: gene symbol type
+    examples:
+      value: MAPKAPK2
+  geneB.ncbi-id:
+    range: external id
+    examples:
+      value: NCBIGene:9261
+  geneB.ensembl-id:
+    range: external id
+    examples:
+      value: ENSG00000162889
+  geneA.perturbation:
+    range: perturbation_enum
+    examples:
+      value: pharmaceutical
+  geneB.perturbation:
+    range: perturbation_enum
+    examples:
+      value: pharmaceutical
+  effect.type:
+    range: effect.type_enum
+    examples:
+      value: n/a
+  effect.size:
+    range: string
+    examples:
+      value: n/a
+  assay:
+    range: assay_enum
+    examples:
+      value: PDX
+  cell.line:
+    range: string
+    examples:
+      value: KRAS-Driven Cancer Cells
+  cellosaurus.id:
+    range: string
+    examples:
+      value: n/a
+  cancer:
+    range: cancer_enum
+    examples:
+      value: n/a
+  ncit.id:
+    range: external id
+    examples:
+      value: n/a
+  background.dependency.status:
+    range: background.dependency.status_enum
+    examples:
+      value: activating mutation
+  background.dependency.genesymbol:
+    range: gene symbol type
+    examples:
+      value: KRAS
+  background.dependency.geneid:
+    range: external id
+    examples:
+      value: NCBIGene:3845
+  pmid:
+    range: external id
+    examples:
+      value: '26140595'
+  SL:
+    range: boolean
+enums:
+  perturbation_enum:
+    permissible_values:
+      degradation:
+        meaning: http://www.ebi.ac.uk/efo/EFO_0007636
+      siRNA:
+        meaning: http://www.ebi.ac.uk/efo/EFO_0001461
+      activating mutation:
+        meaning: http://purl.obolibrary.org/obo/NCIT_C128901
+      CRISPR CAS9:
+        meaning: "http://www.bioassayontology.org/bao#BAO_0010249"
+      pharmaceutical:
+        meaning: http://purl.obolibrary.org/obo/CHEBI_52217
+      inhibitory antibody:
+        meaning: http://purl.obolibrary.org/obo/FMA_62871
+      overexpression:
+        meaning: http://purl.obolibrary.org/obo/INO_0000114
+      sgRNA:
+        meaning: http://purl.obolibrary.org/obo/SO_0001998
+      agonist:
+        meaning: http://identifiers.org/medgen/C4023141
+      promoter hypermethylation:
+        meaning: http://purl.obolibrary.org/obo/NCIT_C158107
+      shRNA:
+        meaning: http://www.ebi.ac.uk/efo/EFO_0001461
+      antisense oligonucleotide:
+        meaning: http://purl.obolibrary.org/obo/CHEBI_76720
+      natural (is a TSG):
+      lof_mutation: null
+      knockout:
+        meaning: http://www.ebi.ac.uk/efo/EFO_0000506
+      cohort study:
+        meaning: http://purl.obolibrary.org/obo/NCIT_C15208
+  effect.type_enum:
+    permissible_values:
+      penetrance:
+        meaning: http://purl.obolibrary.org/obo/HP_0001026
+      n/a:
+        meaning: http://purl.obolibrary.org/obo/CTO_0000043
+      correlation:
+        meaning: http://www.ebi.ac.uk/efo/EFO_0004695
+      log2 decrease in abundance:
+        meaning: http://purl.obolibrary.org/obo/NCIT_C63254
+      confidence.80%:
+        meaning: http://www.ebi.ac.uk/efo/EFO_0009815
+      Z-score:
+        meaning: http://www.ebi.ac.uk/efo/EFO_0007710
+      differential_viability: null
+      p-value:
+        meaning: http://purl.obolibrary.org/obo/NCIT_C44185
+      stddev: null
+  assay_enum:
+    permissible_values:
+      multicolor competition assay:
+        meaning: http://purl.obolibrary.org/obo/INO_0000050
+      apoptosis assay:
+        meaning: http://purl.obolibrary.org/obo/ERO_0001182
+      differential viability assay RCC4(Table-S5):
+        meaning: http://www.bioassayontology.org/bao#BAO_0003009
+      cell viability assay:
+        meaning: http://purl.obolibrary.org/obo/ERO_0001352
+      PDX:
+        meaning: http://purl.obolibrary.org/obo/NCIT_C122936
+      growth inhibition assay:
+        meaning: http://www.bioassayontology.org/bao#BAO_0010056
+      proportions.of.sense.and.antisense.insertions: null
+      siMEM+penetrance:
+        meaning: http://purl.obolibrary.org/obo/NCIT_C48667
+      pharmaceutical + siRNA:
+        meaning: http://purl.obolibrary.org/obo/CHEBI_52217
+      pharmaceutical inhibition assay:
+        meaning: http://purl.obolibrary.org/obo/NCIT_C120696
+      differential viability assay 786-0(Table-S4):
+        meaning: http://www.bioassayontology.org/bao#BAO_0003009
+      shRNA depletion assay:
+        meaning: http://www.bioassayontology.org/bao#BAO_0000323
+      cytotoxicity assay:
+        meaning: http://www.bioassayontology.org/bao#BAO_0002993
+      sgRNA depletion assay:
+        meaning: http://purl.obolibrary.org/obo/SO_0001998
+      competitive hybridization;multicolor competition assay:
+        meaning: http://purl.obolibrary.org/obo/INO_0000050
+      CRISPR-Cas9 Interference assay:
+        meaning: http://www.bioassayontology.org/bao#BAO_0010249
+      cisplatin toxicity assay:
+        meaning: http://www.bioassayontology.org/bao#BAO_0002189
+      shRNA:
+        meaning: http://www.ebi.ac.uk/efo/EFO_0001461
+      transgenic mouse model:
+        meaning: http://purl.obolibrary.org/obo/NCIT_C19272
+      RNA-interference assay:
+        meaning: http://www.ebi.ac.uk/efo/EFO_0010027
+  cancer_enum:
+    permissible_values:
+      Colorectal Carcinoma:
+        meaning: http://www.ebi.ac.uk/efo/EFO_0000365
+      Melanoma:
+        meaning: http://www.ebi.ac.uk/efo/EFO_0000756
+      Prostate Carcinoma:
+        meaning: http://www.ebi.ac.uk/efo/EFO_0001663
+      Ovarian serous adenocarcinoma:
+        meaning: http://www.ebi.ac.uk/efo/EFO_0002917
+      Pleural Malignant Mesothelioma:
+        meaning: http://www.ebi.ac.uk/efo/EFO_0000770
+      Uveal melanoma:
+        meaning: http://www.ebi.ac.uk/efo/EFO_1000616
+      Lung adenocarcinoma:
+        meaning: http://www.ebi.ac.uk/efo/EFO_0000571
+      Colon adenocarcinoma:
+        meaning: http://www.ebi.ac.uk/efo/EFO_0000365
+      Juvenile Myelomonocytic Leukemia:
+        meaning: http://www.ebi.ac.uk/efo/EFO_1000309
+      Ovarian clear cell adenocarcinoma:
+        meaning: http://www.ebi.ac.uk/efo/EFO_1000042
+      Breast Carcinoma:
+        meaning: http://www.ebi.ac.uk/efo/EFO_0000305
+      Glioblastoma:
+        meaning: http://purl.obolibrary.org/obo/MONDO_0018177
+      Adult acute myeloid leukemia:
+        meaning: http://www.ebi.ac.uk/efo/EFO_1001934
+      ' Renal cell carcinoma':
+        meaning: http://www.ebi.ac.uk/efo/EFO_0000681
+      Acute Myeloid Leukemia:
+        meaning: http://www.ebi.ac.uk/efo/EFO_0000222
+      Recurrent Ovarian Carcinoma:
+        meaning: http://purl.obolibrary.org/obo/NCIT_C7833
+      Adult hepatocellular carcinoma:
+        meaning: http://purl.obolibrary.org/obo/MONDO_0016216
+      Triple-Negative Breast Carcinoma:
+        meaning: http://purl.obolibrary.org/obo/NCIT_C71732
+      Lung Non-Small Cell Carcinoma:
+        meaning: http://www.ebi.ac.uk/efo/EFO_0003060
+      Bladder Carcinoma:
+        meaning: http://www.ebi.ac.uk/efo/EFO_0000292
+      Clear Cell Renal Cell Carcinoma:
+        meaning: http://www.ebi.ac.uk/efo/EFO_0000349
+      Chronic myelogenous leukemia, BCR - ABL1 positive:
+        meaning: http://www.ebi.ac.uk/efo/EFO_0000339
+      n/a:
+        meaning: http://purl.obolibrary.org/obo/CTO_0000043
+      Colon carcinoma:
+        meaning: http://www.ebi.ac.uk/efo/EFO_0000365
+      Minimally invasive lung adenocarcinoma:
+        meaning: http://purl.obolibrary.org/obo/MONDO_0004991
+      Chronic Myelogenous Leukemia:
+        meaning: http://www.ebi.ac.uk/efo/EFO_0000339
+      Gastric Carcinoma:
+        meaning: http://www.ebi.ac.uk/efo/EFO_0000178
+  background.dependency.status_enum:
+    permissible_values:
+      n/a:
+        meaning: http://purl.obolibrary.org/obo/CTO_0000043
+      activating mutation:
+        meaning: http://purl.obolibrary.org/obo/NCIT_C128901
+      lof_mutation: null
+      overexpression:
+        meaning: http://purl.obolibrary.org/obo/INO_0000114
+      wildtype:
+        meaning: http://www.ebi.ac.uk/efo/EFO_0005543
+
