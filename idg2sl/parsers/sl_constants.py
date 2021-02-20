@@ -10,6 +10,7 @@ class SlConstants:
     COMPETITIVE_HYBRIDIZATION = 'competitive hybridization'
     CRISPR_CAS9 = "CRISPR CAS9"
     CRISPR_CAS9_INTERFERENCE_ASSAY = "CRISPR-Cas9 Interference assay"
+    CRISPR_CAS9_RNA_I_INTERSECTION = "significant in both CRISPR and RNAi screen"
     CYTOTOXICITY_ASSAY = "cytotoxicity assay"
     DEGRADATION = 'degradation'
     DYSFUNCTIONALITY = 'dysfunction'
@@ -133,6 +134,8 @@ class SlConstants:
     PEO1_CELLOSAURUS = 'CVCL_2686'
     RMG1_CELL = 'RMG-I'
     RMG1_CELLOSAURUS = 'CVCL_1662'
+    RMS_CELL = 'RMS'
+    RMS_CELLOSAURUS = 'CVCL_W527'
     SKBR3_CELL = 'SK-BR-3'
     SKBR3_CELLOSAURUS = 'CVCL_0033'
     SNU601_CELL = 'SNU-601'
@@ -176,6 +179,8 @@ class SlConstants:
     COLON_ADENOCARCINOMA_NCIT = 'NCIT:C4349'
     COLORECTAL_CARCINOMA = "Colorectal Carcinoma"
     COLORECTAL_CARCINOMA_NCIT = "NCIT:C2955"
+    EMBRYONAL_RHABDOMYOSARCOMA = 'Embryonal rhabdomyosarcoma'
+    EMBRYONAL_RHABDOMYOSARCOMA_NCIT = 'NCIT:C8971'
     GASTRIC_CARCINOMA = 'Gastric Carcinoma'
     GASTRIC_CARCINOMA_NCIT = 'NCIT:C4911'
     GLIOBLASTOMA = 'Glioblastoma'
