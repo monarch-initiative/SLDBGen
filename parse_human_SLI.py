@@ -43,6 +43,10 @@ chakraborty2017 = Chakraborty2017Parser()
 chakraborty2017_list = chakraborty2017.parse()
 show_stats("chakraborty et al 2017", chakraborty2017_list)
 
+chin2020 = Chin2020Parser()
+chin2020_list = chin2020.parse()
+show_stats("chin 2020", chin2020_list)
+
 dai2013 = Dai2013Parser()
 dai2013_list = dai2013.parse()
 show_stats("Dai et al 2013", dai2013_list)
@@ -84,13 +88,17 @@ luo2009parser = Luo2009Parser()
 luo2009_list = luo2009parser.parse()
 show_stats("Luo et al 2009", luo2009_list)
 
-manual = ManualEntry(entrez=entrez_dict, ensembl=ensembl_dict, synonym=synonym_dict)
-manual_list = manual.get_entries()
-show_stats("Manually entered single-SLI studies (part zero)", manual_list)
+manual1 = ManualEntry1(entrez=entrez_dict, ensembl=ensembl_dict, synonym=synonym_dict)
+manual_list1 = manual1.get_entries()
+show_stats("Manually entered single-SLI studies (part zero)", manual_list1)
 
-manual_one = ManualEntryOne(entrez=entrez_dict, ensembl=ensembl_dict, synonym=synonym_dict)
-manual_one_list = manual_one.get_entries()
-show_stats("Manually entered single-SLI studies (part one)", manual_one_list)
+manual2 = ManualEntry2(entrez=entrez_dict, ensembl=ensembl_dict, synonym=synonym_dict)
+manual2_list = manual2.get_entries()
+show_stats("Manually entered single-SLI studies (part one)", manual2_list)
+
+manual3 = ManualEntry3(entrez=entrez_dict, ensembl=ensembl_dict, synonym=synonym_dict)
+manual3_list = manual3.get_entries();
+show_stats("Manually entered (3)", manual3_list)
 
 martin2010 = Martin2010and2011Parser()
 martin2010_list = martin2010.parse()
@@ -176,12 +184,12 @@ show_stats("Williamson et al 2016", williamson2016_list)
 
 
 sli_lists = [astsaturov2010_list, baldwin2010_list, bommi2008_list, blomen2015_list, brough2018_list,
-             chakraborty2017_list, dai2013_list, etemadmoghadam2013_list, han2017_list, josse2014_list, kang2015_list,
-             kessler2012_list, krastev2011_list, lord2008_list, luo2009_list, martin2010_list, mengwasser_2019_list,
-             mohni2014_list, mondal2019_list,  oser2019_list, patidar2020_list,
+             chakraborty2017_list, chin2020_list, dai2013_list, etemadmoghadam2013_list, han2017_list, josse2014_list,
+             kang2015_list, kessler2012_list, krastev2011_list, lord2008_list, luo2009_list, martin2010_list,
+             mengwasser_2019_list, mohni2014_list, mondal2019_list, oser2019_list, patidar2020_list,
              shen2015_list, shen2017_list, schick2019_list, srivas2016_list, steckel2012_list, sullivan2012_list,
              sun2019_list, toyoshima2008_list, turner2008_list, vizeacoumar2013_list, wang2016_list, wang2017_list,
-             wang_2019_list, williamson2016_list,manual_list, manual_one_list]
+             wang_2019_list, williamson2016_list, manual_list1, manual2_list,manual3_list]
 all_sli_list = []
 for l in sli_lists:
     all_sli_list.extend(l)

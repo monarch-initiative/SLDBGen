@@ -1,9 +1,9 @@
 from idg2sl.parsers.sl_constants import SlConstants
 from idg2sl import SyntheticLethalInteraction
-from idg2sl.sl_dataset_parser import SL_DatasetParser
+from .manual_entry import ManualEntry
 
 
-class ManualEntryOne(SL_DatasetParser):
+class ManualEntry2(ManualEntry):
     """
        In a number of papers, only one or a handful of synthetic lethal interactions are described.
        These are very valuable. It is easiest to enter this information by hand.
@@ -53,40 +53,6 @@ class ManualEntryOne(SL_DatasetParser):
         self._add_bryant_2005()
         self._add_sullivan_reed_2018()
         self._add_dietlein_2015()
-
-    def create_and_add_sli(self, geneA, geneB, geneApert, geneBpert, assay, pmid,
-                           cell=SlConstants.N_A, cellosaurus=SlConstants.N_A,
-                           cancer=SlConstants.N_A, ncit=SlConstants.N_A,
-                           effecttype=SlConstants.N_A, effectsize=SlConstants.N_A,
-                           background_dependency_status=SlConstants.N_A,
-                           background_dependency_gene_symbol=SlConstants.N_A,
-                           sl=True):
-        geneAid = self.get_ncbigene_curie(geneA)
-        geneBid = self.get_ncbigene_curie(geneB)
-        if background_dependency_gene_symbol != SlConstants.N_A:
-            background_gene_id = self.get_ncbigene_curie(background_dependency_gene_symbol)
-        else:
-            background_gene_id = SlConstants.N_A
-        sli = SyntheticLethalInteraction(gene_A_symbol=geneA,
-                                         gene_A_id=geneAid,
-                                         gene_B_symbol=geneB,
-                                         gene_B_id=geneBid,
-                                         gene_A_pert=geneApert,
-                                         gene_B_pert=geneBpert,
-                                         effect_type=effecttype,
-                                         effect_size=effectsize,
-                                         cell_line=cell,
-                                         cellosaurus_id=cellosaurus,
-                                         cancer_type=cancer,
-                                         ncit_id=ncit,
-                                         assay=assay,
-                                         background_dependency_status=background_dependency_status,
-                                         background_dependency_gene_symbol=background_dependency_gene_symbol,
-                                         background_dependency_gene_id=background_gene_id,
-                                         pmid=pmid,
-                                         SL=sl)
-        self.entries.append(sli)
-
 
     def _add_dietlein_2015(self):
         pmid = '26140595'

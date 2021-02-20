@@ -1,6 +1,7 @@
 from .synthetic_lethal_interaction import SyntheticLethalInteraction
-from idg2sl.parsers.manual_entry import ManualEntry
-from .parsers.manual_entry_one import ManualEntryOne
+from idg2sl.parsers.manual_entry_1 import ManualEntry1
+from .parsers.manual_entry_2 import ManualEntry2
+from .parsers.manual_entry_3 import ManualEntry3
 from .parsers.sl_constants import SlConstants
 from .parsers.astsaturov_2010_parser import Astsaturov2010Parser
 from .parsers.baldwin_2010_parser import Baldwin2010Parser
@@ -8,6 +9,7 @@ from .parsers.blomen_2015_parser import Blomen2015Parser
 from .parsers.bommi_2008_parser import Bommi2008Parser
 from .parsers.brough_2018_parser import Brough2018Parser
 from .parsers.chakraborty_2017_parser import Chakraborty2017Parser
+from .parsers.chin_2020_parser import Chin2020Parser
 from .parsers.dai_2013_parser import Dai2013Parser
 from .parsers.etemadmoghadam_2013_parser import Etemadmoghadam2013Parser
 from .parsers.han_2017_parser import Han2017Parser
@@ -50,6 +52,7 @@ __all__ = ["SyntheticLethalInteraction",
            "Bommi2008Parser",
            "Brough2018Parser",
            "Chakraborty2017Parser",
+           "Chin2020Parser",
            "Dai2013Parser",
            "Etemadmoghadam2013Parser",
            "Han2017Parser",
@@ -81,5 +84,6 @@ __all__ = ["SyntheticLethalInteraction",
            "Wang2019Parser",
            "Williamson2016Parser",
            "HgncParser",
-           "ManualEntry",
-           "ManualEntryOne"]
+           "ManualEntry1",
+           "ManualEntry2",
+           "ManualEntry3"]
