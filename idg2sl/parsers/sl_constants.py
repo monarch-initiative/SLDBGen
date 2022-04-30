@@ -24,6 +24,7 @@ class SlConstants:
     N_A = "n/a"
     OVEREXPRESSION = "overexpression"
     PATIENT_DERIVED_XENOGRAFT = 'PDX'
+    PERCENT_INHIBITION = 'percent inhibition'
     PHARMACEUTICAL = 'pharmaceutical'
     AGONIST = 'agonist'
     PHARAMACEUTICAL_INHIBITION_ASSAY = "pharmaceutical inhibition assay"
@@ -132,6 +133,8 @@ class SlConstants:
     OVCAR3_CELLOSAURUS = "CVCL_0465"
     PEO1_CELL = 'PEO1'
     PEO1_CELLOSAURUS = 'CVCL_2686'
+    RCC4_CELL = 'RCC4'
+    RCC4_CELLOSAURUS = 'CVCL_0498'
     RMG1_CELL = 'RMG-I'
     RMG1_CELLOSAURUS = 'CVCL_1662'
     RMS_CELL = 'RMS'

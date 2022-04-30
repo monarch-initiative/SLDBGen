@@ -13,6 +13,7 @@ from .parsers.chin_2020_parser import Chin2020Parser
 from .parsers.dai_2013_parser import Dai2013Parser
 from .parsers.etemadmoghadam_2013_parser import Etemadmoghadam2013Parser
 from .parsers.han_2017_parser import Han2017Parser
+from .parsers.jerby_arnon_2014_parser import JerbyArnon2014Parser
 from .parsers.josse_2014_parser import Josse2014Parser
 from .parsers.kang_2015_parser import Kang2015Parser
 from .parsers.kessler_2012_parser import Kessler2012Parser
@@ -56,6 +57,7 @@ __all__ = ["SyntheticLethalInteraction",
            "Dai2013Parser",
            "Etemadmoghadam2013Parser",
            "Han2017Parser",
+           "JerbyArnon2014Parser",
            "Josse2014Parser",
            "Kang2015Parser",
            "Kessler2012Parser",

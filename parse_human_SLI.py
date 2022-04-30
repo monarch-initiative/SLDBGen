@@ -59,6 +59,11 @@ han2017 = Han2017Parser()
 han2017_list = han2017.parse()
 show_stats("Han et al 2017", han2017_list)
 
+
+jerby2014 = JerbyArnon2014Parser()
+jerby_2014_list = jerby2014.parse()
+show_stats("Jerby Arnon et al 2014", jerby_2014_list)
+
 josse2014 = Josse2014Parser()
 josse2014_list = josse2014.parse()
 show_stats("Josse et al 2014", josse2014_list)
@@ -184,7 +189,8 @@ show_stats("Williamson et al 2016", williamson2016_list)
 
 
 sli_lists = [astsaturov2010_list, baldwin2010_list, bommi2008_list, blomen2015_list, brough2018_list,
-             chakraborty2017_list, chin2020_list, dai2013_list, etemadmoghadam2013_list, han2017_list, josse2014_list,
+             chakraborty2017_list, chin2020_list, dai2013_list, etemadmoghadam2013_list, han2017_list, jerby_2014_list,
+             josse2014_list,
              kang2015_list, kessler2012_list, krastev2011_list, lord2008_list, luo2009_list, martin2010_list,
              mengwasser_2019_list, mohni2014_list, mondal2019_list, oser2019_list, patidar2020_list,
              shen2015_list, shen2017_list, schick2019_list, srivas2016_list, steckel2012_list, sullivan2012_list,
