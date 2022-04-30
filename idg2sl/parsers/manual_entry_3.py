@@ -19,6 +19,52 @@ class ManualEntry3(ManualEntry):
         self._add_ertay_2020()
         self._add_neggers_2020()
         self.add_bartz_2006()
+        self.add_wang2004()
+        self.add_rottmann2005()
+        self.add_thomas2007()
+        self.add_scholl2009()
+
+
+    def add_scholl2009(self):
+        """
+        Scholl C, Synthetic lethal interaction between oncogenic KRAS dependency and STK33 suppression in human cancer cells.
+        Cell. 2009 May 29;137(5):821-34. doi: 10.1016/j.cell.2009.03.017. PMID: 19490892.
+        """
+        pmid = '19490892'
+        kras = 'KRAS'
+        stk33 = 'STK33'
+        self.create_and_add_sli(geneA=kras, geneB=stk33,
+                                geneApert=SlConstants.ACTIVATING_MUTATION, geneBpert=SlConstants.SI_RNA,
+                                assay=SlConstants.CELL_VIABILITY_ASSAY, pmid=pmid)
+
+    def add_thomas2007(self):
+        """
+        Thomas GV,. Hypoxia-inducible factor
+        determines sensitivity to inhibitors of mTOR in kidney cancer.
+        Nat Med. 2006 Jan;12(1):122-7. doi: 10.1038/nm1337. Epub 2005 Dec 11. PMID: 16341243.
+        """
+        pmid = '16341243'
+        vhl = 'VHL'
+        mTOR = 'MTOR'
+        self.create_and_add_sli(geneA=vhl, geneB=mTOR,
+                                geneApert=SlConstants.SI_RNA, geneBpert=SlConstants.PHARMACEUTICAL,
+                                assay=SlConstants.CELL_VIABILITY_ASSAY, pmid=pmid)
+
+
+    def add_rottmann2005(self):
+        """
+        Rottmann S,  A TRAIL receptor-dependent synthetic lethal relationship between MYC activation and GSK3beta/FBW7 loss of function.
+        Proc Natl Acad Sci U S A. 2005 Oct 18;102(42):15195-200. doi: 10.1073/pnas.0505114102.
+        PMID: 16210249; PMCID: PMC1257707.
+        """
+        pmid = '16210249'
+        myc = 'MYC'
+        gsk3b = 'GSK3B'
+        self.create_and_add_sli(geneA=myc, geneB=gsk3b,
+                            geneApert=SlConstants.ACTIVATING_MUTATION, geneBpert=SlConstants.SI_RNA,
+                            cell=SlConstants.HA1E_CELL, cellosaurus=SlConstants.HA1E_CELLOSAURUS,
+                            assay=SlConstants.APOPTOSIS_ASSAY, pmid=pmid)
+
 
     def _add_li_2020(self):
         pmid = '32913191'
@@ -98,6 +144,21 @@ class ManualEntry3(ManualEntry):
                                     ncit=SlConstants.OVARIAN_CCC_NCIT,
                                     cancer=SlConstants.OVARIAN_CCC,
                                     assay=SlConstants.CYTOTOXICITY_ASSAY, pmid=pmid)
+
+
+    def add_wang2004(self):
+        """
+        Wang Y, Engels IH, Knee DA, Nasoff M, Deveraux QL, Quon KC. Synthetic lethal targeting of MYC by activation of
+        the DR5 death receptor pathway. Cancer Cell. 2004 May;5(5):501-12. doi: 10.1016/s1535-6108(04)00113-8. PMID: 15144957.
+        DR5 is now TNFRSF10B
+        """
+        pmid = '15144957'
+        self.create_and_add_sli(geneA='MYC', geneB='TNFRSF10B',
+                                geneApert=SlConstants.ACTIVATING_MUTATION, geneBpert=SlConstants.PHARMACEUTICAL,
+                                cell=SlConstants.BJ_CELL,
+                                cellosaurus=SlConstants.BJ_CELLOSAURUS,
+                                assay=SlConstants.APOPTOSIS_ASSAY, pmid=pmid)
+
 
     def get_entries(self):
         return self.entries
