@@ -23,7 +23,54 @@ class ManualEntry3(ManualEntry):
         self.add_rottmann2005()
         self.add_thomas2007()
         self.add_scholl2009()
+        self.add_singh2012()
+        self.addBajrami()
+        self.add_bailey2015()
 
+
+
+    def add_bailey2015(self):
+        """
+        Bailey ML, . Dependence of Human Colorectal Cells Lacking the FBW7 Tumor Suppressor on the Spindle Assembly Checkpoint.
+        Genetics. 2015 Nov;201(3):885-95. doi: 10.1534/genetics.115.180653. Epub 2015 Sep 8. PMID: 26354767; PMCID: PMC4649658.
+        """
+        pmid = '26354767'
+        FBXW7 = 'FBXW7'
+        # BUBR1 is BUB1B, HGNC:1149
+        # MPS1 is IDUA, HGNC:5391
+        slgenes = ('BUB1B', 'BUB1', 'IDUA')
+        for geneB in slgenes:
+            self.create_and_add_sli(geneA=FBXW7, geneB=geneB,
+                                    geneApert=SlConstants.KNOCKOUT, geneBpert=SlConstants.RNA_INTERFERENCE_ASSAY,
+                                    cell=SlConstants.HCT_116,
+                                    cellosaurus=SlConstants.HCT_116_CELLOSAURUS,
+                                    assay=SlConstants.CELL_VIABILITY_ASSAY, pmid=pmid)
+
+    def addBajrami(self):
+        """
+        Synthetic lethality of PARP and NAMPT inhibition in triple-negative breast cancer cells.
+         EMBO Mol Med. 2012 Oct;4(10):1087-96.  PMID: 22933245; PMC
+        """
+        pmid = '22933245'
+        parp1 = 'PARP1'
+        nampt = 'NAMPT'
+        self.create_and_add_sli(geneA=parp1, geneB=nampt,
+                                geneApert=SlConstants.PHARMACEUTICAL, geneBpert=SlConstants.SI_RNA,
+                                assay=SlConstants.CELL_VIABILITY_ASSAY, pmid=pmid)
+
+    def add_singh2012(self):
+        """
+        Singh A, TAK1 inhibition promotes apoptosis in KRAS-dependent colon cancers.
+        Cell. 2012 Feb 17;148(4):639-50. doi: 10.1016/j.cell.2011.12.033. PMID: 22341439;
+        """
+        pmid = '19490892'
+        kras = 'KRAS'
+        map3k7 = 'MAP3K7'
+
+        self.create_and_add_sli(geneA=kras, geneB=map3k7,
+                                geneApert=SlConstants.ACTIVATING_MUTATION, geneBpert=SlConstants.SI_RNA,
+                                cell=SlConstants.SW620_CELL, cellosaurus=SlConstants.SW620_CELLOSAURUS,
+                                assay=SlConstants.CELL_VIABILITY_ASSAY, pmid=pmid)
 
     def add_scholl2009(self):
         """
@@ -50,7 +97,6 @@ class ManualEntry3(ManualEntry):
                                 geneApert=SlConstants.SI_RNA, geneBpert=SlConstants.PHARMACEUTICAL,
                                 assay=SlConstants.CELL_VIABILITY_ASSAY, pmid=pmid)
 
-
     def add_rottmann2005(self):
         """
         Rottmann S,  A TRAIL receptor-dependent synthetic lethal relationship between MYC activation and GSK3beta/FBW7 loss of function.
@@ -61,10 +107,9 @@ class ManualEntry3(ManualEntry):
         myc = 'MYC'
         gsk3b = 'GSK3B'
         self.create_and_add_sli(geneA=myc, geneB=gsk3b,
-                            geneApert=SlConstants.ACTIVATING_MUTATION, geneBpert=SlConstants.SI_RNA,
-                            cell=SlConstants.HA1E_CELL, cellosaurus=SlConstants.HA1E_CELLOSAURUS,
-                            assay=SlConstants.APOPTOSIS_ASSAY, pmid=pmid)
-
+                                geneApert=SlConstants.ACTIVATING_MUTATION, geneBpert=SlConstants.SI_RNA,
+                                cell=SlConstants.HA1E_CELL, cellosaurus=SlConstants.HA1E_CELLOSAURUS,
+                                assay=SlConstants.APOPTOSIS_ASSAY, pmid=pmid)
 
     def _add_li_2020(self):
         pmid = '32913191'
@@ -145,7 +190,6 @@ class ManualEntry3(ManualEntry):
                                     cancer=SlConstants.OVARIAN_CCC,
                                     assay=SlConstants.CYTOTOXICITY_ASSAY, pmid=pmid)
 
-
     def add_wang2004(self):
         """
         Wang Y, Engels IH, Knee DA, Nasoff M, Deveraux QL, Quon KC. Synthetic lethal targeting of MYC by activation of
@@ -158,7 +202,6 @@ class ManualEntry3(ManualEntry):
                                 cell=SlConstants.BJ_CELL,
                                 cellosaurus=SlConstants.BJ_CELLOSAURUS,
                                 assay=SlConstants.APOPTOSIS_ASSAY, pmid=pmid)
-
 
     def get_entries(self):
         return self.entries
