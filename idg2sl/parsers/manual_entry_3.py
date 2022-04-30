@@ -18,6 +18,7 @@ class ManualEntry3(ManualEntry):
         self._add_ali_2020()
         self._add_ertay_2020()
         self._add_neggers_2020()
+        self.add_bartz_2006()
 
     def _add_li_2020(self):
         pmid = '32913191'
@@ -76,6 +77,27 @@ class ManualEntry3(ManualEntry):
                                 cancer=SlConstants.EMBRYONAL_RHABDOMYOSARCOMA,
                                 background_dependency_status='16q loss',
                                 assay=SlConstants.CELL_VIABILITY_ASSAY, pmid=pmid)
+
+    def add_bartz_2006(self):
+        """
+        Bartz SR,  Small interfering RNA screens reveal enhanced cisplatin cytotoxicity in tumor cells having both BRCA
+        network and TP53 disruptions.
+        Mol Cell Biol. 2006 Dec;26(24):9377-86. doi: 10.1128/MCB.01229-06. Epub 2006 Sep 25. PMID: 17000754; PMCID: PMC1698535.
+        s shown in Fig. Fig.5A,5A, silencing of BRCA1, BARD1, BRCA2, RAD51, SHFM1, and CHEK1 enhanced growth inhibition
+        by cisplatin approximately four- to sevenfold more in the TP53− TOV21G cells than in TP53+ TOV21G cells.
+        Note that the current symbol for SHFM1 is SEM1
+        """
+        pmid = '17000754'
+        tp53 = 'TP53'
+        sl_genes = ('BRCA1', 'BARD1', 'BRCA2', 'RAD51', 'SEM1', 'CHEK1')
+        for geneB in sl_genes:
+            self.create_and_add_sli(geneA=tp53, geneB=geneB,
+                                    geneApert=SlConstants.KNOCKOUT, geneBpert=SlConstants.SI_RNA,
+                                    cell=SlConstants.TOV21G_CELL,
+                                    cellosaurus=SlConstants.TOV21G_CELLOSAURUS,
+                                    ncit=SlConstants.OVARIAN_CCC_NCIT,
+                                    cancer=SlConstants.OVARIAN_CCC,
+                                    assay=SlConstants.CYTOTOXICITY_ASSAY, pmid=pmid)
 
     def get_entries(self):
         return self.entries
