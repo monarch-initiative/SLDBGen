@@ -26,7 +26,6 @@ baldwin2010 = Baldwin2010Parser()
 baldwin2010_list = baldwin2010.parse()
 show_stats("Baldwin et al 2010", baldwin2010_list)
 
-
 blomen2015 = Blomen2015Parser()
 blomen2015_list = blomen2015.parse()
 show_stats("Blomen et al 2015", blomen2015_list)
@@ -58,7 +57,6 @@ show_stats("Etemadmoghadam et al 2013", etemadmoghadam2013_list)
 han2017 = Han2017Parser()
 han2017_list = han2017.parse()
 show_stats("Han et al 2017", han2017_list)
-
 
 jerby2014 = JerbyArnon2014Parser()
 jerby_2014_list = jerby2014.parse()
@@ -109,7 +107,6 @@ martin2010 = Martin2010and2011Parser()
 martin2010_list = martin2010.parse()
 show_stats("Martin et al 2010/2011", martin2010_list)
 
-
 mengwasser_2019 = Mengwasser2019Parser()
 mengwasser_2019_list = mengwasser_2019.parse()
 show_stats("Mengwasser et al 2019", mengwasser_2019_list)
@@ -121,6 +118,10 @@ show_stats("Mohni et al 2014", mohni2014_list)
 mondal2019 = Mondal2019Parser()
 mondal2019_list = mondal2019.parse()
 show_stats("Mondal et al 2019", mondal2019_list)
+
+najm2018 = Najm2018Parser()
+najm2018_list = najm2018.parse()
+show_stats("Najm et al 2018", najm2018_list)
 
 oser2019 = Oser2019Parser()
 oser2019_list = oser2019.parse()
@@ -187,15 +188,14 @@ williamson2016 = Williamson2016Parser()
 williamson2016_list = williamson2016.parse()
 show_stats("Williamson et al 2016", williamson2016_list)
 
-
 sli_lists = [astsaturov2010_list, baldwin2010_list, bommi2008_list, blomen2015_list, brough2018_list,
              chakraborty2017_list, chin2020_list, dai2013_list, etemadmoghadam2013_list, han2017_list, jerby_2014_list,
              josse2014_list,
              kang2015_list, kessler2012_list, krastev2011_list, lord2008_list, luo2009_list, martin2010_list,
-             mengwasser_2019_list, mohni2014_list, mondal2019_list, oser2019_list, patidar2020_list,
+             mengwasser_2019_list, mohni2014_list, mondal2019_list, najm2018_list, oser2019_list, patidar2020_list,
              shen2015_list, shen2017_list, schick2019_list, srivas2016_list, steckel2012_list, sullivan2012_list,
              sun2019_list, toyoshima2008_list, turner2008_list, vizeacoumar2013_list, wang2016_list, wang2017_list,
-             wang_2019_list, williamson2016_list, manual_list1, manual2_list,manual3_list]
+             wang_2019_list, williamson2016_list, manual_list1, manual2_list, manual3_list]
 all_sli_list = []
 for l in sli_lists:
     all_sli_list.extend(l)

@@ -5,6 +5,7 @@ class SlConstants:
     AGONIST = 'agonist'
     APOPTOSIS_ASSAY = 'apoptosis assay'
     ANTISENSE_OLIGO = 'antisense oligonucleotide'
+    BIG_PAPI ='Big Papi'
     CELL_VIABILITY_ASSAY = 'cell viability assay'
     CISPLATIN_CYTOTOXICITY_ASSAY = "cisplatin toxicity assay"
     COHORT_STUDY = "cohort study"
@@ -32,6 +33,7 @@ class SlConstants:
     PHARAMACEUTICAL_INHIBITION_ASSAY = "pharmaceutical inhibition assay"
     PROMOTER_HYPERMETHYLATION = 'promoter hypermethylation'
     PVAL = 'p-value'
+    QVAL = 'q-value'
     RNA_INTERFERENCE_ASSAY = "RNA-interference assay"
     SG_RNA = "sgRNA"
     SG_RNA_DEPLETION_ASSAY = 'sgRNA depletion assay'
