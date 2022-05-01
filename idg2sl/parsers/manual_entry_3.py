@@ -27,6 +27,25 @@ class ManualEntry3(ManualEntry):
         self.addBajrami()
         self.add_bailey2015()
         self.add_song2021()
+        self.add_anai2011()
+
+
+    def add_anai2011(self):
+        """
+        Anai S, Dual targeting of Bcl-2 and VEGF: a potential strategy to improve therapy for prostate cancer.
+        Urol Oncol. 2011 Jul-Aug;29(4):421-9. doi: 10.1016/j.urolonc.2009.04.009. Epub 2009 Jul 3. PMID: 19576799.
+        Note that  Bevacizumab inhibits vascular endothelial growth factor A (VEGF-A),
+        """
+        pmid = '19576799'
+        bcl2 = 'BCL2'
+        vegfa = 'VEGFA'
+        self.create_and_add_sli(geneA=bcl2, geneB=vegfa,
+                                geneApert=SlConstants.ANTISENSE_OLIGO, geneBpert=SlConstants.PHARMACEUTICAL,
+                                cell=SlConstants.PC3_CELL,
+                                cellosaurus=SlConstants.PC3_CELLOSAURUS,
+                                ncit=SlConstants.PROSTATE_CARCINOMA_NCIT,
+                                cancer=SlConstants.PROSTATE_CARCINOMA,
+                                assay=SlConstants.APOPTOSIS_ASSAY, pmid=pmid)
 
     def add_song2021(self):
         """

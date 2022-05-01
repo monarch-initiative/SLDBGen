@@ -59,6 +59,7 @@ class Shen2017Parser(SL_DatasetParser):
                         cellosaurus = SlConstants.HELA_CELLOSAURUS
                         effect = float(row['HeLa_Z'].replace(",", "."))
                     elif cell_line == "A549":
+                        cell_line = SlConstants.A549_CELL
                         cellosaurus = SlConstants.A549_CELLOSAURUS
                         effect = float(row['A549_Z'].replace(",", "."))
                     else:
