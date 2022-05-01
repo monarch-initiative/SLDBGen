@@ -1,7 +1,7 @@
 from idg2sl import *
 import os
 
-## First download (if needed) and parse the HGNC file with symbol/NCBI Gene/Ensembl mappings
+# First download (if needed) and parse the HGNC file with symbol/NCBI Gene/Ensembl mappings
 hgnc_fname = SL_DatasetParser.get_local_hgncfile_name()
 if not os.path.exists(hgnc_fname):
     SL_DatasetParser.get_hgnc_file()
@@ -100,7 +100,7 @@ manual2_list = manual2.get_entries()
 show_stats("Manually entered single-SLI studies (part one)", manual2_list)
 
 manual3 = ManualEntry3(entrez=entrez_dict, ensembl=ensembl_dict, synonym=synonym_dict)
-manual3_list = manual3.get_entries();
+manual3_list = manual3.get_entries()
 show_stats("Manually entered (3)", manual3_list)
 
 martin2010 = Martin2010and2011Parser()
