@@ -26,8 +26,26 @@ class ManualEntry3(ManualEntry):
         self.add_singh2012()
         self.addBajrami()
         self.add_bailey2015()
+        self.add_song2021()
 
-
+    def add_song2021(self):
+        """
+        Song J,  A Novel cytarabine analog evokes synthetic lethality by targeting MK2 in p53-deficient cancer cells.
+        Cancer Lett. 2021 Jan 28;497:54-65. doi: 10.1016/j.canlet.2020.10.003. Epub 2020 Oct 16. PMID: 33075425.
+        Official symbol for MK2 is MAP2K2
+        A recent study demonstrated the induction of synthetic lethality using a new cytarabine analogue, F-Se-Ara-C, that targets MK2
+        in prostate cancer with p53 mutation [64]. Cdc25B-mediated G2 arrest was disrupted by MK2 depletion only in
+        p53-deficient cells, but not in wtp53-carrying cells, confirming the synthetic lethality interaction between p53
+        """
+        pmid = '33075425'
+        tp53 = 'TP53'
+        map2k2 = 'MAP2K2'
+        self.create_and_add_sli(geneA=tp53, geneB=map2k2,
+                                geneApert=SlConstants.KNOCKOUT, geneBpert=SlConstants.PHARMACEUTICAL,
+                                cell='p53-deficient prostate cancer cells',
+                                ncit=SlConstants.PROSTATE_CARCINOMA_NCIT,
+                                cancer=SlConstants.PROSTATE_CARCINOMA,
+                                assay=SlConstants.APOPTOSIS_ASSAY, pmid=pmid)
 
     def add_bailey2015(self):
         """

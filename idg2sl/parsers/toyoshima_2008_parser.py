@@ -23,8 +23,8 @@ class Toyoshima2008Parser(SL_DatasetParser):
     def parse(self):
         mycsymbol = 'MYC'
         effect_type = 'stddev'
-        cell_line = 'HFF-Myc'
-        cellosaurus = 'CVCL_Y511'
+        cell_line = SlConstants.HFF_Myc_CELL
+        cellosaurus = SlConstants.HFF_Myc_CELLOSAURUS
         sl_list = []
         # The following list includes symbols that are not current but either could
         # not be matched or match to multiple possible candidates

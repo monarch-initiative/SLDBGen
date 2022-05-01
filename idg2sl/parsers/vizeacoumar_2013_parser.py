@@ -62,13 +62,6 @@ class Vizeacoumar2013Parser(SL_DatasetParser):
         geneA = 'KRAS'
         geneAid = self.get_ncbigene_curie(geneA)
         fname = 'data/vizeacoumarSuppl4-PTEN.tsv'
-        geneA_perturbation = SlConstants.ACTIVATING_MUTATION
-        gene2_perturbation = SlConstants.SI_RNA
-        assay_string = SlConstants.MULTICOLOR_COMPETITION_ASSAY
-        cell_line = 'HCT 116'
-        cellosaurus = 'CVCL_0291'
-        cancer = SlConstants.N_A
-        ncit = SlConstants.N_A
         c = 0
         with open(fname) as csvfile:
             csvreader = csv.DictReader(csvfile, delimiter='\t')
@@ -89,15 +82,15 @@ class Vizeacoumar2013Parser(SL_DatasetParser):
                                                      gene_A_id=geneAid,
                                                      gene_B_symbol=geneBsym,
                                                      gene_B_id=geneB_id,
-                                                     gene_A_pert=geneA_perturbation,
-                                                     gene_B_pert=gene2_perturbation,
+                                                     gene_A_pert=SlConstants.ACTIVATING_MUTATION,
+                                                     gene_B_pert=SlConstants.SI_RNA,
                                                      effect_type='confidence.80%',
                                                      effect_size='true',
-                                                     cell_line=cell_line,
-                                                     cellosaurus_id=cellosaurus,
-                                                     cancer_type=cancer,
-                                                     ncit_id=ncit,
-                                                     assay=assay_string,
+                                                     cell_line=SlConstants.HCT_116,
+                                                     cellosaurus_id=SlConstants.HCT_116_CELLOSAURUS,
+                                                     cancer_type=SlConstants.N_A,
+                                                     ncit_id=SlConstants.N_A,
+                                                     assay=SlConstants.MULTICOLOR_COMPETITION_ASSAY,
                                                      pmid=self.pmid,
                                                      SL=True)
                     self.sli_list.append(sli)

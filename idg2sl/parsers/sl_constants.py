@@ -2,6 +2,7 @@
 
 class SlConstants:
     ACTIVATING_MUTATION = 'activating mutation'
+    AGONIST = 'agonist'
     APOPTOSIS_ASSAY = 'apoptosis assay'
     ANTISENSE_OLIGO = 'antisense oligonucleotide'
     CELL_VIABILITY_ASSAY = 'cell viability assay'
@@ -13,6 +14,7 @@ class SlConstants:
     CRISPR_CAS9_RNA_I_INTERSECTION = "significant in both CRISPR and RNAi screen"
     CYTOTOXICITY_ASSAY = "cytotoxicity assay"
     DEGRADATION = 'degradation'
+    DIFFERENTIAL_VIABILITY_ASSAY = 'differential viability assay'
     DYSFUNCTIONALITY = 'dysfunction'
     FOLD_CHANGE = 'fold change'
     GROWTH_INHIBITION_ASSAY = "growth inhibition assay"
@@ -24,9 +26,9 @@ class SlConstants:
     N_A = "n/a"
     OVEREXPRESSION = "overexpression"
     PATIENT_DERIVED_XENOGRAFT = 'PDX'
+    PENETRANCE_ASSAY = 'penetrance assay'
     PERCENT_INHIBITION = 'percent inhibition'
     PHARMACEUTICAL = 'pharmaceutical'
-    AGONIST = 'agonist'
     PHARAMACEUTICAL_INHIBITION_ASSAY = "pharmaceutical inhibition assay"
     PROMOTER_HYPERMETHYLATION = 'promoter hypermethylation'
     PVAL = 'p-value'
@@ -43,8 +45,12 @@ class SlConstants:
 
 
     ## Cells
+    CELL_293T = '293T'
+    CELL_293T_CELLOSAURUS = "CVCL_0161"
     CELL_5637 = '5637'
     CELL_5637_CELLOSAURUS = 'CVCL_0126'
+    CELL_786O = "786-0"
+    CELL_786O_CELLOSAURUS = "CVCL_1051"
     A375_CELL = 'A375'
     A375_CELLOSAURUS = 'CVCL_0132'
     A431_CELL = 'A-431'
@@ -59,6 +65,8 @@ class SlConstants:
     BCAP_CELLOSUARUS = 'CVCL_0153'
     BJ_CELL = 'BJ [Human fibroblast]'
     BJ_CELLOSAURUS = 'CVCL_3653'
+    CAL51_CELL = 'CAL-51'
+    CAL51_CELLOSAURUS = 'CVCL_1110'
     COLO205_CELL = 'COLO205'
     COLO205_CELLOSAURUS = 'CVCL_F402'
     DIFI_CELL = 'DiFi'
@@ -89,8 +97,10 @@ class SlConstants:
     HCC193_CELLOSAURUS = 'CVCL_5130'
     HEC59_CELL = 'HEC-59'
     HEC59_CELLOSAURUS = 'CVCL_2930'
-    HELA_CELL = "HeLa-Cells"
+    HELA_CELL = "HeLa"
     HELA_CELLOSAURUS = "CVCL_0030"
+    HFF_Myc_CELL = 'HFF-Myc'
+    HFF_Myc_CELLOSAURUS = 'CVCL_Y511'
     HUH7_CELL = 'Huh-7'
     HUH7_CELLOSAURUS = 'CVCL_0336'
     H82_CELL = 'NCI-H82'
@@ -167,6 +177,8 @@ class SlConstants:
     WI38_CELLOSAURUS = 'CVCL_0579'
 
     ## NCI T
+    ACUTE_MYELOID_LEUKEMIA = "Acute Myeloid Leukemia"
+    ACUTE_MYELOID_LEUKEMIA_NCIT = "NCIT:C3171"
     ADULT_AML = 'Adult acute myeloid leukemia'
     ADULT_AML_NCIT = 'NCIT: C9154'
     BLADDER_CARCINOMA = 'Bladder Carcinoma'

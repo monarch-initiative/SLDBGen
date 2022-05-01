@@ -19,9 +19,6 @@ class Patidar2020Parser(SL_DatasetParser):
     def get_sli(self, geneA_sym, geneA_id, geneB_sym, geneB_id, sl=True):
         # Gene A should be eigther XRN2
         # These genes had activating mutations in the cell lines
-        ncit = SlConstants.N_A
-        cancer = SlConstants.N_A
-        cellosaurus = SlConstants.N_A
         sli = SyntheticLethalInteraction(gene_A_symbol=geneA_sym,
                                          species_id="10090",
                                          gene_A_id=geneA_id,
@@ -29,12 +26,12 @@ class Patidar2020Parser(SL_DatasetParser):
                                          gene_B_id=geneB_id,
                                          gene_A_pert=SlConstants.SH_RNA,
                                          gene_B_pert=SlConstants.SI_RNA,
-                                         effect_type="n/a",
-                                         effect_size="n/a",
-                                         cell_line="n/a",
-                                         cellosaurus_id="n/a",
-                                         cancer_type=cancer,
-                                         ncit_id=ncit,
+                                         effect_type=SlConstants.N_A,
+                                         effect_size=SlConstants.N_A,
+                                         cell_line=SlConstants.N_A,
+                                         cellosaurus_id=SlConstants.N_A,
+                                         cancer_type=SlConstants.N_A,
+                                         ncit_id=SlConstants.N_A,
                                          assay=SlConstants.CELL_VIABILITY_ASSAY,
                                          pmid=self.pmid,
                                          SL=sl)

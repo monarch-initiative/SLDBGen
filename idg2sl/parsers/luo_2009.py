@@ -35,14 +35,14 @@ class Luo2009Parser(SL_DatasetParser):
         kras_symbol = 'KRAS'
         kras_id = 'NCBIGene:3845'
         kras_perturbation = SlConstants.ACTIVATING_MUTATION
-        gene2_perturbation = 'shRNA'
+        gene2_perturbation = SlConstants.SH_RNA
         assays = ['competitive hybridization', 'multicolor competition assay']
         assay_string = ";".join(assays)
         effect_type = 'stddev'
-        cell_line = "DLD-1"
-        cellosaurus = "CVCL_0248"
-        cancer = "Colorectal Carcinoma"
-        ncit = "NCIT:C2955"
+        cell_line = SlConstants.DLD1_CELL
+        cellosaurus = SlConstants.DLD1_CELLOSAURUS
+        cancer = SlConstants.COLORECTAL_CARCINOMA
+        ncit = SlConstants.COLORECTAL_CARCINOMA_NCIT
 
         # The following keeps track of the current largest effect size SLI for any given gene A/gene B pair
         # Symbol	Accession	v2SH	Sequence	Mean.DLD1	SD.DLD1	Mean.HCT116	SD.HCT116	
@@ -70,7 +70,7 @@ class Luo2009Parser(SL_DatasetParser):
                 else:
                     raise ValueError("Could not get NCBI id for gene %s in Luo2009" % geneB_sym)
                 stddev = float(row['SD.DLD1'])  # float(fields[5])
-                SL = True  # All data in this set is True # TODO CHECK
+                SL = True  # All data in this set is True
                 sli = SyntheticLethalInteraction(gene_A_symbol=kras_symbol,
                                                  gene_A_id=kras_id,
                                                  gene_B_symbol=geneB_sym,
