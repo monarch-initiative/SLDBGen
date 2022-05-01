@@ -21,7 +21,7 @@ class Mohni2014Parser(SL_DatasetParser):
 
     def parse(self):
         geneA = 'ATR'
-        geneAid = 'NCBIGene:545'
+        geneAid = self.get_ncbigene_curie(geneA)
         sli_dict = defaultdict(list)
         with open(self.fname) as csvfile:
             csvreader = csv.DictReader(csvfile, delimiter='\t')

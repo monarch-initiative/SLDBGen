@@ -22,9 +22,6 @@ class Shen2017Parser(SL_DatasetParser):
         gene2_perturbation = SlConstants.CRISPR_CAS9
         assay = SlConstants.CRISPR_CAS9_INTERFERENCE_ASSAY
         effect_type = SlConstants.ZSCORE
-        cancer = ""
-        ncit = ""
-        sli_list = []
         # The following keeps track of the current largest effect size SLI for any given gene A/gene B pair
         sli_dict = defaultdict(list)
         with open(self.fname) as csvfile:
@@ -52,13 +49,15 @@ class Shen2017Parser(SL_DatasetParser):
                 for cell_line in cell_line_list:
                     cell_line = cell_line.strip()
                     if cell_line == "293T":
-                        cellosaurus = "CVCL_0161"
+                        cellosaurus = SlConstants.CELL_293T_CELLOSAURUS
                         effect = float(row['293T_Z'].replace(",", "."))
                     elif cell_line.upper() == "HELA":
-                        cellosaurus = "CVCL_0030"
+                        cell_line = SlConstants.HELA_CELL
+                        cellosaurus = SlConstants.HELA_CELLOSAURUS
                         effect = float(row['HeLa_Z'].replace(",", "."))
                     elif cell_line == "A549":
-                        cellosaurus = "CVCL_0023"
+                        cell_line = SlConstants.A549_CELL
+                        cellosaurus = SlConstants.A549_CELLOSAURUS
                         effect = float(row['A549_Z'].replace(",", "."))
                     else:
                         raise ValueError("Could not find cell line (\"%s\") from %s" % (cell_line,row['Hit_Cell_Line']))
@@ -72,8 +71,8 @@ class Shen2017Parser(SL_DatasetParser):
                                                      effect_size=effect,
                                                      cell_line=cell_line,
                                                      cellosaurus_id=cellosaurus,
-                                                     cancer_type=cancer,
-                                                     ncit_id=ncit,
+                                                     cancer_type=SlConstants.N_A,
+                                                     ncit_id=SlConstants.N_A,
                                                      assay=assay,
                                                      pmid=self.pmid,
                                                      SL=SL)

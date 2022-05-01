@@ -29,10 +29,7 @@ class Turner2008Parser(SL_DatasetParser):
         assays = ['competitive hybridization', 'multicolor competition assay']
         assay_string = ";".join(assays)
         effect_type = 'stddev'
-        cell_line = 'CAL-51'
-        cellosaurus = 'CVCL_1110'
-        cancer = "Breast Carcinoma"
-        ncit = "NCIT:C4872"
+
         sli_dict = defaultdict(list)
         with open(self.fname) as csvfile:
             # SMARTpool	Z score	percent-siCONTROL
@@ -66,10 +63,10 @@ class Turner2008Parser(SL_DatasetParser):
                                                  gene_B_pert=gene2_perturbation,
                                                  effect_type=effect_type,
                                                  effect_size=zscore,
-                                                 cell_line=cell_line,
-                                                 cellosaurus_id=cellosaurus,
-                                                 cancer_type=cancer,
-                                                 ncit_id=ncit,
+                                                 cell_line=SlConstants.CAL51_CELL,
+                                                 cellosaurus_id=SlConstants.CAL51_CELLOSAURUS,
+                                                 cancer_type=SlConstants.BREAST_CARCINOMA,
+                                                 ncit_id=SlConstants.BREAST_CARCINOMA_NCIT,
                                                  assay=assay_string,
                                                  pmid=self.pmid,
                                                  SL=SL)

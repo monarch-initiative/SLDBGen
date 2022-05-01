@@ -18,10 +18,8 @@ class Wang2017Parser(SL_DatasetParser):
 
 
     def get_sli(self, geneA_sym, geneA_id, geneB_sym, geneB_id):
-        # Gene A should be eighter NRAS or KRAS.
+        # Gene A should be either NRAS or KRAS.
         # These genes had activating mutations in the cell lines
-        ncit = "NCIT:C3171"
-        cancer = "Acute Myeloid Leukemia"
         sli = SyntheticLethalInteraction(gene_A_symbol=geneA_sym,
                                          species_id="10090",
                                          gene_A_id=geneA_id,
@@ -29,12 +27,12 @@ class Wang2017Parser(SL_DatasetParser):
                                          gene_B_id=geneB_id,
                                          gene_A_pert=SlConstants.ACTIVATING_MUTATION,
                                          gene_B_pert=SlConstants.SG_RNA,
-                                         effect_type="n/a",
-                                         effect_size="n/a",
-                                         cell_line="n/a",
-                                         cellosaurus_id="n/a",
-                                         cancer_type=cancer,
-                                         ncit_id=ncit,
+                                         effect_type=SlConstants.N_A,
+                                         effect_size=SlConstants.N_A,
+                                         cell_line=SlConstants.N_A,
+                                         cellosaurus_id=SlConstants.N_A,
+                                         cancer_type=SlConstants.ACUTE_MYELOID_LEUKEMIA,
+                                         ncit_id=SlConstants.ACUTE_MYELOID_LEUKEMIA_NCIT,
                                          assay=SlConstants.CRISPR_CAS9_INTERFERENCE_ASSAY,
                                          pmid=self.pmid,
                                          SL=True)
@@ -49,36 +47,35 @@ class Wang2017Parser(SL_DatasetParser):
         sli_list = []
 
         rce1 = "RCE1"
-        rce1id = "NCBIGene:{}".format(self.entrez_dict.get(rce1))
+        rce1id = self.get_ncbigene_curie(rce1)
 
         sli = self.get_sli(geneA_sym=nras, geneA_id=nrasid, geneB_sym=rce1, geneB_id=rce1id)
         sli_list.append(sli)
         sli = self.get_sli(geneA_sym=kras, geneA_id=krasid, geneB_sym=rce1, geneB_id=rce1id)
         sli_list.append(sli)
-
         icmt = 'ICMT'
-        icmtid = "NCBIGene:{}".format(self.entrez_dict.get(icmt))
+        icmtid = self.get_ncbigene_curie(icmt)
         sli = self.get_sli(geneA_sym=nras, geneA_id=nrasid, geneB_sym=icmt, geneB_id=icmtid)
         sli_list.append(sli)
         sli = self.get_sli(geneA_sym=kras, geneA_id=krasid, geneB_sym=icmt, geneB_id=icmtid)
         sli_list.append(sli)
 
         raf1 = 'RAF1'
-        raf1id = "NCBIGene:{}".format(self.entrez_dict.get(raf1))
+        raf1id = self.get_ncbigene_curie(raf1)
         sli = self.get_sli(geneA_sym=nras, geneA_id=nrasid, geneB_sym=raf1, geneB_id=raf1id)
         sli_list.append(sli)
         sli = self.get_sli(geneA_sym=kras, geneA_id=krasid, geneB_sym=raf1, geneB_id=raf1id)
         sli_list.append(sli)
 
         shoc2 = 'SHOC2'
-        shoc2id = "NCBIGene:{}".format(self.entrez_dict.get(shoc2))
+        shoc2id = self.get_ncbigene_curie(shoc2)
         sli = self.get_sli(geneA_sym=nras, geneA_id=nrasid, geneB_sym=shoc2, geneB_id=shoc2id)
         sli_list.append(sli)
         sli = self.get_sli(geneA_sym=kras, geneA_id=krasid, geneB_sym=shoc2, geneB_id=shoc2id)
         sli_list.append(sli)
 
         prex1 = 'PREX1'
-        prex1id = "NCBIGene:{}".format(self.entrez_dict.get(prex1))
+        prex1id = self.get_ncbigene_curie(prex1)
         sli = self.get_sli(geneA_sym=nras, geneA_id=nrasid, geneB_sym=prex1, geneB_id=prex1id)
         sli_list.append(sli)
         sli = self.get_sli(geneA_sym=kras, geneA_id=krasid, geneB_sym=prex1, geneB_id=prex1id)

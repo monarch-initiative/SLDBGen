@@ -58,8 +58,6 @@ class Steckel2012Parser(SL_DatasetParser):
                     raise ValueError("Line has %d fields (should have 6): %s" % (len(row), row))
                 geneB_sym = row['GeneID']  # F[0]
                 geneB_sym = self.get_current_symbol(geneB_sym)
-                locusID = row['Locus.ID']  # F[1]
-                accession = row['Accession']  # F[2]
                 HCT116_zscore = float(row['HCT-116.Z-score'])  # float(F[3])
                 HKE3_zscore = float(row['HKE-3.Z-score'])  # float(F[4])
                 delta_zscore = float(row['D.Z-score'])
@@ -69,8 +67,13 @@ class Steckel2012Parser(SL_DatasetParser):
                     geneB_sym = 'STKLD1'
                 elif geneB_sym in unclear_gene_symbols:
                     continue
+                elif geneB_sym == 'CDR1':
+                    # According to HGNC
+                    # This gene has the locus type 'unknown' because it features in publications but is no longer supported by annotation projects.
+                    # however, the gene is annotated as protein-coding in OMIM and UCSC
+                    geneB_id = 'NCBIGene:1038'
                 elif delta_zscore < 2:
-                    continue # one of the many negative samples, we can skip it if it cannot be mapped
+                    continue  # one of the many negative samples, we can skip it if it cannot be mapped
                 else:
                     raise ValueError("Could not find id for gene %s in Steckel 2012" % geneB_sym)
                 if geneB_sym == "KRAS":

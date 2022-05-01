@@ -42,7 +42,6 @@ class Brough2018Parser(SL_DatasetParser):
         rb1_perturbation = SlConstants.LOF_MUTATION
         gene2_perturbation = SlConstants.SI_RNA
         assay_string = "siMEM+penetrance"
-        effect_type = "penetrance"
         cell_line = SlConstants.N_A
         cellosaurus = SlConstants.N_A
         cancer = SlConstants.N_A
@@ -67,7 +66,7 @@ class Brough2018Parser(SL_DatasetParser):
                                                      gene_B_id=geneB_id,
                                                      gene_A_pert=rb1_perturbation,
                                                      gene_B_pert=gene2_perturbation,
-                                                     effect_type=effect_type,
+                                                     effect_type=SlConstants.PENETRANCE_ASSAY,
                                                      effect_size=penetrance,
                                                      cell_line=cell_line,
                                                      cellosaurus_id=cellosaurus,
@@ -85,7 +84,7 @@ class Brough2018Parser(SL_DatasetParser):
         rb1_perturbation = SlConstants.LOF_MUTATION
         gene2_perturbation = SlConstants.SI_RNA
         assay_string = "siMEM+penetrance"
-        effect_type = "penetrance"
+        effect_type = SlConstants.PENETRANCE_ASSAY
         cell_line = SlConstants.N_A
         cellosaurus = SlConstants.N_A
         cancer = SlConstants.N_A

@@ -23,8 +23,6 @@ class Shen2015Parser(SL_DatasetParser):
         gene2_perturbation = SlConstants.SI_RNA
         assay = SlConstants.RNA_INTERFERENCE_ASSAY
         effect_type = SlConstants.ZSCORE
-        cell_line = "HeLa-Cells"
-        cellosaurus = "CVCL_0030"
         cancer = ""
         ncit = ""  #
         # The following keeps track of the current largest effect size SLI for any given gene A/gene B pair
@@ -57,8 +55,8 @@ class Shen2015Parser(SL_DatasetParser):
                                                  gene_B_pert=gene2_perturbation,
                                                  effect_type=effect_type,
                                                  effect_size=effect,
-                                                 cell_line=cell_line,
-                                                 cellosaurus_id=cellosaurus,
+                                                 cell_line=SlConstants.HELA_CELL,
+                                                 cellosaurus_id=SlConstants.HELA_CELLOSAURUS,
                                                  cancer_type=cancer,
                                                  ncit_id=ncit,
                                                  assay=assay,

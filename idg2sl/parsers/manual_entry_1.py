@@ -13,7 +13,7 @@ class ManualEntry1(ManualEntry):
         pass  # Not implemented. We use other methods from the superclass
 
     def __init__(self, entrez, ensembl, synonym):
-        super().__init__(fname=None, pmid=None, entrez=entrez, ensembl=ensembl, synonym=synonym)
+        super().__init__(entrez=entrez, ensembl=ensembl, synonym=synonym)
         self.entries = []
         self._add_reid_2016()
         self._add_parthak_2015()

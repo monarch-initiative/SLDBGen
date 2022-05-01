@@ -27,7 +27,7 @@ class Sun2019Parser(SL_DatasetParser):
         unclear_gene_symbols = {'QARS', 'SARS' }
         # I could figure out that the following mappings are correct and unique with the HGNC website
         mappings = {'ORAOV1': 'LTO1', 'VWA9': 'INTS14', 'NARFL':'CIAO3', 'WBSCR22': 'BUD23',
-                    'UFD1L': 'UFD1'}
+                    'UFD1L': 'UFD1', 'C7orf26': 'INTS15'}
         with open(self.fname) as f:
             for line in f:
                 geneBsym = line.strip()

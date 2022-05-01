@@ -24,7 +24,7 @@ class Bommi2008Parser(SL_DatasetParser):
     I replaced JNK3 by MAPK10
     I replaced JNK2 by MAPK9
     I replaced AMPKa1 by PRKAA1
-    I prepleaced KHS1 by MAP4K5
+    I replaced KHS1 by MAP4K5
     I replaced SgK495 by STK40
     I replaced SURTK106 by STYK1
     """
@@ -39,12 +39,7 @@ class Bommi2008Parser(SL_DatasetParser):
         vhl_id = SlConstants.VHL_GENE_ID
         vhl_perturbation = SlConstants.LOF_MUTATION
         gene2_perturbation = SlConstants.SH_RNA
-        assays = [SlConstants.COMPETITIVE_HYBRIDIZATION, SlConstants.MULTICOLOR_COMPETITION_ASSAY]
         effect_type = 'differential_viability'
-        cell_786O = "786-0"
-        cellosaurus_786O = "CVCL_1051"
-        cell_RCC4 = "RCC4"
-        cellosaurus_RCC4 = "CVCL_0498"
         # The following keeps track of the current largest effect size SLI for any given gene A/gene B pair
         sli_dict = defaultdict(list)
         # The following list includes symbols that are not current but either could
@@ -69,16 +64,15 @@ class Bommi2008Parser(SL_DatasetParser):
                 effect = float(row['differential'])
                 cell = row['cell']
                 if cell == 'RCC4':
-                    cell_line = cell_RCC4
-                    cellosaurus = cellosaurus_RCC4
+                    cell_line = SlConstants.RCC4_CELL
+                    cellosaurus = SlConstants.RCC4_CELLOSAURUS
                 elif cell == '786-0':
-                    cell_line = cell_786O
-                    cellosaurus = cellosaurus_786O
+                    cell_line = SlConstants.CELL_786O
+                    cellosaurus = SlConstants.CELL_786O_CELLOSAURUS
                 else:
                     raise ValueError("Did not recognize cell type '%s'" % cell)
-                table = row['table']
-                assay_string = "differential viability assay {}({})".format(cell, table)
-                SL = True  # All data in this set is True # TODO CHECK
+                assay_string = SlConstants.DIFFERENTIAL_VIABILITY_ASSAY
+                SL = True  # All data in this set is True
                 sli = SyntheticLethalInteraction(gene_A_symbol=vhl_symbol,
                                                  gene_A_id=vhl_id,
                                                  gene_B_symbol=geneB_sym,

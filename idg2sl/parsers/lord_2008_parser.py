@@ -34,16 +34,16 @@ class Lord2008Parser(SL_DatasetParser):
         is shown in Figure 4C but not mentioned in the text. That is what we get with this parse!
         """
         parp1_symbol = 'PARP1'
-        parp1_id = 'NCBIGene:142'
+        parp1_id = self.get_ncbigene_curie(parp1_symbol)
         parp1_perturbation = SlConstants.PHARMACEUTICAL
         gene2_perturbation = SlConstants.SI_RNA
 
         assay_string = SlConstants.RNA_INTERFERENCE_ASSAY
         effect_type = SlConstants.ZSCORE
-        cell_line = 'CAL-51'
-        cellosaurus = 'CVCL_1110'
-        cancer = "Breast Carcinoma"
-        ncit = "NCIT:C4872"
+        cell_line = SlConstants.CAL51_CELL
+        cellosaurus = SlConstants.CAL51_CELLOSAURUS
+        cancer = SlConstants.BREAST_CARCINOMA
+        ncit = SlConstants.BREAST_CARCINOMA_NCIT
         parpdict = defaultdict(list)
         # The following list includes symbols that are not current but either could
         # not be matched or match to multiple possible candidates (PMS2L4 is a pseudogene)
