@@ -28,7 +28,35 @@ class ManualEntry3(ManualEntry):
         self.add_bailey2015()
         self.add_song2021()
         self.add_anai2011()
+        self.add_chang2016()
 
+    def add_chang2016(self):
+        """
+        Chang JG, Uncovering synthetic lethal interactions for therapeutic targets and predictive markers in lung adenocarcinoma.
+        Oncotarget. 2016 Nov 8;7(45):73664-73680. doi: 10.18632/oncotarget.12046. PMID: 27655641; PMCID: PMC5342006.
+        The results of the MTT assay (Figure 2A) showed that knockdown of TP53 or PARP1 did not affect the cell viability
+        in A549 cells. However, TP53 knockdown or knockdown of both TP53 and PARP1 in CL1-5 cells reduced the cell viability
+        while PAPP1 knockdown or knockdown of both TP53 and PARP1 in H1975 cells also decreased it. The p-values of the
+        viability of cells with knockdown of TP53 and PARP1 individually compared to the control are 0.837 and 0.600 in
+        A549 cells, 0.002 and 0.256 in CL1-5, and 0.057 and 0.001 in H1975 cells, respectively. Moreover, knockdown of
+        both genes markedly reduced the cell viability in CL1-5 (P < 0.0001) and H1975 cells (P < 0.0001), but not in A549 cells (P = 0.154).
+        Further, we found that active caspase 3 was increased in CL1-5 and H1975 cells with knockdown of TP53, PARP1 and both (Figure 2B), indicating that knockdown of TP53 and PARP1 induced apoptosis in CL1-5 and H1975 cells.
+        To examine the long-term cell killing effects of gene knockdown, the colony formation assay was performed.
+        Similar to the MTT results, knockdown of TP53, PARP1 or both remarkably and significantly reduced the colony number
+        in CL1-5 and H1975 cells, but not in A549 (Figure 2C). Thus TP53 and PARP1 have a synergistic killing effect in CL1-5 and H1975 cells,
+        but not in A549 cells, which may be due to a different mutation background in A549 cells from CL1-5 and H1975 cells.
+        """
+        pmid = '27655641'
+        tp53 = 'TP53'
+        parp1 = 'PARP1'
+        self.create_and_add_sli(geneA=tp53, geneB=parp1,
+                                geneApert=SlConstants.RNA_INTERFERENCE_ASSAY,
+                                geneBpert=SlConstants.RNA_INTERFERENCE_ASSAY,
+                                cell=SlConstants.CL15_CELL,
+                                cellosaurus=SlConstants.CL15_CELLOSAURUS,
+                                ncit=SlConstants.N_A,
+                                cancer=SlConstants.N_A,
+                                assay=SlConstants.CELL_VIABILITY_ASSAY, pmid=pmid)
 
     def add_anai2011(self):
         """
