@@ -69,8 +69,13 @@ class Steckel2012Parser(SL_DatasetParser):
                     geneB_sym = 'STKLD1'
                 elif geneB_sym in unclear_gene_symbols:
                     continue
+                elif geneB_sym == 'CDR1':
+                    # According to HGNC
+                    # This gene has the locus type 'unknown' because it features in publications but is no longer supported by annotation projects.
+                    # however, the gene is annotated as protein-coding in OMIM and UCSC
+                    geneB_id = 'NCBIGene:1038'
                 elif delta_zscore < 2:
-                    continue # one of the many negative samples, we can skip it if it cannot be mapped
+                    continue  # one of the many negative samples, we can skip it if it cannot be mapped
                 else:
                     raise ValueError("Could not find id for gene %s in Steckel 2012" % geneB_sym)
                 if geneB_sym == "KRAS":
