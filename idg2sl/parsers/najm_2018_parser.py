@@ -24,18 +24,13 @@ class Najm2018Parser(SL_DatasetParser):
         """
 
         sli_list = []
-        i = 0
         seen_interactions = defaultdict(float)  # There are duplicates. Keep the one with the lowest q value
         with open(self.fname) as f:
             r = DictReader(f, delimiter='\t')
             for row in r:
                 gene1 = row['Gene 1']
                 gene2 = row['Gene 2']
-                group1 = row['Group 1']
-                group2 = row['Group 2']
-                source = row['Source']
                 synletQ = float(row['SynLet q-value'])
-                bufferQ = row['Buffer q-value']
                 if synletQ > 0.05:
                     continue
                 if gene1 == gene2:

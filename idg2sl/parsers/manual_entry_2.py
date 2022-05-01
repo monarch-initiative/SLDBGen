@@ -12,7 +12,7 @@ class ManualEntry2(ManualEntry):
        """
 
     def __init__(self, entrez, ensembl, synonym):
-        super().__init__(fname=None, pmid=None, entrez=entrez, ensembl=ensembl, synonym=synonym)
+        super().__init__(entrez=entrez, ensembl=ensembl, synonym=synonym)
         self.entries = []
         self._add_mcmanus_2009()
         self._add_ward_2017()

@@ -22,9 +22,6 @@ class Shen2017Parser(SL_DatasetParser):
         gene2_perturbation = SlConstants.CRISPR_CAS9
         assay = SlConstants.CRISPR_CAS9_INTERFERENCE_ASSAY
         effect_type = SlConstants.ZSCORE
-        cancer = ""
-        ncit = ""
-        sli_list = []
         # The following keeps track of the current largest effect size SLI for any given gene A/gene B pair
         sli_dict = defaultdict(list)
         with open(self.fname) as csvfile:
@@ -74,8 +71,8 @@ class Shen2017Parser(SL_DatasetParser):
                                                      effect_size=effect,
                                                      cell_line=cell_line,
                                                      cellosaurus_id=cellosaurus,
-                                                     cancer_type=cancer,
-                                                     ncit_id=ncit,
+                                                     cancer_type=SlConstants.N_A,
+                                                     ncit_id=SlConstants.N_A,
                                                      assay=assay,
                                                      pmid=self.pmid,
                                                      SL=SL)

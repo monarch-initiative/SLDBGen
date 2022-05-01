@@ -12,7 +12,7 @@ class ManualEntry3(ManualEntry):
        """
 
     def __init__(self, entrez, ensembl, synonym):
-        super().__init__(fname=None, pmid=None, entrez=entrez, ensembl=ensembl, synonym=synonym)
+        super().__init__(entrez=entrez, ensembl=ensembl, synonym=synonym)
         self.entries = []
         self._add_li_2020()
         self._add_ali_2020()

@@ -58,8 +58,6 @@ class Steckel2012Parser(SL_DatasetParser):
                     raise ValueError("Line has %d fields (should have 6): %s" % (len(row), row))
                 geneB_sym = row['GeneID']  # F[0]
                 geneB_sym = self.get_current_symbol(geneB_sym)
-                locusID = row['Locus.ID']  # F[1]
-                accession = row['Accession']  # F[2]
                 HCT116_zscore = float(row['HCT-116.Z-score'])  # float(F[3])
                 HKE3_zscore = float(row['HKE-3.Z-score'])  # float(F[4])
                 delta_zscore = float(row['D.Z-score'])

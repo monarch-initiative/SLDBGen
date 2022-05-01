@@ -12,7 +12,7 @@ class ManualEntry(SL_DatasetParser):
     def parse(self):
         pass  # Not implemented. We use other methods from the superclass
 
-    def __init__(self, fname, pmid, entrez, ensembl, synonym):
+    def __init__(self, entrez, ensembl, synonym):
         super().__init__(fname=None, pmid=None, entrez=entrez, ensembl=ensembl, synonym=synonym)
 
     def create_and_add_sli(self, geneA, geneB, geneApert, geneBpert, assay, pmid,
