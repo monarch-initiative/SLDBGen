@@ -133,7 +133,7 @@ class SyntheticLethalInteraction:
     def is_maximum(self):
         return self.maximum_value
 
-    def get_SL(self):
+    def is_positive_SLI(self):
         return self.SL
 
     def get_tsv_line(self):
@@ -213,6 +213,43 @@ class SyntheticLethalInteraction:
                self._background_dependency_gene_id,
                self.pmid,
                sl]
+        return "\t".join(lst)
+
+    @staticmethod
+    def get_positives_only_tsv_with_ensembl_header():
+        lst = ['geneA',
+               'geneA.ncbi-id',
+               'geneA.ensembl-id',
+               'geneB',
+               'geneB.ncbi-id',
+               'geneB.ensembl-id',
+               'geneA.perturbation',
+               'geneB.perturbation',
+               'assay',
+               'cell.line',
+               'cellosaurus.id',
+               'pmid']
+        return "\t".join(lst)
+
+    def get_positives_only_tsv_line_with_ensembl(self, symbol2ensembl):
+        ensemblA = symbol2ensembl.get(self.gene_A_symbol, "n/a")
+        ensemblB = symbol2ensembl.get(self.gene_B_symbol, "n/a")
+        if self.gene_A_pert is None:
+            raise ValueError("No data for gene_A_pert")
+        if not self.SL:
+            raise ValueError("This function should only be used for true positives")
+        lst = [self.gene_A_symbol,
+               str(self.gene_A_id),
+               ensemblA,
+               self.gene_B_symbol,
+               str(self.gene_B_id),
+               ensemblB,
+               self.gene_A_pert,
+               self.gene_B_pert,
+               self.assay,
+               self.cell_line,
+               self.cellosaurus_id,
+               self.pmid]
         return "\t".join(lst)
 
 

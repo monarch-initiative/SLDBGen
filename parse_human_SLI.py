@@ -13,8 +13,8 @@ synonym_dict = hgnc.get_synonym_dictionary()
 
 
 def show_stats(name, sli_list):
-    pos = sum(sl.get_SL() for sl in sli_list)
-    neg = sum(not sl.get_SL() for sl in sli_list)
+    pos = sum(sl.is_positive_SLI() for sl in sli_list)
+    neg = sum(not sl.is_positive_SLI() for sl in sli_list)
     print("[INFO] %s: %d positive and %d negative entries" % (name, pos, neg))
 
 
@@ -202,18 +202,14 @@ for l in sli_lists:
 
 n = 0
 n_SL = 0
+
+output_file = "SL_data.tsv"
+fh = open(output_file, 'wt')
+fh.write(SyntheticLethalInteraction.get_positives_only_tsv_with_ensembl_header() + "\n")
 for sli in all_sli_list:
     n += 1
-    if sli.get_SL():
+    if sli.is_positive_SLI():
+        fh.write(sli.get_positives_only_tsv_line_with_ensembl(ensembl_dict) + "\n")
         n_SL += 1
-print("We got %d interactions including %d synthetic lethal interactions" % (n, n_SL))
-
-ensembl_file = "SL_data.tsv"
-fh = open(ensembl_file, 'wt')
-fh.write(SyntheticLethalInteraction.get_tsv_with_ensembl_header() + "\n")
-for sli in all_sli_list:
-    try:
-        fh.write(sli.get_tsv_line_with_ensembl(ensembl_dict) + "\n")
-    except:
-        print("Bad for %s (pmid:%s) " % (sli.get_gene_A_symbol(), sli.get_pmid()))
 fh.close()
+print("We got %d interactions including %d synthetic lethal interactions" % (n, n_SL))

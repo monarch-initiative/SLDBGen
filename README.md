@@ -39,3 +39,26 @@ source py3/bin/activate
 pip install nose
 nosetests
 ```
+
+## Format
+By default, the script will emit a file with the following fields. The current version of the
+file is to be found [here](SL_data.tsv).
+
+| Column      | Example |
+| ----------- | ----------- |
+| geneA      | EGFR       |
+| geneA.ncbi-id   | NCBIGene:1956        |
+| geneA.ensembl-id  | ENSG00000146648        |
+| geneB  | ANXA6        |
+| geneB.ncbi-id  | NCBIGene:309        |
+| geneB.ensembl-id |ENSG00000197043        |
+| geneA.perturbation  | inhibitory antibody        |
+| geneB.perturbation  | siRNA       |
+| assay  | cell viability assay  |
+| cell.line  | A-431      |
+| cellosaurus.id  | CVCL_0037        |
+| pmid  | 20858866        |
+
+
+											
+											
