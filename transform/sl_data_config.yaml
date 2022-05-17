@@ -23,16 +23,15 @@ columns:
 
 node_properties:
   - 'id'
-  - 'iri'
   - 'name'
   - 'category'
+  - 'xref'
 
 edge_properties:
   - 'id'
   - 'subject'
   - 'predicate'
   - 'object'
-  - 'category'
-  - 'relation'
+  - 'publications'
 
 transform_mode: 'flat'
