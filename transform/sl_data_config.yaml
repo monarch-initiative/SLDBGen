@@ -33,5 +33,6 @@ edge_properties:
   - 'predicate'
   - 'object'
   - 'publications'
+  - 'qualifiers'
 
 transform_mode: 'flat'
