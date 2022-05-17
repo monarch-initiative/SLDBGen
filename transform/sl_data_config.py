@@ -28,6 +28,27 @@ perturb_lookup = {"CRISPR CAS9":"BAO:0010249",
                     "shRNA":"BAO:0000323",
                     "siRNA":"BAO:0000324",}
 
+full_assay_lookup = {"Big Papi":"",
+                    "CRISPR-Cas9 Interference assay":"BAO:0010249",
+                    "PDX":"",
+                    "RNA-interference assay":"BAO:0002434",
+                    "apoptosis assay":"BAO:0002043",
+                    "cell viability assay":"BAO:0003009",
+                    "cisplatin toxicity assay":"BAO:0000623",
+                    "competitive hybridization;multicolor competition assay":"",
+                    "cytotoxicity assay":"",
+                    "differential viability assay":"",
+                    "growth inhibition assay":"BAO:0000094",
+                    "multicolor competition assay":"",
+                    "pharmaceutical + siRNA":"",
+                    "pharmaceutical inhibition assay":"",
+                    "proportions.of.sense.and.antisense.insertions":"",
+                    "sgRNA depletion assay":"",
+                    "shRNA":"BAO:0000323",
+                    "shRNA depletion assay":"BAO:0000323",
+                    "siMEM+penetrance":"",
+                    "transgenic mouse model":"NCIT:C14240"}
+
 row = koza_app.get_row(source_name)
 
 # Entities
@@ -49,7 +70,24 @@ association = GeneToGeneAssociation(
         publications=["PMID:"+str(row['pmid'])],
         qualifiers=[]
     )
-association.qualifiers.append(perturb_lookup[str(row["geneA.perturbation"])])
-association.qualifiers.append(perturb_lookup[str(row["geneB.perturbation"])])
+if perturb_lookup[str(row["geneA.perturbation"])] != "":
+    association.qualifiers.append(perturb_lookup[str(row["geneA.perturbation"])])
+else:
+    association.qualifiers.append(str(row["geneA.perturbation"]))
+if perturb_lookup[str(row["geneB.perturbation"])] != "":
+    association.qualifiers.append(perturb_lookup[str(row["geneB.perturbation"])])
+else:
+    association.qualifiers.append(str(row["geneB.perturbation"]))
+
+if full_assay_lookup[str(row["assay"])] != "":
+    association.qualifiers.append(full_assay_lookup[str(row["assay"])])
+else:
+    association.qualifiers.append(str(row["assay"]))
+
+if str(row["cell.line"]) != "n/a":
+    if str(row["cellosaurus.id"]) != "n/a":
+        association.qualifiers.append("cellosaurus:"+str(row["cellosaurus.id"]))
+    else:
+        association.qualifiers.append(str(row["cell.line"]))
 
 koza_app.write(g1, association, g2)
