@@ -1,3 +1,5 @@
 clint
 wget
 numpy
+koza
+biolink_model_pydantic

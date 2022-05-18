@@ -1,0 +1,38 @@
+name: 'sl_data_config'
+
+delimiter: '\t'
+
+files:
+  - '../SL_data.tsv'
+
+header: 'infer'
+
+columns:
+  - 'geneA'
+  - 'geneA.ncbi-id'
+  - 'geneA.ensembl-id'
+  - 'geneB'
+  - 'geneB.ncbi-id'
+  - 'geneB.ensembl-id'
+  - 'geneA.perturbation'
+  - 'geneB.perturbation'
+  - 'assay'
+  - 'cell.line'
+  - 'cellosaurus.id'
+  - 'pmid'
+
+node_properties:
+  - 'id'
+  - 'name'
+  - 'category'
+  - 'xref'
+
+edge_properties:
+  - 'id'
+  - 'subject'
+  - 'predicate'
+  - 'object'
+  - 'publications'
+  - 'qualifiers'
+
+transform_mode: 'flat'
